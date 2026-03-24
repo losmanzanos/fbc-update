@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /success/
+Disallow: /privacy-policy/
+Disallow: /terms-conditions/
+Sitemap: https://fullbloomcounseling.com/sitemap.xml
