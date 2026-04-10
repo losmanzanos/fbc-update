@@ -1,0 +1,186 @@
+
+/* ── Benefit card: space between bold title and description ── */
+.svc-benefit-card p strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* ── HERO IMAGE OVERRIDES (override base rule ordering) ── */
+@media (max-width: 768px) {
+  .page-hero {
+    height: 280px !important;
+    max-height: 280px !important;
+    min-height: 0 !important;
+    align-items: center !important;
+  }
+  .page-hero-img {
+    position: absolute !important;
+    height: 100% !important;
+    width: 100% !important;
+  }
+  .page-hero-content {
+    padding-bottom: 20px !important;
+  }
+}
+
+/* ============================================================
+   FULL BLOOM — MOBILE-FIRST SERVICE PAGE OVERHAUL
+   Replaces scattered mobile rules with one coherent system
+   ============================================================ */
+
+/* ── BASE FONT SCALE (all screens) ──────────────────────── */
+:root {
+  --fs-h1:   clamp(1.9rem, 5vw, 4rem);
+  --fs-h2:   clamp(1.5rem, 3.5vw, 2.6rem);
+  --fs-h3:   clamp(1.2rem, 2.5vw, 1.8rem);
+  --fs-lead: clamp(1rem, 2vw, 1.45rem);
+  --fs-body: clamp(.9rem, 1.6vw, 1rem);
+  --fs-sm:   clamp(.82rem, 1.4vw, .9rem);
+}
+h1 { font-size: var(--fs-h1) }
+h2 { font-size: var(--fs-h2) }
+h3 { font-size: var(--fs-h3) }
+.svc-lead { font-size: var(--fs-lead) }
+p, .svc-p { font-size: var(--fs-body) }
+
+/* ── MOBILE (≤768px) — everything resets here ─────────── */
+@media (max-width: 768px) {
+
+  /* ─ Container ─ */
+  .container { padding: 0 18px }
+
+  /* ─ Service page layout ─ */
+  .svc-layout { display: block }
+  .svc-sidebar { display: none }
+  .svc-main { width: 100%; padding: 0 }
+
+  /* Center ALL content inside service pages */
+  .svc-main,
+  .svc-main p,
+  .svc-main h2,
+  .svc-main h3,
+  .svc-main h4,
+  .svc-main .svc-section-heading,
+  .svc-main .svc-section-intro,
+  .svc-main .svc-lead,
+  .svc-main .faq-list { text-align: center }
+
+  /* FAQ buttons stay left inside the centered wrapper */
+  .faq-question { text-align: left }
+
+  /* ─ Lead paragraph ─ */
+  .svc-lead {
+    padding: 20px 20px;
+    margin-bottom: 24px;
+    border-radius: 8px;
+    font-size: clamp(1rem, 3.5vw, 1.2rem);
+    line-height: 1.65;
+  }
+
+  /* ─ Sections ─ */
+  .svc-section { padding: 24px 0 0 }
+
+  /* ─ Ornament divider: truly equal space above and below ─ */
+  .svc-ornament {
+    margin: 20px 0 !important;
+    padding: 0 !important;
+  }
+  /* Cancel out the next section's top padding so spacing is symmetric */
+  .svc-ornament + .svc-section { padding-top: 0 !important; }
+  .svc-ornament::before,
+  .svc-ornament::after { max-width: 60px }
+
+  /* ─ Cream sections: full-bleed edge-to-edge ─ */
+  .svc-section-cream {
+    margin: 20px -18px !important;
+    border-radius: 0 !important;
+    padding: 28px 18px !important;
+    text-align: center;
+  }
+  .svc-section-cream h2,
+  .svc-section-cream p,
+  .svc-section-cream .svc-section-heading { text-align: center }
+
+  /* ─ Pull quote: edge-to-edge, left-border becomes top-border ─ */
+  .svc-pullquote {
+    margin: 20px -18px !important;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-top: 3px solid var(--petal) !important;
+    padding: 24px 20px 20px !important;
+    text-align: center;
+  }
+  .svc-pullquote::before {
+    font-size: 2.5rem;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: .15;
+  }
+  .svc-pullquote p {
+    font-size: clamp(1.05rem, 4vw, 1.35rem);
+    text-align: center;
+  }
+
+  /* ─ Benefit grid: compact 1-col ─ */
+  .svc-benefit-grid,
+  .svc-benefit-grid.svc-benefit-grid-2col { display: flex; flex-direction: column; gap: 8px }
+  .svc-benefit-card { padding: 14px 16px; border-radius: 6px }
+  .svc-benefit-card p { font-size: .88rem; text-align: center }
+  .svc-benefit-card p strong { font-size: .9rem }
+  .svc-benefit-icon { display: none } /* Icon hidden — saves vertical space */
+
+  /* ─ CTA Final — already full-width, just tune it ─ */
+  .svc-cta-final { text-align: center; padding: 36px 18px 32px }
+  .svc-cta-heading { font-size: clamp(1.3rem, 5vw, 1.7rem) }
+  .svc-cta-final p { font-size: .92rem; margin-bottom: 20px }
+  .svc-cta-final .btn { width: 100%; justify-content: center; font-size: .75rem }
+
+  /* ─ FAQ ─ */
+  .faq-list { text-align: left }
+  .faq-question { font-size: .95rem; padding: 18px 0 }
+
+  /* ─ Page hero on mobile ─ */
+  .page-hero { height: 260px; min-height: 0; max-height: 260px }
+  .page-hero-content { padding-bottom: 24px }
+  .page-hero-content h1 { font-size: clamp(1.6rem, 6vw, 2.2rem) }
+  .page-hero-content .eyebrow { font-size: .6rem; margin-bottom: 8px }
+  .page-hero-content .breadcrumb { display: none } /* Clean on mobile */
+
+  /* ─ Section immediately after hero ─ */
+  .svc-page-content { padding-top: 32px }
+
+  /* ─ Supervisor grid ─ */
+  .supervisor-grid { grid-template-columns: 1fr !important }
+  .supervisor-card img { height: 260px !important }
+
+
+  /* ─ FAQ section: clear visual break from content above ─ */
+  .svc-section:last-of-type { 
+    margin-top: 8px;
+    padding-top: 28px !important;
+    border-top: 1px solid var(--border-lt, #ece6de);
+  }
+  /* Target the faq-list container's parent section specifically */
+  .svc-main > .svc-section:last-child {
+    border-top: 1px solid #ddd5c8;
+    padding-top: 28px !important;
+    margin-top: 16px;
+  }
+
+}
+
+/* ── LANDSCAPE MOBILE (≤896px height when wide) ─────────── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .page-hero { height: 200px; max-height: 200px }
+  .page-hero-content h1 { font-size: 1.6rem }
+  :root { --nav-h: 60px }
+}
+
+/* ── TABLET (769px – 1023px) ─────────────────────────────── */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .svc-benefit-grid { grid-template-columns: 1fr 1fr; gap: 12px }
+  .svc-benefit-grid.svc-benefit-grid-2col { grid-template-columns: 1fr 1fr }
+  .page-hero { height: 340px; max-height: 380px }
+  .page-hero-content h1 { font-size: clamp(1.8rem, 4vw, 2.8rem) }
+}

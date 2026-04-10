@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /
+
+# Staging environment — do not index.
+# Remove this file and replace with production robots.txt before going live.

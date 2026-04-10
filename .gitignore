@@ -1,0 +1,17 @@
+.DS_Store
+Thumbs.db
+*.log
+*.zip
+node_modules/
+.env
+.env.local
+npm-debug.log*
+
+# Editor artifacts
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Keep create-post.html out of production deploys via Netlify/Vercel
+# (GitHub Pages deploys everything — create-post.html is harmless but internal)

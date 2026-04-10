@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script>
+(function(){
+  var h = window.innerHeight;
+  document.documentElement.style.setProperty('--hero-h', h + 'px');
+  window.addEventListener('orientationchange', function(){
+    setTimeout(function(){
+      document.documentElement.style.setProperty('--hero-h', window.innerHeight + 'px');
+    }, 300);
+  });
+})();
+</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Full Bloom — Create Blog Post</title>
+<style>
+  :root {
+    --cream: #F8F4EE;
+    --cream-alt: #EFE9E0;
+    --petal: #C8967A;
+    --petal-dark: #A8724E;
+    --bark: #3A2E24;
+    --bark-mid: #5C4A38;
+    --border: #DDD5C8;
+    --white: #ffffff;
+    --green: #4a7c59;
+    --red: #c0392b;
+    --radius: 6px;
+    --font: 'Georgia', serif;
+    --sans: system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--cream); font-family: var(--sans); color: var(--bark); min-height: 100vh; }
+
+  header {
+    background: var(--bark);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,.25);
+  }
+  header h1 { color: var(--cream); font-size: 1rem; font-weight: 400; letter-spacing: .05em; }
+  header span { color: var(--petal); font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; }
+  .header-actions { margin-left: auto; display: flex; gap: 8px; flex-shrink: 0; }
+  @media (max-width: 500px) {
+    header { padding: 12px 16px; }
+    .header-actions { width: 100%; margin-left: 0; justify-content: stretch; }
+    .header-actions .btn { flex: 1; padding: 9px 10px; font-size: .72rem; }
+  }
+
+  .btn {
+    padding: 10px 22px;
+    border-radius: var(--radius);
+    font-size: .82rem;
+    font-weight: 600;
+    letter-spacing: .06em;
+    cursor: pointer;
+    border: none;
+    transition: all .2s;
+    text-transform: uppercase;
+  }
+  .btn-primary { background: var(--petal); color: white; }
+  .btn-primary:hover { background: var(--petal-dark); }
+  .btn-secondary { background: rgba(255,255,255,.12); color: var(--cream); border: 1px solid rgba(255,255,255,.2); }
+  .btn-secondary:hover { background: rgba(255,255,255,.2); }
+  .btn-success { background: var(--green); color: white; }
+  .btn-lg { padding: 14px 32px; font-size: .88rem; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+
+  .card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 32px;
+    margin-bottom: 24px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 12px rgba(58,46,36,.06);
+  }
+  .card-title {
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--petal-dark);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title .icon { font-size: 1rem; }
+
+  .field { margin-bottom: 20px; }
+  .field label {
+    display: block;
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--bark-mid);
+    margin-bottom: 7px;
+  }
+  .field label .req { color: var(--petal); margin-left: 3px; }
+  .field input, .field select, .field textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    font-size: .92rem;
+    color: var(--bark);
+    font-family: var(--sans);
+    background: var(--cream);
+    transition: border-color .2s;
+    outline: none;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-color: var(--petal);
+    background: white;
+  }
+  .field textarea { min-height: 140px; resize: vertical; line-height: 1.7; }
+  .field .hint { font-size: .75rem; color: var(--bark-mid); margin-top: 5px; line-height: 1.5; }
+
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .field-row { grid-template-columns: 1fr; } }
+
+  /* Author selector */
+  .author-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .author-card {
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: all .2s;
+    background: var(--cream);
+  }
+  .author-card:hover { border-color: var(--petal); }
+  .author-card.selected { border-color: var(--petal); background: #fdf5f0; }
+  .author-card input[type=radio] { display: none; }
+  .author-name { font-size: .88rem; font-weight: 600; color: var(--bark); }
+  .author-creds { font-size: .72rem; color: var(--bark-mid); margin-top: 3px; line-height: 1.4; }
+  .author-check { float: right; color: var(--petal); font-size: 1.1rem; display: none; }
+  .author-card.selected .author-check { display: block; }
+
+  /* Content area */
+  #content {
+    min-height: 400px;
+    font-family: Georgia, serif;
+    font-size: .98rem;
+    line-height: 1.8;
+  }
+  .content-toolbar {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    padding: 10px;
+    background: var(--cream-alt);
+    border: 1.5px solid var(--border);
+    border-bottom: none;
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .tool-btn {
+    padding: 5px 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: white;
+    font-size: .78rem;
+    cursor: pointer;
+    color: var(--bark);
+    font-family: var(--sans);
+  }
+  .tool-btn:hover { background: var(--petal); color: white; border-color: var(--petal); }
+  .tool-sep { width: 1px; background: var(--border); margin: 0 4px; }
+  #content-editor {
+    border: 1.5px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    padding: 20px;
+    min-height: 400px;
+    outline: none;
+    font-family: Georgia, serif;
+    font-size: .98rem;
+    line-height: 1.8;
+    color: var(--bark);
+    background: white;
+  }
+
+  /* Image upload zone */
+  .image-zone {
+    border: 2px dashed var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    text-align: center;
+    background: var(--cream);
+    cursor: pointer;
+    transition: all .2s;
+    margin-bottom: 16px;
+  }
+  .image-zone:hover, .image-zone.drag-over {
+    border-color: var(--petal);
+    background: #fdf5f0;
+  }
+  .image-zone p { font-size: .85rem; color: var(--bark-mid); margin-top: 8px; }
+  .image-zone .zone-icon { font-size: 2rem; }
+
+  .images-list { display: flex; flex-direction: column; gap: 12px; }
+  .image-item {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 12px;
+    align-items: start;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px;
+  }
+  .image-item img { width: 100px; height: 70px; object-fit: cover; border-radius: 4px; }
+  .image-item .img-fields { display: flex; flex-direction: column; gap: 8px; }
+  .image-item input {
+    width: 100%;
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: .82rem;
+    background: white;
+    color: var(--bark);
+  }
+  .image-item input:focus { outline: none; border-color: var(--petal); }
+  .img-label { font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--bark-mid); margin-bottom: 2px; }
+  .img-remove { background: none; border: 1px solid var(--border); border-radius: 4px; padding: 6px 10px; cursor: pointer; color: var(--red); font-size: .8rem; }
+  .img-remove:hover { background: var(--red); color: white; border-color: var(--red); }
+
+  /* Output */
+  #output-section { display: none; }
+  #output-section.visible { display: block; }
+  #output-area {
+    background: var(--bark);
+    color: #e8e0d5;
+    font-family: 'Courier New', monospace;
+    font-size: .78rem;
+    line-height: 1.6;
+    padding: 24px;
+    border-radius: var(--radius);
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+    max-height: 500px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+  }
+
+  .steps {
+    background: #e8f4ec;
+    border: 1px solid #b8d9c4;
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .steps h3 { font-size: .82rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--green); margin-bottom: 12px; }
+  .steps ol { padding-left: 20px; }
+  .steps li { font-size: .88rem; color: #2d5a3d; margin-bottom: 8px; line-height: 1.6; }
+  .steps code { background: rgba(0,0,0,.08); padding: 1px 5px; border-radius: 3px; font-family: monospace; font-size: .85em; }
+
+  .notice {
+    background: #fff8e8;
+    border: 1px solid #e8d5a0;
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    font-size: .84rem;
+    color: #6b5010;
+    margin-bottom: 20px;
+  }
+
+  .slug-preview {
+    font-family: monospace;
+    font-size: .82rem;
+    color: var(--petal-dark);
+    background: var(--cream-alt);
+    padding: 6px 10px;
+    border-radius: 4px;
+    margin-top: 6px;
+    border: 1px solid var(--border);
+  }
+
+  .progress { display: flex; gap: 0; margin-bottom: 32px; }
+  .step { flex: 1; padding: 10px; text-align: center; font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; border-bottom: 3px solid var(--border); color: var(--bark-mid); }
+  .step.active { border-color: var(--petal); color: var(--petal-dark); }
+  .step.done { border-color: var(--green); color: var(--green); }
+
+  .copy-btn {
+    position: sticky;
+    bottom: 20px;
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-size: .9rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 4px 16px rgba(74,124,89,.35);
+  }
+  .copy-btn:hover { background: #3a6347; }
+  .copy-btn.copied { background: var(--petal-dark); }
+
+  .tag-input { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; border: 1.5px solid var(--border); border-radius: var(--radius); background: var(--cream); min-height: 44px; cursor: text; }
+  .tag { background: var(--petal); color: white; padding: 3px 10px; border-radius: 20px; font-size: .78rem; display: flex; align-items: center; gap: 6px; }
+  .tag button { background: none; border: none; color: white; cursor: pointer; font-size: .9rem; padding: 0; line-height: 1; }
+  .tag-input input { border: none; outline: none; font-size: .88rem; background: transparent; color: var(--bark); flex: 1; min-width: 120px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <span>Full Bloom Counseling</span>
+    <h1>Blog Post Creator</h1>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-secondary" onclick="clearForm()">↺ Clear</button>
+    <button class="btn btn-primary btn-lg" onclick="generatePost()">Generate HTML →</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="notice">
+    💡 Fill in the fields below, then click <strong>Generate HTML</strong>. You'll get a complete, ready-to-use HTML file and step-by-step instructions for adding it to the blog.
+  </div>
+
+  <!-- SECTION 1: Post Basics -->
+  <div class="card">
+    <div class="card-title"><span class="icon">📝</span> Post Details</div>
+
+    <div class="field">
+      <label>Post Title <span class="req">*</span></label>
+      <input type="text" id="title" placeholder="e.g. What Is Brainspotting? How It Works and Who It Helps"
+             oninput="updateSlug()">
+      <div class="slug-preview" id="slug-preview">URL: /blog/your-post-title/</div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>Publish Date <span class="req">*</span></label>
+        <input type="date" id="pub-date">
+        <p class="hint">Back-date if needed. Affects sort order on the blog.</p>
+      </div>
+      <div class="field">
+        <label>Category <span class="req">*</span></label>
+        <select id="category">
+          <option value="">— Select —</option>
+          <option>Mental Health &amp; Wellness</option>
+          <option>Trauma &amp; Healing</option>
+          <option>Couples &amp; Relationships</option>
+          <option>Health at Every Size</option>
+          <option>Enneagram Therapy</option>
+          <option>Therapy Process</option>
+          <option>Self-Care &amp; Wellness</option>
+          <option>Growth</option>
+          <option>Anxiety</option>
+          <option>Depression</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Meta Description (SEO) <span class="req">*</span></label>
+      <textarea id="meta-desc" rows="2" placeholder="Write a compelling 120–155 character description for Google search results..."></textarea>
+      <div class="hint"><span id="meta-count" style="font-weight:700;">0</span>/155 characters. Sweet spot: 120–155. <span id="meta-status"></span></div>
+    </div>
+
+    <div class="field">
+      <label>Keywords / Tags</label>
+      <div class="tag-input" id="tag-container" onclick="document.getElementById('tag-input').focus()">
+        <input type="text" id="tag-input" placeholder="Type a keyword and press Enter..."
+               onkeydown="handleTagInput(event)">
+      </div>
+      <p class="hint">Press Enter after each keyword. These appear in the post schema.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 2: Author -->
+  <div class="card">
+    <div class="card-title"><span class="icon">👤</span> Author</div>
+    <div class="author-grid" id="author-grid">
+      <!-- populated by JS -->
+    </div>
+  </div>
+
+  <!-- SECTION 3: Hero Image -->
+  <div class="card">
+    <div class="card-title"><span class="icon">🖼</span> Hero Image</div>
+    <div class="field">
+      <label>Image Path <span class="req">*</span></label>
+      <input type="text" id="hero-img" placeholder="/images/fbc-photos/your-image-name.jpg">
+      <p class="hint">Use the exact path from the <code>images/</code> folder. Check <code>images/fbc-photos/</code> for available images.</p>
+    </div>
+    <div class="field">
+      <label>Alt Text <span class="req">*</span></label>
+      <input type="text" id="hero-alt" placeholder="Descriptive alt text for accessibility and SEO">
+    </div>
+  </div>
+
+  <!-- SECTION 4: Content -->
+  <div class="card">
+    <div class="card-title"><span class="icon">✍️</span> Post Content</div>
+    <p style="font-size:.84rem;color:var(--bark-mid);margin-bottom:16px;line-height:1.6;">Write your post below. Use the toolbar to format. Paste from a doc and use <strong>Clean Paste</strong> to strip unwanted formatting. <strong>Tip:</strong> Start with a strong opening paragraph — no heading needed at the top.</p>
+
+    <div class="content-toolbar">
+      <button class="tool-btn" onclick="format('bold')"><strong>B</strong></button>
+      <button class="tool-btn" onclick="format('italic')"><em>I</em></button>
+      <div class="tool-sep"></div>
+      <button class="tool-btn" onclick="insertHeading(2)">H2</button>
+      <button class="tool-btn" onclick="insertHeading(3)">H3</button>
+      <div class="tool-sep"></div>
+      <button class="tool-btn" onclick="insertPullQuote()">❝ Pull Quote</button>
+      <button class="tool-btn" onclick="insertLink()">🔗 Link</button>
+      <div class="tool-sep"></div>
+      <button class="tool-btn" onclick="cleanPaste()" title="Strips formatting from pasted text">🧹 Clean Paste</button>
+    </div>
+    <div id="content-editor" contenteditable="true"
+         data-placeholder="Start writing your post here... Write clear H2 headings for each section. Open with your strongest hook — no fluff."
+         oninput="updateWordCount()"></div>
+    <p class="hint" style="margin-top:8px;"><span id="word-count">0</span> words. Aim for 600–1,200 words for strong SEO.</p>
+  </div>
+
+  <!-- SECTION 5: In-Post Images -->
+  <div class="card">
+    <div class="card-title"><span class="icon">🖼</span> In-Post Images (Optional)</div>
+    <p style="font-size:.84rem;color:var(--bark-mid);margin-bottom:16px;line-height:1.6;">Add images to include within the post body. Each gets a path, alt text, optional caption, and placement. They'll be inserted after the paragraph you specify.</p>
+
+    <div class="image-zone" id="add-image-zone" onclick="addImageManually()">
+      <div class="zone-icon">＋</div>
+      <p>Click to add an image</p>
+      <p style="font-size:.76rem;margin-top:4px;">You can add multiple — they'll be formatted in a visually appealing grid or inline layout</p>
+    </div>
+
+    <div class="images-list" id="images-list"></div>
+  </div>
+
+  <!-- SECTION 6: Generate -->
+  <div style="text-align:center;padding:16px 0 40px;">
+    <button class="btn btn-primary btn-lg" onclick="generatePost()" style="padding:18px 48px;font-size:1rem;">
+      ✨ Generate Blog Post HTML
+    </button>
+  </div>
+
+  <!-- OUTPUT -->
+  <div id="output-section">
+    <div class="card">
+      <div class="card-title"><span class="icon">✅</span> Your Post Is Ready</div>
+
+      <div class="steps">
+        <h3>📂 How to Publish This Post</h3>
+        <ol>
+          <li>Click <strong>Copy HTML</strong> below to copy the complete file.</li>
+          <li>Open your file manager and navigate to <code>fbc-site/blog/</code></li>
+          <li>Create a new folder named: <code id="folder-name-hint">your-post-slug</code></li>
+          <li>Inside that folder, create a file called <code>index.html</code></li>
+          <li>Paste the copied HTML and save.</li>
+          <li>Open <code>fbc-site/blog/index.html</code> — your post card will be <strong>auto-inserted at the correct date position</strong> when you run the sort script, OR follow the card template at the bottom of this page to add it manually.</li>
+          <li>Copy any new images to <code>fbc-site/images/fbc-photos/</code></li>
+          <li>Push to GitHub — your post goes live automatically!</li>
+        </ol>
+      </div>
+
+      <pre id="output-area"></pre>
+      <button class="copy-btn" id="copy-btn" onclick="copyOutput()">📋 Copy HTML to Clipboard</button>
+    </div>
+
+    <div class="card" style="margin-top:24px;">
+      <div class="card-title"><span class="icon">📇</span> Blog Index Card (for manual insertion)</div>
+      <p style="font-size:.84rem;color:var(--bark-mid);margin-bottom:16px;">If you're adding the card to the blog index manually, paste this snippet in <code>blog/index.html</code> inside the <code>&lt;div class="grid-3"&gt;</code> in the correct date order (newest first):</p>
+      <pre id="card-output" style="background:var(--bark);color:#e8e0d5;font-family:monospace;font-size:.76rem;line-height:1.6;padding:20px;border-radius:6px;overflow-x:auto;white-space:pre-wrap;"></pre>
+      <button class="btn btn-secondary" style="margin-top:12px;background:var(--bark-mid);color:white;" onclick="copyCard()">📋 Copy Card HTML</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+// Authors
+// ============================================================
+const AUTHORS = [
+  { name: 'Rebecca Moravec', creds: 'LPC, LMFT, AAMFT Approved Supervisor', slug: 'rebecca-moravec', initials: 'RM',
+    bio: 'Rebecca is the founder of Full Bloom Counseling. She specializes in trauma-informed care, EMDR, Enneagram therapy, and Health at Every Size.' },
+  { name: 'Mark Whitney', creds: 'LPC, AAMFT Approved Clinical Supervisor, Certified Enneagram Teacher', slug: 'mark-whitney', initials: 'MW',
+    bio: 'Mark is a Senior Clinical Associate at Full Bloom Counseling specializing in couples therapy, Enneagram work, trauma, and anxiety.' },
+  { name: 'Jillian Corpora', creds: 'LPC, Certified Intuitive Eating Counselor', slug: 'jillian-corpora', initials: 'JC',
+    bio: 'Jillian is a therapist at Full Bloom Counseling specializing in anxiety, depression, grief, and food and body concerns.' },
+  { name: 'Natalie Siegel', creds: 'LPC, Certified Intuitive Eating Counselor', slug: 'natalie-siegel', initials: 'NS',
+    bio: 'Natalie is a therapist at Full Bloom Counseling specializing in body image, Intuitive Eating, anxiety, and disordered eating.' },
+  { name: 'Kelsey Bennett', creds: 'LPC, SSP Provider, EMDR Trained', slug: 'kelsey-bennett', initials: 'KB',
+    bio: 'Kelsey is a therapist at Full Bloom Counseling seeing clients virtually across Colorado and in person in Boulder. She specializes in young adults, parents, and the Safe and Sound Protocol.' },
+  { name: 'Kelli Ruhl', creds: 'LPC, NCC, LAC, Certified Brainspotting Practitioner', slug: 'kelli-ruhl', initials: 'KR',
+    bio: 'Kelli is a therapist at Full Bloom Counseling specializing in trauma, anxiety, addiction, and somatic approaches including Brainspotting.' },
+  { name: 'Kirsten Adorno', creds: 'LPC, MFTC', slug: 'kirsten-adorno', initials: 'KA',
+    bio: 'Kirsten is a therapist at Full Bloom Counseling offering virtual therapy for individuals, couples, and families across Colorado.' },
+  { name: 'Myldha Verdelus', creds: 'LPCC', slug: 'myldha-verdelus', initials: 'MV',
+    bio: 'Myldha is a therapist at Full Bloom Counseling offering individual and couples therapy with a culturally responsive approach.' },
+];
+
+let tags = [];
+let inlineImages = [];
+let selectedAuthor = null;
+
+// Render author grid
+function renderAuthors() {
+  const grid = document.getElementById('author-grid');
+  grid.innerHTML = AUTHORS.map((a, i) => `
+    <label class="author-card" id="author-card-${i}" onclick="selectAuthor(${i})">
+      <input type="radio" name="author" value="${i}">
+      <span class="author-check">✓</span>
+      <div class="author-name">${a.name}</div>
+      <div class="author-creds">${a.creds}</div>
+    </label>
+  `).join('');
+}
+
+function selectAuthor(i) {
+  selectedAuthor = i;
+  document.querySelectorAll('.author-card').forEach((c, idx) => {
+    c.classList.toggle('selected', idx === i);
+  });
+}
+
+// Slug generation
+function slugify(str) {
+  return str.toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+function updateSlug() {
+  const title = document.getElementById('title').value;
+  const slug = slugify(title);
+  document.getElementById('slug-preview').textContent = slug ? `/blog/${slug}/` : 'URL: /blog/your-post-title/';
+}
+
+// Meta description counter
+document.getElementById('meta-desc').addEventListener('input', function() {
+  const len = this.value.length;
+  const count = document.getElementById('meta-count');
+  const status = document.getElementById('meta-status');
+  count.textContent = len;
+  if (len < 120) { count.style.color = '#e67e22'; status.textContent = '— too short'; }
+  else if (len > 155) { count.style.color = 'var(--red)'; status.textContent = '— too long!'; }
+  else { count.style.color = 'var(--green)'; status.textContent = '— ✓ good'; }
+});
+
+// Tags
+function handleTagInput(e) {
+  if (e.key === 'Enter' || e.key === ',') {
+    e.preventDefault();
+    const input = document.getElementById('tag-input');
+    const val = input.value.trim().replace(/,$/, '');
+    if (val && !tags.includes(val)) {
+      tags.push(val);
+      renderTags();
+    }
+    input.value = '';
+  }
+}
+
+function renderTags() {
+  const container = document.getElementById('tag-container');
+  const input = document.getElementById('tag-input');
+  container.innerHTML = '';
+  tags.forEach((t, i) => {
+    const tag = document.createElement('span');
+    tag.className = 'tag';
+    tag.innerHTML = `${t} <button onclick="removeTag(${i})">×</button>`;
+    container.appendChild(tag);
+  });
+  container.appendChild(input);
+  input.focus();
+}
+
+function removeTag(i) {
+  tags.splice(i, 1);
+  renderTags();
+}
+
+// Word count
+function updateWordCount() {
+  const text = document.getElementById('content-editor').innerText;
+  const words = text.trim().split(/\s+/).filter(w => w).length;
+  document.getElementById('word-count').textContent = words;
+}
+
+// Toolbar formatting
+function format(cmd) {
+  document.execCommand(cmd, false, null);
+  document.getElementById('content-editor').focus();
+}
+
+function insertHeading(level) {
+  const editor = document.getElementById('content-editor');
+  editor.focus();
+  const sel = window.getSelection();
+  if (!sel.rangeCount) return;
+  const range = sel.getRangeAt(0);
+  const text = sel.toString() || 'Heading';
+  const h = document.createElement(`h${level}`);
+  h.textContent = text;
+  range.deleteContents();
+  range.insertNode(h);
+  range.setStartAfter(h);
+  sel.removeAllRanges();
+  sel.addRange(range);
+}
+
+function insertPullQuote() {
+  const editor = document.getElementById('content-editor');
+  editor.focus();
+  const quote = prompt('Enter the pull quote text:');
+  if (!quote) return;
+  const cite = prompt('Attribution (e.g. "— Full Bloom client, Denver"):') || '';
+  const div = document.createElement('div');
+  div.setAttribute('data-pullquote', 'true');
+  div.style.cssText = 'border-left:3px solid #C8967A;padding:20px 24px;background:#EFE9E0;margin:20px 0;border-radius:0 4px 4px 0;';
+  div.innerHTML = `<p style="font-style:italic;font-size:1.1em;color:#3A2E24;">"${quote}"</p>${cite ? `<cite style="font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:#A8724E;">${cite}</cite>` : ''}`;
+  const sel = window.getSelection();
+  if (sel.rangeCount) {
+    const range = sel.getRangeAt(0);
+    range.collapse(false);
+    range.insertNode(div);
+  } else {
+    editor.appendChild(div);
+  }
+}
+
+function insertLink() {
+  const url = prompt('URL:');
+  if (!url) return;
+  const text = prompt('Link text:') || url;
+  document.execCommand('insertHTML', false, `<a href="${url}" style="color:var(--petal-dark);">${text}</a>`);
+}
+
+function cleanPaste() {
+  const editor = document.getElementById('content-editor');
+  const text = editor.innerText;
+  editor.innerHTML = '';
+  const paras = text.split(/\n{2,}/);
+  paras.forEach(p => {
+    if (p.trim()) {
+      const el = document.createElement('p');
+      el.textContent = p.trim();
+      editor.appendChild(el);
+    }
+  });
+  updateWordCount();
+}
+
+// Inline images
+function addImageManually() {
+  const count = inlineImages.length;
+  inlineImages.push({ path: '', alt: '', caption: '', position: 'after-intro' });
+  renderImagesList();
+}
+
+function renderImagesList() {
+  const list = document.getElementById('images-list');
+  list.innerHTML = inlineImages.map((img, i) => `
+    <div class="image-item">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+        <div style="width:100px;height:70px;background:var(--cream-alt);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;border:1px solid var(--border);">🖼</div>
+        <span style="font-size:.68rem;color:var(--bark-mid);">Image ${i+1}</span>
+      </div>
+      <div class="img-fields">
+        <div>
+          <div class="img-label">File Path</div>
+          <input type="text" placeholder="/images/fbc-photos/your-image.jpg"
+                 value="${img.path}" oninput="inlineImages[${i}].path=this.value">
+        </div>
+        <div>
+          <div class="img-label">Alt Text</div>
+          <input type="text" placeholder="Descriptive alt text for this image"
+                 value="${img.alt}" oninput="inlineImages[${i}].alt=this.value">
+        </div>
+        <div>
+          <div class="img-label">Caption (optional)</div>
+          <input type="text" placeholder="Image caption text..."
+                 value="${img.caption}" oninput="inlineImages[${i}].caption=this.value">
+        </div>
+        <div>
+          <div class="img-label">Placement</div>
+          <select oninput="inlineImages[${i}].position=this.value" style="padding:6px 10px;border:1px solid var(--border);border-radius:4px;font-size:.82rem;background:white;color:var(--bark);">
+            <option value="after-intro" ${img.position==='after-intro'?'selected':''}>After opening paragraph</option>
+            <option value="mid" ${img.position==='mid'?'selected':''}>Mid-article</option>
+            <option value="end" ${img.position==='end'?'selected':''}>Near the end</option>
+            <option value="full-width" ${img.position==='full-width'?'selected':''}>Full-width break</option>
+          </select>
+        </div>
+      </div>
+      <button class="img-remove" onclick="removeImage(${i})">✕</button>
+    </div>
+  `).join('');
+}
+
+function removeImage(i) {
+  inlineImages.splice(i, 1);
+  renderImagesList();
+}
+
+// ============================================================
+// GENERATE POST HTML
+// ============================================================
+function generatePost() {
+  const title = document.getElementById('title').value.trim();
+  const pubDate = document.getElementById('pub-date').value;
+  const category = document.getElementById('category').value;
+  const metaDesc = document.getElementById('meta-desc').value.trim();
+  const heroImg = document.getElementById('hero-img').value.trim();
+  const heroAlt = document.getElementById('hero-alt').value.trim();
+  const contentEl = document.getElementById('content-editor');
+
+  // Validation
+  const errors = [];
+  if (!title) errors.push('Title is required');
+  if (!pubDate) errors.push('Publish date is required');
+  if (!category) errors.push('Category is required');
+  if (!metaDesc) errors.push('Meta description is required');
+  if (!heroImg) errors.push('Hero image path is required');
+  if (!heroAlt) errors.push('Hero image alt text is required');
+  if (selectedAuthor === null) errors.push('Select an author');
+  if (!contentEl.innerText.trim()) errors.push('Post content is required');
+
+  if (errors.length) {
+    alert('Please fix these issues:\n• ' + errors.join('\n• '));
+    return;
+  }
+
+  const author = AUTHORS[selectedAuthor];
+  const slug = slugify(title);
+  const dateObj = new Date(pubDate + 'T12:00:00');
+  const displayDate = dateObj.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  const displayDateFull = dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+  // Process content HTML
+  let contentHTML = contentEl.innerHTML;
+
+  // Insert inline images at appropriate positions
+  const afterIntroImgs = inlineImages.filter(i => i.position === 'after-intro' && i.path);
+  const midImgs = inlineImages.filter(i => i.position === 'mid' && i.path);
+  const endImgs = inlineImages.filter(i => i.position === 'end' && i.path);
+  const fullWidthImgs = inlineImages.filter(i => i.position === 'full-width' && i.path);
+
+  const imgHTML = (imgs) => {
+    if (!imgs.length) return '';
+    if (imgs.length === 1) {
+      return `\n<figure style="margin:28px 0;">\n  <img src="${imgs[0].path}" alt="${imgs[0].alt}" loading="lazy" decoding="async" style="width:100%;border-radius:6px;box-shadow:0 4px 20px rgba(58,46,36,.12);">\n  ${imgs[0].caption ? `<figcaption style="text-align:center;font-size:.78rem;color:#5C4A38;margin-top:8px;letter-spacing:.06em;">${imgs[0].caption}</figcaption>` : ''}\n</figure>\n`;
+    }
+    // Two images side by side
+    return `\n<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0;">\n` +
+      imgs.map(img => `  <figure style="margin:0;">\n    <img src="${img.path}" alt="${img.alt}" loading="lazy" decoding="async" style="width:100%;height:220px;object-fit:cover;border-radius:6px;box-shadow:0 4px 20px rgba(58,46,36,.12);">\n    ${img.caption ? `<figcaption style="text-align:center;font-size:.75rem;color:#5C4A38;margin-top:6px;">${img.caption}</figcaption>` : ''}\n  </figure>`).join('\n') +
+      '\n</div>\n';
+  };
+
+  // Insert after-intro images after first </p>
+  if (afterIntroImgs.length) {
+    const firstP = contentHTML.indexOf('</p>');
+    if (firstP > -1) contentHTML = contentHTML.slice(0, firstP + 4) + imgHTML(afterIntroImgs) + contentHTML.slice(firstP + 4);
+  }
+
+  // Insert mid images after middle <h2> or halfway through
+  if (midImgs.length) {
+    const h2matches = [...contentHTML.matchAll(/<\/h2>/g)];
+    if (h2matches.length >= 2) {
+      const midH2 = h2matches[Math.floor(h2matches.length / 2)];
+      const nextP = contentHTML.indexOf('</p>', midH2.index);
+      if (nextP > -1) contentHTML = contentHTML.slice(0, nextP + 4) + imgHTML(midImgs) + contentHTML.slice(nextP + 4);
+    }
+  }
+
+  // Insert end images before last </p>
+  if (endImgs.length) {
+    const lastP = contentHTML.lastIndexOf('</p>');
+    if (lastP > -1) contentHTML = contentHTML.slice(0, lastP) + imgHTML(endImgs) + contentHTML.slice(lastP);
+  }
+
+  // Full-width images — wrapped in a special div
+  const fullWidthHTML = fullWidthImgs.map(img =>
+    `<div style="margin:36px -20px;">\n  <img src="${img.path}" alt="${img.alt}" loading="lazy" decoding="async" style="width:100%;max-height:420px;object-fit:cover;display:block;">\n  ${img.caption ? `<p style="text-align:center;font-size:.75rem;color:#5C4A38;margin-top:8px;letter-spacing:.06em;padding:0 20px;">${img.caption}</p>` : ''}\n</div>`
+  ).join('\n');
+
+  if (fullWidthHTML) {
+    // Insert full-width image in the middle of the content
+    const midPoint = Math.floor(contentHTML.length / 2);
+    const nearestP = contentHTML.indexOf('</p>', midPoint);
+    if (nearestP > -1) contentHTML = contentHTML.slice(0, nearestP + 4) + '\n' + fullWidthHTML + '\n' + contentHTML.slice(nearestP + 4);
+  }
+
+  const keywordsSchema = tags.length ? `,"keywords":"${tags.join(', ')}"` : '';
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
+  <title>${title} | Full Bloom Counseling Denver</title>
+  <meta name="description" content="${metaDesc}">
+  <meta name="robots" content="index,follow">
+  <meta name="googlebot" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+  <meta name="geo.region" content="US-CO">
+  <meta name="geo.placename" content="Denver, Colorado">
+  <meta name="theme-color" content="#F8F4EE">
+  <link rel="canonical" href="https://fullbloomcounseling.com/blog/${slug}/">
+  <link rel="alternate" hreflang="en-US" href="https://fullbloomcounseling.com/blog/${slug}/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="${title}">
+  <meta property="og:description" content="${metaDesc}">
+  <meta property="og:url" content="https://fullbloomcounseling.com/blog/${slug}/">
+  <meta property="og:image" content="https://fullbloomcounseling.com${heroImg}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${title}">
+  <meta name="twitter:description" content="${metaDesc}">
+  <meta name="twitter:image" content="https://fullbloomcounseling.com${heroImg}">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"${title.replace(/"/g, '\\"')}","datePublished":"${pubDate}","image":"https://fullbloomcounseling.com${heroImg}","author":{"@type":"Person","name":"${author.name}","honorificSuffix":"${author.creds}","worksFor":{"@type":"Organization","name":"Full Bloom Counseling","url":"https://fullbloomcounseling.com"}},"publisher":{"@type":"Organization","name":"Full Bloom Counseling","url":"https://fullbloomcounseling.com"}${keywordsSchema}}<\/script>  <link rel="preload" as="image" href="${heroImg}" type="image/jpeg" fetchpriority="high">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" type="image/png" href="https://fullbloomcounseling.com/wp-content/uploads/2025/04/favicon.png">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- NAV: copy from any existing page -->
+
+<div style="background:var(--bark);padding:var(--nav-h) 0 0;">
+  <div style="width:100%;height:440px;position:relative;overflow:hidden;">
+    <img src="${heroImg}" alt="${heroAlt}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.44;" loading="eager" fetchpriority="high" decoding="async">
+    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(24,18,10,.92) 0%,rgba(24,18,10,.15) 100%);" aria-hidden="true"></div>
+    <div style="position:absolute;bottom:0;left:0;right:0;padding:44px 32px;max-width:var(--max-w);margin:0 auto;">
+      <p style="font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--petal-lt);font-weight:600;margin-bottom:12px;">${category}</p>
+      <h1 style="color:var(--white);font-size:clamp(1.7rem,4vw,3rem);max-width:780px;line-height:1.2;font-weight:500;">${title}</h1>
+      <p style="color:rgba(255,255,255,.65);font-size:.78rem;margin-top:14px;letter-spacing:.1em;">${displayDate}</p>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+<section class="section band-white">
+  <div class="container">
+    <div class="post-layout">
+      <article class="post-body">
+        ${contentHTML}
+
+        <div class="author-box">
+          <img src="/images/team/${author.slug}-square.jpg" alt="${author.name}, ${author.creds} — therapist at Full Bloom Counseling Denver" class="author-photo" width="72" height="72" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="author-placeholder" aria-hidden="true">${author.initials}</div>
+          <div class="author-info">
+            <h4>${author.name}</h4><span>${author.creds}</span>
+            <p>${author.bio}</p>
+          </div>
+        </div>
+      </article>
+
+      <aside class="post-sidebar">
+        <div class="sidebar-box">
+          <h4>Free Consultation</h4>
+          <p style="font-size:.86rem;color:var(--bark-mid);margin-bottom:16px;">Ready to start? We offer free 15-minute consultations with all of our therapists — no commitment required.</p>
+          <a href="/contact/" class="btn btn-primary" style="width:100%;text-align:center;display:block;">Get Started</a>
+        </div>
+        <div class="sidebar-box">
+          <h4>More Posts</h4>
+          <ul>
+            <li><a href="/blog/the-power-of-pausing/">The Power of Pausing: Why Slowing Down Can Help You Heal</a></li>
+            <li><a href="/blog/what-happens-in-your-first-therapy-session/">What Happens in Your First Therapy Session</a></li>
+            <li><a href="/blog/">Browse all posts →</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-box">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="/services/individual-therapy/">Individual Therapy</a></li>
+            <li><a href="/services/anxiety-therapy/">Anxiety Therapy</a></li>
+            <li><a href="/services/trauma-therapy/">Trauma Therapy</a></li>
+            <li><a href="/services/couples-therapy/">Couples Therapy</a></li>
+            <li><a href="/services/">All services →</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER: copy from any existing page -->
+<script src="/js/main.js" defer><\/script>
+</body>
+</html>`;
+
+  // Generate blog index card
+  const excerpt = contentEl.innerText.replace(/\s+/g, ' ').trim().slice(0, 160) + '…';
+  const cardHTML = `      <div class="blog-card fade-in" data-date="${pubDate}">
+        <a href="/blog/${slug}/" class="blog-card-img-link">
+          <div class="blog-card-img"><img src="${heroImg}" alt="${heroAlt}" loading="lazy" decoding="async"></div>
+        </a>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <span class="blog-card-date">${displayDate.toUpperCase()}</span>
+            <span class="blog-card-sep">&middot;</span>
+            <span class="blog-card-cat">${category.toUpperCase()}</span>
+          </div>
+          <h3 class="blog-card-title"><a href="/blog/${slug}/">${title}</a></h3>
+          <p class="blog-card-excerpt">${excerpt}</p>
+          <a href="/blog/${slug}/" class="blog-card-link">Read More &#8594;</a>
+        </div>
+      </div>`;
+
+  document.getElementById('output-area').textContent = html;
+  document.getElementById('card-output').textContent = cardHTML;
+  document.getElementById('folder-name-hint').textContent = slug;
+
+  const outputSection = document.getElementById('output-section');
+  outputSection.classList.add('visible');
+  outputSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function copyOutput() {
+  const text = document.getElementById('output-area').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '✅ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 Copy HTML to Clipboard'; btn.classList.remove('copied'); }, 2500);
+  });
+}
+
+function copyCard() {
+  const text = document.getElementById('card-output').textContent;
+  navigator.clipboard.writeText(text).then(() => alert('Card HTML copied!'));
+}
+
+function clearForm() {
+  if (!confirm('Clear everything and start over?')) return;
+  document.getElementById('title').value = '';
+  document.getElementById('pub-date').value = '';
+  document.getElementById('category').value = '';
+  document.getElementById('meta-desc').value = '';
+  document.getElementById('hero-img').value = '';
+  document.getElementById('hero-alt').value = '';
+  document.getElementById('content-editor').innerHTML = '';
+  document.getElementById('slug-preview').textContent = 'URL: /blog/your-post-title/';
+  document.getElementById('meta-count').textContent = '0';
+  document.getElementById('word-count').textContent = '0';
+  tags = [];
+  renderTags();
+  inlineImages = [];
+  renderImagesList();
+  selectedAuthor = null;
+  document.querySelectorAll('.author-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('output-section').classList.remove('visible');
+}
+
+// Set default date to today
+document.getElementById('pub-date').value = new Date().toISOString().split('T')[0];
+
+// Placeholder behaviour for contenteditable
+const editor = document.getElementById('content-editor');
+editor.addEventListener('focus', () => { if (!editor.textContent.trim()) editor.innerHTML = ''; });
+editor.addEventListener('blur', () => { if (!editor.textContent.trim()) editor.innerHTML = ''; });
+
+renderAuthors();
+renderTags();
+</script>
+</body>
+</html>
