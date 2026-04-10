@@ -1527,7 +1527,7 @@ a:focus-visible {
    FOOTER
    ═══════════════════════════════════════════════════════════════════════ */
 #footer { background: #111; color: rgba(248,244,238,.82); padding: 80px 0 0; position: relative; overflow: hidden; border-top: 3px solid var(--sage); }
-#footer::before { content: ''; position: absolute; right: -20px; top: -30px; width: 380px; height: 380px; background: url('/images/fbc-logo-f-white.png') center/contain no-repeat; opacity: .14; pointer-events: none; }
+#footer::before { content: ''; position: absolute; right: -20px; top: -30px; width: 380px; height: 380px; background: url('../images/fbc-logo-f-white.png') center/contain no-repeat; opacity: .14; pointer-events: none; }
 #footer::after { content: ''; position: absolute; left: -60px; bottom: -60px; width: 260px; height: 260px; border-radius: 50%; background: var(--sage); opacity: .06; pointer-events: none; }
 .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 64px; border-bottom: 1px solid rgba(248,244,238,.1); }
 .footer-brand p { font-size: .86rem; line-height: 1.8; max-width: 260px; margin-top: 16px; color: rgba(248,244,238,.70); }
