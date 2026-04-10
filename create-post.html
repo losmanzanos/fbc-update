@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<base href="https://losmanzanos.github.io/fbc-update/">
 <meta charset="UTF-8">
 <script>
 (function(){
@@ -836,7 +837,7 @@ function generatePost() {
   <meta name="twitter:description" content="${metaDesc}">
   <meta name="twitter:image" content="https://fullbloomcounseling.com${heroImg}">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"${title.replace(/"/g, '\\"')}","datePublished":"${pubDate}","image":"https://fullbloomcounseling.com${heroImg}","author":{"@type":"Person","name":"${author.name}","honorificSuffix":"${author.creds}","worksFor":{"@type":"Organization","name":"Full Bloom Counseling","url":"https://fullbloomcounseling.com"}},"publisher":{"@type":"Organization","name":"Full Bloom Counseling","url":"https://fullbloomcounseling.com"}${keywordsSchema}}<\/script>  <link rel="preload" as="image" href="${heroImg}" type="image/jpeg" fetchpriority="high">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/fbc-update/css/style.css">
   <link rel="icon" type="image/png" href="https://fullbloomcounseling.com/wp-content/uploads/2025/04/favicon.png">
 </head>
 <body>
@@ -876,24 +877,24 @@ function generatePost() {
         <div class="sidebar-box">
           <h4>Free Consultation</h4>
           <p style="font-size:.86rem;color:var(--bark-mid);margin-bottom:16px;">Ready to start? We offer free 15-minute consultations with all of our therapists — no commitment required.</p>
-          <a href="/contact/" class="btn btn-primary" style="width:100%;text-align:center;display:block;">Get Started</a>
+          <a href="/fbc-update/contact/" class="btn btn-primary" style="width:100%;text-align:center;display:block;">Get Started</a>
         </div>
         <div class="sidebar-box">
           <h4>More Posts</h4>
           <ul>
-            <li><a href="/blog/the-power-of-pausing/">The Power of Pausing: Why Slowing Down Can Help You Heal</a></li>
-            <li><a href="/blog/what-happens-in-your-first-therapy-session/">What Happens in Your First Therapy Session</a></li>
-            <li><a href="/blog/">Browse all posts →</a></li>
+            <li><a href="/fbc-update/blog/the-power-of-pausing/">The Power of Pausing: Why Slowing Down Can Help You Heal</a></li>
+            <li><a href="/fbc-update/blog/what-happens-in-your-first-therapy-session/">What Happens in Your First Therapy Session</a></li>
+            <li><a href="/fbc-update/blog/">Browse all posts →</a></li>
           </ul>
         </div>
         <div class="sidebar-box">
           <h4>Our Services</h4>
           <ul>
-            <li><a href="/services/individual-therapy/">Individual Therapy</a></li>
-            <li><a href="/services/anxiety-therapy/">Anxiety Therapy</a></li>
-            <li><a href="/services/trauma-therapy/">Trauma Therapy</a></li>
-            <li><a href="/services/couples-therapy/">Couples Therapy</a></li>
-            <li><a href="/services/">All services →</a></li>
+            <li><a href="/fbc-update/services/individual-therapy/">Individual Therapy</a></li>
+            <li><a href="/fbc-update/services/anxiety-therapy/">Anxiety Therapy</a></li>
+            <li><a href="/fbc-update/services/trauma-therapy/">Trauma Therapy</a></li>
+            <li><a href="/fbc-update/services/couples-therapy/">Couples Therapy</a></li>
+            <li><a href="/fbc-update/services/">All services →</a></li>
           </ul>
         </div>
       </aside>
@@ -910,7 +911,7 @@ function generatePost() {
   // Generate blog index card
   const excerpt = contentEl.innerText.replace(/\s+/g, ' ').trim().slice(0, 160) + '…';
   const cardHTML = `      <div class="blog-card fade-in" data-date="${pubDate}">
-        <a href="/blog/${slug}/" class="blog-card-img-link">
+        <a href="/fbc-update/blog/${slug}/" class="blog-card-img-link">
           <div class="blog-card-img"><img src="${heroImg}" alt="${heroAlt}" loading="lazy" decoding="async"></div>
         </a>
         <div class="blog-card-body">
@@ -919,9 +920,9 @@ function generatePost() {
             <span class="blog-card-sep">&middot;</span>
             <span class="blog-card-cat">${category.toUpperCase()}</span>
           </div>
-          <h3 class="blog-card-title"><a href="/blog/${slug}/">${title}</a></h3>
+          <h3 class="blog-card-title"><a href="/fbc-update/blog/${slug}/">${title}</a></h3>
           <p class="blog-card-excerpt">${excerpt}</p>
-          <a href="/blog/${slug}/" class="blog-card-link">Read More &#8594;</a>
+          <a href="/fbc-update/blog/${slug}/" class="blog-card-link">Read More &#8594;</a>
         </div>
       </div>`;
 
