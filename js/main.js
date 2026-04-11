@@ -164,10 +164,13 @@ if (searchOverlay) {
 
 /* Search index — embedded page data */
 var ROOT_PATH = (function() {
-  var link = document.querySelector('link[href*="style.css"]');
-  if (!link) return '/';
-  var href = link.getAttribute('href');
-  return href.replace('css/style.css', '');
+  /* On GitHub Pages project sites the URL is github.io/repo-name/
+     window.location gives us the real path — use it directly */
+  if (location.hostname.indexOf('github.io') !== -1) {
+    var m = location.pathname.match(/^(\/[^\/]+\/)/);
+    return m ? m[1] : '/';
+  }
+  return '/';
 })();
 
 var PAGES = [
