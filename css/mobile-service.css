@@ -184,3 +184,27 @@ p, .svc-p { font-size: var(--fs-body) }
   .page-hero { height: 340px; max-height: 380px }
   .page-hero-content h1 { font-size: clamp(1.8rem, 4vw, 2.8rem) }
 }
+
+/* ── Hide therapist placeholder initials on mobile ─────── */
+@media (max-width: 768px) {
+  .team-photo-placeholder { display: none !important; }
+  .team-photo-wrap { width: 80px !important; height: 80px !important; }
+  .team-photo-wrap img { width: 80px !important; height: 80px !important; }
+}
+
+/* ── Uniform section spacing on mobile ─────────────────── */
+@media (max-width: 768px) {
+  .svc-section,
+  .svc-section-cream,
+  .svc-pullquote { 
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  /* All sections: consistent 28px top gap */
+  .svc-main > .svc-section,
+  .svc-main > div { padding-top: 28px !important; }
+  .svc-section-cream {
+    padding-top: 28px !important;
+    padding-bottom: 24px !important;
+  }
+}

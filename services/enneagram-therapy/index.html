@@ -5,13 +5,11 @@
 <meta charset="utf-8"/>
 <script>
 (function(){
-  var h = window.innerHeight;
-  document.documentElement.style.setProperty('--hero-h', h + 'px');
-  window.addEventListener('orientationchange', function(){
-    setTimeout(function(){
-      document.documentElement.style.setProperty('--hero-h', window.innerHeight + 'px');
-    }, 300);
-  });
+  function setH(){document.documentElement.style.setProperty('--hero-h',window.innerHeight+'px');}
+  setH();
+  window.addEventListener('resize',function(){setTimeout(setH,100);});
+  window.addEventListener('orientationchange',function(){setTimeout(setH,300);});
+  window.addEventListener('load',setH);
 })();
 </script>
 <meta content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover" name="viewport"/>
@@ -268,7 +266,7 @@
 <div class="svc-ornament" aria-hidden="true"><span class="svc-ornament-glyph">✦ &nbsp; ✦ &nbsp; ✦</span></div>
 <div class="svc-section svc-section-cream">
 <h2 class="svc-section-heading">Certified Narrative Enneagram Teachers</h2>
-<p>Rebecca Moravec is a Certified Narrative Enneagram Practitioner and Teacher — one of a small number of certified teachers worldwide through the <a href="https://www.theenneagraminschool.com" target="_blank" rel="noopener noreferrer" style="color:var(--petal-dark);">The Narrative Enneagram</a>. This approach emphasizes the lived experience of each type rather than test results and abstract theory.</p><div style="display:flex;gap:24px;align-items:center;margin-top:24px;flex-wrap:wrap;"><img src="../../images/fbc-photos/the-narrative-enneagram-certified-practitioner-badge.jpg" alt="The Narrative Enneagram Certified Practitioner badge" style="width:100px;height:auto;" loading="lazy"/><img src="../../images/fbc-photos/the-narrative-enneagram-certified-teacher-badge.jpg" alt="The Narrative Enneagram Certified Teacher badge" style="width:100px;height:auto;" loading="lazy"/></div>
+<p>Rebecca Moravec is a Certified Narrative Enneagram Practitioner and Teacher — one of a small number of certified teachers worldwide through the <a href="https://www.theenneagraminschool.com" target="_blank" rel="noopener noreferrer" style="color:var(--petal-dark);">The Narrative Enneagram</a>. This approach emphasizes the lived experience of each type rather than test results and abstract theory.</p><div style="display:flex;gap:32px;align-items:center;justify-content:center;margin-top:32px;flex-wrap:wrap;"><img src="../../images/fbc-photos/the-narrative-enneagram-certified-practitioner-badge.jpg" alt="The Narrative Enneagram Certified Practitioner badge" style="width:130px;height:130px;object-fit:contain;background:none;" loading="lazy"/><img src="../../images/fbc-photos/the-narrative-enneagram-certified-teacher-badge.jpg" alt="The Narrative Enneagram Certified Teacher badge" style="width:130px;height:130px;object-fit:contain;background:none;" loading="lazy"/></div>
 </div>
 <div class="svc-section">
 <div class="svc-pullquote"><p>Knowing your type doesn't put you in a box. It helps you see the box you're already in — so you can decide whether to stay.</p></div>

@@ -163,6 +163,13 @@ if (searchOverlay) {
 }
 
 /* Search index — embedded page data */
+var ROOT_PATH = (function() {
+  var link = document.querySelector('link[href*="style.css"]');
+  if (!link) return '/';
+  var href = link.getAttribute('href');
+  return href.replace('css/style.css', '');
+})();
+
 var PAGES = [
   {url:'/',title:'Therapists in Denver & Online | Full Bloom Counseling',desc:'Compassionate therapy for anxiety, trauma, relationships, disordered eating. Free consultations.',cat:'Home'},
   {url:'/about/',title:'About Our Denver Therapists',desc:'Eight licensed therapists specializing in trauma, anxiety, Enneagram, couples therapy, and more.',cat:'About'},
@@ -213,7 +220,7 @@ function doSearch() {
   }
 
   results.innerHTML = hits.map(function(p) {
-    return '<a href="' + p.url + '" class="search-result-item">' +
+    return '<a href="' + ROOT_PATH.replace(/\/$/, '') + p.url + '" class="search-result-item">' +
       '<div class="search-result-cat">' + p.cat + '</div>' +
       '<h4>' + p.title + '</h4>' +
       '<p>' + p.desc + '</p>' +
@@ -362,7 +369,7 @@ document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); })
       return;
     }
     msmResults.innerHTML = hits.map(function(p) {
-      return '<a href="' + p.url + '" class="msm-result">' +
+      return '<a href="' + ROOT_PATH.replace(/\/$/, '') + p.url + '" class="msm-result">' +
         '<span class="msm-cat">' + p.cat + '</span>' +
         '<strong>' + p.title + '</strong>' +
         '<span>' + p.desc + '</span></a>';
