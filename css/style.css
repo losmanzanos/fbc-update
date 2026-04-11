@@ -1215,6 +1215,14 @@ a:focus-visible {
   background: var(--cream-alt);
   border-radius: 0 8px 8px 0;
 }
+/* When pullquote sits inline next to sibling paragraphs/headings within a section,
+   restore breathing room. When it's the sole child, margin stays 0 (flex gap handles it). */
+p + .svc-pullquote,
+h2 + .svc-pullquote,
+h3 + .svc-pullquote { margin-top: 32px; }
+.svc-pullquote + p,
+.svc-pullquote + h2,
+.svc-pullquote + h3 { margin-top: 32px; }
 .svc-pullquote::before {
   content: '\201C';
   position: absolute;
