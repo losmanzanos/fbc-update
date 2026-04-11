@@ -394,7 +394,7 @@ document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); })
     '<div class="konami-tv">' +
       '<div class="konami-screen-bezel">' +
         '<div class="konami-screen">' +
-          '<img src="/images/konami-contra.jpg" alt="Contra — Konami 1988" class="konami-img">' +
+          '<img src="' + (document.querySelector('link[href*="style.css"]')||{getAttribute:function(){return 'css/style.css'}}).getAttribute('href').replace('css/style.css','') + 'images/konami-contra.jpg" alt="Contra — Konami 1988" class="konami-img">' +
           '<div class="konami-scanlines"></div>' +
         '</div>' +
       '</div>' +
