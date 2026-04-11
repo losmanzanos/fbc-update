@@ -1805,3 +1805,11 @@ h3 + .svc-benefit-grid {
     padding-right: max(40px, env(safe-area-inset-right));
   }
 }
+/* Ensure fade-in elements always show even if IntersectionObserver doesn't fire */
+.fade-in {
+  animation: fadein-fallback 0.8s ease forwards;
+}
+@keyframes fadein-fallback {
+  0% { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
