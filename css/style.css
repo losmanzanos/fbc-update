@@ -1177,7 +1177,7 @@ a:focus-visible {
   align-items: center;
   justify-content: center;
   gap: 16px;
-  padding: 40px 0 16px;
+  padding: 0;
   color: var(--petal-dark);
 }
 .svc-ornament::before,
@@ -1211,7 +1211,7 @@ a:focus-visible {
   position: relative;
   border-left: 3px solid var(--petal);
   padding: 32px 40px;
-  margin: 44px 0;
+  margin: 0;
   background: var(--cream-alt);
   border-radius: 0 8px 8px 0;
 }
@@ -1319,7 +1319,12 @@ a:focus-visible {
   align-items: start;
   overflow: visible;
 }
-.svc-main { min-width: 0; }
+.svc-main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
 .svc-main h2 { font-size: clamp(1.7rem,3vw,2.4rem); margin: 0 0 20px; }
 .svc-main h3 { font-size: 1.35rem; margin: 0 0 14px; }
 .svc-main p { font-size: 1rem; line-height: 1.87; color: var(--text); max-width: 720px; }
@@ -1329,8 +1334,8 @@ a:focus-visible {
 .svc-intro-headline { font-family: var(--font-serif); font-size: clamp(1.45rem,2.8vw,2rem); font-weight: 500; color: var(--bark); line-height: 1.22; margin: 0 0 20px; }
 .svc-lead { font-family: var(--font-serif); font-size: clamp(1.28rem,2.2vw,1.7rem); line-height: 1.55; font-weight: 400; color: var(--bark); max-width: 840px; margin: 0 auto 1.25rem; text-align: center; letter-spacing: .01em; padding: 18px 24px; border-radius: 8px; background: linear-gradient(135deg,rgba(200,148,122,.12) 0%,rgba(232,184,152,.08) 100%); }
 
-.svc-section { padding: 44px 0; clear: both; }
-.svc-section-cream { margin: 0; padding: 44px 40px 32px; background: var(--cream); border-radius: 12px; text-align: center; }
+.svc-section { padding: 0; margin: 0; clear: both; }
+.svc-section-cream { margin: 0; padding: 36px 40px; background: var(--cream); border-radius: 12px; text-align: center; }
 .svc-section-cream p, .svc-section-cream h2, .svc-section-cream h3 { text-align: center; max-width: 720px; margin-left: auto; margin-right: auto; }
 .svc-section-heading { font-family: var(--font-serif); font-size: clamp(1.9rem,2.2vw,1.95rem); font-weight: 500; color: var(--bark); margin: 0 0 24px; line-height: 1.25; }
 .svc-section-intro { font-size: 1rem; line-height: 1.85; color: var(--text); margin: 0 0 28px; max-width: 720px; }
