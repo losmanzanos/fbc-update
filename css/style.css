@@ -620,8 +620,9 @@ strong {
 }
 
 body.menu-open .nav-hamburger {
-  opacity: 0;
-  pointer-events: none;
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 10002; /* above the menu overlay */
 }
 
 .nav-hamburger span {
@@ -635,6 +636,10 @@ body.menu-open .nav-hamburger {
 }
 
 body.header-scrolled .nav-hamburger span {
+  background: var(--bark);
+  box-shadow: none;
+}
+body.menu-open .nav-hamburger span {
   background: var(--bark);
   box-shadow: none;
 }
@@ -1831,4 +1836,60 @@ h3 + .svc-benefit-grid {
 @keyframes fadein-fallback {
   0% { opacity: 0; transform: translateY(16px); }
   100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ── HOMEPAGE HERO: Mobile height caps ──────────────────────────────────
+   iOS reports innerHeight including the chrome sometimes. Cap so hero
+   never exceeds the visible viewport. svh/dvh are iOS 15.4+/16+ support.
+   ──────────────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero {
+    max-height: 100svh;      /* iOS 15.4+: small viewport height (excludes browser UI) */
+    max-height: 100dvh;      /* iOS 16+: dynamic viewport height */
+  }
+}
+@media (max-width: 768px) and (orientation: landscape) {
+  .hero {
+    height: 300px !important;
+    max-height: 300px;
+    min-height: 0;
+  }
+  .hero h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+}
+
+/* ── Custom checkbox — cross-browser visible checkmark ─────────────── */
+.custom-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border: 2px solid var(--petal-dark);
+  border-radius: 4px;
+  background: var(--white);
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 2px;
+  position: relative;
+  transition: background .15s, border-color .15s;
+}
+.custom-checkbox:checked {
+  background: var(--petal-btn);
+  border-color: var(--petal-btn);
+}
+.custom-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 6px;
+  height: 10px;
+  border: 2px solid var(--white);
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+.custom-checkbox:focus-visible {
+  outline: 3px solid var(--petal);
+  outline-offset: 2px;
 }
