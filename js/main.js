@@ -164,13 +164,10 @@ if (searchOverlay) {
 
 /* Search index — embedded page data */
 var ROOT_PATH = (function() {
-  /* On GitHub Pages project sites the URL is github.io/repo-name/
-     window.location gives us the real path — use it directly */
-  if (location.hostname.indexOf('github.io') !== -1) {
-    var m = location.pathname.match(/^(\/[^\/]+\/)/);
-    return m ? m[1] : '/';
-  }
-  return '/';
+  var link = document.querySelector('link[href*="style.css"]');
+  if (!link) return '/';
+  var href = link.getAttribute('href');
+  return href.replace('css/style.css', '');
 })();
 
 var PAGES = [
@@ -201,6 +198,36 @@ var PAGES = [
   {url:'/faqs/',title:'Therapy FAQs | Full Bloom Counseling Denver',desc:'Insurance, rates, sliding scale, first sessions, online therapy questions answered.',cat:'FAQ'},
   {url:'/contact/',title:'Contact Full Bloom Counseling Denver',desc:'Schedule a free 15-minute consultation. Call 720-767-9808 or email us.',cat:'Contact'},
   {url:'/press/',title:'Press & Media | Full Bloom Counseling',desc:'Rebecca Moravec featured in CNN, Bumble, Jewish Unpacked. Podcast: Two Therapists in Therapy.',cat:'Press'},
+,
+  // -- Missing service pages --
+  {url:'/services/brainspotting-therapy/',title:'Brainspotting Therapy Denver',desc:'Certified Brainspotting Practitioner. Trauma, PTSD, anxiety treated at the body level — not just the cognitive.',cat:'Service'},
+  {url:'/services/therapy-for-men-denver/',title:'Therapy for Men in Denver',desc:'A space to work through it. Anxiety, relationships, identity, anger, and the things men rarely say out loud.',cat:'Service'},
+  {url:'/services/therapy-for-women-denver/',title:'Therapy for Women in Denver',desc:'Individual therapy for anxiety, burnout, body image, relationships, life transitions, and self-discovery.',cat:'Service'},
+  {url:'/services/therapy-young-adults-denver/',title:'Therapy for Young Adults Denver',desc:'Navigating your 20s and early 30s. Identity, relationships, anxiety, career uncertainty, and new independence.',cat:'Service'},
+  {url:'/services/grief-loss-therapy/',title:'Grief & Loss Therapy Denver',desc:'Compassionate support for loss, anticipatory grief, complicated grief, and major life transitions.',cat:'Service'},
+  {url:'/services/adhd-neurodivergent-therapy-denver/',title:'ADHD & Neurodivergent Therapy Denver',desc:'Therapy that works with how your brain actually works. ADHD, autism, sensory processing.',cat:'Service'},
+  {url:'/services/postpartum-perinatal-therapy/',title:'Postpartum & Perinatal Therapy Denver',desc:'Support for postpartum depression, anxiety, birth trauma, and the emotional complexity of new parenthood.',cat:'Service'},
+  {url:'/services/depression-therapy-denver/',title:'Depression Therapy Denver',desc:'Evidence-based treatment for depression. CBT, EMDR, somatic therapy for real change, not just management.',cat:'Service'},
+  {url:'/services/online-therapy-colorado/',title:'Online Therapy Colorado',desc:'All services available via secure telehealth statewide. Denver to Durango, Boulder to Colorado Springs.',cat:'Service'},
+  // -- Blog posts --
+  {url:'/blog/what-happens-in-your-first-therapy-session/',title:'What Happens in Your First Therapy Session',desc:'Not sure what to expect? A Full Bloom therapist walks you through exactly what happens and why it\'s less scary than you think.',cat:'Blog',author:'Jillian Corpora'},
+  {url:'/blog/therapy-for-men-denver/',title:'Therapy for Men: What Gets in the Way (And Why It\'s Worth It)',desc:'Men seek therapy less often and wait longer when they do. A Denver therapist on what actually gets in the way.',cat:'Blog',author:'Mark Whitney'},
+  {url:'/blog/enneagram-relationships-communication-denver/',title:'How the Enneagram Can Transform Your Relationships',desc:'Understanding your Enneagram type and your partner\'s can transform how you communicate, fight, and repair.',cat:'Blog',author:'Rebecca Moravec'},
+  {url:'/blog/what-is-complex-ptsd-denver/',title:'What Is Complex PTSD? How It Differs From PTSD',desc:'You didn\'t have one terrible event -- you had years of them. C-PTSD is more common than most people know.',cat:'Blog',author:'Kelsey Bennett'},
+  {url:'/blog/brainspotting-therapy-denver/',title:'Brainspotting Therapy in Denver: What It Is and What to Expect',desc:'Brainspotting reaches what talking can\'t. A Certified Brainspotting Practitioner explains how it works.',cat:'Blog',author:'Kelli Ruhl'},
+  {url:'/blog/intuitive-eating-beginners-guide-denver/',title:'Intuitive Eating: A Beginner\'s Guide From a Denver Therapist',desc:'Intuitive Eating is not about eating whatever you want -- it\'s about rebuilding trust with your body.',cat:'Blog',author:'Natalie Siegel'},
+  {url:'/blog/anti-diet-therapy-body-trust/',title:'How to Begin Anti-Diet Therapy: Building Body Trust',desc:'What does it look like to actually let go of the diet mentality? A Full Bloom therapist on how it begins.',cat:'Blog',author:'Natalie Siegel'},
+  {url:'/blog/narrative-therapy-couples-families-denver/',title:'Narrative Therapy for Couples and Families',desc:'Every relationship has a story. Narrative therapy helps couples examine the dominant stories keeping them stuck.',cat:'Blog',author:'Mark Whitney'},
+  {url:'/blog/culturally-responsive-therapy-denver/',title:'Culturally Responsive Therapy: Why Your Culture Belongs in the Room',desc:'Therapy has a history of centering one kind of experience. A Denver therapist on why cultural context matters.',cat:'Blog',author:'Myldha Verdelus'},
+  {url:'/blog/safe-sound-protocol-denver/',title:'Feel Safer in Your Body with the Safe and Sound Protocol',desc:'For many people talk therapy isn\'t enough -- especially when anxiety and trauma live in the nervous system.',cat:'Blog',author:'Kelsey Bennett'},
+  {url:'/blog/therapy-parents-young-adults-postpartum-colorado/',title:'The Hidden Weight of Parenting',desc:'Postpartum mental health gets attention. The years that follow -- navigating identity, young adults, and more.',cat:'Blog',author:'Jillian Corpora'},
+  {url:'/blog/therapy-for-growth-denver/',title:'Therapy for Growth: Clarity, Connection, and Healing',desc:'Therapy isn\'t just for crisis. A Denver therapist on how counseling can help you grow and find direction.',cat:'Blog',author:'Rebecca Moravec'},
+  {url:'/blog/the-power-of-pausing/',title:'The Power of Pausing: Why Slowing Down Can Help You Heal',desc:'In a culture that rewards busyness, pausing can feel threatening. But it may be the most healing thing.',cat:'Blog',author:'Kirsten Adorno'},
+  {url:'/blog/enneagram-therapy-denver/',title:'The Enneagram & Full Bloom: A Long Overdue Website Update',desc:'What the Enneagram actually is, why we use it in therapy, and what this practice stands for.',cat:'Blog',author:'Rebecca Moravec'},
+  {url:'/blog/the-unspoken-truth-about-starting-therapy/',title:'The Unspoken Truth About Starting Therapy',desc:'Most people wait years before reaching out. Here\'s what nobody tells you about what it\'s actually like.',cat:'Blog',author:'Jillian Corpora'},
+  {url:'/blog/emdr-therapy-what-to-expect/',title:'EMDR Therapy in Denver: What It Is and What to Expect',desc:'EMDR has become one of the most well-researched treatments available. A Denver therapist explains how it works.',cat:'Blog',author:'Kelsey Bennett'},
+  {url:'/blog/couples-therapy-denver-gottman-method/',title:'What the Gottman Method Can Teach You About Your Relationship',desc:'The Four Horsemen, emotional bank accounts, and why how you fight matters more than how often.',cat:'Blog',author:'Kirsten Adorno'},
+  {url:'/blog/feeling-stuck-in-life-therapy-denver/',title:'When Something Feels Off But You Can\'t Name It',desc:'You don\'t need to be in crisis to deserve support. A Denver therapist on the suffering that doesn\'t have a name.',cat:'Blog',author:'Rebecca Moravec'},
 ];
 
 function doSearch() {
@@ -214,7 +241,8 @@ function doSearch() {
     return p.title.toLowerCase().includes(q) ||
            p.desc.toLowerCase().includes(q) ||
            p.cat.toLowerCase().includes(q) ||
-           p.url.toLowerCase().includes(q);
+           p.url.toLowerCase().includes(q) ||
+           (p.author && p.author.toLowerCase().includes(q));
   });
 
   if (hits.length === 0) {
@@ -223,8 +251,9 @@ function doSearch() {
   }
 
   results.innerHTML = hits.map(function(p) {
+    var authorStr = p.author ? ' <span style="opacity:.65;">by ' + p.author + '</span>' : '';
     return '<a href="' + ROOT_PATH.replace(/\/$/, '') + p.url + '" class="search-result-item">' +
-      '<div class="search-result-cat">' + p.cat + '</div>' +
+      '<div class="search-result-cat">' + p.cat + authorStr + '</div>' +
       '<h4>' + p.title + '</h4>' +
       '<p>' + p.desc + '</p>' +
       '</a>';
@@ -372,8 +401,9 @@ document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); })
       return;
     }
     msmResults.innerHTML = hits.map(function(p) {
+      var authorLabel = p.author ? ' · ' + p.author : '';
       return '<a href="' + ROOT_PATH.replace(/\/$/, '') + p.url + '" class="msm-result">' +
-        '<span class="msm-cat">' + p.cat + '</span>' +
+        '<span class="msm-cat">' + p.cat + authorLabel + '</span>' +
         '<strong>' + p.title + '</strong>' +
         '<span>' + p.desc + '</span></a>';
     }).join('');

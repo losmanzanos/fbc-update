@@ -601,7 +601,7 @@ strong {
 .nav-hamburger {
   display: none;
   position: fixed;
-  top: 16px;
+  top: 25px;
   right: 18px;
   z-index: 10001;
   flex-direction: column;
@@ -620,8 +620,7 @@ strong {
 }
 
 body.menu-open .nav-hamburger {
-  opacity: 0;
-  pointer-events: none;
+  display: none; /* hide hamburger when dedicated close button is visible inside menu */
 }
 
 .nav-hamburger span {
@@ -635,6 +634,10 @@ body.menu-open .nav-hamburger {
 }
 
 body.header-scrolled .nav-hamburger span {
+  background: var(--bark);
+  box-shadow: none;
+}
+body.menu-open .nav-hamburger span {
   background: var(--bark);
   box-shadow: none;
 }
@@ -1513,6 +1516,7 @@ h3 + .svc-pullquote { margin-top: 32px; }
 .contact-row dd a:hover { color: var(--petal-dark); }
 .form-group { margin-bottom: 20px; }
 .form-group label { display: block; font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px; color: var(--bark); }
+.form-group label.checkbox-label { font-size: .88rem; font-weight: 400; letter-spacing: 0; text-transform: none; margin-bottom: 0; }
 .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 13px 16px; border: 1px solid var(--border); border-radius: var(--radius); font-family: var(--font-sans); font-size: .95rem; color: var(--text); background: var(--white); transition: border-color var(--ease), box-shadow var(--ease); -webkit-appearance: none; appearance: none; }
 .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--petal); box-shadow: 0 0 0 3px rgba(200,150,122,.18); }
 .form-group textarea { resize: vertical; min-height: 130px; }
@@ -1665,7 +1669,7 @@ h3 + .svc-pullquote { margin-top: 32px; }
   .nav-hamburger, #hamburger { display: flex !important; }
   .nav-bar { justify-content: space-between !important; padding: 0 16px !important; }
   .nav-logo { margin: 0 !important; }
-  .nav-logo img { height: 36px !important; width: auto !important; filter: brightness(0) invert(1) drop-shadow(0 1px 6px rgba(0,0,0,.55)) !important; display: block !important; }
+  .nav-logo img { height: 40px !important; width: auto !important; filter: brightness(0) invert(1) drop-shadow(0 1px 6px rgba(0,0,0,.55)) !important; display: block !important; }
   #header.scrolled .nav-logo img { filter: brightness(0) !important; }
 }
 
@@ -1689,7 +1693,7 @@ h3 + .svc-pullquote { margin-top: 32px; }
   .nav-hamburger, #hamburger { display: flex !important; }
   .nav-bar { justify-content: space-between !important; padding: 0 16px !important; }
   .nav-logo { margin: 0 !important; }
-  .nav-logo img { height: 38px !important; width: auto !important; filter: brightness(0) invert(1) drop-shadow(0 1px 6px rgba(0,0,0,.55)) !important; display: block !important; }
+  .nav-logo img { height: 40px !important; width: auto !important; filter: brightness(0) invert(1) drop-shadow(0 1px 6px rgba(0,0,0,.55)) !important; display: block !important; }
   #header.scrolled .nav-logo img { filter: brightness(0) !important; transition: filter var(--ease); }
 }
 @media(min-width:1024px) { #hamburger { display: none !important; } }
@@ -1830,4 +1834,54 @@ h3 + .svc-benefit-grid {
 @keyframes fadein-fallback {
   0% { opacity: 0; transform: translateY(16px); }
   100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ── HOMEPAGE HERO: Mobile height caps ──────────────────────────────────
+   iOS reports innerHeight including the chrome sometimes. Cap so hero
+   never exceeds the visible viewport. svh/dvh are iOS 15.4+/16+ support.
+   ──────────────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero {
+    max-height: 100svh;      /* iOS 15.4+: small viewport height (excludes browser UI) */
+    max-height: 100dvh;      /* iOS 16+: dynamic viewport height */
+  }
+}
+@media (max-width: 768px) and (orientation: landscape) {
+  .hero {
+    height: 300px !important;
+    max-height: 300px;
+    min-height: 0;
+  }
+  .hero h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+}
+
+/* ── Custom checkbox — cross-browser visible checkmark ─────────────── */
+.custom-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  max-width: 20px;
+  flex-grow: 0;
+  border: 2px solid var(--petal-dark);
+  border-radius: 4px;
+  background: var(--white);
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 2px;
+  position: relative;
+  transition: background .15s, border-color .15s;
+}
+.custom-checkbox:checked {
+  background: var(--petal-btn);
+  border-color: var(--petal-btn);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpolyline points='1.5,6 4.5,9 10.5,3' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-size: 12px 12px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.custom-checkbox:focus-visible {
+  outline: 3px solid var(--petal);
+  outline-offset: 2px;
 }
