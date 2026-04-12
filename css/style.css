@@ -62,6 +62,8 @@ body {
   background: var(--white);
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
+  /* Reserve scrollbar gutter so it doesn't cause layout shift when it appears */
+  scrollbar-gutter: stable;
 }
 
 img {
@@ -1829,15 +1831,6 @@ h3 + .svc-benefit-grid {
     padding-right: max(40px, env(safe-area-inset-right));
   }
 }
-/* Ensure fade-in elements always show even if IntersectionObserver doesn't fire */
-.fade-in {
-  animation: fadein-fallback 0.8s ease forwards;
-}
-@keyframes fadein-fallback {
-  0% { opacity: 0; transform: translateY(16px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
 /* ── HOMEPAGE HERO: Mobile height caps ──────────────────────────────────
    iOS reports innerHeight including the chrome sometimes. Cap so hero
    never exceeds the visible viewport. svh/dvh are iOS 15.4+/16+ support.
