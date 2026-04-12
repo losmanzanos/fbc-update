@@ -5,14 +5,11 @@
 <script>
 (function(){
   function setH(){document.documentElement.style.setProperty('--hero-h',window.innerHeight+'px');}
-  /* Run immediately as a rough first pass, then again after layout settles.
-     The delayed call catches the correct innerHeight on first load —
-     the immediate call prevents any flash of wrong height on older browsers. */
   setH();
-  window.addEventListener('load', function(){ setTimeout(setH, 50); });
-  /* orientationchange only — NOT resize.
-     iOS Safari fires resize on every address-bar show/hide, which is exactly
-     what causes the hero to jump. Orientation is the only time we need to recalc. */
+  /* load: corrects measurement on desktop after layout fully settles.
+     No visible jump on desktop (innerHeight doesn't change).
+     Does NOT cause iOS jump — resize listener was already removed. */
+  window.addEventListener('load', setH);
   window.addEventListener('orientationchange',function(){setTimeout(setH,400);});
 })();
 </script>
