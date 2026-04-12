@@ -932,9 +932,10 @@ body.menu-open {
   overflow: hidden;
   /* 1. Fallback for very old browsers */
   height: 100vh;
-  /* 2. JS-set pixel value — set once at page load, NEVER changes.
-     This is the real fix. Pixel values don't respond to address bar. */
-  height: var(--hero-h, 100vh);
+  /* 2. Modern browsers: svh = viewport with address bar visible — stable on first load, no jump */
+  height: 100svh;
+  /* 3. JS-set pixel value overrides on browsers that don't support svh (belt + suspenders) */
+  height: var(--hero-h, 100svh);
   display: flex;
   align-items: center;
   justify-content: center;
