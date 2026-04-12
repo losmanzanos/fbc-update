@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
 <script>
 (function(){
-  /* Only use JS height-lock on mobile where iOS Safari address bar causes jumps.
-     Desktop uses 100dvh (CSS) which is always correct and never changes. */
+  /* Height lock: mobile only (iOS address bar). Desktop uses 100dvh via CSS. */
   function isMobile(){ return window.innerWidth <= 768; }
   function setH(){
     if(isMobile()){
@@ -16,6 +15,13 @@
   }
   setH();
   window.addEventListener('orientationchange', function(){ setTimeout(setH, 400); });
+
+  /* Unpause hero animation once fonts are ready — ensures heroUp plays with
+     Cormorant Garamond, not the fallback font. Consistent on first load + refresh. */
+  document.fonts.ready.then(function(){
+    var hc = document.querySelector('.hero-content');
+    if (hc) hc.style.animationPlayState = 'running';
+  });
 })();
 </script>
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">

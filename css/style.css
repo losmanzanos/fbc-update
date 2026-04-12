@@ -932,11 +932,12 @@ body.menu-open {
 .hero {
   position: relative;
   overflow: hidden;
-  /* Desktop: 100dvh fills viewport perfectly, never jumps (no address bar on desktop) */
-  height: 100vh;    /* oldest browser fallback */
-  height: 100dvh;   /* modern desktop — always fills screen, never changes */
-  /* Mobile: JS overrides --hero-h with static px to prevent iOS address bar jump */
+  height: 100vh;
+  height: 100dvh;
   height: var(--hero-h, 100dvh);
+  /* Safety net: never shorter than full viewport even with subpixel rounding */
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -974,6 +975,9 @@ body.menu-open {
   max-width: 860px;
   padding: calc(var(--nav-h) + 32px) 32px 64px;
   animation: heroUp .9s ease both;
+  /* Pause until fonts loaded — prevents animation playing with fallback font.
+     JS (document.fonts.ready) unpauses it, giving consistent first-load experience. */
+  animation-play-state: paused;
 }
 
 @keyframes heroUp {
