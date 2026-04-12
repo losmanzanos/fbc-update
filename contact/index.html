@@ -239,17 +239,18 @@
   <input type="text" name="website" id="_hp_phone" style="display:none !important" tabindex="-1" autocomplete="off" aria-hidden="true">
   <input type="text" name="company" id="_hp_company" style="display:none !important" tabindex="-1" autocomplete="off" aria-hidden="true">
   <input type="hidden" name="_loadtime" id="_loadtime" value="">
-  <input type="hidden" name="_subject" value="New Contact — Full Bloom Counseling">
+  <input type="hidden" name="_subject" value="New Inquiry — Full Bloom Counseling" id="form-subject">
+  <input type="hidden" name="_replyto" id="form-replyto">
   <input type="hidden" name="_timestamp" id="form-timestamp" value="0">
 <div class="form-row">
-<div class="form-group"><label for="fname">First Name *</label><input autocomplete="given-name" id="fname" name="first_name" required="" type="text"/></div>
-<div class="form-group"><label for="lname">Last Name *</label><input autocomplete="family-name" id="lname" name="last_name" required="" type="text"/></div>
+<div class="form-group"><label for="fname">First Name *</label><input autocomplete="given-name" id="fname" name="First Name" required="" type="text"/></div>
+<div class="form-group"><label for="lname">Last Name *</label><input autocomplete="family-name" id="lname" name="Last Name" required="" type="text"/></div>
 </div>
-<div class="form-group"><label for="email">Email Address *</label><input autocomplete="email" id="email" name="email" required="" type="email"/></div>
-<div class="form-group"><label for="phone">Phone <span style="font-weight:400;color:var(--bark-mid);">(optional)</span></label><input autocomplete="tel" id="phone" name="phone" type="tel"/></div>
+<div class="form-group"><label for="email">Email Address *</label><input autocomplete="email" id="email" name="Email Address" required="" type="email"/></div>
+<div class="form-group"><label for="phone">Phone <span style="font-weight:400;color:var(--bark-mid);">(optional)</span></label><input autocomplete="tel" id="phone" name="Phone Number" type="tel"/></div>
 <div class="form-group">
 <label for="service">What brings you in?</label>
-<select id="service" name="service">
+<select id="service" name="Interested In">
 <option value="">Select one (optional)</option>
 <option>Individual Therapy</option><option>Couples Therapy</option>
 <option>Family Therapy</option><option>Trauma / EMDR</option>
@@ -258,16 +259,16 @@
 <option>Something else</option>
 </select>
 </div>
-<div class="form-group"><label for="message">Message</label><textarea id="message" name="message" placeholder="Tell us a little about what you’re looking for. No pressure — just say hello."></textarea></div>
+<div class="form-group"><label for="message">Message</label><textarea id="message" name="Message" placeholder="Tell us a little about what you’re looking for. No pressure — just say hello."></textarea></div>
 
 <div class="form-group">
 <label for="referral">How did you hear about Full Bloom? <span style="font-weight:400;color:var(--bark-mid);">(optional)</span></label>
-<input type="text" id="referral" name="referral" placeholder="Google, a friend, Instagram, therapist referral…" autocomplete="off">
+<input type="text" id="referral" name="How They Found Us" placeholder="Google, a friend, Instagram, therapist referral…" autocomplete="off">
 </div>
 
 <div class="form-group" style="background:var(--cream);border-radius:8px;padding:20px 22px;border:1px solid var(--border);margin-top:8px;">
 <label class="checkbox-label" style="display:flex;gap:14px;align-items:flex-start;cursor:pointer;line-height:1.6;">
-<input type="checkbox" id="private_pay_confirm" name="private_pay_confirm" required class="custom-checkbox">
+<input type="checkbox" id="private_pay_confirm" name="Private Pay Confirmed" required class="custom-checkbox">
 <span style="font-size:.88rem;color:var(--bark);"><strong>I understand Full Bloom Counseling is a private pay practice.</strong> We do not bill health insurance or Medicaid directly. Our rates reflect the expertise and quality of care you receive — with no insurance-dictated session limits. Please check this box to confirm you understand our private pay model before submitting.</span>
 </label>
 </div>

@@ -318,7 +318,21 @@ if (form && suc) {
     }
 
     /* ── Real submission ─────────────────────────────────────────────── */
-    var b = form.querySelector('[type="submit"]');
+    /* Build clean subject: "New Inquiry — Jane Smith (Couples Therapy)" */
+    var fname = (form.querySelector('[name="First Name"]') || {}).value || '';
+    var lname = (form.querySelector('[name="Last Name"]') || {}).value || '';
+    var service = (form.querySelector('[name="Interested In"]') || {}).value || '';
+    var clientEmail = (form.querySelector('[name="Email Address"]') || {}).value || '';
+    var fullName = (fname + ' ' + lname).trim();
+    var subjectField = document.getElementById('form-subject');
+    var replytoField = document.getElementById('form-replyto');
+    if (subjectField) {
+      subjectField.value = 'New Inquiry — ' + fullName + (service ? ' (' + service + ')' : '');
+    }
+    if (replytoField && clientEmail) {
+      replytoField.value = clientEmail;
+    }
+    var b = form.querySelector('[type="submit\"]');
     if (b) { b.disabled = true; b.textContent = 'Sending…'; }
     fetch(form.action, {method:'POST', body:new FormData(form), headers:{Accept:'application/json'}})
       .then(function(r) {
