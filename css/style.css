@@ -930,12 +930,11 @@ body.menu-open {
 .hero {
   position: relative;
   overflow: hidden;
-  /* 1. Fallback for very old browsers */
-  height: 100vh;
-  /* 2. Modern browsers: svh = viewport with address bar visible — stable on first load, no jump */
-  height: 100svh;
-  /* 3. JS-set pixel value overrides on browsers that don't support svh (belt + suspenders) */
-  height: var(--hero-h, 100svh);
+  /* Desktop: 100dvh fills viewport perfectly, never jumps (no address bar on desktop) */
+  height: 100vh;    /* oldest browser fallback */
+  height: 100dvh;   /* modern desktop — always fills screen, never changes */
+  /* Mobile: JS overrides --hero-h with static px to prevent iOS address bar jump */
+  height: var(--hero-h, 100dvh);
   display: flex;
   align-items: center;
   justify-content: center;

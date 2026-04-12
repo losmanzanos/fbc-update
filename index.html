@@ -4,13 +4,18 @@
   <meta charset="UTF-8">
 <script>
 (function(){
-  function setH(){document.documentElement.style.setProperty('--hero-h',window.innerHeight+'px');}
+  /* Only use JS height-lock on mobile where iOS Safari address bar causes jumps.
+     Desktop uses 100dvh (CSS) which is always correct and never changes. */
+  function isMobile(){ return window.innerWidth <= 768; }
+  function setH(){
+    if(isMobile()){
+      document.documentElement.style.setProperty('--hero-h', window.innerHeight + 'px');
+    } else {
+      document.documentElement.style.removeProperty('--hero-h');
+    }
+  }
   setH();
-  /* load: corrects measurement on desktop after layout fully settles.
-     No visible jump on desktop (innerHeight doesn't change).
-     Does NOT cause iOS jump — resize listener was already removed. */
-  window.addEventListener('load', setH);
-  window.addEventListener('orientationchange',function(){setTimeout(setH,400);});
+  window.addEventListener('orientationchange', function(){ setTimeout(setH, 400); });
 })();
 </script>
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
