@@ -173,14 +173,14 @@ var ROOT_PATH = (function() {
 var PAGES = [
   {url:'/',title:'Therapists in Denver & Online | Full Bloom Counseling',desc:'Compassionate therapy for anxiety, trauma, relationships, disordered eating. Free consultations.',cat:'Home'},
   {url:'/about/',title:'About Our Denver Therapists',desc:'Eight licensed therapists specializing in trauma, anxiety, Enneagram, couples therapy, and more.',cat:'About'},
-  {url:'/team/rebecca-moravec/',title:'Rebecca Moravec, LPC LMFT — Founder',desc:'Trauma-informed care, Enneagram, couples therapy, Intuitive Eating, women\'s issues.',cat:'Therapist'},
-  {url:'/team/natalie-siegel/',title:'Natalie Siegel, LPC — Therapist',desc:'Body image, disordered eating, Intuitive Eating, anxiety, self-esteem.',cat:'Therapist'},
-  {url:'/team/mark-whitney/',title:'Mark Whitney, LPC — Senior Clinician',desc:'Couples therapy, Enneagram, trauma, family systems.',cat:'Therapist'},
-  {url:'/team/jillian-corpora/',title:'Jillian Corpora, LPC — Therapist',desc:'Anxiety, depression, grief, life transitions, Intuitive Eating.',cat:'Therapist'},
-  {url:'/team/kirsten-adorno/',title:'Kirsten Adorno, LPC MFTC — Therapist',desc:'Attachment-based therapy, couples counseling, emotional bonds.',cat:'Therapist'},
-  {url:'/team/kelsey-bennett/',title:'Kelsey Bennett, LPC — Therapist',desc:'Young adults, couples, emotional regulation, EMDR, SSP. Boulder office.',cat:'Therapist'},
-  {url:'/team/kelli-ruhl/',title:'Kelli Ruhl, LPC — Therapist',desc:'Trauma therapy, addiction recovery, somatic interventions, Brainspotting.',cat:'Therapist'},
-  {url:'/team/myldha-verdelus/',title:'Myldha Verdelus, LPCC — Therapist',desc:'Anxiety, depression, identity, couples, attachment-focused therapy.',cat:'Therapist'},
+  {url:'/team/rebecca-moravec/',title:'Rebecca Moravec, LPC LMFT — Founder',desc:'Trauma-informed care, Enneagram, couples therapy, Intuitive Eating, women\'s issues.',cat:'Therapist',author:'Rebecca Moravec',tags:'emdr enneagram couples intuitive eating haes'},
+  {url:'/team/natalie-siegel/',title:'Natalie Siegel, LPC — Therapist',desc:'Body image, disordered eating, Intuitive Eating, anxiety, self-esteem.',cat:'Therapist',author:'Natalie Siegel',tags:'haes anti-diet body image intuitive eating'},
+  {url:'/team/mark-whitney/',title:'Mark Whitney, LPC — Senior Clinician',desc:'Couples therapy, Enneagram, trauma, family systems.',cat:'Therapist',author:'Mark Whitney',tags:'gottman couples enneagram family'},
+  {url:'/team/jillian-corpora/',title:'Jillian Corpora, LPC — Therapist',desc:'Anxiety, depression, grief, life transitions, Intuitive Eating.',cat:'Therapist',author:'Jillian Corpora',tags:'grief anxiety depression intuitive eating'},
+  {url:'/team/kirsten-adorno/',title:'Kirsten Adorno, LPC MFTC — Therapist',desc:'Attachment-based therapy, couples counseling, emotional bonds.',cat:'Therapist',author:'Kirsten Adorno',tags:'gottman couples attachment'},
+  {url:'/team/kelsey-bennett/',title:'Kelsey Bennett, LPC — Therapist',desc:'Young adults, couples, emotional regulation, EMDR, SSP. Boulder office.',cat:'Therapist',author:'Kelsey Bennett',tags:'emdr safe sound protocol ssp brainspotting'},
+  {url:'/team/kelli-ruhl/',title:'Kelli Ruhl, LPC — Therapist',desc:'Trauma therapy, addiction recovery, somatic interventions, Brainspotting.',cat:'Therapist',author:'Kelli Ruhl',tags:'brainspotting trauma somatic'},
+  {url:'/team/myldha-verdelus/',title:'Myldha Verdelus, LPCC — Therapist',desc:'Anxiety, depression, identity, couples, attachment-focused therapy.',cat:'Therapist',author:'Myldha Verdelus',tags:''},
   {url:'/services/',title:'Therapy Services in Denver',desc:'Individual, couples, family, trauma, EMDR, Enneagram, Intuitive Eating, anxiety therapy.',cat:'Services'},
   {url:'/services/individual-therapy/',title:'Individual Therapy Denver',desc:'One-on-one therapy for anxiety, depression, trauma, relationships, life transitions. CBT, IFS, EMDR.',cat:'Service'},
   {url:'/services/couples-therapy/',title:'Couples Therapy Denver',desc:'Strengthen connection, communication, and navigate conflict. Gottman Method, EFT.',cat:'Service'},
@@ -242,7 +242,8 @@ function doSearch() {
            p.desc.toLowerCase().includes(q) ||
            p.cat.toLowerCase().includes(q) ||
            p.url.toLowerCase().includes(q) ||
-           (p.author && p.author.toLowerCase().includes(q));
+           (p.author && p.author.toLowerCase().includes(q)) ||
+           (p.tags && p.tags.toLowerCase().includes(q));
   });
 
   if (hits.length === 0) {
@@ -394,7 +395,12 @@ document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); })
     var q = msmInput.value.toLowerCase().trim();
     if (!q) { msmResults.innerHTML = ''; return; }
     var hits = PAGES.filter(function(p) {
-      return p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q);
+      return p.title.toLowerCase().includes(q) ||
+             p.desc.toLowerCase().includes(q) ||
+             p.cat.toLowerCase().includes(q) ||
+             p.url.toLowerCase().includes(q) ||
+             (p.author && p.author.toLowerCase().includes(q)) ||
+             (p.tags && p.tags.toLowerCase().includes(q));
     });
     if (!hits.length) {
       msmResults.innerHTML = '<p class="msm-no-results">No results for \u201c' + q + '\u201d</p>';
@@ -410,6 +416,12 @@ document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); })
   }
 
   mSearchBtn.addEventListener('click', openMobileSearch);
+  /* Also open + search if user presses Enter in the nav bar input */
+  if (mSearchInput) {
+    mSearchInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') { openMobileSearch(); }
+    });
+  }
   document.getElementById('msm-close').addEventListener('click', closeMobileSearch);
   document.getElementById('msm-submit').addEventListener('click', runMobileSearch);
   msmInput.addEventListener('keydown', function(e) {
