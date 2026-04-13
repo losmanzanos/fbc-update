@@ -1836,6 +1836,19 @@ h3 + .svc-benefit-grid {
     padding-right: max(40px, env(safe-area-inset-right));
   }
 }
+/* ── HOMEPAGE HERO: Desktop floor ────────────────────────────────────────
+   On HiDPI (Retina/2x) displays, 100dvh can round down by a subpixel,
+   exposing a 1-2px sliver of the section below the hero on load.
+   min-height as a floor ensures the hero always covers the full viewport.
+   DESKTOP ONLY — never add min-height on mobile (causes iOS grow animation).
+   ──────────────────────────────────────────────────────────────────────── */
+@media (min-width: 769px) {
+  .hero {
+    min-height: 100vh;       /* floor: old browsers */
+    min-height: 100dvh;      /* floor: modern — seals subpixel gap on HiDPI */
+  }
+}
+
 /* ── HOMEPAGE HERO: Mobile height caps ──────────────────────────────────
    iOS reports innerHeight including the chrome sometimes. Cap so hero
    never exceeds the visible viewport. svh/dvh are iOS 15.4+/16+ support.
