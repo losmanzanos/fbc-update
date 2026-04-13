@@ -227,14 +227,93 @@
 </dl>
 </div>
 <div>
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SUCCESS STATE (shared by both Formspree and EmailJS)
+     ════════════════════════════════════════════════════════════════════════ -->
 <div hidden="" id="form-success" style="padding:40px;background:var(--cream);border:1px solid var(--border);border-radius:4px;text-align:center;" tabindex="-1">
 <div style="width:64px;height:64px;background:var(--petal);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:1.8rem;color:white;">✓</div>
 <h3>Message Received</h3>
-<p>Thank you for reaching out. We’ll be in touch within one business day.</p>
+<p>Thank you for reaching out. We'll be in touch within one business day.</p>
 <a class="btn btn-primary mt-24" href="../">Back to Home</a>
 </div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     EMAILJS FORM  (currently active)
+     ────────────────────────────────────────────────────────────────────────
+     SETUP STEPS — do this once in your EmailJS dashboard:
+     1. emailjs.com → Add New Service → connect Gmail/Outlook → note Service ID
+     2. Email Templates → Create New → paste the HTML template from the artifact
+        → note Template ID
+     3. Account → API Keys → copy Public Key
+     4. Replace the three placeholders below:
+          YOUR_PUBLIC_KEY   → e.g. "abc123XYZ"
+          YOUR_SERVICE_ID   → e.g. "service_abc123"
+          YOUR_TEMPLATE_ID  → e.g. "template_abc123"
+     ════════════════════════════════════════════════════════════════════════ -->
+<form id="contact-form-ejs" novalidate="">
+  <!-- Honeypot spam traps — do not remove -->
+  <input type="text" name="_gotcha"   id="_hp_website" style="display:none !important" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <input type="text" name="website"   id="_hp_phone"   style="display:none !important" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <input type="text" name="company"   id="_hp_company" style="display:none !important" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+<div class="form-row">
+<div class="form-group"><label for="fname">First Name *</label><input autocomplete="given-name" id="fname" name="first_name" required="" type="text"/></div>
+<div class="form-group"><label for="lname">Last Name *</label><input autocomplete="family-name" id="lname" name="last_name" required="" type="text"/></div>
+</div>
+<div class="form-group"><label for="email">Email Address *</label><input autocomplete="email" id="email" name="email" required="" type="email"/></div>
+<div class="form-group"><label for="phone">Phone <span style="font-weight:400;color:var(--bark-mid);">(optional)</span></label><input autocomplete="tel" id="phone" name="phone" type="tel"/></div>
+<div class="form-group">
+<label for="service">What brings you in?</label>
+<select id="service" name="service">
+<option value="">Select one (optional)</option>
+<option>Individual Therapy</option><option>Couples Therapy</option>
+<option>Family Therapy</option><option>Trauma / EMDR</option>
+<option>Disordered Eating / Intuitive Eating</option>
+<option>Enneagram Therapy</option><option>Clinical Supervision</option>
+<option>Something else</option>
+</select>
+</div>
+<div class="form-group">
+<label for="therapist_pref">Therapist Preference <span style="font-weight:400;color:var(--bark-mid);">(optional)</span></label>
+<select id="therapist_pref" name="therapist_pref">
+<option value="">No preference</option>
+<option>Rebecca Moravec</option>
+<option disabled style="color:#aaa;">Natalie Siegel (currently not accepting new clients)</option>
+<option>Mark Whitney</option>
+<option>Jillian Corpora</option>
+<option>Kirsten Adorno</option>
+<option>Kelsey Bennett</option>
+<option>Kelli Ruhl</option>
+<option>Myldha Verdelus</option>
+</select>
+</div>
+<div class="form-group"><label for="message">Message</label><textarea id="message" name="message" placeholder="Tell us a little about what you're looking for. No pressure — just say hello."></textarea></div>
+<div class="form-group">
+<label for="referral">How did you hear about Full Bloom? <span style="font-weight:400;color:var(--bark-mid);">(optional)</span></label>
+<input type="text" id="referral" name="referral" placeholder="Google, a friend, Instagram, therapist referral…" autocomplete="off">
+</div>
+<div class="form-group" style="background:var(--cream);border-radius:8px;padding:20px 22px;border:1px solid var(--border);margin-top:8px;">
+<label class="checkbox-label" style="display:flex;gap:14px;align-items:flex-start;cursor:pointer;line-height:1.6;">
+<input type="checkbox" id="private_pay_confirm" name="private_pay_confirm" required class="custom-checkbox">
+<span style="font-size:.88rem;color:var(--bark);"><strong>I understand Full Bloom Counseling is a private pay practice.</strong> We do not bill health insurance or Medicaid directly. Our rates reflect the expertise and quality of care you receive — with no insurance-dictated session limits. Please check this box to confirm you understand our private pay model before submitting.</span>
+</label>
+</div>
+<button class="btn btn-primary" style="width:100%;" type="submit">Send Message</button>
+<p style="font-size:.73rem;color:var(--bark-mid);margin-top:14px;text-align:center;">Your information is kept strictly confidential. We respond within one business day.</p>
+</form>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     FORMSPREE FORM  (commented out — kept as fallback)
+     ────────────────────────────────────────────────────────────────────────
+     TO REVERT TO FORMSPREE:
+       1. Delete the entire EmailJS <form> block above (id="contact-form-ejs")
+       2. Delete the EmailJS <script> block at the bottom of this file
+       3. Uncomment the block below (remove the opening HTML-comment markers)
+       4. In js/main.js the form handler already looks for id="contact-form"
+          and posts to form.action — it will just work again automatically.
+     ════════════════════════════════════════════════════════════════════════
+<!--FORMSPREE-START
 <form action="https://formspree.io/f/xaqlegaq" id="contact-form" data-loaded="0" method="POST" novalidate="">
-  <!-- Spam filters: hidden fields — do not remove -->
   <input type="text" name="_gotcha" id="_hp_website" style="display:none !important" tabindex="-1" autocomplete="off" aria-hidden="true">
   <input type="text" name="website" id="_hp_phone" style="display:none !important" tabindex="-1" autocomplete="off" aria-hidden="true">
   <input type="text" name="company" id="_hp_company" style="display:none !important" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -259,23 +338,21 @@
 <option>Something else</option>
 </select>
 </div>
-<div class="form-group"><label for="message">Message</label><textarea id="message" name="Message" placeholder="Tell us a little about what you’re looking for. No pressure — just say hello."></textarea></div>
-
+<div class="form-group"><label for="message">Message</label><textarea id="message" name="Message" placeholder="Tell us a little about what you're looking for. No pressure — just say hello."></textarea></div>
 <div class="form-group">
 <label for="referral">How did you hear about Full Bloom? <span style="font-weight:400;color:var(--bark-mid);">(optional)</span></label>
 <input type="text" id="referral" name="How They Found Us" placeholder="Google, a friend, Instagram, therapist referral…" autocomplete="off">
 </div>
-
 <div class="form-group" style="background:var(--cream);border-radius:8px;padding:20px 22px;border:1px solid var(--border);margin-top:8px;">
 <label class="checkbox-label" style="display:flex;gap:14px;align-items:flex-start;cursor:pointer;line-height:1.6;">
 <input type="checkbox" id="private_pay_confirm" name="Private Pay Confirmed" required class="custom-checkbox">
 <span style="font-size:.88rem;color:var(--bark);"><strong>I understand Full Bloom Counseling is a private pay practice.</strong> We do not bill health insurance or Medicaid directly. Our rates reflect the expertise and quality of care you receive — with no insurance-dictated session limits. Please check this box to confirm you understand our private pay model before submitting.</span>
 </label>
 </div>
-
 <button class="btn btn-primary" style="width:100%;" type="submit">Send Message</button>
 <p style="font-size:.73rem;color:var(--bark-mid);margin-top:14px;text-align:center;">Your information is kept strictly confidential. We respond within one business day.</p>
 </form>
+FORMSPREE-END-->
 </div>
 </div>
 </div>
@@ -391,5 +468,77 @@
 </div>
 </footer>
 <script defer="" src="../js/main.js"></script>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     EMAILJS SDK + FORM HANDLER
+     Replace the three YOUR_* placeholders with your real EmailJS credentials.
+     Find them at: emailjs.com → Account → API Keys (Public Key)
+                               → Email Services (Service ID)
+                               → Email Templates (Template ID)
+     ════════════════════════════════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+(function() {
+  // ── REPLACE THESE THREE VALUES ────────────────────────────────────────
+  var EJS_PUBLIC_KEY   = 'O937-BvgioIYABPfD';    // Account → API Keys
+  var EJS_SERVICE_ID   = 'service_90i8krs';    // Email Services → Service ID
+  var EJS_TEMPLATE_ID  = 'template_188atxh';   // Email Templates → Template ID
+  // ─────────────────────────────────────────────────────────────────────
+
+  emailjs.init({ publicKey: EJS_PUBLIC_KEY });
+
+  var form = document.getElementById('contact-form-ejs');
+  var suc  = document.getElementById('form-success');
+  if (!form || !suc) return;
+
+  var loadTime = Date.now();
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    /* Checkbox validation */
+    var cb = document.getElementById('private_pay_confirm');
+    if (cb && !cb.checked) {
+      cb.focus();
+      var wrap = cb.closest('div[style]') || cb.parentElement;
+      if (wrap) {
+        wrap.style.outline = '2px solid var(--petal-dark)';
+        wrap.style.borderRadius = '8px';
+        setTimeout(function(){ wrap.style.outline = ''; }, 2000);
+      }
+      return;
+    }
+
+    /* Time check — bots submit instantly */
+    if (Date.now() - loadTime < 3000) return;
+
+    /* Honeypot check */
+    if (document.getElementById('_hp_website').value ||
+        document.getElementById('_hp_phone').value   ||
+        document.getElementById('_hp_company').value) return;
+
+    /* Duplicate session guard */
+    if (sessionStorage.getItem('fbc_submitted')) {
+      form.hidden = true; suc.hidden = false; return;
+    }
+
+    var btn = form.querySelector('[type="submit"]');
+    if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+
+    emailjs.sendForm(EJS_SERVICE_ID, EJS_TEMPLATE_ID, form)
+      .then(function() {
+        sessionStorage.setItem('fbc_submitted', '1');
+        form.hidden = true;
+        suc.hidden = false;
+        suc.focus();
+      })
+      .catch(function(err) {
+        console.error('EmailJS error:', err);
+        alert('Something went wrong. Please call 720-767-9808 or email info@fullbloomcounseling.com.');
+        if (btn) { btn.disabled = false; btn.textContent = 'Send Message'; }
+      });
+  });
+})();
+</script>
 </body>
 </html>

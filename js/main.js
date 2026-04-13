@@ -574,28 +574,12 @@ document.querySelectorAll('.svc-testimonials').forEach(function(wrap) {
 });
 
 
-// Bot protection: set load timestamp, validate on submit
+/* ── Bot protection: load timestamp only (full anti-spam in primary handler above) ──
+   NOTE: A second submit listener here caused a race condition silently blocking
+   real submissions on certain browsers. Removed duplicate — do not re-add. */
 (function() {
-  var loadTime = Date.now();
-  document.getElementById('form-timestamp').value = loadTime;
-  
-  var form = document.getElementById('contact-form');
-  if (!form) return;
-  
-  form.addEventListener('submit', function(e) {
-    // Reject if submitted in under 3 seconds (bot speed)
-    var elapsed = Date.now() - loadTime;
-    if (elapsed < 3000) {
-      e.preventDefault();
-      return false;
-    }
-    // Check honeypot is empty
-    var trap = form.querySelector('[name="_gotcha"]');
-    if (trap && trap.value) {
-      e.preventDefault();
-      return false;
-    }
-  });
+  var tsField = document.getElementById('form-timestamp');
+  if (tsField) tsField.value = Date.now();
 })();
 
 
