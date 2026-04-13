@@ -934,10 +934,9 @@ body.menu-open {
   overflow: hidden;
   height: 100vh;
   height: 100dvh;
+  /* Mobile: JS sets --hero-h as static px (no response to address bar).
+     Desktop: 100dvh is stable (no address bar to change it). */
   height: var(--hero-h, 100dvh);
-  /* Safety net: never shorter than full viewport even with subpixel rounding */
-  min-height: 100vh;
-  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1363,6 +1362,8 @@ h3 + .svc-pullquote { margin-top: 32px; }
 .svc-clean-list, .svc-main ul { list-style: none; padding: 0; margin: 16px 0 24px; max-width: 680px; display: flex; flex-direction: column; gap: 10px; }
 .svc-clean-list li, .svc-main ul li { display: flex; align-items: flex-start; gap: 14px; padding: 16px 18px; background: var(--white); border: 1px solid var(--border); border-radius: 6px; font-size: .97rem; line-height: 1.72; color: var(--text); max-width: 680px; }
 .svc-clean-list li::before, .svc-main ul li::before { content: ''; display: block; width: 8px; height: 8px; background: var(--petal-dark); transform: rotate(45deg); border-radius: 1px; flex-shrink: 0; margin-top: 7px; }
+.svc-icon-list li::before { display: none !important; content: none !important; }
+.svc-icon-list { list-style: none !important; padding: 0 !important; }
 .svc-clean-list li strong, .svc-main ul li strong { color: var(--bark); font-weight: 600; }
 
 .svc-main blockquote, .svc-quote { border-left: 3px solid var(--petal); padding: 18px 26px; margin: 32px 0; background: var(--cream); font-family: var(--font-serif); font-size: 1.12rem; font-style: italic; color: var(--bark); border-radius: 0 8px 8px 0; line-height: 1.75; clear: both; max-width: 680px; }

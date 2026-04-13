@@ -284,6 +284,23 @@ if (form && suc) {
   form.addEventListener('submit', function(e) {
     e.preventDefault();
 
+    /* ── CHECKBOX VALIDATION ──────────────────────────────────────────
+       e.preventDefault() bypasses native required validation, so we
+       check the private pay checkbox manually before anything else.  */
+    var cb = document.getElementById('private_pay_confirm');
+    if (cb && !cb.checked) {
+      cb.focus();
+      cb.closest('.form-group') && cb.closest('.form-group').scrollIntoView({behavior:'smooth', block:'center'});
+      /* Visual shake on the checkbox container */
+      var wrap = cb.closest('div[style]') || cb.parentElement;
+      if (wrap) {
+        wrap.style.outline = '2px solid var(--petal-dark)';
+        wrap.style.borderRadius = '8px';
+        setTimeout(function(){ wrap.style.outline = ''; }, 2000);
+      }
+      return;
+    }
+
     /* ── SPAM LAYER 1: Time check ─────────────────────────────────────
        Bots submit instantly. Real users take at least 3 seconds to read
        and fill out a form. Reject anything under 3 seconds.         */
