@@ -65,7 +65,7 @@
 <ul class="dropdown" role="menu">
 <li class="nav-item has-sub"><a href="../therapists/" role="menuitem">Therapists</a>
 <ul class="dropdown-sub" role="menu">
-<li><a href="../team/rebecca-moravec/">Rebecca Moravec</a></li>
+<li><a href="../team/rebecca-moravec/">Becca Moravec</a></li>
 <li><a href="../team/natalie-siegel/">Natalie Siegel</a></li>
 <li><a href="../team/mark-whitney/">Mark Whitney</a></li>
 <li><a href="../team/jillian-corpora/">Jillian Corpora</a></li>
@@ -149,7 +149,7 @@
       <a href="../therapists/" class="mobile-link" style="font-weight:600;">Meet Our Therapists</a>
 <div aria-expanded="false" class="mobile-toggle-sub"><span>All Therapists</span><span class="mobile-chevron">▼</span></div>
 <div class="mobile-submenu">
-<a href="../team/rebecca-moravec/">Rebecca Moravec</a>
+<a href="../team/rebecca-moravec/">Becca Moravec</a>
 <a href="../team/natalie-siegel/">Natalie Siegel</a>
 <a href="../team/mark-whitney/">Mark Whitney</a>
 <a href="../team/jillian-corpora/">Jillian Corpora</a>
@@ -221,7 +221,10 @@
 <dl class="contact-rows">
 <div class="contact-row"><dt>Email</dt><dd><a href="mailto:info@fullbloomcounseling.com">info@fullbloomcounseling.com</a></dd></div>
 <div class="contact-row"><dt>Phone</dt><dd><a href="tel:7207679808">720-767-9808</a></dd></div>
-<div class="contact-row"><dt>Office</dt><dd><a href="https://www.google.com/maps/place/Full+Bloom+Counseling/@39.6846272,-104.937044,17z" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer">1780 S Bellaire St #485<br/>Denver, CO 80222</a></dd></div>
+<div class="contact-row"><dt>Offices</dt><dd>
+  <a href="https://www.google.com/maps/place/Full+Bloom+Counseling/@39.6846272,-104.937044,17z" rel="noopener noreferrer" target="_blank">1780 S Bellaire St #485, Denver, CO 80222</a><br>
+  <a href="https://www.google.com/maps/search/5637+Arapahoe+Ave+Boulder+CO+80303" rel="noopener noreferrer" target="_blank" style="opacity:.85;">5637 Arapahoe Ave, Boulder, CO 80303</a>
+</dd></div>
 <div class="contact-row"><dt>Hours</dt><dd>Monday – Sunday, 8am – 7pm</dd></div>
 <div class="contact-row"><dt>Existing Clients</dt><dd><a href="https://rebecca-moravec.clientsecure.me/" rel="noopener noreferrer" style="color:var(--petal-dark);font-weight:500;" target="_blank" rel="noopener noreferrer">Access Your Client Portal →</a></dd></div>
 </dl>
@@ -252,6 +255,7 @@
      ════════════════════════════════════════════════════════════════════════ -->
 <form id="contact-form-ejs" novalidate="">
   <!-- Honeypot spam traps — do not remove -->
+  <input type="hidden" name="from_name" value="Full Bloom Counseling Group">
   <input type="text" name="_gotcha"   id="_hp_website" style="display:none !important" tabindex="-1" autocomplete="off" aria-hidden="true">
   <input type="text" name="website"   id="_hp_phone"   style="display:none !important" tabindex="-1" autocomplete="off" aria-hidden="true">
   <input type="text" name="company"   id="_hp_company" style="display:none !important" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -277,7 +281,7 @@
 <label for="therapist_pref">Therapist Preference <span style="font-weight:400;color:var(--bark-mid);">(optional)</span></label>
 <select id="therapist_pref" name="therapist_pref">
 <option value="">No preference</option>
-<option>Rebecca Moravec</option>
+<option>Becca Moravec</option>
 <option disabled style="color:#aaa;">Natalie Siegel (currently not accepting new clients)</option>
 <option>Mark Whitney</option>
 <option>Jillian Corpora</option>
@@ -361,9 +365,12 @@ FORMSPREE-END-->
 <section style="padding:48px 0 48px;background:var(--cream-alt);">
   <div class="container" style="max-width:860px;margin:0 auto;">
     <div style="text-align:center;margin-bottom:32px;">
-      <span class="eyebrow">Find Us</span>
+      <span class="eyebrow">Denver Location</span>
       <h2 style="font-family:var(--font-serif);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:500;color:var(--bark);margin:8px 0 10px;">Our Denver Office</h2>
-      <p style="color:var(--bark-mid);font-size:.92rem;">1780 S Bellaire St #485 &middot; Denver, CO 80222</p>
+      <p style="color:var(--bark-mid);font-size:.92rem;">
+        <strong>Denver:</strong> 1780 S Bellaire St #485 &middot; Denver, CO 80222<br>
+        <strong>Boulder:</strong> 5637 Arapahoe Ave &middot; Boulder, CO 80303
+      </p>
     </div>
     <div style="border-radius:10px;overflow:hidden;box-shadow:0 4px 32px rgba(58,46,36,.14);border:1px solid var(--border);">
       <iframe
@@ -383,7 +390,31 @@ FORMSPREE-END-->
           View Profile &amp; Reviews
         </a>
       </div>
+    
+
+    <div style="margin-top:40px;text-align:center;margin-bottom:32px;">
+      <span class="eyebrow">Boulder Location</span>
+      <h2 style="font-family:var(--font-serif);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:500;color:var(--bark);margin:8px 0 10px;">Our Boulder Office</h2>
+      <p style="color:var(--bark-mid);font-size:.92rem;">5637 Arapahoe Ave &middot; Boulder, CO 80303 &middot; D&amp;K Printing Building</p>
     </div>
+    <div style="border-radius:10px;overflow:hidden;box-shadow:0 4px 32px rgba(58,46,36,.14);border:1px solid var(--border);">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3054.8!2d-105.2055!3d40.0171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876bedb0e8aeedd7%3A0x5c7a1a9b8d8e7c6a!2s5637+Arapahoe+Ave%2C+Boulder%2C+CO+80303!5e0!3m2!1sen!2sus!4v1712000000001"
+        referrerpolicy="no-referrer-when-downgrade"
+        width="100%" height="420" style="display:block;border:none;"
+        title="Full Bloom Counseling Boulder — Google Maps" loading="lazy"
+        aria-label="Google Map showing Full Bloom Counseling Boulder office at 5637 Arapahoe Ave Boulder CO 80303"></iframe>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 24px;background:var(--bark);flex-wrap:wrap;gap:12px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(248,244,238,.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span style="color:rgba(248,244,238,.8);font-size:.82rem;">5637 Arapahoe Ave &middot; Boulder, CO 80303</span>
+        </div>
+        <a href="https://www.google.com/maps/search/5637+Arapahoe+Ave+Boulder+CO+80303" target="_blank" rel="noopener noreferrer" style="font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--petal-lt);text-decoration:none;white-space:nowrap;display:flex;align-items:center;gap:6px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Get Directions
+        </a>
+      </div>
+    </div></div>
   </div>
 </section>
 </main><footer id="footer" role="contentinfo">
@@ -409,6 +440,7 @@ FORMSPREE-END-->
 <h4>Visit Us</h4>
 <ul>
 <li><a href="https://www.google.com/maps/place/Full+Bloom+Counseling/@39.6846272,-104.937044,17z" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer">1780 S Bellaire St #485<br/>Denver, CO 80222</a></li>
+<li style="margin-top:6px;"><a href="https://www.google.com/maps/search/5637+Arapahoe+Ave+Boulder+CO+80303" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" style="opacity:.85;">5637 Arapahoe Ave<br/>Boulder, CO 80303</a></li>
 <li style="margin-top:10px;"><a href="tel:7207679808">720-767-9808</a></li>
 <li><a href="mailto:info@fullbloomcounseling.com">info@fullbloomcounseling.com</a></li>
           <li style="margin-top:10px;"><span style="font-size:.86rem;color:rgba(248,244,238,.60);">Mon &#8211; Sun &nbsp;&nbsp; 8am &#8211; 7pm</span></li>
@@ -446,7 +478,7 @@ FORMSPREE-END-->
 <div class="footer-col">
 <h4>Our Team</h4>
 <ul>
-<li><a href="../team/rebecca-moravec/">Rebecca Moravec</a></li>
+<li><a href="../team/rebecca-moravec/">Becca Moravec</a></li>
 <li><a href="../team/natalie-siegel/">Natalie Siegel</a></li>
 <li><a href="../team/mark-whitney/">Mark Whitney</a></li>
 <li><a href="../team/jillian-corpora/">Jillian Corpora</a></li>
@@ -459,6 +491,7 @@ FORMSPREE-END-->
 </div>
 <div class="footer-bottom">
 <span>© 2026 Full Bloom Counseling Group. All rights reserved.</span>
+<span style="font-size:.65rem;color:rgba(248,244,238,.22);letter-spacing:.04em;">made with love by <a href="https://therapistweb.design/" target="_blank" rel="noopener" style="color:rgba(248,244,238,.22);text-decoration:none;" onmouseover="this.style.color='rgba(200,150,122,.5)'" onmouseout="this.style.color='rgba(248,244,238,.22)'">chad</a></span>
 <div class="footer-bottom-links">
 <a href="../privacy-policy/">Privacy Policy</a>
 <a href="../terms-conditions/">Terms &amp; Conditions</a>
@@ -481,9 +514,9 @@ FORMSPREE-END-->
 <script>
 (function() {
   // ── REPLACE THESE THREE VALUES ────────────────────────────────────────
-  var EJS_PUBLIC_KEY   = 'O937-BvgioIYABPfD';    // Account → API Keys
-  var EJS_SERVICE_ID   = 'service_90i8krs';    // Email Services → Service ID
-  var EJS_TEMPLATE_ID  = 'template_188atxh';   // Email Templates → Template ID
+  var EJS_PUBLIC_KEY   = 'YOUR_PUBLIC_KEY';    // Account → API Keys
+  var EJS_SERVICE_ID   = 'YOUR_SERVICE_ID';    // Email Services → Service ID
+  var EJS_TEMPLATE_ID  = 'YOUR_TEMPLATE_ID';   // Email Templates → Template ID
   // ─────────────────────────────────────────────────────────────────────
 
   emailjs.init({ publicKey: EJS_PUBLIC_KEY });
