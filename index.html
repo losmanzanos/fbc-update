@@ -28,11 +28,18 @@
   window.addEventListener('pageshow', function(e) { if (e.persisted) setH(); });
 
   /* Unpause hero animation once fonts are ready — ensures heroUp plays with
-     Cormorant Garamond, not the fallback font. Consistent on first load + refresh. */
-  document.fonts.ready.then(function(){
+     Cormorant Garamond, not the fallback font. Consistent on first load + refresh.
+     Safety net: if fonts.ready hasn't resolved in 600ms (iframe/desktop edge case
+     where the FontFaceSet API can stall), unpause anyway so hero never stays hidden. */
+  var heroUnpaused = false;
+  function unpauseHero() {
+    if (heroUnpaused) return;
+    heroUnpaused = true;
     var hc = document.querySelector('.hero-content');
     if (hc) hc.style.animationPlayState = 'running';
-  });
+  }
+  document.fonts.ready.then(unpauseHero);
+  setTimeout(unpauseHero, 600);
 })();
 </script>
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
