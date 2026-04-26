@@ -16,15 +16,6 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: DuckDuckBot
-Allow: /
-
 User-agent: AhrefsBot
 Disallow: /
 
@@ -42,5 +33,14 @@ Disallow: /
 
 User-agent: CCBot
 Disallow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
 
 Sitemap: https://fullbloomcounseling.com/sitemap.xml
