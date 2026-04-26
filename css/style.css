@@ -974,9 +974,11 @@ body.menu-open {
   max-width: 860px;
   padding: calc(var(--nav-h) + 32px) 32px 64px;
   animation: heroUp .9s ease both;
-  /* Pause until fonts loaded — prevents animation playing with fallback font.
-     JS (document.fonts.ready) unpauses it, giving consistent first-load experience. */
-  animation-play-state: paused;
+  /* Note: previously paused via animation-play-state and unpaused via JS once
+     fonts loaded — but document.fonts.ready was unreliable in iframe contexts,
+     leaving hero stuck invisible. Now plays on load; on first visit (uncached
+     fonts) you may briefly see fallback font during the 0.9s animation, which
+     is preferable to text never appearing. Cached visits are unaffected. */
 }
 
 @keyframes heroUp {
