@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google Analytics 4 — replace G-3C97K0XW7Z with your Measurement ID -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3C97K0XW7Z"></script>
+<!-- Google Analytics 4 — replace G-XXXXXXXXXX with your Measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-3C97K0XW7Z');
+  gtag('config', 'G-XXXXXXXXXX');
 </script>
   <meta charset="UTF-8">
 <script>
@@ -233,7 +233,7 @@
   </div>
 </div>
 <main id="main">
-<div class="page-hero-plain"><div class="container text-center"><h1>Terms &amp; Conditions</h1><p style="color:var(--bark-mid);font-size:.86rem;margin-top:8px;">Last updated: January 1, 2026</p></div></div>
+<div class="page-hero-plain"><div class="container text-center"><h1 style="color:var(--cream);">Terms &amp; Conditions</h1><p style="color:rgba(248,244,238,.6);font-size:.86rem;margin-top:8px;">Last updated: January 1, 2026</p></div></div>
 <section class="section band-white"><div class="container" style="max-width:760px;">
 <h2>Use of This Website</h2><p>By accessing fullbloomcounseling.com, you agree to these terms. This website is provided for informational purposes only and does not constitute a therapist-client relationship.</p>
 <h2>No Therapist-Client Relationship</h2><p>Submitting a contact form or reading blog content does not establish a therapeutic relationship. A therapeutic relationship is established only through a formal intake process and signed consent forms.</p>
@@ -325,5 +325,13 @@
   </div>
 </footer>
 <script src="../js/main.js" defer></script>
+<script>
+/* Force nav dark — no hero image on this page */
+document.addEventListener('DOMContentLoaded', function() {
+  var h = document.getElementById('header');
+  if (h) h.classList.add('scrolled');
+});
+</script>
+
 </body>
 </html>

@@ -1093,10 +1093,10 @@ body.menu-open {
 .breadcrumb a { color: rgba(255,255,255,.85); }
 .breadcrumb a:hover { color: var(--petal-lt); }
 .page-hero-plain {
-  background: var(--cream);
+  background: var(--bark);
   padding: calc(var(--nav-h) + 64px) 0 64px;
   text-align: center;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid rgba(248,244,238,.1);
 }
 @media(max-width:768px) {
   .page-hero-content { padding: calc(var(--nav-h) + 40px) 0 48px; }

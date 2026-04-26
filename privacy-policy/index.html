@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google Analytics 4 — replace G-3C97K0XW7Z with your Measurement ID -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3C97K0XW7Z"></script>
+<!-- Google Analytics 4 — replace G-XXXXXXXXXX with your Measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-3C97K0XW7Z');
+  gtag('config', 'G-XXXXXXXXXX');
 </script>
   <meta charset="UTF-8">
 <script>
@@ -233,7 +233,7 @@
   </div>
 </div>
 <main id="main">
-<div class="page-hero-plain"><div class="container text-center"><h1>Privacy Policy</h1><p style="color:var(--bark-mid);font-size:.86rem;margin-top:8px;">Last updated: January 1, 2026</p></div></div>
+<div class="page-hero-plain"><div class="container text-center"><h1 style="color:var(--cream);">Privacy Policy</h1><p style="color:rgba(248,244,238,.6);font-size:.86rem;margin-top:8px;">Last updated: January 1, 2026</p></div></div>
 <section class="section band-white"><div class="container" style="max-width:760px;">
 <h2>Overview</h2><p>Full Bloom Counseling Group is committed to protecting the privacy of all individuals who visit fullbloomcounseling.com. This policy explains what information we collect and how we use it.</p>
 <h2>Information We Collect</h2><p>We collect information you voluntarily provide through our contact form, including your name, email address, phone number, and message content. This information is used solely to respond to your inquiry and connect you with a therapist.</p>
@@ -325,5 +325,13 @@
   </div>
 </footer>
 <script src="../js/main.js" defer></script>
+<script>
+/* Force nav dark — no hero image on this page */
+document.addEventListener('DOMContentLoaded', function() {
+  var h = document.getElementById('header');
+  if (h) h.classList.add('scrolled');
+});
+</script>
+
 </body>
 </html>
