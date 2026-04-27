@@ -1856,24 +1856,29 @@ h3 + .svc-benefit-grid {
    iOS reports innerHeight including the chrome sometimes. Cap so hero
    never exceeds the visible viewport. svh/dvh are iOS 15.4+/16+ support.
    ──────────────────────────────────────────────────────────────────────── */
-@media (max-width: 768px) {
+@media (max-width: 768px) and (orientation: portrait) {
   .hero {
-    /* Mobile: JS sets --hero-h as a fixed pixel value at first paint.
-       Removing max-height:100dvh prevents iOS Safari from re-growing the hero
-       when the address bar collapses on scroll. */
-    max-height: var(--hero-h, 100svh);
+    /* Mobile portrait: lock hero to JS pixel value with svh fallback.
+       NEVER use 100dvh or 100vh on mobile — they recalculate when iOS address bar
+       collapses on scroll, causing the "jump/grow" effect. svh is the SMALL
+       viewport height (excludes browser chrome) — stable, won't grow. */
+    height: var(--hero-h, 100svh) !important;
+    max-height: var(--hero-h, 100svh) !important;
+    min-height: 0 !important;
   }
 }
 @media (max-width: 932px) and (orientation: landscape) and (max-height: 500px) {
-  /* Mobile landscape: viewport is wide but very short.
-     Use full locked viewport (--hero-h) and push content lower
-     so it sits below the bouquet image rather than centered on it. */
+  /* Mobile landscape: short viewport. Use the locked JS pixel height as a HARD
+     cap — never any dvh — so the hero won't grow on address-bar collapse and
+     create that jerky "image scroll" feeling before the next section appears.
+     We give the hero ~140% of viewport so the bouquet image isn't squished,
+     while still being a fixed pixel value (no recalc on scroll). */
   .hero {
-    height: var(--hero-h, 100svh);
-    max-height: var(--hero-h, 100svh);
-    min-height: 0;
-    align-items: flex-end;       /* anchor content to bottom */
-    padding-bottom: 8vh;         /* breathing room above browser chrome */
+    height: calc(var(--hero-h, 100svh) * 1.4) !important;
+    max-height: calc(var(--hero-h, 100svh) * 1.4) !important;
+    min-height: 0 !important;
+    align-items: flex-end;
+    padding-bottom: 8vh;
   }
   .hero-content { padding-bottom: 0; }
   .hero h1 { font-size: clamp(1.6rem, 3.6vw, 2.4rem); margin-bottom: 8px; }
