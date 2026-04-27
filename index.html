@@ -12,21 +12,18 @@
   <meta charset="UTF-8">
 <script>
 (function(){
-  /* Height lock: mobile + tablet (address bar / subpixel dvh issues).
-     Desktop (>1024px) uses 100dvh via CSS which is stable. */
-  function isMobileOrTablet(){ return window.innerWidth <= 1024; }
-  function setH(){
-    if(isMobileOrTablet()){
-      document.documentElement.style.setProperty('--hero-h', window.innerHeight + 'px');
-    } else {
-      document.documentElement.style.removeProperty('--hero-h');
-    }
+  /* Hero height: lock to pixel value at first paint, NEVER update after.
+     This is the only bulletproof way to prevent iOS Safari from growing
+     the hero when the address bar collapses on scroll.
+     Listeners (resize, orientationchange, pageshow) intentionally omitted —
+     any update would cause the visible "grow" effect. */
+  if (window.innerWidth <= 1024) {
+    document.documentElement.style.setProperty('--hero-h', window.innerHeight + 'px');
   }
-  setH();
-  window.addEventListener('resize', function(){ clearTimeout(window._heroTimer); window._heroTimer = setTimeout(setH, 150); });
-  window.addEventListener('orientationchange', function(){ setTimeout(setH, 400); });
-  /* bfcache restore fix: iOS/tablet Safari freezes --hero-h when tab is suspended. */
-  window.addEventListener('pageshow', function(e) { if (e.persisted) setH(); });
+  /* On orientation change, reload page so hero re-locks to new dimensions. */
+  window.addEventListener('orientationchange', function() {
+    setTimeout(function() { window.location.reload(); }, 300);
+  });
 
   /* Unpause hero animation once fonts are ready — ensures heroUp plays with
      Cormorant Garamond, not the fallback font. Consistent on first load + refresh.

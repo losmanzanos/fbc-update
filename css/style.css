@@ -932,8 +932,10 @@ body.menu-open {
 .hero {
   position: relative;
   overflow: hidden;
-  height: 100vh;       /* fallback for old browsers */
-  height: 100svh;      /* iOS 15.4+: small viewport height — stable, never grows on address-bar collapse */
+  /* Pixel-locked at first paint by inline JS in <head>.
+     Once locked, this value NEVER changes — bulletproof against
+     iOS address-bar collapse causing the hero to grow on scroll. */
+  height: var(--hero-h, 100svh);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1844,7 +1846,8 @@ h3 + .svc-benefit-grid {
    ──────────────────────────────────────────────────────────────────────── */
 @media (min-width: 1025px) {
   .hero {
-    /* Desktop: no address bar to collapse. 100dvh is stable here. */
+    /* Desktop: no address bar to collapse. JS removes --hero-h on desktop
+       so this 100dvh applies. */
     height: 100dvh;
     min-height: 100dvh;
   }
