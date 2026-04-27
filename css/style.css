@@ -1698,7 +1698,7 @@ h3 + .svc-pullquote { margin-top: 32px; }
 }
 
 /* ─ Landscape phone nav ─────────────────────────────────────────────── */
-@media(min-width:769px) and (max-width:1023px) {
+@media(min-width:769px) and (max-width:1100px) {
   .nav-left, .nav-right, .nav-socials, .nav-sep, .nav-cta, .nav-search { display: none !important; }
   .nav-hamburger, #hamburger { display: flex !important; }
   body.menu-open .nav-hamburger, body.menu-open #hamburger { display: none !important; }
@@ -1708,7 +1708,7 @@ h3 + .svc-pullquote { margin-top: 32px; }
   .nav-logo img { height: 44px !important; width: auto !important; filter: brightness(0) invert(1) drop-shadow(0 1px 6px rgba(0,0,0,.55)) !important; display: block !important; }
   #header.scrolled .nav-logo img { filter: brightness(0) !important; transition: filter var(--ease); }
 }
-@media(min-width:1024px) { #hamburger { display: none !important; } }
+@media(min-width:1101px) { #hamburger { display: none !important; } }
 
 /* ─ Centered odd grid items ─────────────────────────────────────────── */
 .svc-benefit-grid:not(.svc-benefit-grid-2col) .svc-benefit-card:last-child:nth-child(3n+1) {
