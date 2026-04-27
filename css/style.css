@@ -1702,9 +1702,10 @@ h3 + .svc-pullquote { margin-top: 32px; }
   .nav-left, .nav-right, .nav-socials, .nav-sep, .nav-cta, .nav-search { display: none !important; }
   .nav-hamburger, #hamburger { display: flex !important; }
   body.menu-open .nav-hamburger, body.menu-open #hamburger { display: none !important; }
-  .nav-bar { justify-content: space-between !important; padding: 0 16px !important; }
-  .nav-logo { margin: 0 !important; }
-  .nav-logo img { height: 40px !important; width: auto !important; filter: brightness(0) invert(1) drop-shadow(0 1px 6px rgba(0,0,0,.55)) !important; display: block !important; }
+  .nav-bar { justify-content: space-between !important; padding: 0 20px !important; }
+  /* Logo left-anchored on tablet hamburger layout */
+  .nav-logo { margin: 0 !important; position: static !important; transform: none !important; left: auto !important; }
+  .nav-logo img { height: 44px !important; width: auto !important; filter: brightness(0) invert(1) drop-shadow(0 1px 6px rgba(0,0,0,.55)) !important; display: block !important; }
   #header.scrolled .nav-logo img { filter: brightness(0) !important; transition: filter var(--ease); }
 }
 @media(min-width:1024px) { #hamburger { display: none !important; } }
@@ -1844,7 +1845,7 @@ h3 + .svc-benefit-grid {
    min-height as a floor ensures the hero always covers the full viewport.
    DESKTOP ONLY — never add min-height on mobile (causes iOS grow animation).
    ──────────────────────────────────────────────────────────────────────── */
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .hero {
     min-height: 100vh;       /* floor: old browsers */
     min-height: 100dvh;      /* floor: modern — seals subpixel gap on HiDPI */

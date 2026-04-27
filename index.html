@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google Analytics 4 — replace G-3C97K0XW7Z with your Measurement ID -->
+<!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3C97K0XW7Z"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -12,19 +12,20 @@
   <meta charset="UTF-8">
 <script>
 (function(){
-  /* Height lock: mobile only (iOS address bar). Desktop uses 100dvh via CSS. */
-  function isMobile(){ return window.innerWidth <= 768; }
+  /* Height lock: mobile + tablet (address bar / subpixel dvh issues).
+     Desktop (>1024px) uses 100dvh via CSS which is stable. */
+  function isMobileOrTablet(){ return window.innerWidth <= 1024; }
   function setH(){
-    if(isMobile()){
+    if(isMobileOrTablet()){
       document.documentElement.style.setProperty('--hero-h', window.innerHeight + 'px');
     } else {
       document.documentElement.style.removeProperty('--hero-h');
     }
   }
   setH();
+  window.addEventListener('resize', function(){ clearTimeout(window._heroTimer); window._heroTimer = setTimeout(setH, 150); });
   window.addEventListener('orientationchange', function(){ setTimeout(setH, 400); });
-  /* bfcache restore fix: iOS Safari can freeze --hero-h when tab is suspended.
-     pageshow fires on back-forward cache restore; persisted=true means it was cached. */
+  /* bfcache restore fix: iOS/tablet Safari freezes --hero-h when tab is suspended. */
   window.addEventListener('pageshow', function(e) { if (e.persisted) setH(); });
 
   /* Unpause hero animation once fonts are ready — ensures heroUp plays with
@@ -126,7 +127,9 @@
   
   <link rel="dns-prefetch" href="https://formspree.io">  <link rel="preload" as="image" href="images/hero-home-flowers-bouquet.jpg" type="image/jpeg" fetchpriority="high">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" type="image/png" href="https://fullbloomcounseling.com/wp-content/uploads/2025/04/favicon.png">
+  <link rel="icon" type="image/png" href="images/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="images/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="images/favicons/apple-touch-icon.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["#main h2","#main .svc-lead","#main .hero-h1"]}}</script>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
@@ -345,7 +348,7 @@
     <div class="rule-divider"><span aria-hidden="true">&amp;</span></div>
     <p class="lead">Life can get messy. Relationships get complicated. Work and life&#8217;s demands weigh heavily. Whether you&#8217;re looking to better navigate your personal challenges, or grow deeper in your connections with the people you love, you&#8217;re in the right place. Full Bloom Counseling Group is a group private practice of experienced, dedicated therapists who take their work seriously — and who will take yours seriously too.</p>
     <p>We offer both <strong>in-person sessions</strong> in Denver, Colorado and <strong>online therapy</strong> for clients across the state.</p>
-    <a href="about/" class="btn btn-primary mt-32">Meet Our Therapists</a>
+    <a href="about/" class="btn btn-primary mt-32">About Our Practice</a>
   </div>
 </section>
 

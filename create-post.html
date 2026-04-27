@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google Analytics 4 — replace G-3C97K0XW7Z with your Measurement ID -->
+<!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3C97K0XW7Z"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -505,22 +505,22 @@
 // Authors
 // ============================================================
 const AUTHORS = [
-  { name: 'Becca Moravec', creds: 'LPC, LMFT, AAMFT Approved Supervisor', slug: 'rebecca-moravec', initials: 'RM',
-    bio: 'Becca is the founder of Full Bloom Counseling. She specializes in trauma-informed care, EMDR, Enneagram therapy, and Health at Every Size.' },
-  { name: 'Mark Whitney', creds: 'LPC, AAMFT Approved Clinical Supervisor, Certified Enneagram Teacher', slug: 'mark-whitney', initials: 'MW',
-    bio: 'Mark is a Senior Clinical Associate at Full Bloom Counseling specializing in couples therapy, Enneagram work, trauma, and anxiety.' },
-  { name: 'Jillian Corpora', creds: 'LPC, Certified Intuitive Eating Counselor', slug: 'jillian-corpora', initials: 'JC',
-    bio: 'Jillian is a therapist at Full Bloom Counseling specializing in anxiety, depression, grief, and food and body concerns.' },
-  { name: 'Natalie Siegel', creds: 'LPC, Certified Intuitive Eating Counselor', slug: 'natalie-siegel', initials: 'NS',
-    bio: 'Natalie is a therapist at Full Bloom Counseling specializing in body image, Intuitive Eating, anxiety, and disordered eating.' },
-  { name: 'Kelsey Bennett', creds: 'LPC, SSP Provider, EMDR Trained', slug: 'kelsey-bennett', initials: 'KB',
-    bio: 'Kelsey is a therapist at Full Bloom Counseling seeing clients virtually across Colorado and in person in Boulder. She specializes in young adults, parents, and the Safe and Sound Protocol.' },
-  { name: 'Kelli Ruhl', creds: 'LPC, NCC, LAC, Certified Brainspotting Practitioner', slug: 'kelli-ruhl', initials: 'KR',
-    bio: 'Kelli is a therapist at Full Bloom Counseling specializing in trauma, anxiety, addiction, and somatic approaches including Brainspotting.' },
-  { name: 'Kirsten Adorno', creds: 'LPC, MFTC', slug: 'kirsten-adorno', initials: 'KA',
-    bio: 'Kirsten is a therapist at Full Bloom Counseling offering virtual therapy for individuals, couples, and families across Colorado.' },
-  { name: 'Myldha Verdelus', creds: 'LPCC', slug: 'myldha-verdelus', initials: 'MV',
-    bio: 'Myldha is a therapist at Full Bloom Counseling offering individual and couples therapy with a culturally responsive approach.' },
+  { name: 'Becca Moravec', creds: 'LPC, LMFT, AAMFT Approved Supervisor', slug: 'becca', teamSlug: 'rebecca-moravec', initials: 'BM',
+    bio: 'Becca is the founder of Full Bloom Counseling. She specializes in trauma-informed care, EMDR, couples therapy, and helping women and people pleasers come home to themselves.' },
+  { name: 'Mark Whitney', creds: 'LPC, ACS', slug: 'mark', teamSlug: 'mark-whitney', initials: 'MW',
+    bio: 'Mark is a senior clinician and Approved Clinical Supervisor at Full Bloom Counseling, specializing in couples therapy, trauma, and the Enneagram.' },
+  { name: 'Natalie Siegel', creds: 'LPC', slug: 'natalie', teamSlug: 'natalie-siegel', initials: 'NS',
+    bio: 'Natalie specializes in body image, Intuitive Eating, self-acceptance, and helping clients heal their relationship with food and their bodies.' },
+  { name: 'Jillian Corpora', creds: 'LPC', slug: 'jillian', teamSlug: 'jillian-corpora', initials: 'JC',
+    bio: 'Jillian specializes in Intuitive Eating, disordered eating recovery, and helping clients build a compassionate relationship with food and their bodies.' },
+  { name: 'Kirsten Adorno', creds: 'LPC, MFTC', slug: 'kirsten', teamSlug: 'kirsten-adorno', initials: 'KA',
+    bio: 'Kirsten works with individuals, couples, and families, specializing in relationship dynamics, attachment, and emotionally focused therapy.' },
+  { name: 'Kelsey Bennett', creds: 'LPC', slug: 'kelsey', teamSlug: 'kelsey-bennett', initials: 'KB',
+    bio: 'Kelsey helps women, parents, couples, and adult children heal anxiety, attachment wounds, and relational patterns through EMDR, SSP, and IFS-informed therapy.' },
+  { name: 'Kelli Ruhl', creds: 'LPC, NCC, LAC', slug: 'kelli', teamSlug: 'kelli-ruhl', initials: 'KR',
+    bio: 'Kelli is a Certified Brainspotting Practitioner specializing in trauma, anxiety, addiction, and somatic approaches.' },
+  { name: 'Myldha Verdelus', creds: 'LPCC', slug: 'myldha', teamSlug: 'myldha-verdelus', initials: 'MV',
+    bio: 'Myldha provides culturally responsive therapy for anxiety, depression, identity, and relationship challenges.' },
 ];
 
 let tags = [];
@@ -825,7 +825,7 @@ function generatePost() {
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
   <title>${title} | Full Bloom Counseling Denver</title>
   <meta name="description" content="${metaDesc}">
-  <meta name="robots" content="index,follow">
+  <meta name="robots" content="noindex,nofollow">
   <meta name="googlebot" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
   <meta name="geo.region" content="US-CO">
   <meta name="geo.placename" content="Denver, Colorado">
@@ -843,7 +843,9 @@ function generatePost() {
   <meta name="twitter:image" content="https://fullbloomcounseling.com${heroImg}">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"${title.replace(/"/g, '\\"')}","datePublished":"${pubDate}","image":"https://fullbloomcounseling.com${heroImg}","author":{"@type":"Person","name":"${author.name}","honorificSuffix":"${author.creds}","worksFor":{"@type":"Organization","name":"Full Bloom Counseling","url":"https://fullbloomcounseling.com"}},"publisher":{"@type":"Organization","name":"Full Bloom Counseling","url":"https://fullbloomcounseling.com"}${keywordsSchema}}<\/script>  <link rel="preload" as="image" href="${heroImg}" type="image/jpeg" fetchpriority="high">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" type="image/png" href="https://fullbloomcounseling.com/wp-content/uploads/2025/04/favicon.png">
+  <link rel="icon" type="image/png" href="images/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="images/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="images/favicons/apple-touch-icon.png">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -869,10 +871,14 @@ function generatePost() {
         ${contentHTML}
 
         <div class="author-box">
-          <img src="images/team/${author.slug}-square.jpg" alt="${author.name}, ${author.creds} — therapist at Full Bloom Counseling Denver" class="author-photo" width="72" height="72" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="author-placeholder" aria-hidden="true">${author.initials}</div>
+          <img src="../../images/team/${author.slug}-square.jpg" alt="${author.name}, ${author.creds} — Full Bloom Counseling Denver" class="author-photo" width="72" height="72" loading="lazy" decoding="async" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">
+          <div class="author-placeholder" aria-hidden="true" style="display:none;">${author.initials}</div>
           <div class="author-info">
-            <h4>${author.name}</h4><span>${author.creds}</span>
+            <span style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--bark-mid);">Written by</span>
+            <strong style="display:block;font-family:var(--font-serif);font-size:1.1rem;color:var(--bark);margin:2px 0;">${author.name}</strong>
+            <span style="font-size:.82rem;color:var(--bark-mid);">${author.creds}</span>
+            <p style="font-size:.88rem;color:var(--bark-mid);margin:6px 0 8px;line-height:1.5;">${author.bio}</p>
+            <a href="../../team/${author.teamSlug}/" style="display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--petal-dark);text-decoration:none;">View Profile &#8594;</a>
             <p>${author.bio}</p>
           </div>
         </div>

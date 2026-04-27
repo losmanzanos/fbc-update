@@ -630,3 +630,21 @@ document.querySelectorAll('.svc-testimonials').forEach(function(wrap) {
   window.addEventListener('scroll', updateSidebar, { passive: true });
   updateSidebar();
 })();
+
+/* ── Logo click: always scroll to top on homepage ── */
+(function() {
+  var logo = document.querySelector('.nav-logo a');
+  if (!logo) return;
+  logo.addEventListener('click', function(e) {
+    var href = this.getAttribute('href');
+    var isHome = window.location.pathname === '/' || 
+                 window.location.pathname === '/index.html' ||
+                 window.location.pathname.endsWith('/fbc-update/');
+    if (isHome) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      history.replaceState(null, '', window.location.pathname);
+    }
+  });
+  /* logo-scroll-top */
+})();
