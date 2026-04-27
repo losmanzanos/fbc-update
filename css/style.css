@@ -297,14 +297,13 @@ strong {
   z-index: 1000;
   height: var(--nav-h);
   background: transparent;
-  transition: background .35s ease, box-shadow .35s ease, border-color .35s ease;
-  border-bottom: 1px solid transparent;
+  transition: background .35s ease, box-shadow .35s ease;
+  /* No border — was causing a brief 1px line flash on page load/paint */
 }
 
 #header.scrolled {
   background: var(--nav-bg);
-  box-shadow: var(--shadow-sm);
-  border-bottom-color: var(--border-light);
+  box-shadow: 0 1px 0 var(--border-light), var(--shadow-sm);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
@@ -1860,13 +1859,20 @@ h3 + .svc-benefit-grid {
 @media (max-width: 768px) {
   /* Mobile: base rule already uses 100svh which is stable. No additional rules needed. */
 }
-@media (max-width: 768px) and (orientation: landscape) {
-  /* Landscape: 100svh covers viewport without growing on scroll */
+@media (max-width: 932px) and (orientation: landscape) and (max-height: 500px) {
+  /* Mobile landscape: viewport is too short for full hero.
+     Give hero a fixed pixel height (taller than viewport so user can scroll)
+     so content has room and there's no jump/grow. */
   .hero {
-    height: 100svh;
-    min-height: 100svh;
+    height: 560px !important;
+    min-height: 560px !important;
+    max-height: 560px !important;
+    align-items: flex-end;
+    padding-bottom: 60px;
   }
-  .hero h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+  .hero h1 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); margin-bottom: 8px; }
+  .hero-tag { font-size: .68rem; letter-spacing: .14em; margin-bottom: 14px; }
+  .hero .btn { padding: 10px 22px; font-size: .82rem; }
 }
 
 /* ── Custom checkbox — cross-browser visible checkmark ─────────────── */
