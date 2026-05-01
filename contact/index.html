@@ -44,6 +44,10 @@
 <meta content="Have questions or ready to begin? Reach our Denver office to ask about rates, availability, and free consults. In‑person &amp; telehealth across Colorado." property="og:description"/>
 <meta content="https://fullbloomcounseling.com/contact/" property="og:url"/>
 <meta content="https://fullbloomcounseling.com/images/hero-contact.jpg" property="og:image"/>
+<meta property="og:image:secure_url" content="https://fullbloomcounseling.com/images/hero-contact.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="1440">
 <meta content="Full Bloom Counseling | Denver Therapists" property="og:site_name"/>
 <meta content="en_US" property="og:locale"/>
 <meta content="summary_large_image" name="twitter:card"/>
@@ -607,21 +611,87 @@ FORMSPREE-END-->
 </script>
 
 <script>
-/* Capture visitor approximate location via ipapi.co (free, no API key)
-   to include in form submission email body via {{visitor_location}} EmailJS variable */
+/* Robust visitor geolocation with fallback chain.
+   Populates hidden form field {{visitor_location}} for EmailJS. */
 (function() {
-  fetch('https://ipapi.co/json/')
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
-      var loc = '';
-      if (data.city) loc += data.city;
-      if (data.region) loc += (loc ? ', ' : '') + data.region;
-      if (data.country_name) loc += (loc ? ', ' : '') + data.country_name;
-      if (data.ip) loc += ' (IP: ' + data.ip + ')';
-      var field = document.getElementById('visitor_location');
-      if (field && loc) field.value = loc;
+  var locField = document.getElementById('visitor_location');
+  if (!locField) return;
+  
+  function setLocation(data, source) {
+    var parts = [];
+    if (data.city) parts.push(data.city);
+    if (data.region || data.region_name || data.state) parts.push(data.region || data.region_name || data.state);
+    if (data.country_name || data.country) parts.push(data.country_name || data.country);
+    if (data.postal || data.zip) parts.push(data.postal || data.zip);
+    var loc = parts.join(', ');
+    if (data.ip) loc += ' (IP: ' + data.ip + ')';
+    if (loc) {
+      locField.value = loc + ' — via ' + source;
+      window._visitor_location_loaded = true;
+    }
+  }
+  
+  // Primary: ipapi.co (1k requests/day free, no key)
+  fetch('https://ipapi.co/json/', {cache: 'no-store'})
+    .then(function(res) { 
+      if (!res.ok) throw new Error('ipapi.co failed');
+      return res.json(); 
     })
-    .catch(function() { /* fail silently — field stays default */ });
+    .then(function(data) {
+      if (data && (data.city || data.region)) {
+        setLocation(data, 'ipapi.co');
+      } else {
+        throw new Error('ipapi.co returned empty');
+      }
+    })
+    .catch(function() {
+      // Fallback 1: ipwho.is (no key, no rate limit)
+      fetch('https://ipwho.is/', {cache: 'no-store'})
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (data && data.success !== false) {
+            setLocation({
+              city: data.city,
+              region: data.region,
+              country_name: data.country,
+              postal: data.postal,
+              ip: data.ip
+            }, 'ipwho.is');
+          } else {
+            throw new Error('ipwho.is failed');
+          }
+        })
+        .catch(function() {
+          // Fallback 2: ipapi.com basic (just country/IP via free service)
+          fetch('https://api.country.is/', {cache: 'no-store'})
+            .then(function(res) { return res.json(); })
+            .then(function(data) {
+              if (data && data.country) {
+                locField.value = 'Country: ' + data.country + ' (IP: ' + (data.ip || 'unknown') + ') — via country.is';
+              }
+            })
+            .catch(function() { 
+              locField.value = 'Location lookup unavailable (privacy mode or blocked)'; 
+            });
+        });
+    });
+  
+  // Also: when form submits, if geo hasn't loaded yet, give it 1 more second
+  var form = document.getElementById('contact-form');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      if (!window._visitor_location_loaded && locField.value === 'Location not detected') {
+        // Geo hasn't completed — wait briefly so the email at least includes IP/country
+        e.preventDefault();
+        var submitBtn = form.querySelector('[type="submit"]');
+        if (submitBtn) submitBtn.disabled = true;
+        setTimeout(function() {
+          if (submitBtn) submitBtn.disabled = false;
+          form.dispatchEvent(new Event('submit', {bubbles: true, cancelable: true}));
+        }, 800);
+      }
+    }, {once: true, capture: true});
+  }
 })();
 </script>
 
