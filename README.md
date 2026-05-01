@@ -1,42 +1,43 @@
-# Full Bloom Counseling Group — Website
+# Full Bloom Counseling
 
-Static site for [fullbloomcounseling.com](https://fullbloomcounseling.com).  
-Built with plain HTML, CSS, and vanilla JavaScript. No build step. No dependencies.
+Full Bloom Counseling is a Denver-based therapy practice founded by Becca Moravec, LPC, LMFT. We are a group of licensed clinicians offering compassionate, evidence-informed therapy for individuals, couples, and families.
 
-## Structure
+🌐 **[fullbloomcounseling.com](https://fullbloomcounseling.com)**
 
-```
-├── index.html              Homepage
-├── services/               21 service pages
-├── blog/                   Blog posts
-├── team/                   Therapist bio pages
-├── therapists/             Team overview page
-├── about/                  About page
-├── contact/                Contact page
-├── faqs/                   FAQs page
-├── press/                  Press & media page
-├── css/
-│   ├── style.css           Main stylesheet
-│   └── mobile-service.css  Mobile-first responsive overrides
-├── js/
-│   └── main.js             Nav, search, FAQ accordion, form spam protection
-├── images/                 All photos and graphics
-│   └── fbc-photos/         Practice-specific photography
-├── fonts/                  Self-hosted Cormorant Garamond + DM Sans
-├── robots.txt              Staging: Disallow all (swap at launch)
-├── robots.production.txt   Production robots rules — rename to robots.txt at launch
-└── sitemap.xml             XML sitemap
-```
+## Who We Are
 
-## Deployment
+We specialize in trauma-informed care, EMDR, couples therapy, the Enneagram, body image and intuitive eating, anxiety, depression, and supporting people through life transitions.
 
-Hosted on GitHub Pages. Push to `main` branch to deploy.
+Our practice is built on the belief that therapy works best when it feels human — when the person across from you is engaged, curious, and genuinely invested in your healing.
 
-**At launch:** rename `robots.production.txt` → `robots.txt` to allow indexing.
+## Locations
 
-## Notes
+- **Denver:** 1780 S Bellaire St #485, Denver, CO 80222
+- **Boulder:** 5637 Arapahoe Ave, Boulder, CO 80303 (D&K Printing Building)
+- **Online:** Telehealth available throughout Colorado
 
-- All fonts are self-hosted (no Google Fonts)
-- Contact form uses Formspree (ID: xaqlegaq)
-- Mobile menu, FAQ, and search are vanilla JS — no frameworks
-- Konami code Easter egg: ↑ ↑ ↓ ↓ ← → ← → B A → opens Contra
+## Services
+
+- Individual Therapy
+- Couples & Family Therapy
+- EMDR & Brainspotting
+- Safe and Sound Protocol (SSP)
+- Anxiety, Trauma, and Grief Therapy
+- Body Image & Intuitive Eating
+- Enneagram Therapy
+- Therapy for Women, Men, and Young Adults
+- Clinical Supervision (LPC & LMFT hours)
+
+## Get In Touch
+
+📧 [info@fullbloomcounseling.com](mailto:info@fullbloomcounseling.com)
+📞 (303) 246-4923
+🌐 [Schedule a free 15-minute consultation](https://fullbloomcounseling.com/contact/)
+
+---
+
+### A Small Easter Egg 🌸
+
+There may or may not be a Konami code surprise hidden somewhere on the site. If you find it, you'll know.
+
+*Hint: ↑ ↑ ↓ ↓ ← → ← → B A*

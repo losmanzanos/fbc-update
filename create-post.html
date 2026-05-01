@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <!-- Google Analytics 4 -->
+<link rel="preconnect" href="https://www.googletagmanager.com">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3C97K0XW7Z"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -10,6 +11,10 @@
   gtag('config', 'G-3C97K0XW7Z');
 </script>
 <meta charset="UTF-8">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png?v=4">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png?v=4">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon.png?v=4">
+<link rel="icon" type="image/png" sizes="192x192" href="images/favicons/favicon-192.png?v=4">
 <script>
 (function(){
   function setH(){document.documentElement.style.setProperty('--hero-h',window.innerHeight+'px');}
@@ -415,7 +420,7 @@
     <div class="field">
       <label>Image Path <span class="req">*</span></label>
       <input type="text" id="hero-img" placeholder="/images/fbc-photos/your-image-name.jpg">
-      <p class="hint">Use the exact path from the <code>images/</code> folder. Check <code>images/fbc-photos/</code> for available images.</p>
+      <p class="hint">Use the exact path from the <code>images/</code> folder. <strong>This single image will be used as the hero, social/OG share image, and blog index card thumbnail — they always match.</strong> Check <code>images/fbc-photos/</code> for available images.</p>
     </div>
     <div class="field">
       <label>Alt Text <span class="req">*</span></label>
@@ -761,6 +766,7 @@ function generatePost() {
   const dateObj = new Date(pubDate + 'T12:00:00');
   const displayDate = dateObj.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   const displayDateFull = dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  const readTime = Math.max(3, Math.round(content.split(/\s+/).length / 200));
 
   // Process content HTML
   let contentHTML = contentEl.innerHTML;
@@ -843,10 +849,7 @@ function generatePost() {
   <meta name="twitter:image" content="https://fullbloomcounseling.com${heroImg}">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"${title.replace(/"/g, '\\"')}","datePublished":"${pubDate}","image":"https://fullbloomcounseling.com${heroImg}","author":{"@type":"Person","name":"${author.name}","honorificSuffix":"${author.creds}","worksFor":{"@type":"Organization","name":"Full Bloom Counseling","url":"https://fullbloomcounseling.com"}},"publisher":{"@type":"Organization","name":"Full Bloom Counseling","url":"https://fullbloomcounseling.com"}${keywordsSchema}}<\/script>  <link rel="preload" as="image" href="${heroImg}" type="image/jpeg" fetchpriority="high">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" type="image/png" href="images/favicons/favicon-32x32.png?v=2" sizes="32x32">
-<link rel="icon" type="image/png" href="images/favicons/favicon-16x16.png?v=2" sizes="16x16">
-<link rel="apple-touch-icon" href="images/favicons/apple-touch-icon.png?v=2">
-</head>
+  </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <!-- NAV: copy from any existing page -->
@@ -858,7 +861,7 @@ function generatePost() {
     <div style="position:absolute;bottom:0;left:0;right:0;padding:44px 32px;max-width:var(--max-w);margin:0 auto;">
       <p style="font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--petal-lt);font-weight:600;margin-bottom:12px;">${category}</p>
       <h1 style="color:var(--white);font-size:clamp(1.7rem,4vw,3rem);max-width:780px;line-height:1.2;font-weight:500;">${title}</h1>
-      <p style="color:rgba(255,255,255,.65);font-size:.78rem;margin-top:14px;letter-spacing:.1em;">${displayDate}</p>
+      <p style="color:rgba(255,255,255,.65);font-size:.78rem;margin-top:14px;letter-spacing:.1em;">${displayDateFull} &nbsp;&middot;&nbsp; By ${author.name}, ${author.creds} &middot; ${readTime} min read</p>
     </div>
   </div>
 </div>
