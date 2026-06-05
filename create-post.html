@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics 4 -->
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3C97K0XW7Z"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-3C97K0XW7Z');
+</script>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png?v=4">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png?v=4">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon.png?v=4">
+<link rel="icon" type="image/png" sizes="192x192" href="images/favicons/favicon-192.png?v=4">
+<script>
+(function(){
+  function setH(){document.documentElement.style.setProperty('--hero-h',window.innerHeight+'px');}
+  setH();
+  window.addEventListener('resize',function(){setTimeout(setH,100);});
+  window.addEventListener('orientationchange',function(){setTimeout(setH,300);});
+  window.addEventListener('load',setH);
+})();
+</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Full Bloom — Create Blog Post</title>
+<style>
+  :root {
+    --cream: #F8F4EE;
+    --cream-alt: #EFE9E0;
+    --petal: #C8967A;
+    --petal-dark: #A8724E;
+    --bark: #3A2E24;
+    --bark-mid: #5C4A38;
+    --border: #DDD5C8;
+    --white: #ffffff;
+    --green: #4a7c59;
+    --red: #c0392b;
+    --radius: 6px;
+    --font: 'Georgia', serif;
+    --sans: system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--cream); font-family: var(--sans); color: var(--bark); min-height: 100vh; }
+
+  header {
+    background: var(--bark);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,.25);
+  }
+  header h1 { color: var(--cream); font-size: 1rem; font-weight: 400; letter-spacing: .05em; }
+  header span { color: var(--petal); font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; }
+  .header-actions { margin-left: auto; display: flex; gap: 8px; flex-shrink: 0; }
+  @media (max-width: 500px) {
+    header { padding: 12px 16px; }
+    .header-actions { width: 100%; margin-left: 0; justify-content: stretch; }
+    .header-actions .btn { flex: 1; padding: 9px 10px; font-size: .72rem; }
+  }
+
+  .btn {
+    padding: 10px 22px;
+    border-radius: var(--radius);
+    font-size: .82rem;
+    font-weight: 600;
+    letter-spacing: .06em;
+    cursor: pointer;
+    border: none;
+    transition: all .2s;
+    text-transform: uppercase;
+  }
+  .btn-primary { background: var(--petal); color: white; }
+  .btn-primary:hover { background: var(--petal-dark); }
+  .btn-secondary { background: rgba(255,255,255,.12); color: var(--cream); border: 1px solid rgba(255,255,255,.2); }
+  .btn-secondary:hover { background: rgba(255,255,255,.2); }
+  .btn-success { background: var(--green); color: white; }
+  .btn-lg { padding: 14px 32px; font-size: .88rem; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+
+  .card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 32px;
+    margin-bottom: 24px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 12px rgba(58,46,36,.06);
+  }
+  .card-title {
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--petal-dark);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title .icon { font-size: 1rem; }
+
+  .field { margin-bottom: 20px; }
+  .field label {
+    display: block;
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--bark-mid);
+    margin-bottom: 7px;
+  }
+  .field label .req { color: var(--petal); margin-left: 3px; }
+  .field input, .field select, .field textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    font-size: .92rem;
+    color: var(--bark);
+    font-family: var(--sans);
+    background: var(--cream);
+    transition: border-color .2s;
+    outline: none;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-color: var(--petal);
+    background: white;
+  }
+  .field textarea { min-height: 140px; resize: vertical; line-height: 1.7; }
+  .field .hint { font-size: .75rem; color: var(--bark-mid); margin-top: 5px; line-height: 1.5; }
+
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .field-row { grid-template-columns: 1fr; } }
+
+  /* Author selector */
+  .author-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .author-card {
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: all .2s;
+    background: var(--cream);
+  }
+  .author-card:hover { border-color: var(--petal); }
+  .author-card.selected { border-color: var(--petal); background: #fdf5f0; }
+  .author-card input[type=radio] { display: none; }
+  .author-name { font-size: .88rem; font-weight: 600; color: var(--bark); }
+  .author-creds { font-size: .72rem; color: var(--bark-mid); margin-top: 3px; line-height: 1.4; }
+  .author-check { float: right; color: var(--petal); font-size: 1.1rem; display: none; }
+  .author-card.selected .author-check { display: block; }
+
+  /* Content area */
+  #content {
+    min-height: 400px;
+    font-family: Georgia, serif;
+    font-size: .98rem;
+    line-height: 1.8;
+  }
+  .content-toolbar {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    padding: 10px;
+    background: var(--cream-alt);
+    border: 1.5px solid var(--border);
+    border-bottom: none;
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .tool-btn {
+    padding: 5px 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: white;
+    font-size: .78rem;
+    cursor: pointer;
+    color: var(--bark);
+    font-family: var(--sans);
+  }
+  .tool-btn:hover { background: var(--petal); color: white; border-color: var(--petal); }
+  .tool-sep { width: 1px; background: var(--border); margin: 0 4px; }
+  #content-editor {
+    border: 1.5px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    padding: 20px;
+    min-height: 400px;
+    outline: none;
+    font-family: Georgia, serif;
+    font-size: .98rem;
+    line-height: 1.8;
+    color: var(--bark);
+    background: white;
+  }
+
+  /* Image upload zone */
+  .image-zone {
+    border: 2px dashed var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    text-align: center;
+    background: var(--cream);
+    cursor: pointer;
+    transition: all .2s;
+    margin-bottom: 16px;
+  }
+  .image-zone:hover, .image-zone.drag-over {
+    border-color: var(--petal);
+    background: #fdf5f0;
+  }
+  .image-zone p { font-size: .85rem; color: var(--bark-mid); margin-top: 8px; }
+  .image-zone .zone-icon { font-size: 2rem; }
+
+  .images-list { display: flex; flex-direction: column; gap: 12px; }
+  .image-item {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 12px;
+    align-items: start;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px;
+  }
+  .image-item img { width: 100px; height: 70px; object-fit: cover; border-radius: 4px; }
+  .image-item .img-fields { display: flex; flex-direction: column; gap: 8px; }
+  .image-item input {
+    width: 100%;
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: .82rem;
+    background: white;
+    color: var(--bark);
+  }
+  .image-item input:focus { outline: none; border-color: var(--petal); }
+  .img-label { font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--bark-mid); margin-bottom: 2px; }
+  .img-remove { background: none; border: 1px solid var(--border); border-radius: 4px; padding: 6px 10px; cursor: pointer; color: var(--red); font-size: .8rem; }
+  .img-remove:hover { background: var(--red); color: white; border-color: var(--red); }
+
+  /* Output */
+  #output-section { display: none; }
+  #output-section.visible { display: block; }
+  #output-area {
+    background: var(--bark);
+    color: #e8e0d5;
+    font-family: 'Courier New', monospace;
+    font-size: .78rem;
+    line-height: 1.6;
+    padding: 24px;
+    border-radius: var(--radius);
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+    max-height: 500px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+  }
+
+  .steps {
+    background: #e8f4ec;
+    border: 1px solid #b8d9c4;
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .steps h3 { font-size: .82rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--green); margin-bottom: 12px; }
+  .steps ol { padding-left: 20px; }
+  .steps li { font-size: .88rem; color: #2d5a3d; margin-bottom: 8px; line-height: 1.6; }
+  .steps code { background: rgba(0,0,0,.08); padding: 1px 5px; border-radius: 3px; font-family: monospace; font-size: .85em; }
+
+  .notice {
+    background: #fff8e8;
+    border: 1px solid #e8d5a0;
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    font-size: .84rem;
+    color: #6b5010;
+    margin-bottom: 20px;
+  }
+
+  .slug-preview {
+    font-family: monospace;
+    font-size: .82rem;
+    color: var(--petal-dark);
+    background: var(--cream-alt);
+    padding: 6px 10px;
+    border-radius: 4px;
+    margin-top: 6px;
+    border: 1px solid var(--border);
+  }
+
+  .progress { display: flex; gap: 0; margin-bottom: 32px; }
+  .step { flex: 1; padding: 10px; text-align: center; font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; border-bottom: 3px solid var(--border); color: var(--bark-mid); }
+  .step.active { border-color: var(--petal); color: var(--petal-dark); }
+  .step.done { border-color: var(--green); color: var(--green); }
+
+  .copy-btn {
+    position: sticky;
+    bottom: 20px;
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-size: .9rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 4px 16px rgba(74,124,89,.35);
+  }
+  .copy-btn:hover { background: #3a6347; }
+  .copy-btn.copied { background: var(--petal-dark); }
+
+  .tag-input { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; border: 1.5px solid var(--border); border-radius: var(--radius); background: var(--cream); min-height: 44px; cursor: text; }
+  .tag { background: var(--petal); color: white; padding: 3px 10px; border-radius: 20px; font-size: .78rem; display: flex; align-items: center; gap: 6px; }
+  .tag button { background: none; border: none; color: white; cursor: pointer; font-size: .9rem; padding: 0; line-height: 1; }
+  .tag-input input { border: none; outline: none; font-size: .88rem; background: transparent; color: var(--bark); flex: 1; min-width: 120px; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- NAV: copy from any existing page -->
+
+<div style="background:var(--bark);padding:var(--nav-h) 0 0;">
+  <div style="width:100%;height:440px;position:relative;overflow:hidden;">
+    <img src="${heroImg}" alt="${heroAlt}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.44;" loading="eager" fetchpriority="high" decoding="async">
+    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(24,18,10,.92) 0%,rgba(24,18,10,.15) 100%);" aria-hidden="true"></div>
+    <div style="position:absolute;bottom:0;left:0;right:0;padding:44px 32px;max-width:var(--max-w);margin:0 auto;">
+      <p style="font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--petal-lt);font-weight:600;margin-bottom:12px;">${category}</p>
+      <h1 style="color:var(--white);font-size:clamp(1.7rem,4vw,3rem);max-width:780px;line-height:1.2;font-weight:500;">${title}</h1>
+      <p style="color:rgba(255,255,255,.65);font-size:.78rem;margin-top:14px;letter-spacing:.1em;">${displayDateFull} &nbsp;&middot;&nbsp; By ${author.name}, ${author.creds} &middot; ${readTime} min read</p>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+<section class="section band-white">
+  <div class="container">
+    <div class="post-layout">
+      <article class="post-body">
+        ${contentHTML}
+
+        <div class="author-box">
+          <img src="../../images/team/${author.slug}-square.jpg" alt="${author.name}, ${author.creds} — Full Bloom Counseling Denver" class="author-photo" width="72" height="72" loading="lazy" decoding="async" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">
+          <div class="author-placeholder" aria-hidden="true" style="display:none;">${author.initials}</div>
+          <div class="author-info">
+            <span style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--bark-mid);">Written by</span>
+            <strong style="display:block;font-family:var(--font-serif);font-size:1.1rem;color:var(--bark);margin:2px 0;">${author.name}</strong>
+            <span style="font-size:.82rem;color:var(--bark-mid);">${author.creds}</span>
+            <p style="font-size:.88rem;color:var(--bark-mid);margin:6px 0 8px;line-height:1.5;">${author.bio}</p>
+            <a href="../../team/${author.teamSlug}/" style="display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--petal-dark);text-decoration:none;">View Profile &#8594;</a>
+            <p>${author.bio}</p>
+          </div>
+        </div>
+      </article>
+
+      <aside class="post-sidebar">
+        <div class="sidebar-box">
+          <h4>Free Consultation</h4>
+          <p style="font-size:.86rem;color:var(--bark-mid);margin-bottom:16px;">Ready to start? We offer free 15-minute consultations with all of our therapists — no commitment required.</p>
+          <a href="contact/" class="btn btn-primary" style="width:100%;text-align:center;display:block;">Get Started</a>
+        </div>
+        <div class="sidebar-box">
+          <h4>More Posts</h4>
+          <ul>
+            <li><a href="blog/the-power-of-pausing/">The Power of Pausing: Why Slowing Down Can Help You Heal</a></li>
+            <li><a href="blog/what-happens-in-your-first-therapy-session/">What Happens in Your First Therapy Session</a></li>
+            <li><a href="blog/">Browse all posts →</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-box">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="services/individual-therapy/">Individual Therapy</a></li>
+            <li><a href="services/anxiety-therapy/">Anxiety Therapy</a></li>
+            <li><a href="services/trauma-therapy/">Trauma Therapy</a></li>
+            <li><a href="services/couples-therapy/">Couples Therapy</a></li>
+            <li><a href="services/">All services →</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER: copy from any existing page -->
+<script src="js/main.js" defer><\/script>
+</body>
+</html>`;
+
+  // Generate blog index card
+  const excerpt = contentEl.innerText.replace(/\s+/g, ' ').trim().slice(0, 160) + '…';
+  const cardHTML = `      <div class="blog-card fade-in" data-date="${pubDate}">
+        <a href="blog/${slug}/" class="blog-card-img-link">
+          <div class="blog-card-img"><img src="${heroImg}" alt="${heroAlt}" loading="lazy" decoding="async"></div>
+        </a>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <span class="blog-card-date">${displayDate.toUpperCase()}</span>
+            <span class="blog-card-sep">&middot;</span>
+            <span class="blog-card-cat">${category.toUpperCase()}</span>
+          </div>
+          <h3 class="blog-card-title"><a href="blog/${slug}/">${title}</a></h3>
+          <p class="blog-card-excerpt">${excerpt}</p>
+          <a href="blog/${slug}/" class="blog-card-link">Read More &#8594;</a>
+        </div>
+      </div>`;
+
+  document.getElementById('output-area').textContent = html;
+  document.getElementById('card-output').textContent = cardHTML;
+  document.getElementById('folder-name-hint').textContent = slug;
+
+  const outputSection = document.getElementById('output-section');
+  outputSection.classList.add('visible');
+  outputSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function copyOutput() {
+  const text = document.getElementById('output-area').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '✅ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 Copy HTML to Clipboard'; btn.classList.remove('copied'); }, 2500);
+  });
+}
+
+function copyCard() {
+  const text = document.getElementById('card-output').textContent;
+  navigator.clipboard.writeText(text).then(() => alert('Card HTML copied!'));
+}
+
+function clearForm() {
+  if (!confirm('Clear everything and start over?')) return;
+  document.getElementById('title').value = '';
+  document.getElementById('pub-date').value = '';
+  document.getElementById('category').value = '';
+  document.getElementById('meta-desc').value = '';
+  document.getElementById('hero-img').value = '';
+  document.getElementById('hero-alt').value = '';
+  document.getElementById('content-editor').innerHTML = '';
+  document.getElementById('slug-preview').textContent = 'URL: /blog/your-post-title/';
+  document.getElementById('meta-count').textContent = '0';
+  document.getElementById('word-count').textContent = '0';
+  tags = [];
+  renderTags();
+  inlineImages = [];
+  renderImagesList();
+  selectedAuthor = null;
+  document.querySelectorAll('.author-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('output-section').classList.remove('visible');
+}
+
+// Set default date to today
+document.getElementById('pub-date').value = new Date().toISOString().split('T')[0];
+
+// Placeholder behaviour for contenteditable
+const editor = document.getElementById('content-editor');
+editor.addEventListener('focus', () => { if (!editor.textContent.trim()) editor.innerHTML = ''; });
+editor.addEventListener('blur', () => { if (!editor.textContent.trim()) editor.innerHTML = ''; });
+
+renderAuthors();
+renderTags();
+</script>
+</body>
+</html>

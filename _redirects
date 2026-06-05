@@ -1,0 +1,101 @@
+# Full Bloom Counseling — Netlify Redirect Rules
+# True 301 redirects for WordPress → Static Site migration
+# These replace the need for Cloudflare page rules
+
+# ── www → non-www canonical redirect ────────────────────────────────────────
+https://www.fullbloomcounseling.com/* https://fullbloomcounseling.com/:splat 301!
+
+# ── WordPress admin/system URLs ──────────────────────────────────────────────
+/wp-admin/*          /          301
+/wp-login.php        /          301
+/wp-content/*        /          301
+/xmlrpc.php          /          301
+/feed/               /blog/     301
+/feed                /blog/     301
+/rss/                /blog/     301
+/atom/               /blog/     301
+
+# ── WordPress archive patterns ───────────────────────────────────────────────
+/category/*          /blog/     301
+/tag/*               /blog/     301
+/author/*            /therapists/ 301
+/page/*              /          301
+/:year/:month/:day/:slug/  /blog/:slug/  301
+
+# ── Old page slugs → new URLs ────────────────────────────────────────────────
+/about-us/                   /about/             301
+/about-full-bloom/            /about/             301
+/meet-the-team/               /therapists/        301
+/our-team/                    /therapists/        301
+/meet-our-therapists/         /therapists/        301
+/therapy-services/            /services/          301
+/counseling-services/         /services/          301
+/mental-health-services/      /services/          301
+/contact-us/                  /contact/           301
+/get-started/                 /contact/           301
+/schedule/                    /contact/           301
+/book/                        /contact/           301
+/free-consultation/           /contact/           301
+/faq/                         /faqs/              301
+/frequently-asked-questions/  /faqs/              301
+
+# ── Old service URLs ─────────────────────────────────────────────────────────
+/anxiety/                     /services/anxiety-therapy/                   301
+/anxiety-therapy/             /services/anxiety-therapy/                   301
+/anxiety-counseling/          /services/anxiety-therapy/                   301
+/trauma/                      /services/trauma-therapy/                    301
+/trauma-therapy/              /services/trauma-therapy/                    301
+/trauma-counseling/           /services/trauma-therapy/                    301
+/emdr/                        /services/emdr/                              301
+/emdr-therapy/                /services/emdr/                              301
+/brainspotting/               /services/brainspotting-therapy/             301
+/couples/                     /services/couples-therapy/                   301
+/couples-therapy/             /services/couples-therapy/                   301
+/couples-counseling/          /services/couples-therapy/                   301
+/marriage-counseling/         /services/couples-therapy/                   301
+/family/                      /services/family-therapy/                    301
+/family-therapy/              /services/family-therapy/                    301
+/family-counseling/           /services/family-therapy/                    301
+/individual/                  /services/individual-therapy/                301
+/individual-therapy/          /services/individual-therapy/                301
+/depression/                  /services/depression-therapy-denver/         301
+/depression-therapy/          /services/depression-therapy-denver/         301
+/grief/                       /services/grief-loss-therapy/                301
+/grief-therapy/               /services/grief-loss-therapy/                301
+/grief-counseling/            /services/grief-loss-therapy/                301
+/enneagram/                   /services/enneagram-therapy/                 301
+/enneagram-therapy/           /services/enneagram-therapy/                 301
+/intuitive-eating/            /services/health-at-every-size/              301
+/haes/                        /services/health-at-every-size/              301
+/eating-disorders/            /services/disordered-eating/                 301
+/disordered-eating/           /services/disordered-eating/                 301
+/online-therapy/              /services/online-therapy-colorado/           301
+/telehealth/                  /services/online-therapy-colorado/           301
+/postpartum/                  /services/postpartum-perinatal-therapy/      301
+/postpartum-therapy/          /services/postpartum-perinatal-therapy/      301
+/premarital/                  /services/pre-marital/                       301
+/premarital-counseling/       /services/pre-marital/                       301
+/pre-marital-counseling/      /services/pre-marital/                       301
+/supervision/                 /services/clinical-supervision/              301
+/safe-and-sound-protocol/     /services/safe-and-sound/                    301
+/ssp/                         /services/safe-and-sound/                    301
+/adhd/                        /services/adhd-neurodivergent-therapy-denver/ 301
+/adhd-therapy/                /services/adhd-neurodivergent-therapy-denver/ 301
+/neurodivergent/              /services/adhd-neurodivergent-therapy-denver/ 301
+/therapy-for-women/           /services/therapy-for-women-denver/          301
+/therapy-for-men/             /services/therapy-for-men-denver/            301
+/young-adults/                /services/therapy-young-adults-denver/       301
+
+# ── Old team/therapist pages ─────────────────────────────────────────────────
+/rebecca-moravec/     /team/rebecca-moravec/  301
+/becca-moravec/       /team/rebecca-moravec/  301
+/natalie-siegel/      /team/natalie-siegel/   301
+/mark-whitney/        /team/mark-whitney/     301
+/jillian-corpora/     /team/jillian-corpora/  301
+/kirsten-adorno/      /team/kirsten-adorno/   301
+/kelsey-bennett/      /team/kelsey-bennett/   301
+/kelli-ruhl/          /team/kelli-ruhl/       301
+/myldha-verdelus/     /team/myldha-verdelus/  301
+
+# ── Catch-all for anything still not matched ─────────────────────────────────
+# (Netlify falls through to 404.html automatically if no rule matches)

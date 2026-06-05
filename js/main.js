@@ -1,0 +1,749 @@
+// ============================================================
+// MOBILE HERO: Fix iOS Safari 100vh jump on scroll
+// The root cause: iOS recalculates viewport-relative units (vh/svh/dvh)
+// when the address bar shows/hides. The ONLY reliable fix is to set
+// an explicit PIXEL height once at page load and never change it.
+// ============================================================
+(function() {
+  function isMobile() { return window.innerWidth <= 768; }
+
+  function lockHeroHeight() {
+    if (isMobile()) {
+      // Mobile only: lock height in px so iOS address bar show/hide never causes jump.
+      // innerHeight at this point includes the address bar (safest baseline).
+      var h = window.innerHeight;
+      document.documentElement.style.setProperty('--hero-h', h + 'px');
+    } else {
+      // Desktop: let CSS handle it with 100dvh — no pixel lock needed.
+      document.documentElement.style.removeProperty('--hero-h');
+    }
+  }
+
+  // Run immediately, synchronously, before first paint
+  lockHeroHeight();
+
+  // Re-lock on orientation change only (genuine device rotation, not scroll)
+  window.addEventListener('orientationchange', function() {
+    // Wait for the browser to settle after rotation
+    setTimeout(lockHeroHeight, 300);
+  });
+
+  // Re-lock on desktop resize (window resize changes viewport height legitimately on desktop)
+  window.addEventListener('resize', function() {
+    if (!isMobile()) lockHeroHeight();
+  });
+
+  // Do NOT listen to resize on mobile or scroll — that's what causes the jump
+})();
+
+/* Full Bloom Counseling v6 */
+(function(){'use strict';
+
+/* ── Transparent nav on scroll ── */
+var hdr = document.getElementById('header');
+function updateNav() {
+  if (!hdr) return;
+  // Lower threshold on mobile so logo goes dark immediately after hero clears
+  var threshold = window.innerWidth <= 768 ? 10 : 20;
+  if (window.scrollY > threshold) {
+    hdr.classList.add('scrolled');
+    document.body.classList.add('header-scrolled');
+  } else {
+    hdr.classList.remove('scrolled');
+    document.body.classList.remove('header-scrolled');
+  }
+}
+if (hdr) {
+  window.addEventListener('scroll', updateNav, {passive: true});
+  updateNav();
+}
+
+/* ── Mobile menu ── */
+var btn = document.getElementById('hamburger');
+var menu = document.getElementById('mobile-menu');
+
+function openMenu() {
+  if (!menu) return;
+  menu.style.cssText = 'display:flex!important;transform:translateX(100%)';
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      menu.style.cssText = '';
+      menu.classList.add('open');
+      var spans = document.querySelectorAll('#hamburger span');
+      if (spans.length === 3) {
+        spans[0].style.transform = 'rotate(45deg) translate(4px,4px)';
+        spans[1].style.opacity = '0';
+        spans[2].style.transform = 'rotate(-45deg) translate(4px,-4px)';
+      }
+    });
+  });
+  document.body.style.overflow = 'hidden';
+  document.body.classList.add('menu-open');
+  if (btn) { btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+  menu.setAttribute('aria-hidden','false');
+}
+
+function closeMenu() {
+  if (!menu) return;
+  menu.classList.remove('open');
+  // Reset hamburger from X
+  var spans = document.querySelectorAll('#hamburger span');
+  if (spans.length === 3) {
+    spans[0].style.transform = '';
+    spans[1].style.opacity = '';
+    spans[2].style.transform = '';
+  }
+  document.body.classList.remove('menu-open');
+  document.body.style.overflow = '';
+  if (btn) { btn.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  menu.setAttribute('aria-hidden','true');
+  // Hide after transition completes
+  setTimeout(function() {
+    if (!menu.classList.contains('open')) {
+      menu.style.display = '';
+    }
+  }, 320);
+  updateNav();
+}
+
+if (btn) {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    menu && menu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+}
+var closeBtn = document.getElementById('mobile-close');
+if (closeBtn) { closeBtn.addEventListener('click', closeMenu); }
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { closeMenu(); closeSearch(); } });
+if (menu) {
+  menu.querySelectorAll('a[href]').forEach(function(a) { 
+    a.addEventListener('click', function() {
+      setTimeout(closeMenu, 50);
+    });
+  });
+}
+
+/* Mobile submenus */
+document.querySelectorAll('.mobile-toggle-sub').forEach(function(t) {
+  t.addEventListener('click', function() {
+    var s = t.nextElementSibling;
+    if (!s) return;
+    var o = s.classList.contains('open');
+    s.classList.toggle('open', !o);
+    t.setAttribute('aria-expanded', o ? 'false' : 'true');
+  });
+});
+
+/* ── Search overlay ── */
+var searchOverlay = document.getElementById('search-overlay');
+var searchInput = document.getElementById('search-input');
+
+function openSearch() {
+  if (!searchOverlay) return;
+  searchOverlay.classList.add('open');
+  if (searchInput) setTimeout(function(){ searchInput.focus(); }, 50);
+}
+function closeSearch() {
+  if (!searchOverlay) return;
+  searchOverlay.classList.remove('open');
+  if (searchInput) searchInput.value = '';
+  var results = document.getElementById('search-results');
+  if (results) results.innerHTML = '';
+}
+
+document.querySelectorAll('.nav-search, .nav-search-mobile').forEach(function(el) {
+  el.addEventListener('click', function(e) { e.preventDefault(); openSearch(); });
+});
+
+var searchBtn = document.getElementById('search-submit');
+if (searchBtn) searchBtn.addEventListener('click', doSearch);
+if (searchInput) {
+  searchInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') doSearch();
+    if (e.key === 'Escape') closeSearch();
+  });
+}
+
+var searchCloseBtn = document.getElementById('search-close-btn');
+if (searchCloseBtn) searchCloseBtn.addEventListener('click', closeSearch);
+if (searchOverlay) {
+  searchOverlay.addEventListener('click', function(e) {
+    if (e.target === searchOverlay) closeSearch();
+  });
+}
+
+/* Search index — embedded page data */
+var ROOT_PATH = (function() {
+  var link = document.querySelector('link[href*="style.css"]');
+  if (!link) return '/';
+  var href = link.getAttribute('href');
+  return href.replace('css/style.css', '');
+})();
+
+var PAGES = [
+  {url:'/',title:'Therapists in Denver & Online | Full Bloom Counseling',desc:'Compassionate therapy for anxiety, trauma, relationships, disordered eating. Free consultations.',cat:'Home'},
+  {url:'/therapists/',title:'Meet Our Denver Therapists',desc:'Eight licensed therapists. One practice built around depth, warmth, and evidence-based care. Find the right fit for you in Denver or online across Colorado.',cat:'About'},
+  {url:'/about/',title:'About Our Denver Therapists',desc:'Eight licensed therapists specializing in trauma, anxiety, Enneagram, couples therapy, and more.',cat:'About'},
+  {url:'/team/rebecca-moravec/',title:'Becca Moravec, LPC LMFT — Founder',desc:'Trauma-informed care, EMDR, IFS, Enneagram, couples therapy, Intuitive Eating, women\'s issues, people pleasers, millennial women.',cat:'Therapist',author:'Becca Moravec',tags:'emdr enneagram couples intuitive eating haes ifs internal family systems narrative therapy becca'},
+  {url:'/team/natalie-siegel/',title:'Natalie Siegel, LPC — Therapist',desc:'Body image, disordered eating, Intuitive Eating, anxiety, self-esteem.',cat:'Therapist',author:'Natalie Siegel',tags:'haes anti-diet body image intuitive eating'},
+  {url:'/team/mark-whitney/',title:'Mark Whitney, LPC ACS — Senior Clinician',desc:'Couples therapy, Enneagram, trauma, family systems, clinical supervision.',cat:'Therapist',author:'Mark Whitney',tags:'gottman couples enneagram family clinical supervision acs approved clinical supervisor emdr'},
+  {url:'/team/jillian-corpora/',title:'Jillian Corpora, LPC — Therapist',desc:'Anxiety, depression, grief, life transitions, Intuitive Eating.',cat:'Therapist',author:'Jillian Corpora',tags:'grief anxiety depression intuitive eating'},
+  {url:'/team/kirsten-adorno/',title:'Kirsten Adorno, LPC MFTC — Therapist',desc:'Attachment-based therapy, couples counseling, emotional bonds.',cat:'Therapist',author:'Kirsten Adorno',tags:'gottman couples attachment'},
+  {url:'/team/kelsey-bennett/',title:'Kelsey Bennett, LPC — Therapist',desc:'Young adults, couples, emotional regulation, EMDR, SSP, Gottman. Boulder and online.',cat:'Therapist',author:'Kelsey Bennett',tags:'emdr safe sound protocol ssp gottman boulder colorado young adults couples'},
+  {url:'/team/kelli-ruhl/',title:'Kelli Ruhl, LPC — Therapist',desc:'Trauma therapy, addiction recovery, somatic interventions, Brainspotting.',cat:'Therapist',author:'Kelli Ruhl',tags:'brainspotting trauma somatic'},
+  {url:'/team/myldha-verdelus/',title:'Myldha Verdelus, LPCC — Therapist',desc:'Anxiety, depression, identity, couples, culturally responsive therapy, attachment.',cat:'Therapist',author:'Myldha Verdelus',tags:'cultural culturally responsive identity anxiety depression couples attachment'},
+  {url:'/services/',title:'Therapy Services in Denver',desc:'Individual, couples, family, trauma, EMDR, Enneagram, Intuitive Eating, anxiety therapy.',cat:'Services'},
+  {url:'/services/individual-therapy/',title:'Individual Therapy Denver',desc:'One-on-one therapy for anxiety, depression, trauma, relationships, life transitions. CBT, IFS, EMDR.',cat:'Service'},
+  {url:'/services/couples-therapy/',title:'Couples Therapy Denver',desc:'Strengthen connection, communication, and navigate conflict. Gottman Method, EFT.',cat:'Service'},
+  {url:'/services/family-therapy/',title:'Family Therapy Denver',desc:'Resolve conflict, improve communication, and build stronger family bonds.',cat:'Service'},
+  {url:'/services/enneagram-therapy/',title:'Enneagram Therapy Denver',desc:'Use the Enneagram for deep self-discovery with certified practitioners.',cat:'Service'},
+  {url:'/services/health-at-every-size/',title:'Intuitive Eating & HAES Therapy Denver',desc:'Heal your relationship with food and body. Weight-neutral, affirming care.',cat:'Service'},
+  {url:'/services/trauma-therapy/',title:'Trauma Therapy Denver',desc:'EMDR, SSP, somatic therapy for PTSD, complex trauma, and attachment wounds.',cat:'Service'},
+  {url:'/services/anxiety-therapy/',title:'Anxiety Therapy Denver',desc:'CBT, ACT, and mindfulness-based treatment for anxiety, panic, and perfectionism.',cat:'Service'},
+  {url:'/services/emdr/',title:'EMDR Therapy Denver',desc:'Eye Movement Desensitization and Reprocessing for trauma and PTSD.',cat:'Service'},
+  {url:'/services/disordered-eating/',title:'Disordered Eating & Body Image Therapy',desc:'Compassionate, weight-neutral support with Certified Intuitive Eating Counselors.',cat:'Service'},
+  {url:'/services/safe-and-sound/',title:'Safe and Sound Protocol (SSP) Denver',desc:'Nervous system regulation for anxiety, trauma, and sensory processing.',cat:'Service'},
+  {url:'/services/pre-marital/',title:'Pre-Marital Counseling Denver',desc:'Build a strong foundation for marriage with evidence-based premarital therapy.',cat:'Service'},
+  {url:'/services/clinical-supervision/',title:'Clinical Supervision Denver',desc:'AAMFT-approved supervision for LPC and LMFT associate therapists in Colorado. Provided by Mark Whitney, ACS.',cat:'Service',tags:'mark whitney clinical supervision acs supervisor lpc lmft associates'},
+  {url:'/blog/',title:'Mental Health Blog | Full Bloom Counseling',desc:'Insights on anxiety, trauma, Enneagram therapy, disordered eating, and mental health.',cat:'Blog'},
+  {url:'/faqs/',title:'Therapy FAQs | Full Bloom Counseling Denver',desc:'Insurance, rates, sliding scale, first sessions, online therapy questions answered.',cat:'FAQ'},
+  {url:'/contact/',title:'Contact Full Bloom Counseling Denver',desc:'Schedule a free 15-minute consultation. Call 720-767-9808 or email us.',cat:'Contact'},
+  {url:'/press/',title:'Press & Media | Full Bloom Counseling',desc:'Becca Moravec featured in CNN, Bumble, Jewish Unpacked. Podcast: Two Therapists in Therapy.',cat:'Press'},
+  // -- Missing service pages --
+  {url:'/services/brainspotting-therapy/',title:'Brainspotting Therapy Denver',desc:'Certified Brainspotting Practitioner. Trauma, PTSD, anxiety treated at the body level — not just the cognitive.',cat:'Service'},
+  {url:'/services/therapy-for-men-denver/',title:'Therapy for Men in Denver',desc:'A space to work through it. Anxiety, relationships, identity, anger, and the things men rarely say out loud.',cat:'Service'},
+  {url:'/services/therapy-for-women-denver/',title:'Therapy for Women in Denver',desc:'Individual therapy for anxiety, burnout, body image, relationships, life transitions, and self-discovery.',cat:'Service'},
+  {url:'/services/therapy-young-adults-denver/',title:'Therapy for Young Adults Denver',desc:'Navigating your 20s and early 30s. Identity, relationships, anxiety, career uncertainty, and new independence.',cat:'Service'},
+  {url:'/services/grief-loss-therapy/',title:'Grief & Loss Therapy Denver',desc:'Compassionate support for loss, anticipatory grief, complicated grief, and major life transitions.',cat:'Service'},
+  {url:'/services/adhd-neurodivergent-therapy-denver/',title:'ADHD & Neurodivergent Therapy Denver',desc:'Therapy that works with how your brain actually works. ADHD, autism, sensory processing.',cat:'Service'},
+  {url:'/services/postpartum-perinatal-therapy/',title:'Postpartum & Perinatal Therapy Denver',desc:'Support for postpartum depression, anxiety, birth trauma, and the emotional complexity of new parenthood.',cat:'Service'},
+  {url:'/services/depression-therapy-denver/',title:'Depression Therapy Denver',desc:'Evidence-based treatment for depression. CBT, EMDR, somatic therapy for real change, not just management.',cat:'Service'},
+  {url:'/services/online-therapy-colorado/',title:'Online Therapy Colorado',desc:'All services available via secure telehealth statewide. Denver to Durango, Boulder to Colorado Springs.',cat:'Service'},
+  // -- Blog posts --
+    {url:'/blog/teen-therapy-denver/',title:'Teen Therapy in Denver: What Young People Actually Need',desc:'Teen therapy that meets young people where they are — not where adults wish they were. A Denver therapist on what actually helps adolescents.',cat:'Blog',author:'Jillian Corpora'},
+  {url:'/blog/depression-therapy-denver/',title:'Depression Therapy in Denver: What It Actually Looks Like',desc:'Depression isn\'t just sadness. A Denver therapist on what depression really is, why it often goes unrecognized, and how therapy helps.',cat:'Blog',author:'Kirsten Adorno'},
+  {url:'/blog/somatic-therapy-denver/',title:'Somatic Therapy in Denver: Why Healing Happens in the Body',desc:'Talk therapy doesn\'t work for everyone. A Denver somatic therapist on why body-based therapy reaches what words often can\'t.',cat:'Blog',author:'Natalie Siegel'},
+  {url:'/blog/life-transitions-therapy-denver/',title:'Life Transitions Therapy in Denver: When Change Feels Like Too Much',desc:'Divorce, career shifts, loss, empty nest, new city — big changes can feel destabilizing even when chosen. A Denver therapist on how therapy helps.',cat:'Blog',author:'Jillian Corpora'},
+  {url:'/blog/attachment-styles-therapy-denver/',title:'Attachment Styles and Therapy in Denver: How Early Bonds Shape Adult Relationships',desc:'Anxious, avoidant, disorganized — your attachment style shapes every relationship. A Denver therapist explains what it means and how it can change.',cat:'Blog',author:'Kelli Ruhl'},
+  {url:'/blog/what-happens-in-your-first-therapy-session/',title:'What Happens in Your First Therapy Session',desc:'Not sure what to expect? A Full Bloom therapist walks you through exactly what happens and why it\'s less scary than you think.',cat:'Blog',author:'Jillian Corpora'},
+  {url:'/blog/therapy-for-men-denver/',title:'Therapy for Men: What Gets in the Way (And Why It\'s Worth It)',desc:'Men seek therapy less often and wait longer when they do. A Denver therapist on what actually gets in the way.',cat:'Blog',author:'Mark Whitney'},
+  {url:'/blog/enneagram-relationships-communication-denver/',title:'How the Enneagram Can Transform Your Relationships',desc:'Understanding your Enneagram type and your partner\'s can transform how you communicate, fight, and repair.',cat:'Blog',author:'Becca Moravec'},
+  {url:'/blog/what-is-complex-ptsd-denver/',title:'What Is Complex PTSD? How It Differs From PTSD',desc:'You didn\'t have one terrible event -- you had years of them. C-PTSD is more common than most people know.',cat:'Blog',author:'Kelsey Bennett'},
+  {url:'/blog/brainspotting-therapy-denver/',title:'Brainspotting Therapy in Denver: What It Is and What to Expect',desc:'Brainspotting reaches what talking can\'t. A Certified Brainspotting Practitioner explains how it works.',cat:'Blog',author:'Kelli Ruhl'},
+  {url:'/blog/intuitive-eating-beginners-guide-denver/',title:'Intuitive Eating: A Beginner\'s Guide From a Denver Therapist',desc:'Intuitive Eating is not about eating whatever you want -- it\'s about rebuilding trust with your body.',cat:'Blog',author:'Natalie Siegel'},
+  {url:'/blog/anti-diet-therapy-body-trust/',title:'How to Begin Anti-Diet Therapy: Building Body Trust',desc:'What does it look like to actually let go of the diet mentality? A Full Bloom therapist on how it begins.',cat:'Blog',author:'Natalie Siegel'},
+  {url:'/blog/narrative-therapy-couples-families-denver/',title:'Narrative Therapy for Couples and Families',desc:'Every relationship has a story. Narrative therapy helps couples examine the dominant stories keeping them stuck.',cat:'Blog',author:'Mark Whitney'},
+  {url:'/blog/culturally-responsive-therapy-denver/',title:'Culturally Responsive Therapy: Why Your Culture Belongs in the Room',desc:'Therapy has a history of centering one kind of experience. A Denver therapist on why cultural context matters.',cat:'Blog',author:'Myldha Verdelus'},
+  {url:'/blog/safe-sound-protocol-denver/',title:'Feel Safer in Your Body with the Safe and Sound Protocol',desc:'For many people talk therapy isn\'t enough -- especially when anxiety and trauma live in the nervous system.',cat:'Blog',author:'Kelsey Bennett'},
+  {url:'/blog/therapy-parents-young-adults-postpartum-colorado/',title:'The Hidden Weight of Parenting',desc:'Postpartum mental health gets attention. The years that follow -- navigating identity, young adults, and more.',cat:'Blog',author:'Jillian Corpora'},
+  {url:'/blog/therapy-for-growth-denver/',title:'Therapy for Growth: Clarity, Connection, and Healing',desc:'Therapy isn\'t just for crisis. A Denver therapist on how counseling can help you grow and find direction.',cat:'Blog',author:'Becca Moravec'},
+  {url:'/blog/the-power-of-pausing/',title:'The Power of Pausing: Why Slowing Down Can Help You Heal',desc:'In a culture that rewards busyness, pausing can feel threatening. But it may be the most healing thing.',cat:'Blog',author:'Kirsten Adorno'},
+  {url:'/blog/enneagram-therapy-denver/',title:'The Enneagram & Full Bloom: A Long Overdue Website Update',desc:'What the Enneagram actually is, why we use it in therapy, and what this practice stands for.',cat:'Blog',author:'Becca Moravec'},
+  {url:'/blog/the-unspoken-truth-about-starting-therapy/',title:'The Unspoken Truth About Starting Therapy',desc:'Most people wait years before reaching out. Here\'s what nobody tells you about what it\'s actually like.',cat:'Blog',author:'Jillian Corpora'},
+  {url:'/blog/emdr-therapy-what-to-expect/',title:'EMDR Therapy in Denver: What It Is and What to Expect',desc:'EMDR has become one of the most well-researched treatments available. A Denver therapist explains how it works.',cat:'Blog',author:'Kelsey Bennett'},
+  {url:'/blog/couples-therapy-denver-gottman-method/',title:'What the Gottman Method Can Teach You About Your Relationship',desc:'The Four Horsemen, emotional bank accounts, and why how you fight matters more than how often.',cat:'Blog',author:'Kirsten Adorno'},
+  {url:'/blog/feeling-stuck-in-life-therapy-denver/',title:'When Something Feels Off But You Can\'t Name It',desc:'You don\'t need to be in crisis to deserve support. A Denver therapist on the suffering that doesn\'t have a name.',cat:'Blog',author:'Becca Moravec'},
+  {url:'/blog/therapy-for-men-why-its-different/',title:'Therapy for Men Denver: Why It\'s Different and Why It Works',desc:'Therapy built for men isn\'t softer — it\'s sharper. Mark Whitney on what makes men\'s therapy work differently and what actually changes when it does.',cat:'Blog',author:'Mark Whitney'},
+  {url:'/blog/what-is-brainspotting-therapy-denver/',title:'What Is Brainspotting Therapy? A Denver Therapist Explains',desc:'Never heard of Brainspotting? Kelli Ruhl answers the questions clients actually ask — what it feels like, who it helps, and how it differs from EMDR.',cat:'Blog',author:'Kelli Ruhl'},
+  {url:'/blog/how-to-find-a-therapist-denver/',title:'How to Find the Right Therapist in Denver',desc:'A practical guide to finding a therapist in Denver without the overwhelm — what to search for, what to ask, and how to know when you\'ve found a good fit.',cat:'Blog',author:'Becca Moravec'},
+  {url:'/blog/enneagram-in-therapy-denver/',title:'The Enneagram in Therapy: How Knowing Your Type Changes Everything',desc:'The Enneagram is more than a personality quiz. A certified Denver Enneagram therapist on how it maps core motivations and changes the therapy conversation.',cat:'Blog',author:'Becca Moravec'},
+  {url:'/blog/adhd-therapy-denver/',title:'ADHD Therapy in Denver: When Executive Dysfunction Needs More Than a Planner',desc:'No planner fixes executive dysfunction. A Denver therapist on what ADHD actually looks like in adults and what therapy addresses that coaching can\'t.',cat:'Blog',author:'Jillian Corpora'},
+  {url:'/blog/intuitive-eating-therapy-denver/',title:'Intuitive Eating in Therapy: What It Means and Why It Works',desc:'Intuitive eating isn\'t a diet — it\'s a framework for healing your relationship with food. A Denver HAES therapist explains what this work actually involves.',cat:'Blog',author:'Becca Moravec'},
+  {url:'/blog/anxiety-therapy-denver/',title:'Anxiety Therapy Denver: Beyond Managing Symptoms',desc:'Anxiety is more than worry — and therapy does more than teach you to breathe differently. A Denver therapist on what actually changes anxiety.',cat:'Blog',author:'Becca Moravec'},
+  {url:'/blog/trauma-therapy-denver/',title:'Trauma Therapy Denver: What It Is and What to Expect',desc:'Trauma therapy that goes to the root — not just symptom management. EMDR, Brainspotting, and somatic approaches for PTSD and complex trauma in Denver.',cat:'Blog',author:'Becca Moravec'},
+  {url:'/blog/couples-therapy-denver/',title:'Couples Therapy Denver: How It Works and When to Go',desc:'What couples therapy in Denver actually looks like — how it works, what to expect, and when it makes sense to start. From Full Bloom\'s Gottman-trained therapists.',cat:'Blog',author:'Becca Moravec'},
+  {url:'/blog/grief-therapy-denver/',title:'Grief Therapy Denver: When Grief Needs More Than Time',desc:'Grief doesn\'t follow a timeline — and sometimes it needs more than patience. A Denver therapist on what grief therapy actually addresses.',cat:'Blog',author:'Becca Moravec'},
+  {url:'/blog/postpartum-therapy-denver/',title:'Postpartum Therapy Denver: You Don\'t Have to Do This Alone',desc:'Postpartum depression, anxiety, and overwhelm are more common than people talk about. Denver therapists specializing in postpartum and perinatal care.',cat:'Blog',author:'Becca Moravec'},
+  {url:'/blog/premarital-counseling-denver/',title:'Premarital Counseling Denver: Build It Right',desc:'Premarital counseling isn\'t just for troubled relationships — it\'s for couples who want to start with clarity. Denver Gottman-trained therapists.',cat:'Blog',author:'Becca Moravec'},
+  {url:'/blog/clinical-supervision-denver/',title:'Clinical Supervision Denver: Finding the Right Supervisor',desc:'Finding the right clinical supervisor in Denver is one of the most important decisions new therapists make. What good supervision actually looks like.',cat:'Blog',author:'Becca Moravec'},
+  {url:'/blog/how-to-know-if-youre-ready-for-emdr/',title:'How to Know If You\'re Ready for EMDR',desc:'Wondering if EMDR is right for you? Becca Moravec shares the signs you\'re prepared and what to expect from this powerful trauma treatment.',cat:'Blog',author:'Becca Moravec'},
+];
+
+function doSearch() {
+  if (!searchInput) return;
+  var q = searchInput.value.toLowerCase().trim();
+  var results = document.getElementById('search-results');
+  if (!results) return;
+  if (!q) { results.innerHTML = ''; return; }
+
+  var hits = PAGES.filter(function(p) {
+    /* Hide future-scheduled posts from search results */
+    var slug = p.url.replace(/.*\/blog\//, '').replace(/\/$/, '');
+    if (FBC_FUTURE_SLUGS[slug]) return false;
+    return p.title.toLowerCase().includes(q) ||
+           p.desc.toLowerCase().includes(q) ||
+           p.cat.toLowerCase().includes(q) ||
+           p.url.toLowerCase().includes(q) ||
+           (p.author && p.author.toLowerCase().includes(q)) ||
+           (p.tags && p.tags.toLowerCase().includes(q));
+  });
+
+  if (hits.length === 0) {
+    results.innerHTML = '<p class="search-no-results">No results found for \u201c' + q + '\u201d. Try a different search.</p>';
+    return;
+  }
+
+  results.innerHTML = hits.map(function(p) {
+    var authorStr = p.author ? ' <span style="opacity:.65;">by ' + p.author + '</span>' : '';
+    return '<a href="' + ROOT_PATH.replace(/\/$/, '') + p.url + '" class="search-result-item">' +
+      '<div class="search-result-cat">' + p.cat + authorStr + '</div>' +
+      '<h4>' + p.title + '</h4>' +
+      '<p>' + p.desc + '</p>' +
+      '</a>';
+  }).join('');
+}
+
+/* ── FAQ accordion ── */
+document.querySelectorAll('.faq-question').forEach(function(q) {
+  q.addEventListener('click', function() {
+    var item = q.closest('.faq-item'), was = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(el) {
+      el.classList.remove('open');
+      el.querySelector('.faq-question').setAttribute('aria-expanded','false');
+    });
+    if (!was) { item.classList.add('open'); q.setAttribute('aria-expanded','true'); }
+  });
+});
+
+/* ── Contact form ── */
+var form = document.getElementById('contact-form'), suc = document.getElementById('form-success');
+
+  /* Set page load timestamp for time-check spam filter */
+  var ltField = document.getElementById('_loadtime');
+  if (ltField) ltField.value = Date.now();
+
+if (form && suc) {
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    /* ── CHECKBOX VALIDATION ──────────────────────────────────────────
+       e.preventDefault() bypasses native required validation, so we
+       check the private pay checkbox manually before anything else.  */
+    var cb = document.getElementById('private_pay_confirm');
+    if (cb && !cb.checked) {
+      cb.focus();
+      cb.closest('.form-group') && cb.closest('.form-group').scrollIntoView({behavior:'smooth', block:'center'});
+      /* Visual shake on the checkbox container */
+      var wrap = cb.closest('div[style]') || cb.parentElement;
+      if (wrap) {
+        wrap.style.outline = '2px solid var(--petal-dark)';
+        wrap.style.borderRadius = '8px';
+        setTimeout(function(){ wrap.style.outline = ''; }, 2000);
+      }
+      return;
+    }
+
+    /* ── SPAM LAYER 1: Time check ─────────────────────────────────────
+       Bots submit instantly. Real users take at least 3 seconds to read
+       and fill out a form. Reject anything under 3 seconds.         */
+    var loadTime = parseInt(document.getElementById('_loadtime').value || '0', 10);
+    var elapsed = Date.now() - loadTime;
+    if (elapsed < 3000) {
+      /* Silent fail — bot gets no feedback */
+      form.hidden = true;
+      suc.hidden = false;
+      return;
+    }
+
+    /* ── SPAM LAYER 2: Honeypot check ─────────────────────────────────
+       Three hidden fields with tempting names. Bots fill them in.
+       Real users never see them (display:none + tabindex:-1).        */
+    var hp1 = document.getElementById('_hp_website').value;
+    var hp2 = document.getElementById('_hp_phone').value;
+    var hp3 = document.getElementById('_hp_company').value;
+    if (hp1 || hp2 || hp3) {
+      /* Silent fail */
+      form.hidden = true;
+      suc.hidden = false;
+      return;
+    }
+
+    /* ── SPAM LAYER 3: Duplicate submit guard ─────────────────────────
+       Prevent the same session from submitting twice.               */
+    if (sessionStorage.getItem('fbc_submitted')) {
+      form.hidden = true;
+      suc.hidden = false;
+      return;
+    }
+
+    /* ── Real submission ─────────────────────────────────────────────── */
+    /* Build clean subject: "New Inquiry — Jane Smith (Couples Therapy)" */
+    var fname = (form.querySelector('[name="First Name"]') || {}).value || '';
+    var lname = (form.querySelector('[name="Last Name"]') || {}).value || '';
+    var service = (form.querySelector('[name="Interested In"]') || {}).value || '';
+    var clientEmail = (form.querySelector('[name="Email Address"]') || {}).value || '';
+    var fullName = (fname + ' ' + lname).trim();
+    var subjectField = document.getElementById('form-subject');
+    var replytoField = document.getElementById('form-replyto');
+    if (subjectField) {
+      subjectField.value = 'New Inquiry — ' + fullName + (service ? ' (' + service + ')' : '');
+    }
+    if (replytoField && clientEmail) {
+      replytoField.value = clientEmail;
+    }
+    var b = form.querySelector('[type="submit\"]');
+    if (b) { b.disabled = true; b.textContent = 'Sending…'; }
+    fetch(form.action, {method:'POST', body:new FormData(form), headers:{Accept:'application/json'}})
+      .then(function(r) {
+        if (r.ok) {
+          sessionStorage.setItem('fbc_submitted', '1');
+          form.hidden = true;
+          suc.hidden = false;
+          suc.focus();
+        } else {
+          alert('Something went wrong. Please call 720-767-9808.');
+        }
+      })
+      .catch(function() { alert('Connection error. Please call 720-767-9808 or email info@fullbloomcounseling.com.'); })
+      .finally(function() { if (b) { b.disabled = false; b.textContent = 'Send Message'; } });
+  });}
+
+/* ── Active nav link ── */
+var path = location.pathname;
+document.querySelectorAll('.nav-link').forEach(function(a) {
+  var href = a.getAttribute('href');
+  if (!href) return;
+  if (href === '/' && (path === '/' || path === '/index.html')) a.classList.add('active');
+  else if (href !== '/' && path.indexOf(href) === 0) a.classList.add('active');
+});
+
+/* ── Fade-in on scroll ── */
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, {threshold:0.08, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); });
+/* Safety net: if IO hasn't fired within 1.5s (slow first load / no support), show everything */
+setTimeout(function() {
+  document.querySelectorAll('.fade-in:not(.visible)').forEach(function(el) { el.classList.add('visible'); });
+}, 1500);
+
+/* ── Mobile search modal ── */
+(function() {
+  var mSearchBtn = document.getElementById('mobile-search-btn');
+  var mSearchInput = document.getElementById('mobile-search-input');
+  if (!mSearchBtn || !mSearchInput) return;
+
+  // Build dedicated mobile search modal
+  var modal = document.createElement('div');
+  modal.id = 'mobile-search-modal';
+  modal.setAttribute('role','dialog');
+  modal.setAttribute('aria-label','Search');
+  modal.setAttribute('aria-modal','true');
+  modal.innerHTML =
+    '<div class="msm-box">' +
+      '<div class="msm-top">' +
+        '<input type="search" id="msm-input" class="msm-input" placeholder="Search therapists, services, topics\u2026" autocomplete="off" aria-label="Search site">' +
+        '<button class="msm-close" id="msm-close" aria-label="Close search">' +
+          '<svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg>' +
+        '</button>' +
+      '</div>' +
+      '<button class="msm-submit" id="msm-submit">Search</button>' +
+      '<div class="msm-results" id="msm-results" role="list" aria-live="polite"></div>' +
+    '</div>';
+  document.body.appendChild(modal);
+
+  var msmInput = document.getElementById('msm-input');
+  var msmResults = document.getElementById('msm-results');
+
+  function openMobileSearch() {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function() { if (msmInput) msmInput.focus(); }, 80);
+    // Pre-fill with whatever's already typed in the bottom bar
+    if (mSearchInput.value) { msmInput.value = mSearchInput.value; runMobileSearch(); }
+  }
+  function closeMobileSearch() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    msmResults.innerHTML = '';
+    msmInput.value = '';
+  }
+  function runMobileSearch() {
+    var q = msmInput.value.toLowerCase().trim();
+    if (!q) { msmResults.innerHTML = ''; return; }
+    var hits = PAGES.filter(function(p) {
+      return p.title.toLowerCase().includes(q) ||
+             p.desc.toLowerCase().includes(q) ||
+             p.cat.toLowerCase().includes(q) ||
+             p.url.toLowerCase().includes(q) ||
+             (p.author && p.author.toLowerCase().includes(q)) ||
+             (p.tags && p.tags.toLowerCase().includes(q));
+    });
+    if (!hits.length) {
+      msmResults.innerHTML = '<p class="msm-no-results">No results for \u201c' + q + '\u201d</p>';
+      return;
+    }
+    msmResults.innerHTML = hits.map(function(p) {
+      var authorLabel = p.author ? ' · ' + p.author : '';
+      return '<a href="' + ROOT_PATH.replace(/\/$/, '') + p.url + '" class="msm-result">' +
+        '<span class="msm-cat">' + p.cat + authorLabel + '</span>' +
+        '<strong>' + p.title + '</strong>' +
+        '<span>' + p.desc + '</span></a>';
+    }).join('');
+  }
+
+  mSearchBtn.addEventListener('click', openMobileSearch);
+  /* Also open + search if user presses Enter in the nav bar input */
+  if (mSearchInput) {
+    mSearchInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') { openMobileSearch(); }
+    });
+  }
+  document.getElementById('msm-close').addEventListener('click', closeMobileSearch);
+  document.getElementById('msm-submit').addEventListener('click', runMobileSearch);
+  msmInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') runMobileSearch();
+    if (e.key === 'Escape') closeMobileSearch();
+  });
+  modal.addEventListener('click', function(e) { if (e.target === modal) closeMobileSearch(); });
+})();
+
+/* ══════════════════════════════════════════════
+   KONAMI CODE EASTER EGG
+   ↑ ↑ ↓ ↓ ← → ← → B A  (then Enter/Start)
+   ══════════════════════════════════════════════ */
+(function() {
+  var CODE = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  var pos = 0;
+
+  // Build the retro TV overlay
+  var overlay = document.createElement('div');
+  overlay.id = 'konami-overlay';
+  overlay.innerHTML =
+    '<div class="konami-tv">' +
+      '<div class="konami-screen-bezel">' +
+        '<div class="konami-screen">' +
+          '<img src="' + (document.querySelector('link[href*="style.css"]')||{getAttribute:function(){return 'css/style.css'}}).getAttribute('href').replace('css/style.css','') + 'images/konami-contra.jpg" alt="Contra — Konami 1988" class="konami-img">' +
+          '<div class="konami-scanlines"></div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="konami-tv-bottom">' +
+        '<div class="konami-speaker"></div>' +
+        '<div class="konami-tv-knobs"><span></span><span></span><span></span></div>' +
+      '</div>' +
+    '</div>' +
+    
+    '<p class="konami-hint">Press any key to continue&hellip;</p>';
+  document.body.appendChild(overlay);
+
+  function showKonami() {
+    overlay.classList.add('active');
+    // Auto-dismiss after 8 seconds
+    setTimeout(hideKonami, 8000);
+  }
+  function hideKonami() {
+    overlay.classList.remove('active');
+    pos = 0;
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (overlay.classList.contains('active')) { hideKonami(); return; }
+    if (e.key === CODE[pos]) {
+      pos++;
+      if (pos === CODE.length) { showKonami(); pos = 0; }
+    } else {
+      pos = (e.key === CODE[0]) ? 1 : 0;
+    }
+  });
+
+  overlay.addEventListener('click', hideKonami);
+})();
+
+})();
+
+// Fix: ensure 4-item grids are always 2-column
+(function() {
+  document.querySelectorAll('.svc-benefit-grid').forEach(function(grid) {
+    var cards = grid.querySelectorAll('.svc-benefit-card');
+    if (cards.length === 4 && !grid.classList.contains('svc-benefit-grid-2col')) {
+      grid.classList.add('svc-benefit-grid-2col');
+    }
+  });
+})();
+
+
+
+// Testimonial carousel — single card
+document.querySelectorAll('.svc-testimonials').forEach(function(wrap) {
+  var viewport = wrap.querySelector('.testimonial-viewport');
+  var track = wrap.querySelector('.testimonial-track');
+  var cards = wrap.querySelectorAll('.testimonial-card');
+  var dots = wrap.querySelectorAll('.testimonial-dot');
+  var prevBtn = wrap.querySelector('.t-prev');
+  var nextBtn = wrap.querySelector('.t-next');
+  if (!track || !cards.length) return;
+  var current = 0;
+  var total = cards.length;
+  var isAnimating = false;
+
+  function goTo(n) {
+    if (isAnimating) return;
+    isAnimating = true;
+    current = ((n % total) + total) % total;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
+    setTimeout(function() { isAnimating = false; }, 460);
+  }
+
+  dots.forEach(function(d, i) { d.addEventListener('click', function() { goTo(i); }); });
+  if (prevBtn) prevBtn.addEventListener('click', function() { goTo(current - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', function() { goTo(current + 1); });
+
+  // Touch swipe
+  var touchX = 0;
+  track.addEventListener('touchstart', function(e) { touchX = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', function(e) {
+    var diff = touchX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+  }, {passive:true});
+
+  // Auto-advance every 6s
+  var timer = setInterval(function() { goTo(current + 1); }, 6000);
+  wrap.addEventListener('mouseenter', function() { clearInterval(timer); });
+  wrap.addEventListener('mouseleave', function() { timer = setInterval(function() { goTo(current + 1); }, 6000); });
+
+  goTo(0);
+});
+
+
+/* ── Bot protection: load timestamp only (full anti-spam in primary handler above) ──
+   NOTE: A second submit listener here caused a race condition silently blocking
+   real submissions on certain browsers. Removed duplicate — do not re-add. */
+(function() {
+  var tsField = document.getElementById('form-timestamp');
+  if (tsField) tsField.value = Date.now();
+})();
+
+
+/* ── Sidebar sticky across multi-section pages ── */
+(function() {
+  var sidebar = document.querySelector('.svc-sidebar');
+  if (!sidebar) return;
+  // Only activate if sidebar is NOT already in a single-section page
+  var sectionsInMain = document.querySelectorAll('#main section');
+  if (sectionsInMain.length <= 1) return;
+
+  var navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 88;
+  var offset = navH + 24;
+  var sidebarW = sidebar.offsetWidth;
+
+  function updateSidebar() {
+    var lastSection = sectionsInMain[sectionsInMain.length - 1];
+    var lastBottom = lastSection.getBoundingClientRect().bottom + window.scrollY;
+    var sidebarBottom = sidebar.getBoundingClientRect().bottom + window.scrollY;
+    var scrollY = window.scrollY;
+
+    // Get the top of the first section
+    var firstTop = sectionsInMain[0].getBoundingClientRect().top + window.scrollY;
+
+    if (scrollY + offset < firstTop) return; // above content
+
+    var maxTop = lastBottom - sidebar.offsetHeight - window.scrollY;
+    var desiredTop = scrollY + offset - firstTop;
+    var clampedTop = Math.min(desiredTop, maxTop);
+
+    sidebar.style.transform = 'translateY(' + Math.max(0, clampedTop) + 'px)';
+    sidebar.style.position = 'relative';
+    sidebar.style.top = '0';
+  }
+
+  // Only run on pages with multiple sections
+  sidebar.style.willChange = 'transform';
+  window.addEventListener('scroll', updateSidebar, { passive: true });
+  updateSidebar();
+})();
+
+/* ── Logo click: always scroll to top on homepage ── */
+(function() {
+  var logo = document.querySelector('.nav-logo a');
+  if (!logo) return;
+  logo.addEventListener('click', function(e) {
+    var href = this.getAttribute('href');
+    var isHome = window.location.pathname === '/' || 
+                 window.location.pathname === '/index.html' ||
+                 window.location.pathname.endsWith('/fbc-update/');
+    if (isHome) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      history.replaceState(null, '', window.location.pathname);
+    }
+  });
+  /* logo-scroll-top */
+})();
+
+/* ── Future post slugs (populated by scheduler, used by search) ── */
+var FBC_FUTURE_SLUGS = {};
+
+/* ── Blog Post Scheduler ──────────────────────────────────────────────────────
+ * Hides blog cards and adds noindex to post pages until their publish date.
+ *
+ * TESTING: Open DevTools console and run:
+ *   FBC_TEST_DATE = '2026-08-19'; location.reload();
+ * To clear:
+ *   sessionStorage.removeItem('FBC_TEST_DATE'); location.reload();
+ *
+ * Cards use data-date="YYYY-MM-DD". Posts use <meta name="publish-date" content="YYYY-MM-DD">.
+ * ─────────────────────────────────────────────────────────────────────────── */
+(function () {
+  /* Allow DevTools date override via sessionStorage */
+  var testDate = sessionStorage.getItem('FBC_TEST_DATE');
+  var today = testDate ? new Date(testDate + 'T00:00:00') : new Date();
+  today.setHours(0, 0, 0, 0);
+
+  /* ── 1. Blog index: hide future cards, keep correct DOM order ── */
+  var cards = document.querySelectorAll('.blog-card[data-date]');
+  if (cards.length) {
+    cards.forEach(function (card) {
+      var pubDate = new Date(card.getAttribute('data-date') + 'T00:00:00');
+      if (pubDate > today) {
+        card.style.display = 'none';
+        card.setAttribute('aria-hidden', 'true');
+        /* Mark slug as future so search can filter it */
+        var href = card.querySelector('a') && card.querySelector('a').getAttribute('href');
+        if (href) {
+          var slug = href.replace(/^.*\/blog\//, '').replace(/\/$/, '');
+          FBC_FUTURE_SLUGS[slug] = true;
+        }
+      }
+    });
+  }
+
+  /* ── 2. Individual post pages: add noindex if pre-publish ── */
+  var publishMeta = document.querySelector('meta[name="publish-date"]');
+  if (publishMeta) {
+    var postDate = new Date(publishMeta.getAttribute('content') + 'T00:00:00');
+    if (postDate > today) {
+      /* Inject noindex so bots won't index early */
+      var ni = document.createElement('meta');
+      ni.name = 'robots';
+      ni.content = 'noindex,nofollow';
+      document.head.appendChild(ni);
+      /* Also hide the main content and show a polite holding message */
+      document.addEventListener('DOMContentLoaded', function () {
+        var main = document.getElementById('main');
+        if (main) {
+          main.innerHTML = '<section class="section band-white"><div class="container" style="text-align:center;padding:80px 20px;"><h1 style="font-family:var(--font-serif);color:var(--bark);">Coming Soon</h1><p style="color:var(--bark-mid);margin-top:12px;">This post isn\'t published yet. <a href="../../blog/" style="color:var(--petal-dark);">Browse all posts &#8594;</a></p></div></section>';
+        }
+      });
+    }
+  }
+})();
+
+/* ── DevTools helper: set FBC_TEST_DATE from console ─────────────────────── */
+window.FBC_TEST_DATE = {
+  set: function (dateStr) {
+    sessionStorage.setItem('FBC_TEST_DATE', dateStr);
+    console.log('%c[FBC] Test date set to ' + dateStr + ' — reloading…', 'color:#a8724e;font-weight:bold;');
+    location.reload();
+  },
+  clear: function () {
+    sessionStorage.removeItem('FBC_TEST_DATE');
+    console.log('%c[FBC] Test date cleared — reloading…', 'color:#a8724e;font-weight:bold;');
+    location.reload();
+  },
+  current: function () {
+    var d = sessionStorage.getItem('FBC_TEST_DATE');
+    console.log('%c[FBC] Active date: ' + (d || 'REAL TODAY (' + new Date().toISOString().slice(0,10) + ')'), 'color:#a8724e;');
+  }
+};
