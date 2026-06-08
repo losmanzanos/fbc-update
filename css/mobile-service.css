@@ -193,14 +193,8 @@ p, .svc-p { font-size: var(--fs-body) }
   }
 }
 
-/* ── Phone hero: match Services page height (480px, flex-end) ── */
+/* ── Phone hero: let style.css base rule control height (45vw, min 320px) ── */
 @media (max-width: 480px) {
-  .page-hero {
-    height: 480px;
-    max-height: 480px;
-    min-height: 0;
-    align-items: flex-end;
-  }
   .page-hero-img {
     position: absolute;
     height: 100%;
