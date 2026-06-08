@@ -1041,16 +1041,16 @@ body.menu-open {
    ──────────────────────────────────────────────────────────────────────── */
 @media (max-width: 480px) {
   .page-hero {
-    height: 440px;         /* ← PHONE HEIGHT (fixed px — DO NOT change to vw/vh) */
+    height: 480px;         /* ← PHONE HEIGHT (fixed px — DO NOT change to vw/vh) */
     min-height: 0;
-    max-height: 440px;
+    max-height: 480px;
   }
   .page-hero-img {
     position: fixed;       /* frozen relative to hero via transform parent = no jump */
     top: 0;
     left: 0;
     width: 100%;
-    height: 440px;         /* must match height above */
+    height: 480px;         /* must match height above */
     object-fit: cover;
     object-position: center 35%; /* ← PHONE image position (overridden by inline style per-page) */
     backface-visibility: hidden;
@@ -1915,8 +1915,7 @@ h3 + .svc-benefit-grid {
 
 /* Mobile menu CTA — "Schedule a Free Consultation" button above socials/search */
 .mobile-menu-cta {
-  padding: 20px 28px 0;
-  border-top: 1px solid rgba(170,148,128,.18);
+  padding: 16px 28px 0;
   flex-shrink: 0;
 }
 .mobile-menu-cta a {
@@ -1941,16 +1940,7 @@ h3 + .svc-benefit-grid {
   transform: translateY(-1px);
 }
 
-/* Hero tagline: prevent awkward wrapping on narrow phones */
-@media (max-width: 520px) {
-  .hero-tag {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 94vw;
-    letter-spacing: .10em;
-  }
-}
+/* hero-tag breakpoint handled by existing ≤768px rule */
 
 /* Footer: stay 2-column on tablet (769px–1100px already handled; 
    at 768px keep left col + right stacked as 2-col grid) */
@@ -1966,4 +1956,20 @@ h3 + .svc-benefit-grid {
   .btn-outline {
     padding: 10px 22px;
   }
+}
+
+
+
+
+/* Mobile + tablet: hide hero description, keep h1 + eyebrow only */
+@media (max-width: 1024px) {
+  .page-hero-content p:not(.breadcrumb) {
+    display: none;
+  }
+}
+
+/* Tablet tagline break: forces "• LIVE AUTHENTICALLY..." to line 2 */
+.hero-tag-br { display: none; }
+@media (max-width: 1100px) and (min-width: 481px) {
+  .hero-tag-br { display: block; }
 }
