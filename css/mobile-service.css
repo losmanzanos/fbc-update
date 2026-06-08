@@ -129,7 +129,7 @@ p, .svc-p { font-size: var(--fs-body) }
   .page-hero-content { padding-bottom: 32px }
   .page-hero-content h1 { font-size: clamp(1.6rem, 6vw, 2.2rem) }
   .page-hero-content .eyebrow { font-size: .6rem; margin-bottom: 8px }
-  .page-hero-content .breadcrumb { display: none } /* Clean on mobile */
+  .page-hero-content .breadcrumb { display: block } /* Show breadcrumbs on mobile/tablet */
 
   /* ─ Section immediately after hero ─ */
   .svc-page-content { padding-top: 32px }
