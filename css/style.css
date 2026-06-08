@@ -1908,3 +1908,62 @@ h3 + .svc-benefit-grid {
   outline: 3px solid var(--petal);
   outline-offset: 2px;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   AUDIT FIXES — June 2026
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Mobile menu CTA — "Schedule a Free Consultation" button above socials/search */
+.mobile-menu-cta {
+  padding: 20px 28px 0;
+  border-top: 1px solid rgba(170,148,128,.18);
+  flex-shrink: 0;
+}
+.mobile-menu-cta a {
+  display: block;
+  text-align: center;
+  background: var(--petal-btn);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  padding: 14px 24px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background .18s ease, transform .12s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.mobile-menu-cta a:hover,
+.mobile-menu-cta a:active {
+  background: var(--petal-dark);
+  transform: translateY(-1px);
+}
+
+/* Hero tagline: prevent awkward wrapping on narrow phones */
+@media (max-width: 520px) {
+  .hero-tag {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 94vw;
+    letter-spacing: .10em;
+  }
+}
+
+/* Footer: stay 2-column on tablet (769px–1100px already handled; 
+   at 768px keep left col + right stacked as 2-col grid) */
+@media (min-width: 600px) and (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+}
+
+/* Therapist "Meet" buttons: add slight padding boost on mobile for easier tapping */
+@media (max-width: 640px) {
+  .btn-outline {
+    padding: 10px 22px;
+  }
+}
