@@ -127,7 +127,7 @@ p, .svc-p { font-size: var(--fs-body) }
   /* ─ Page hero on mobile ─ */
   /* hero height handled by style.css per-breakpoint */
   .page-hero-content { padding-bottom: 32px }
-  .page-hero-content h1 { font-size: clamp(1.6rem, 6vw, 2.2rem) }
+  /* .page-hero-content h1 font-size controlled by style.css base rule */
   .page-hero-content .eyebrow { font-size: .6rem; margin-bottom: 8px }
   .page-hero-content .breadcrumb { display: block } /* Show breadcrumbs on mobile/tablet */
 
@@ -157,7 +157,7 @@ p, .svc-p { font-size: var(--fs-body) }
 /* ── LANDSCAPE MOBILE (≤896px height when wide) ─────────── */
 @media (max-height: 500px) and (orientation: landscape) {
   .page-hero { height: 200px; max-height: 200px }
-  .page-hero-content h1 { font-size: 1.6rem }
+  /* .page-hero-content h1 font-size controlled by style.css base rule */
   :root { --nav-h: 60px }
 }
 
@@ -166,7 +166,7 @@ p, .svc-p { font-size: var(--fs-body) }
   .svc-benefit-grid { grid-template-columns: 1fr 1fr; gap: 12px }
   .svc-benefit-grid.svc-benefit-grid-2col { grid-template-columns: 1fr 1fr }
   .page-hero { height: 65vw; max-height: 520px; align-items: flex-end; }
-  .page-hero-content h1 { font-size: clamp(1.8rem, 4vw, 2.8rem) }
+  /* .page-hero-content h1 font-size controlled by style.css base rule */
 }
 
 /* ── Hide therapist placeholder initials on mobile ─────── */
