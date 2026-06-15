@@ -268,9 +268,6 @@ function doSearch() {
   if (!q) { results.innerHTML = ''; return; }
 
   var hits = PAGES.filter(function(p) {
-    /* Hide future-scheduled posts from search results */
-    var slug = p.url.replace(/.*\/blog\//, '').replace(/\/$/, '');
-    if (FBC_FUTURE_SLUGS[slug]) return false;
     return p.title.toLowerCase().includes(q) ||
            p.desc.toLowerCase().includes(q) ||
            p.cat.toLowerCase().includes(q) ||
@@ -672,78 +669,3 @@ document.querySelectorAll('.svc-testimonials').forEach(function(wrap) {
   /* logo-scroll-top */
 })();
 
-/* ── Future post slugs (populated by scheduler, used by search) ── */
-var FBC_FUTURE_SLUGS = {};
-
-/* ── Blog Post Scheduler ──────────────────────────────────────────────────────
- * Hides blog cards and adds noindex to post pages until their publish date.
- *
- * TESTING: Open DevTools console and run:
- *   FBC_TEST_DATE = '2026-08-19'; location.reload();
- * To clear:
- *   sessionStorage.removeItem('FBC_TEST_DATE'); location.reload();
- *
- * Cards use data-date="YYYY-MM-DD". Posts use <meta name="publish-date" content="YYYY-MM-DD">.
- * ─────────────────────────────────────────────────────────────────────────── */
-(function () {
-  /* Allow DevTools date override via sessionStorage */
-  var testDate = sessionStorage.getItem('FBC_TEST_DATE');
-  var today = testDate ? new Date(testDate + 'T00:00:00') : new Date();
-  today.setHours(0, 0, 0, 0);
-
-  /* ── 1. Blog index: hide future cards, keep correct DOM order ── */
-  var cards = document.querySelectorAll('.blog-card[data-date]');
-  if (cards.length) {
-    cards.forEach(function (card) {
-      var pubDate = new Date(card.getAttribute('data-date') + 'T00:00:00');
-      if (pubDate > today) {
-        card.style.display = 'none';
-        card.setAttribute('aria-hidden', 'true');
-        /* Mark slug as future so search can filter it */
-        var href = card.querySelector('a') && card.querySelector('a').getAttribute('href');
-        if (href) {
-          var slug = href.replace(/^.*\/blog\//, '').replace(/\/$/, '');
-          FBC_FUTURE_SLUGS[slug] = true;
-        }
-      }
-    });
-  }
-
-  /* ── 2. Individual post pages: add noindex if pre-publish ── */
-  var publishMeta = document.querySelector('meta[name="publish-date"]');
-  if (publishMeta) {
-    var postDate = new Date(publishMeta.getAttribute('content') + 'T00:00:00');
-    if (postDate > today) {
-      /* Inject noindex so bots won't index early */
-      var ni = document.createElement('meta');
-      ni.name = 'robots';
-      ni.content = 'noindex,nofollow';
-      document.head.appendChild(ni);
-      /* Also hide the main content and show a polite holding message */
-      document.addEventListener('DOMContentLoaded', function () {
-        var main = document.getElementById('main');
-        if (main) {
-          main.innerHTML = '<section class="section band-white"><div class="container" style="text-align:center;padding:80px 20px;"><h1 style="font-family:var(--font-serif);color:var(--bark);">Coming Soon</h1><p style="color:var(--bark-mid);margin-top:12px;">This post isn\'t published yet. <a href="../../blog/" style="color:var(--petal-dark);">Browse all posts &#8594;</a></p></div></section>';
-        }
-      });
-    }
-  }
-})();
-
-/* ── DevTools helper: set FBC_TEST_DATE from console ─────────────────────── */
-window.FBC_TEST_DATE = {
-  set: function (dateStr) {
-    sessionStorage.setItem('FBC_TEST_DATE', dateStr);
-    console.log('%c[FBC] Test date set to ' + dateStr + ' — reloading…', 'color:#a8724e;font-weight:bold;');
-    location.reload();
-  },
-  clear: function () {
-    sessionStorage.removeItem('FBC_TEST_DATE');
-    console.log('%c[FBC] Test date cleared — reloading…', 'color:#a8724e;font-weight:bold;');
-    location.reload();
-  },
-  current: function () {
-    var d = sessionStorage.getItem('FBC_TEST_DATE');
-    console.log('%c[FBC] Active date: ' + (d || 'REAL TODAY (' + new Date().toISOString().slice(0,10) + ')'), 'color:#a8724e;');
-  }
-};
