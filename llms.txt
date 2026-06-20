@@ -1,99 +1,105 @@
-# Full Bloom Counseling — LLM Reference File
-# https://fullbloomcounseling.com
-# Last updated: June 2026
+# Full Bloom Counseling
+
+> Full Bloom Counseling is a licensed group therapy practice in Denver, Colorado, founded by Rebecca Moravec, LPC, LMFT, AAMFT Approved Supervisor and Certified Narrative Enneagram Practitioner & Teacher. The practice serves Denver and all of Colorado via telehealth, offering trauma-informed, weight-inclusive, LGBTQ+ affirming care.
+
+Website: <https://fullbloomcounseling.com>. Last updated: June 2026.
 
 ## About
-Full Bloom Counseling is a licensed group therapy practice in Denver, Colorado.
-Founded by Rebecca Moravec, LPC, LMFT, AAMFT Approved Supervisor, Certified Narrative
-Enneagram Practitioner & Teacher. Serving Denver and all of Colorado via telehealth.
 
-## Community Partnerships
-Full Bloom partners with Colorado Children's Chorale (childrenschorale.org), a premier
-Denver-based children's choral organization that tours nationally and internationally.
-Full Bloom embeds a licensed clinician on every Chorale tour. Becca Moravec, LPC, LMFT
-developed a custom mental health handbook for the demands of touring with young singers.
-- Partnerships: /partnerships/
-- Colorado Children's Chorale: https://www.childrenschorale.org
+Full Bloom Counseling is a group private practice of licensed clinicians offering compassionate, evidence-informed therapy for individuals, couples, and families. Approach: weight-inclusive, anti-diet, trauma-informed, LGBTQ+ affirming, and HAES-aligned. Modalities include EMDR, Brainspotting, the Safe and Sound Protocol (SSP), Narrative Therapy, the Gottman Method, ACT, CBT, and IFS. Insurance: out of network, with superbills provided and sliding scale available.
+
+- [About Full Bloom](https://fullbloomcounseling.com/about/): practice story, philosophy, and team overview
+- [Meet Our Therapists](https://fullbloomcounseling.com/therapists/): full clinician roster and specialties
+- [Boulder Office](https://fullbloomcounseling.com/boulder/): in-person therapy in Boulder, CO with Kelsey Bennett, LPC (plus telehealth statewide)
+- [Contact & Free Consultation](https://fullbloomcounseling.com/contact/): book a free 15-minute consultation
+- [FAQs](https://fullbloomcounseling.com/faqs/): common questions about therapy, fees, and insurance
 
 ## Services
-- Individual Therapy: /services/individual-therapy/
-- Anxiety Therapy: /services/anxiety-therapy/
-- Trauma Therapy: /services/trauma-therapy/
-- Couples Therapy: /services/couples-therapy/
-- Family Therapy: /services/family-therapy/
-- EMDR Therapy: /services/emdr/
-- Brainspotting Therapy: /services/brainspotting-therapy/
-- Safe and Sound Protocol (SSP): /services/safe-and-sound/
-- Disordered Eating & Body Image: /services/disordered-eating/
-- Health at Every Size (HAES): /services/health-at-every-size/
-- Enneagram Therapy: /services/enneagram-therapy/
-- Grief & Loss Therapy: /services/grief-loss-therapy/
-- Pre-Marital Counseling: /services/pre-marital/
-- Postpartum & Perinatal Therapy: /services/postpartum-perinatal-therapy/
-- Therapy for Women: /services/therapy-for-women-denver/
-- Therapy for Young Adults: /services/therapy-young-adults-denver/
-- ADHD & Neurodivergent Therapy: /services/adhd-neurodivergent-therapy-denver/
-- Online Therapy (Colorado): /services/online-therapy-colorado/
-- Clinical Supervision: /services/clinical-supervision/
+
+- [Individual Therapy](https://fullbloomcounseling.com/services/individual-therapy/): one-on-one therapy for anxiety, trauma, growth, and life transitions
+- [Anxiety Therapy](https://fullbloomcounseling.com/services/anxiety-therapy/): EMDR, somatic, and evidence-based approaches for lasting relief
+- [Trauma Therapy](https://fullbloomcounseling.com/services/trauma-therapy/): trauma-informed care including EMDR and SSP
+- [Couples Therapy](https://fullbloomcounseling.com/services/couples-therapy/): Gottman Method and Emotionally Focused Therapy
+- [Family Therapy](https://fullbloomcounseling.com/services/family-therapy/): connection and conflict resolution for families
+- [EMDR Therapy](https://fullbloomcounseling.com/services/emdr/): Eye Movement Desensitization and Reprocessing for trauma
+- [Brainspotting Therapy](https://fullbloomcounseling.com/services/brainspotting-therapy/): brain-body trauma processing with a certified practitioner
+- [Safe and Sound Protocol (SSP)](https://fullbloomcounseling.com/services/safe-and-sound/): nervous system regulation through listening therapy
+- [Disordered Eating & Body Image](https://fullbloomcounseling.com/services/disordered-eating/): weight-inclusive support for disordered eating and body image
+- [Health at Every Size (HAES)](https://fullbloomcounseling.com/services/health-at-every-size/): intuitive eating and body liberation counseling
+- [Enneagram Therapy](https://fullbloomcounseling.com/services/enneagram-therapy/): Narrative Enneagram work with certified teachers
+- [Grief & Loss Therapy](https://fullbloomcounseling.com/services/grief-loss-therapy/): support for grief that needs more than time
+- [Pre-Marital Counseling](https://fullbloomcounseling.com/services/pre-marital/): Gottman-informed preparation for couples
+- [Postpartum & Perinatal Therapy](https://fullbloomcounseling.com/services/postpartum-perinatal-therapy/): perinatal mood, anxiety, and adjustment support
+- [Therapy for Women](https://fullbloomcounseling.com/services/therapy-for-women-denver/): therapy addressing anxiety, identity, and life transitions
+- [Therapy for Men](https://fullbloomcounseling.com/services/therapy-for-men-denver/): therapy designed for how men actually engage
+- [Therapy for Young Adults](https://fullbloomcounseling.com/services/therapy-young-adults-denver/): support through the challenges of your 20s
+- [ADHD & Neurodivergent Therapy](https://fullbloomcounseling.com/services/adhd-neurodivergent-therapy-denver/): executive function and neurodivergent-affirming care
+- [Online Therapy (Colorado)](https://fullbloomcounseling.com/services/online-therapy-colorado/): telehealth therapy throughout Colorado
+- [Clinical Supervision](https://fullbloomcounseling.com/services/clinical-supervision/): LPC and LMFT supervision hours, AAMFT Approved
 
 ## Team
-- Rebecca Moravec, LPC, LMFT — Founder, AAMFT Approved Supervisor, Certified Narrative Enneagram Practitioner: /team/rebecca-moravec/
-- Natalie Siegel, LPC — Intuitive Eating, body image, anxiety: /team/natalie-siegel/
-- Mark Whitney, LPC, ACS — Trauma, relationships, supervision: /team/mark-whitney/
-- Jillian Corpora, LPC — Anxiety, life transitions, young adults: /team/jillian-corpora/
-- Kirsten Adorno, LPCC — Trauma, grief, culturally responsive care: /team/kirsten-adorno/
-- Kelsey Bennett, LPC — EMDR, SSP, trauma, anxiety: /team/kelsey-bennett/
-- Kelli Ruhl, LPC, CBP — Brainspotting (certified), trauma: /team/kelli-ruhl/
-- Myldha Verdelus, LPCC — Multicultural, relationships, identity: /team/myldha-verdelus/
 
-## Blog Posts
-- The Power of Pausing: Why Slowing Down Can Help You Heal: /blog/the-power-of-pausing/
-- What Happens in Your First Therapy Session: /blog/what-happens-in-your-first-therapy-session/
-- Therapy for Men in Denver: /blog/therapy-for-men-denver/
-- Anti-Diet Therapy & Body Trust: /blog/anti-diet-therapy-body-trust/
-- EMDR Therapy — What to Expect: /blog/emdr-therapy-what-to-expect/
-- What Is Complex PTSD: /blog/what-is-complex-ptsd-denver/
-- Brainspotting Therapy Denver: /blog/brainspotting-therapy-denver/
-- Couples Therapy Denver — Gottman Method: /blog/couples-therapy-denver-gottman-method/
-- Enneagram Therapy Denver: /blog/enneagram-therapy-denver/
-- Enneagram & Relationships: /blog/enneagram-relationships-communication-denver/
-- Intuitive Eating Beginner's Guide: /blog/intuitive-eating-beginners-guide-denver/
-- Narrative Therapy for Couples & Families: /blog/narrative-therapy-couples-families-denver/
-- Safe Sound Protocol Denver: /blog/safe-sound-protocol-denver/
-- The Unspoken Truth About Starting Therapy: /blog/the-unspoken-truth-about-starting-therapy/
-- Therapy for Growth Denver: /blog/therapy-for-growth-denver/
-- Therapy for Parents, Young Adults & Postpartum: /blog/therapy-parents-young-adults-postpartum-colorado/
-- Feeling Stuck in Life — Therapy Denver: /blog/feeling-stuck-in-life-therapy-denver/
-- Culturally Responsive Therapy Denver: /blog/culturally-responsive-therapy-denver/
-- How to Know If You're Ready for EMDR: /blog/how-to-know-if-youre-ready-for-emdr/
-- Somatic Therapy Denver — Why Healing Happens in the Body: /blog/somatic-therapy-denver/
-- Life Transitions Therapy Denver: /blog/life-transitions-therapy-denver/
-- Attachment Styles and Therapy Denver: /blog/attachment-styles-therapy-denver/
-- Teen Therapy in Denver — What Young People Actually Need: /blog/teen-therapy-denver/
-- Depression Therapy Denver — What It Actually Looks Like: /blog/depression-therapy-denver/
+- [Rebecca Moravec, LPC, LMFT](https://fullbloomcounseling.com/team/rebecca-moravec/): Founder, AAMFT Approved Supervisor, Certified Narrative Enneagram Practitioner; trauma, couples, Enneagram, Intuitive Eating
+- [Natalie Siegel, LPC](https://fullbloomcounseling.com/team/natalie-siegel/): Intuitive Eating, body image, anxiety, self-esteem
+- [Mark Whitney, LPC, ACS](https://fullbloomcounseling.com/team/mark-whitney/): trauma, relationships, Enneagram, clinical supervision
+- [Jillian Corpora, LPC](https://fullbloomcounseling.com/team/jillian-corpora/): anxiety, depression, grief, life transitions, young adults
+- [Kirsten Adorno, LPCC](https://fullbloomcounseling.com/team/kirsten-adorno/): trauma, grief, culturally responsive and attachment-based care
+- [Kelsey Bennett, LPC](https://fullbloomcounseling.com/team/kelsey-bennett/): EMDR, SSP, trauma, anxiety, young adults
+- [Kelli Ruhl, LPC, CBP](https://fullbloomcounseling.com/team/kelli-ruhl/): certified Brainspotting, trauma, addiction recovery, somatic work
+- [Myldha Verdelus, LPCC](https://fullbloomcounseling.com/team/myldha-verdelus/): multicultural, relationships, identity, attachment-focused care
 
-- Anxiety Therapy in Denver: How to Find the Right Help: /blog/anxiety-therapy-denver/
-- Clinical Supervision in Denver: What to Look for as a New Therapist: /blog/clinical-supervision-denver/
-- Couples Therapy in Denver: What It Is, How It Works, and When to Go: /blog/couples-therapy-denver/
-- Grief Therapy in Denver: When Grief Needs More Than Time: /blog/grief-therapy-denver/
-- Postpartum Therapy in Denver: You Don't Have to Do This Alone: /blog/postpartum-therapy-denver/
-- Premarital Counseling in Denver: Why Do It Before You Need It: /blog/premarital-counseling-denver/
-- Trauma Therapy in Denver: What It Is and What to Expect: /blog/trauma-therapy-denver/
-- Therapy for Men in Denver: Why It's Different and Why It Works: /blog/therapy-for-men-why-its-different/
-- What Is Brainspotting Therapy? A Denver Therapist Explains: /blog/what-is-brainspotting-therapy-denver/
-- How to Find the Right Therapist in Denver (Without the Overwhelm): /blog/how-to-find-a-therapist-denver/
-- The Enneagram in Therapy: How Knowing Your Type Can Change Everything: /blog/enneagram-in-therapy-denver/
-- ADHD Therapy in Denver: When Executive Dysfunction Needs More Than a Planner: /blog/adhd-therapy-denver/
-- Intuitive Eating in Therapy: What It Means and Why It Works: /blog/intuitive-eating-therapy-denver/
+## Community Partnerships
+
+Full Bloom partners with the Colorado Children's Chorale, a premier Denver-based children's choral organization that tours nationally and internationally. Full Bloom embeds a licensed clinician on every Chorale tour, and Becca Moravec developed a custom mental health handbook for the demands of touring with young singers.
+
+- [Partnerships](https://fullbloomcounseling.com/partnerships/): community and organizational partnerships
+- [Colorado Children's Chorale](https://www.childrenschorale.org): partner choral organization
+
+## Blog
+
+- [How to Find the Right Therapist in Denver (Without the Overwhelm)](https://fullbloomcounseling.com/blog/how-to-find-a-therapist-denver/)
+- [Therapy for Men in Denver: Why It's Different and Why It Works](https://fullbloomcounseling.com/blog/therapy-for-men-why-its-different/)
+- [The Enneagram in Therapy: How Knowing Your Type Can Change Everything](https://fullbloomcounseling.com/blog/enneagram-in-therapy-denver/)
+- [ADHD Therapy in Denver: When Executive Dysfunction Needs More Than a Planner](https://fullbloomcounseling.com/blog/adhd-therapy-denver/)
+- [Intuitive Eating in Therapy: What It Means and Why It Works](https://fullbloomcounseling.com/blog/intuitive-eating-therapy-denver/)
+- [Anxiety Therapy in Denver: How to Find the Right Help](https://fullbloomcounseling.com/blog/anxiety-therapy-denver/)
+- [Trauma Therapy in Denver: What It Is and What to Expect](https://fullbloomcounseling.com/blog/trauma-therapy-denver/)
+- [Couples Therapy in Denver: What It Is, How It Works, and When to Go](https://fullbloomcounseling.com/blog/couples-therapy-denver/)
+- [Couples Therapy Denver — Gottman Method](https://fullbloomcounseling.com/blog/couples-therapy-denver-gottman-method/)
+- [Grief Therapy in Denver: When Grief Needs More Than Time](https://fullbloomcounseling.com/blog/grief-therapy-denver/)
+- [Postpartum Therapy in Denver: You Don't Have to Do This Alone](https://fullbloomcounseling.com/blog/postpartum-therapy-denver/)
+- [Premarital Counseling in Denver: Why Do It Before You Need It](https://fullbloomcounseling.com/blog/premarital-counseling-denver/)
+- [Clinical Supervision in Denver: What to Look for as a New Therapist](https://fullbloomcounseling.com/blog/clinical-supervision-denver/)
+- [What Is Brainspotting Therapy? A Denver Therapist Explains](https://fullbloomcounseling.com/blog/what-is-brainspotting-therapy-denver/)
+- [Brainspotting Therapy Denver: What It Is and What to Expect](https://fullbloomcounseling.com/blog/brainspotting-therapy-denver/)
+- [EMDR Therapy — What to Expect](https://fullbloomcounseling.com/blog/emdr-therapy-what-to-expect/)
+- [How to Know If You're Ready for EMDR](https://fullbloomcounseling.com/blog/how-to-know-if-youre-ready-for-emdr/)
+- [What Is Complex PTSD](https://fullbloomcounseling.com/blog/what-is-complex-ptsd-denver/)
+- [Somatic Therapy Denver: Why Healing Happens in the Body](https://fullbloomcounseling.com/blog/somatic-therapy-denver/)
+- [Enneagram Therapy Denver](https://fullbloomcounseling.com/blog/enneagram-therapy-denver/)
+- [The Enneagram & Relationships](https://fullbloomcounseling.com/blog/enneagram-relationships-communication-denver/)
+- [Narrative Therapy for Couples & Families](https://fullbloomcounseling.com/blog/narrative-therapy-couples-families-denver/)
+- [Intuitive Eating: A Beginner's Guide](https://fullbloomcounseling.com/blog/intuitive-eating-beginners-guide-denver/)
+- [Anti-Diet Therapy & Body Trust](https://fullbloomcounseling.com/blog/anti-diet-therapy-body-trust/)
+- [Culturally Responsive Therapy Denver](https://fullbloomcounseling.com/blog/culturally-responsive-therapy-denver/)
+- [Attachment Styles and Therapy](https://fullbloomcounseling.com/blog/attachment-styles-therapy-denver/)
+- [Life Transitions Therapy Denver](https://fullbloomcounseling.com/blog/life-transitions-therapy-denver/)
+- [Feeling Stuck in Life — Therapy Denver](https://fullbloomcounseling.com/blog/feeling-stuck-in-life-therapy-denver/)
+- [Therapy for Growth Denver](https://fullbloomcounseling.com/blog/therapy-for-growth-denver/)
+- [Therapy for Parents, Young Adults & Postpartum](https://fullbloomcounseling.com/blog/therapy-parents-young-adults-postpartum-colorado/)
+- [Teen Therapy in Denver: What Young People Actually Need](https://fullbloomcounseling.com/blog/teen-therapy-denver/)
+- [Depression Therapy Denver: What It Actually Looks Like](https://fullbloomcounseling.com/blog/depression-therapy-denver/)
+- [Safe Sound Protocol Denver](https://fullbloomcounseling.com/blog/safe-sound-protocol-denver/)
+- [What Happens in Your First Therapy Session](https://fullbloomcounseling.com/blog/what-happens-in-your-first-therapy-session/)
+- [The Unspoken Truth About Starting Therapy](https://fullbloomcounseling.com/blog/the-unspoken-truth-about-starting-therapy/)
+- [The Power of Pausing: Why Slowing Down Can Help You Heal](https://fullbloomcounseling.com/blog/the-power-of-pausing/)
+- [Therapy for Men in Denver (overview)](https://fullbloomcounseling.com/blog/therapy-for-men-denver/)
 
 ## Contact
-Address: 1780 S Bellaire St #485, Denver, CO 80222
-Phone: 720-767-9808
-Email: info@fullbloomcounseling.com
-Hours: Monday–Sunday 8am–7pm
-Client Portal: https://rebecca-moravec.clientsecure.me/
 
-## Approach
-Weight-inclusive, anti-diet, trauma-informed, LGBTQ+ affirming, HAES-aligned.
-Modalities: EMDR, Brainspotting, SSP, Narrative Therapy, Gottman Method, ACT, CBT, IFS.
-Insurance: Out of network. Superbills provided. Sliding scale available.
+- Address: 1780 S Bellaire St #485, Denver, CO 80222
+- Phone: 720-767-9808
+- Email: info@fullbloomcounseling.com
+- Hours: Monday–Sunday, 8am–7pm
+- [Client Portal](https://rebecca-moravec.clientsecure.me/): existing client login
+- [Schedule a Free Consultation](https://fullbloomcounseling.com/contact/): free 15-minute consultation
