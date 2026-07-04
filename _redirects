@@ -99,3 +99,14 @@ https://www.fullbloomcounseling.com/* https://fullbloomcounseling.com/:splat 301
 
 # ── Catch-all for anything still not matched ─────────────────────────────────
 # (Netlify falls through to 404.html automatically if no rule matches)
+
+# ── ADDED 2026-07-04: legacy URLs still indexed in Google (confirmed live 404s / duplicates) ──
+/enneagram-denver/                /services/enneagram-therapy/   301
+/rebecca-moravec-lpc-lmft/        /team/rebecca-moravec/         301
+/therapy-in-denver/               /services/                     301
+/contact-full-bloom-counseling/   /contact/                      301
+/full-bloom-counseling-blog/      /blog/                         301
+
+# Old WordPress dated blog permalinks under /blog/ (the existing root-level
+# /:year/:month/:day/:slug/ rule does NOT catch these)
+/blog/:year/:month/:day/:slug/    /blog/:slug/                   301
