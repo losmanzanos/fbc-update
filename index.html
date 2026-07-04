@@ -21,7 +21,7 @@
 <link rel="preload" href="fonts/cormorant-garamond-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/dm-sans-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/dm-sans-500-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="images/hero-home-flowers-bouquet.jpg" as="image" fetchpriority="high">
+<link rel="preload" href="images/hero-home-flowers-bouquet.webp" as="image" fetchpriority="high">
 <script>
 (function(){
   /* Hero height: lock to pixel value at first paint, NEVER update after.
@@ -352,11 +352,11 @@
 <main id="main">
 
 <section class="hero">
-  <img src="images/hero-home-flowers-bouquet.jpg" alt="Person holding a lush spring bouquet — Full Bloom Counseling Denver therapists for anxiety, trauma, and healing" class="hero-img" loading="eager" fetchpriority="high" decoding="async" width="2000" height="1125">
+  <picture><source srcset="images/hero-home-flowers-bouquet.webp" type="image/webp"><img src="images/hero-home-flowers-bouquet.jpg" alt="Person holding a lush spring bouquet — Full Bloom Counseling Denver therapists for anxiety, trauma, and healing" class="hero-img" loading="eager" fetchpriority="high" decoding="async" width="2000" height="1125"></picture>
   <div class="hero-overlay" aria-hidden="true"></div>
   <div class="hero-content">
     <span class="hero-tag">Find Healing &nbsp;&#8226;&nbsp; Feel Joy &nbsp;&#8226;&nbsp; Love Fully<span class="hero-tag-br" aria-hidden="true"></span> &nbsp;&#8226;&nbsp; Live Authentically &nbsp;&#8226;&nbsp; Discover Who You Are!</span>
-    <h1>You&#8217;re Ready<br><em>to Bloom!</em></h1>
+    <h1>You&#8217;re Ready<br><em>to Bloom!</em><span style="display:block;font-family:var(--font-sans,'DM Sans',sans-serif);font-size:clamp(.7rem,1.5vw,.9rem);font-style:normal;font-weight:500;letter-spacing:.24em;text-transform:uppercase;margin-top:20px;opacity:.92;">Therapy in Denver &amp; Online Across Colorado</span></h1>
     <a href="contact/" class="btn btn-petal">Find Your Therapist</a>
   </div>
 </section>
@@ -424,7 +424,7 @@
       <p>Finding the right therapist matters. Our team brings diverse expertise united by a commitment to inclusive, affirming, compassionate care.</p>
     </div>
     <div class="grid-4"><div class="team-card fade-in">
-  <img src="images/team/rebecca-square.jpg" alt="Becca Moravec, LPC LMFT — Founder and Senior Clinician at Full Bloom Counseling Denver" class="team-photo" width="120" height="120" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+  <picture><source srcset="images/team/rebecca-square.webp" type="image/webp"><img src="images/team/rebecca-square.jpg" alt="Becca Moravec, LPC LMFT — Founder and Senior Clinician at Full Bloom Counseling Denver" class="team-photo" width="120" height="120" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></picture>
   <div class="team-photo-placeholder" aria-hidden="true">RM</div>
   <h3>Becca Moravec</h3>
   <div class="title">Founder &amp; Senior Clinician</div>
@@ -433,7 +433,7 @@
   <a href="team/rebecca-moravec/" class="btn btn-outline" style="padding:9px 20px;font-size:.7rem;">Meet Becca</a>
 </div>
 <div class="team-card fade-in">
-  <img src="images/team/natalie-square.jpg" alt="Natalie Siegel, LPC — Intuitive Eating therapist at Full Bloom Counseling Denver" class="team-photo" width="120" height="120" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+  <picture><source srcset="images/team/natalie-square.webp" type="image/webp"><img src="images/team/natalie-square.jpg" alt="Natalie Siegel, LPC — Intuitive Eating therapist at Full Bloom Counseling Denver" class="team-photo" width="120" height="120" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></picture>
   <div class="team-photo-placeholder" aria-hidden="true">NS</div>
   <h3>Natalie Siegel</h3>
   <div class="title">Clinical Associate</div>
@@ -442,7 +442,7 @@
   <a href="team/natalie-siegel/" class="btn btn-outline" style="padding:9px 20px;font-size:.7rem;">Meet Natalie</a>
 </div>
 <div class="team-card fade-in">
-  <img src="images/team/mark-square.jpg" alt="Mark Whitney, LPC — Senior Clinical Associate at Full Bloom Counseling Denver" class="team-photo" width="120" height="120" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+  <picture><source srcset="images/team/mark-square.webp" type="image/webp"><img src="images/team/mark-square.jpg" alt="Mark Whitney, LPC — Senior Clinical Associate at Full Bloom Counseling Denver" class="team-photo" width="120" height="120" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></picture>
   <div class="team-photo-placeholder" aria-hidden="true">MW</div>
   <h3>Mark Whitney</h3>
   <div class="title">Senior Clinical Associate</div>
@@ -451,7 +451,7 @@
   <a href="team/mark-whitney/" class="btn btn-outline" style="padding:9px 20px;font-size:.7rem;">Meet Mark</a>
 </div>
 <div class="team-card fade-in">
-  <img src="images/team/jillian-square.jpg" alt="Jillian Corpora, LPC — Therapist at Full Bloom Counseling Denver" class="team-photo" width="120" height="120" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+  <picture><source srcset="images/team/jillian-square.webp" type="image/webp"><img src="images/team/jillian-square.jpg" alt="Jillian Corpora, LPC — Therapist at Full Bloom Counseling Denver" class="team-photo" width="120" height="120" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></picture>
   <div class="team-photo-placeholder" aria-hidden="true">JC</div>
   <h3>Jillian Corpora</h3>
   <div class="title">Clinical Associate</div>
@@ -460,7 +460,7 @@
   <a href="team/jillian-corpora/" class="btn btn-outline" style="padding:9px 20px;font-size:.7rem;">Meet Jillian</a>
 </div>
 <div class="team-card fade-in">
-  <img src="images/team/kirsten-square.jpg" alt="Kirsten Adorno, LPC MFTC — Couples therapist at Full Bloom Counseling Denver" class="team-photo" width="120" height="120" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+  <picture><source srcset="images/team/kirsten-square.webp" type="image/webp"><img src="images/team/kirsten-square.jpg" alt="Kirsten Adorno, LPC MFTC — Couples therapist at Full Bloom Counseling Denver" class="team-photo" width="120" height="120" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></picture>
   <div class="team-photo-placeholder" aria-hidden="true">KA</div>
   <h3>Kirsten Adorno</h3>
   <div class="title">Clinical Associate</div>
@@ -469,7 +469,7 @@
   <a href="team/kirsten-adorno/" class="btn btn-outline" style="padding:9px 20px;font-size:.7rem;">Meet Kirsten</a>
 </div>
 <div class="team-card fade-in">
-  <img src="images/team/kelsey-square.jpg" alt="Kelsey Bennett, LPC — EMDR and SSP therapist at Full Bloom Counseling" class="team-photo" width="120" height="120" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+  <picture><source srcset="images/team/kelsey-square.webp" type="image/webp"><img src="images/team/kelsey-square.jpg" alt="Kelsey Bennett, LPC — EMDR and SSP therapist at Full Bloom Counseling" class="team-photo" width="120" height="120" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></picture>
   <div class="team-photo-placeholder" aria-hidden="true">KB</div>
   <h3>Kelsey Bennett</h3>
   <div class="title">Clinical Associate</div>
@@ -478,7 +478,7 @@
   <a href="team/kelsey-bennett/" class="btn btn-outline" style="padding:9px 20px;font-size:.7rem;">Meet Kelsey</a>
 </div>
 <div class="team-card fade-in">
-  <img src="images/team/kelli-square.jpg" alt="Kelli Ruhl, LPC — Trauma and Brainspotting therapist at Full Bloom Counseling Denver" class="team-photo" width="120" height="120" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+  <picture><source srcset="images/team/kelli-square.webp" type="image/webp"><img src="images/team/kelli-square.jpg" alt="Kelli Ruhl, LPC — Trauma and Brainspotting therapist at Full Bloom Counseling Denver" class="team-photo" width="120" height="120" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></picture>
   <div class="team-photo-placeholder" aria-hidden="true">KR</div>
   <h3>Kelli Ruhl</h3>
   <div class="title">Clinical Associate</div>
@@ -487,7 +487,7 @@
   <a href="team/kelli-ruhl/" class="btn btn-outline" style="padding:9px 20px;font-size:.7rem;">Meet Kelli</a>
 </div>
 <div class="team-card fade-in">
-  <img src="images/team/myldha-square.jpg" alt="Myldha Verdelus, LPCC — Therapist at Full Bloom Counseling Denver" class="team-photo" width="120" height="120" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+  <picture><source srcset="images/team/myldha-square.webp" type="image/webp"><img src="images/team/myldha-square.jpg" alt="Myldha Verdelus, LPCC — Therapist at Full Bloom Counseling Denver" class="team-photo" width="120" height="120" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></picture>
   <div class="team-photo-placeholder" aria-hidden="true">MV</div>
   <h3>Myldha Verdelus</h3>
   <div class="title">Clinical Associate</div>
@@ -503,7 +503,7 @@
   <div class="container">
     <div class="grid-2" style="gap:56px;">
       <div style="position:relative;border-radius:4px;overflow:hidden;box-shadow:var(--shadow-lg);">
-        <img src="images/hero-team.jpg" alt="The Full Bloom Counseling team of licensed therapists — Denver and Boulder Colorado" width="640" height="480" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;">
+        <picture><source srcset="images/hero-team.webp" type="image/webp"><img src="images/hero-team.jpg" alt="The Full Bloom Counseling team of licensed therapists — Denver and Boulder Colorado" width="640" height="480" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;"></picture>
         <div style="position:absolute;bottom:0;left:0;right:0;padding:20px 24px;background:linear-gradient(to top,rgba(28,20,12,.85) 0%,transparent 100%);">
           <span style="font-family:var(--font-serif);font-style:italic;font-size:.85rem;color:rgba(248,244,238,.9);opacity:0;" aria-hidden="true">Your Denver Therapy Team</span>
         </div>
@@ -528,6 +528,33 @@
           </div>
         </div>
         <a href="about/" class="btn btn-primary" style="display:inline-flex;align-items:center;justify-content:center;width:auto;">Our Story &amp; Team</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section band-white" id="reviews">
+  <div class="container">
+    <div class="text-center mb-48">
+      <span class="eyebrow">Kind Words</span>
+      <h2>What People Say About Full Bloom</h2>
+      <p><a href="https://www.google.com/maps/place/Full+Bloom+Counseling/@39.6846272,-104.937044,17z/data=!4m8!3m7!1s0x876c791134bd8d37:0x893a09fa860705dc!8m2!3d39.6846272!4d-104.937044!9m1!1b1!16s%2Fg%2F11jqxknlvp" target="_blank" rel="noopener noreferrer" style="color:var(--petal-dark);font-weight:500;text-decoration:none;">Rated 5.0 from 18 Google reviews &#8594;</a></p>
+    </div>
+    <div class="grid-3">
+      <div class="fade-in" style="background:var(--white);border:1px solid var(--border);border-radius:4px;padding:36px 32px;display:flex;flex-direction:column;gap:18px;">
+        <span aria-label="5 out of 5 stars" style="color:#E8A33D;font-size:.95rem;letter-spacing:.18em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p style="font-family:var(--font-serif);font-style:italic;font-size:1.02rem;line-height:1.65;color:var(--bark);">&#8220;Incredible practice with such capable, kind, trustworthy clinicians. Working with anyone here is a gift in a world where it&#8217;s hard to find a good therapist. 10/10 recommend!&#8221;</p>
+        <span style="font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bark-mid);font-weight:600;">&#8212; Sarah B., Google review</span>
+      </div>
+      <div class="fade-in" style="background:var(--white);border:1px solid var(--border);border-radius:4px;padding:36px 32px;display:flex;flex-direction:column;gap:18px;">
+        <span aria-label="5 out of 5 stars" style="color:#E8A33D;font-size:.95rem;letter-spacing:.18em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p style="font-family:var(--font-serif);font-style:italic;font-size:1.02rem;line-height:1.65;color:var(--bark);">&#8220;Would highly recommend Becca Moravec to anyone that I care deeply about. She is an experienced and skilled clinician and has assembled a fantastic team of counselors.&#8221;</p>
+        <span style="font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bark-mid);font-weight:600;">&#8212; Briana S., Google review</span>
+      </div>
+      <div class="fade-in" style="background:var(--white);border:1px solid var(--border);border-radius:4px;padding:36px 32px;display:flex;flex-direction:column;gap:18px;">
+        <span aria-label="5 out of 5 stars" style="color:#E8A33D;font-size:.95rem;letter-spacing:.18em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p style="font-family:var(--font-serif);font-style:italic;font-size:1.02rem;line-height:1.65;color:var(--bark);">&#8220;The warmth and care that Rebecca has for her clients is heartening. I recommend Full Bloom Counseling for any age.&#8221;</p>
+        <span style="font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bark-mid);font-weight:600;">&#8212; Cathleen H., Google review</span>
       </div>
     </div>
   </div>
