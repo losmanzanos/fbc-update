@@ -16,16 +16,33 @@
 <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicons/favicon-16x16.png?v=4">
 <link rel="apple-touch-icon" sizes="180x180" href="../../images/favicons/apple-touch-icon.png?v=4">
 <link rel="icon" type="image/png" sizes="192x192" href="../../images/favicons/favicon-192.png?v=4">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
 <script>
 (function(){
-  function setH(){document.documentElement.style.setProperty('--hero-h',window.innerHeight+'px');}
-  setH();
-  window.addEventListener('resize',function(){setTimeout(setH,100);});
-  window.addEventListener('orientationchange',function(){setTimeout(setH,300);});
-  window.addEventListener('load',setH);
+  /* HERO HEIGHT LOCK — pixel height that updates ONLY on width change
+     (rotation) or one-shot post-load corrections. Height-only resizes
+     (address-bar collapse) are ignored: no grow-on-scroll. */
+  if (window.innerWidth <= 1024) {
+    var lastW = window.innerWidth;
+    var setH = function(){
+      var vh = (window.visualViewport && window.visualViewport.height)
+        ? Math.round(window.visualViewport.height) : window.innerHeight;
+      document.documentElement.style.setProperty('--hero-h', vh + 'px');
+    };
+    setH();
+    setTimeout(setH, 300);
+    window.addEventListener('pageshow', function(){ setH(); });
+    window.addEventListener('resize', function(){
+      if (Math.abs(window.innerWidth - lastW) > 1) {
+        lastW = window.innerWidth;
+        setH();
+        setTimeout(setH, 250);
+      }
+    });
+  }
 })();
 </script>
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
   <title>What Keeps Men Out of Therapy — and What Helps</title>
   <meta name="description" content="Men wait longer to seek therapy and less often come at all. A Denver therapist on what actually holds men back — and why it's worth pushing through.">
   <meta name="robots" content="index,follow">
@@ -280,7 +297,7 @@
         <p>They're men dealing with the particular loneliness of male friendship cultures, where connection happens through activity rather than disclosure. Men navigating fatherhood and trying not to repeat patterns they swore they wouldn't. Men who've outgrown versions of themselves and aren't sure what comes next. Men whose anxiety or anger is showing up in ways that are starting to cost them things that matter.</p>
         <p>If any of this resonates — regardless of whether you'd call yourself someone who "does therapy" — <a href="../../contact/" style="color:var(--petal-dark);">a free consultation is a low-stakes first step</a>. No commitment, no predefined expectations of what the conversation has to look like.</p>
         <div class="author-box">
-          <picture><source srcset="../../images/team/mark-square.webp" type="image/webp"><img src="../../images/team/mark-square.jpg" alt="Mark Whitney, LPC, ACS — Full Bloom Counseling Denver" class="author-photo" width="72" height="72" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></picture>
+          <picture><source srcset="../../images/team/mark-square.webp" type="image/webp"><img src="../../images/team/mark-square.jpg" alt="Mark Whitney, LPC, ACS — Full Bloom Counseling Denver" class="author-photo" width="88" height="88" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></picture>
           <div class="author-placeholder" aria-hidden="true" style="display:none;">MW</div>
           <div class="author-info">
             <span style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--bark-mid);">Written by</span>

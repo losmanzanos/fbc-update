@@ -16,16 +16,33 @@
 <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicons/favicon-16x16.png?v=4">
 <link rel="apple-touch-icon" sizes="180x180" href="../../images/favicons/apple-touch-icon.png?v=4">
 <link rel="icon" type="image/png" sizes="192x192" href="../../images/favicons/favicon-192.png?v=4">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
 <script>
 (function(){
-  function setH(){document.documentElement.style.setProperty('--hero-h',window.innerHeight+'px');}
-  setH();
-  window.addEventListener('resize',function(){setTimeout(setH,100);});
-  window.addEventListener('orientationchange',function(){setTimeout(setH,300);});
-  window.addEventListener('load',setH);
+  /* HERO HEIGHT LOCK — pixel height that updates ONLY on width change
+     (rotation) or one-shot post-load corrections. Height-only resizes
+     (address-bar collapse) are ignored: no grow-on-scroll. */
+  if (window.innerWidth <= 1024) {
+    var lastW = window.innerWidth;
+    var setH = function(){
+      var vh = (window.visualViewport && window.visualViewport.height)
+        ? Math.round(window.visualViewport.height) : window.innerHeight;
+      document.documentElement.style.setProperty('--hero-h', vh + 'px');
+    };
+    setH();
+    setTimeout(setH, 300);
+    window.addEventListener('pageshow', function(){ setH(); });
+    window.addEventListener('resize', function(){
+      if (Math.abs(window.innerWidth - lastW) > 1) {
+        lastW = window.innerWidth;
+        setH();
+        setTimeout(setH, 250);
+      }
+    });
+  }
 })();
 </script>
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
   <title>Gottman Method Denver | Why HOW You Fight Matters</title>
   <meta name="description" content="The Four Horsemen, bids for connection, and repair attempts — a Gottman-trained Denver therapist explains what the research actually says.">
   <meta name="robots" content="index,follow">
@@ -286,7 +303,7 @@
         <p>Couples typically wait an average of six years after significant problems develop before seeking help — and by then, negative patterns are deeply entrenched. Research consistently shows earlier intervention leads to better outcomes.</p>
         <p>Couples therapy isn't only for relationships in crisis. It's also genuinely valuable for couples who are doing fine and want to build stronger habits, couples preparing for marriage, and couples navigating major life transitions. If you're in the Denver area and curious about couples therapy, <a href="../../contact/" style="color:var(--petal-dark);">schedule a free consultation</a>.</p>
         <div class="author-box">
-          <picture><source srcset="../../images/team/kelsey-square.webp" type="image/webp"><img src="../../images/team/kelsey-square.jpg" alt="Kelsey Bennett, LPC — Full Bloom Counseling Denver" class="author-photo" width="72" height="72" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></picture>
+          <picture><source srcset="../../images/team/kelsey-square.webp" type="image/webp"><img src="../../images/team/kelsey-square.jpg" alt="Kelsey Bennett, LPC — Full Bloom Counseling Denver" class="author-photo" width="88" height="88" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></picture>
           <div class="author-placeholder" aria-hidden="true" style="display:none;">KB</div>
           <div class="author-info">
             <span style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--bark-mid);">Written by</span>

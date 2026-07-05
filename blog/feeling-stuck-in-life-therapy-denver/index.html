@@ -16,16 +16,33 @@
 <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicons/favicon-16x16.png?v=4">
 <link rel="apple-touch-icon" sizes="180x180" href="../../images/favicons/apple-touch-icon.png?v=4">
 <link rel="icon" type="image/png" sizes="192x192" href="../../images/favicons/favicon-192.png?v=4">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
 <script>
 (function(){
-  function setH(){document.documentElement.style.setProperty('--hero-h',window.innerHeight+'px');}
-  setH();
-  window.addEventListener('resize',function(){setTimeout(setH,100);});
-  window.addEventListener('orientationchange',function(){setTimeout(setH,300);});
-  window.addEventListener('load',setH);
+  /* HERO HEIGHT LOCK — pixel height that updates ONLY on width change
+     (rotation) or one-shot post-load corrections. Height-only resizes
+     (address-bar collapse) are ignored: no grow-on-scroll. */
+  if (window.innerWidth <= 1024) {
+    var lastW = window.innerWidth;
+    var setH = function(){
+      var vh = (window.visualViewport && window.visualViewport.height)
+        ? Math.round(window.visualViewport.height) : window.innerHeight;
+      document.documentElement.style.setProperty('--hero-h', vh + 'px');
+    };
+    setH();
+    setTimeout(setH, 300);
+    window.addEventListener('pageshow', function(){ setH(); });
+    window.addEventListener('resize', function(){
+      if (Math.abs(window.innerWidth - lastW) > 1) {
+        lastW = window.innerWidth;
+        setH();
+        setTimeout(setH, 250);
+      }
+    });
+  }
 })();
 </script>
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
   <title>Feeling Stuck in Life? Denver Therapist Can Help</title>
   <meta name="description" content="That vague sense that something's off but you can't name it — a Denver therapist on the suffering that has no obvious label, and what helps.">
   <meta name="robots" content="index,follow">
@@ -283,7 +300,7 @@
         <p>This kind of work often involves slowing down enough to notice things you've been too busy to pay attention to. It might involve exploring the gap between who you are and who you think you're supposed to be. It might involve grief — for versions of your life you didn't choose, or versions of yourself you left behind somewhere.</p>
         <p>Many of the people we work with at Full Bloom Counseling don't arrive looking for symptom relief. They arrive looking for meaning, clarity, and a sense of actually inhabiting their own life. If that sounds like you, <a href="../../contact/" style="color:var(--petal-dark);">reach out for a free consultation</a>. There's no commitment, and no requirement that your situation meet some threshold of difficulty.</p>
         <div class="author-box">
-          <picture><source srcset="../../images/team/rebecca-square.webp" type="image/webp"><img src="../../images/team/rebecca-square.jpg" alt="Becca Moravec, LPC, LMFT, AAMFT Approved Supervisor — Full Bloom Counseling Denver" class="author-photo" width="72" height="72" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></picture>
+          <picture><source srcset="../../images/team/rebecca-square.webp" type="image/webp"><img src="../../images/team/rebecca-square.jpg" alt="Becca Moravec, LPC, LMFT, AAMFT Approved Supervisor — Full Bloom Counseling Denver" class="author-photo" width="88" height="88" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></picture>
           <div class="author-placeholder" aria-hidden="true" style="display:none;">BM</div>
           <div class="author-info">
             <span style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--bark-mid);">Written by</span>

@@ -16,16 +16,33 @@
 <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicons/favicon-16x16.png?v=4">
 <link rel="apple-touch-icon" sizes="180x180" href="../../images/favicons/apple-touch-icon.png?v=4">
 <link rel="icon" type="image/png" sizes="192x192" href="../../images/favicons/favicon-192.png?v=4">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
 <script>
 (function(){
-  function setH(){document.documentElement.style.setProperty('--hero-h',window.innerHeight+'px');}
-  setH();
-  window.addEventListener('resize',function(){setTimeout(setH,100);});
-  window.addEventListener('orientationchange',function(){setTimeout(setH,300);});
-  window.addEventListener('load',setH);
+  /* HERO HEIGHT LOCK — pixel height that updates ONLY on width change
+     (rotation) or one-shot post-load corrections. Height-only resizes
+     (address-bar collapse) are ignored: no grow-on-scroll. */
+  if (window.innerWidth <= 1024) {
+    var lastW = window.innerWidth;
+    var setH = function(){
+      var vh = (window.visualViewport && window.visualViewport.height)
+        ? Math.round(window.visualViewport.height) : window.innerHeight;
+      document.documentElement.style.setProperty('--hero-h', vh + 'px');
+    };
+    setH();
+    setTimeout(setH, 300);
+    window.addEventListener('pageshow', function(){ setH(); });
+    window.addEventListener('resize', function(){
+      if (Math.abs(window.innerWidth - lastW) > 1) {
+        lastW = window.innerWidth;
+        setH();
+        setTimeout(setH, 250);
+      }
+    });
+  }
 })();
 </script>
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
   <title>When Grief Needs More Than Time: How Therapy Helps</title>
   <meta name="description" content="Grief doesn't follow a timeline — and sometimes it needs more than patience. A Denver therapist on what grief therapy actually addresses."/>
   <meta name="robots" content="index,follow">
@@ -291,7 +308,7 @@
 <p>Grief doesn&#8217;t require a crisis to justify seeking support. If you&#8217;re carrying something heavy and tired of carrying it alone, that&#8217;s enough. <a href="../../contact/">Schedule a free consultation</a> or <a href="../../services/grief-loss-therapy/">learn more about grief and loss therapy at Full Bloom.</a></p>
 
         <div class="author-box">
-          <picture><source srcset="../../images/team/rebecca-square.webp" type="image/webp"><img src="../../images/team/rebecca-square.jpg" alt="Becca Moravec, LPC, LMFT, AAMFT Approved Supervisor &#8212; Full Bloom Counseling Denver" class="author-photo" width="72" height="72" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></picture>
+          <picture><source srcset="../../images/team/rebecca-square.webp" type="image/webp"><img src="../../images/team/rebecca-square.jpg" alt="Becca Moravec, LPC, LMFT, AAMFT Approved Supervisor &#8212; Full Bloom Counseling Denver" class="author-photo" width="88" height="88" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></picture>
           <div class="author-placeholder" aria-hidden="true" style="display:none;">BM</div>
           <div class="author-info">
             <span style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--bark-mid);">Written by</span>

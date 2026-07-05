@@ -16,16 +16,33 @@
 <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicons/favicon-16x16.png?v=4">
 <link rel="apple-touch-icon" sizes="180x180" href="../../images/favicons/apple-touch-icon.png?v=4">
 <link rel="icon" type="image/png" sizes="192x192" href="../../images/favicons/favicon-192.png?v=4">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
 <script>
 (function(){
-  function setH(){document.documentElement.style.setProperty('--hero-h',window.innerHeight+'px');}
-  setH();
-  window.addEventListener('resize',function(){setTimeout(setH,100);});
-  window.addEventListener('orientationchange',function(){setTimeout(setH,300);});
-  window.addEventListener('load',setH);
+  /* HERO HEIGHT LOCK — pixel height that updates ONLY on width change
+     (rotation) or one-shot post-load corrections. Height-only resizes
+     (address-bar collapse) are ignored: no grow-on-scroll. */
+  if (window.innerWidth <= 1024) {
+    var lastW = window.innerWidth;
+    var setH = function(){
+      var vh = (window.visualViewport && window.visualViewport.height)
+        ? Math.round(window.visualViewport.height) : window.innerHeight;
+      document.documentElement.style.setProperty('--hero-h', vh + 'px');
+    };
+    setH();
+    setTimeout(setH, 300);
+    window.addEventListener('pageshow', function(){ setH(); });
+    window.addEventListener('resize', function(){
+      if (Math.abs(window.innerWidth - lastW) > 1) {
+        lastW = window.innerWidth;
+        setH();
+        setTimeout(setH, 250);
+      }
+    });
+  }
 })();
 </script>
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
   <title>The Truth About Starting Therapy | Full Bloom Counseling</title>
   <meta name="description" content="Most people wait years before reaching out. A Denver therapist on the real reasons people hesitate — and what it's actually like when you go.">
   <meta name="robots" content="index,follow">
@@ -277,7 +294,7 @@
 <h2>What Makes It Worth It</h2>
 <p>Therapy changes small things first. The way you respond to a particular feeling. The story you tell yourself. The space between stimulus and response. Those small things compound. And over time, the life you&#8217;re living starts to feel more like yours. <a href="../../contact/" style="color:var(--petal-dark);">Schedule a free consultation</a> &#8212; no commitment, no pressure.</p>
         <div class="author-box">
-          <picture><source srcset="../../images/team/rebecca-square.webp" type="image/webp"><img src="../../images/team/rebecca-square.jpg" alt="Becca Moravec, LPC, LMFT, AAMFT Approved Supervisor — Full Bloom Counseling Denver" class="author-photo" width="72" height="72" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></picture>
+          <picture><source srcset="../../images/team/rebecca-square.webp" type="image/webp"><img src="../../images/team/rebecca-square.jpg" alt="Becca Moravec, LPC, LMFT, AAMFT Approved Supervisor — Full Bloom Counseling Denver" class="author-photo" width="88" height="88" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></picture>
           <div class="author-placeholder" aria-hidden="true" style="display:none;">BM</div>
           <div class="author-info">
             <span style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--bark-mid);">Written by</span>

@@ -1519,9 +1519,9 @@ h3 + .svc-pullquote { margin-top: 32px; }
 .post-body a:hover { color: var(--petal); text-decoration-color: var(--petal); }
 .post-sidebar { position: sticky; top: calc(var(--nav-h) + 32px); }
 
-.author-box { display: flex; gap: 18px; align-items: flex-start; padding: 32px; background: var(--cream); border: 1px solid var(--border); border-radius: 4px; margin-top: 52px; }
-.author-photo { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; object-position: top; border: 2px solid var(--border); flex-shrink: 0; }
-.author-placeholder { width: 72px; height: 72px; border-radius: 50%; background: var(--cream-alt); border: 2px solid var(--border); display: none; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 1.3rem; font-style: italic; color: var(--petal-dark); flex-shrink: 0; }
+.author-box { display: flex; gap: 32px; align-items: flex-start; padding: 32px; background: var(--cream); border: 1px solid var(--border); border-radius: 4px; margin-top: 52px; }
+.author-photo { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; object-position: top; border: 2px solid var(--border); flex-shrink: 0; }
+.author-placeholder { width: 88px; height: 88px; border-radius: 50%; background: var(--cream-alt); border: 2px solid var(--border); display: none; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 1.3rem; font-style: italic; color: var(--petal-dark); flex-shrink: 0; }
 .author-info h4 { font-size: 1rem; margin-bottom: 4px; }
 .author-info span { font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: var(--petal-dark); font-weight: 600; }
 .author-info p { font-size: .85rem; margin-top: 8px; }
@@ -1918,6 +1918,13 @@ h3 + .svc-benefit-grid {
   .hero h1 { font-size: clamp(2.1rem, 6vw, 3.6rem); margin-bottom: 20px; }
   .hero h1 span { margin-top: 16px !important; font-size: clamp(.78rem, 1.7vw, 1.05rem) !important; }
   .hero .btn { padding: 12px 30px; font-size: .88rem; }
+  /* Interior page heroes: fill the short landscape viewport completely
+     using the same pixel lock (no grow-on-scroll). */
+  .page-hero {
+    height: var(--hero-h, 100svh) !important;
+    max-height: none !important;
+    min-height: 0 !important;
+  }
 }
 
 /* ── Custom checkbox — cross-browser visible checkmark ─────────────── */
