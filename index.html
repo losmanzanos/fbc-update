@@ -37,6 +37,12 @@
       document.documentElement.style.setProperty('--hero-h', window.innerHeight + 'px');
     };
     setH();
+    /* One-shot corrections shortly after load: some mobile browsers
+       under-report innerHeight until toolbar layout settles, which left
+       the hero short on FIRST load (refresh looked fine). These fire once
+       near load — they are not scroll-driven, so no grow-on-scroll. */
+    setTimeout(setH, 300);
+    window.addEventListener('pageshow', function(){ setH(); });
     window.addEventListener('resize', function(){
       if (Math.abs(window.innerWidth - lastW) > 1) {
         lastW = window.innerWidth;
