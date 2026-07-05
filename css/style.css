@@ -994,13 +994,14 @@ body.menu-open {
 }
 
 @keyframes heroUp {
+  /* Transform-only: content is visible from first paint (LCP fires
+     immediately) and still glides up. The old opacity fade cost ~850ms
+     of LCP because the element doesn't count as painted until visible. */
   from {
-    opacity: 0;
     transform: translateY(28px);
   }
 
   to {
-    opacity: 1;
     transform: none;
   }
 }

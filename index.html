@@ -46,18 +46,7 @@
     });
   }
 
-  /* Unpause hero animation once fonts are ready — ensures heroUp plays with
-     Cormorant Garamond, not the fallback font. Safety net at 600ms so the
-     hero never stays hidden if FontFaceSet stalls. */
-  var heroUnpaused = false;
-  function unpauseHero() {
-    if (heroUnpaused) return;
-    heroUnpaused = true;
-    var hc = document.querySelector('.hero-content');
-    if (hc) hc.style.animationPlayState = 'running';
-  }
-  document.fonts.ready.then(unpauseHero);
-  setTimeout(unpauseHero, 600);
+
 })();
 </script>
   <title>Therapists in Denver Who Actually Get It | Full Bloom</title>
