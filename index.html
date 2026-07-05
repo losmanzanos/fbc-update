@@ -22,21 +22,21 @@
 <link rel="preload" href="fonts/dm-sans-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/dm-sans-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="images/hero-home-flowers-bouquet.webp" as="image" fetchpriority="high">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
 <script>
 (function(){
-  /* Hero height: lock to pixel value at first paint, NEVER update after.
-     This is the only bulletproof way to prevent iOS Safari from growing
-     the hero when the address bar collapses on scroll.
-     Listeners (resize, orientationchange, pageshow) intentionally omitted —
-     any update would cause the visible "grow" effect. */
+  /* HERO HEIGHT LOCK — single owner, runs AFTER the viewport meta so
+     innerWidth/innerHeight are the real visual viewport (pre-paint).
+     Locks a pixel height; updates ONLY on width change (= rotation).
+     Height-only resizes (iOS address-bar collapse) are ignored, so the
+     hero can never grow on scroll. No page reloads on rotation. */
   if (window.innerWidth <= 1024) {
     var lastW = window.innerWidth;
     var setH = function(){
       document.documentElement.style.setProperty('--hero-h', window.innerHeight + 'px');
     };
     setH();
-    /* Update ONLY when width changes (rotation) — never on height-only
-       resizes (address-bar collapse), which caused the grow-on-scroll. */
     window.addEventListener('resize', function(){
       if (Math.abs(window.innerWidth - lastW) > 1) {
         lastW = window.innerWidth;
@@ -45,15 +45,10 @@
       }
     });
   }
-  /* On orientation change, reload page so hero re-locks to new dimensions. */
-  window.addEventListener('orientationchange', function() {
-    setTimeout(function() { window.location.reload(); }, 300);
-  });
 
   /* Unpause hero animation once fonts are ready — ensures heroUp plays with
-     Cormorant Garamond, not the fallback font. Consistent on first load + refresh.
-     Safety net: if fonts.ready hasn't resolved in 600ms (iframe/desktop edge case
-     where the FontFaceSet API can stall), unpause anyway so hero never stays hidden. */
+     Cormorant Garamond, not the fallback font. Safety net at 600ms so the
+     hero never stays hidden if FontFaceSet stalls. */
   var heroUnpaused = false;
   function unpauseHero() {
     if (heroUnpaused) return;
@@ -65,7 +60,6 @@
   setTimeout(unpauseHero, 600);
 })();
 </script>
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
   <title>Therapists in Denver Who Actually Get It | Full Bloom</title>
   <meta name="description" content="Tired of good-enough therapy? Full Bloom is a Denver group practice where every therapist was chosen carefully — and every client feels it.">
   <meta name="robots" content="index,follow">
