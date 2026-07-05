@@ -79,6 +79,12 @@ picture {
   display: contents;
 }
 
+picture source {
+  /* With display:contents above, <source> would otherwise become a
+     zero-width flex item and consume a flex gap. */
+  display: none;
+}
+
 .author-photo {
   /* Belt & suspenders: a perfect uniform circle no matter the context. */
   aspect-ratio: 1 / 1;
