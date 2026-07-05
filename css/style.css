@@ -973,8 +973,8 @@ body.menu-open {
   z-index: -1;
   pointer-events: none;
   background: radial-gradient(ellipse 62% 55% at 50% 52%,
-      rgba(28, 20, 12, .32) 0%,
-      rgba(28, 20, 12, .18) 45%,
+      rgba(28, 20, 12, .40) 0%,
+      rgba(28, 20, 12, .24) 45%,
       rgba(28, 20, 12, 0) 72%);
 }
 
