@@ -969,13 +969,15 @@ body.menu-open {
 .hero-content::before {
   content: "";
   position: absolute;
-  inset: -12% -18%;
+  inset: -22% -32%;
   z-index: -1;
   pointer-events: none;
-  background: radial-gradient(ellipse 62% 55% at 50% 52%,
-      rgba(28, 20, 12, .40) 0%,
-      rgba(28, 20, 12, .24) 45%,
-      rgba(28, 20, 12, 0) 72%);
+  background: radial-gradient(ellipse 72% 62% at 50% 52%,
+      rgba(28, 20, 12, .46) 0%,
+      rgba(28, 20, 12, .34) 28%,
+      rgba(28, 20, 12, .18) 52%,
+      rgba(28, 20, 12, .07) 74%,
+      rgba(28, 20, 12, 0) 94%);
 }
 
 .hero-content {
