@@ -966,18 +966,18 @@ body.menu-open {
       rgba(28, 20, 12, .68) 100%);
 }
 
-.hero-content::before {
+.hero::after {
   content: "";
   position: absolute;
-  inset: -22% -32%;
-  z-index: -1;
+  inset: 0;
+  z-index: 0;
   pointer-events: none;
-  background: radial-gradient(ellipse 72% 62% at 50% 52%,
+  background: radial-gradient(ellipse 46% 44% at 50% 54%,
       rgba(28, 20, 12, .46) 0%,
-      rgba(28, 20, 12, .34) 28%,
-      rgba(28, 20, 12, .18) 52%,
-      rgba(28, 20, 12, .07) 74%,
-      rgba(28, 20, 12, 0) 94%);
+      rgba(28, 20, 12, .32) 30%,
+      rgba(28, 20, 12, .16) 55%,
+      rgba(28, 20, 12, .06) 76%,
+      rgba(28, 20, 12, 0) 96%);
 }
 
 .hero-content {
