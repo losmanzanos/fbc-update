@@ -72,6 +72,18 @@ img {
   display: block;
 }
 
+picture {
+  /* WebP <picture> wrappers must be layout-invisible: display:contents
+     lets the inner <img> participate in flex/grid exactly as it did
+     before wrapping (fixes squeezed/oval author photos in .author-box). */
+  display: contents;
+}
+
+.author-photo {
+  /* Belt & suspenders: a perfect uniform circle no matter the context. */
+  aspect-ratio: 1 / 1;
+}
+
 a {
   color: inherit;
   text-decoration: none;

@@ -34,7 +34,11 @@
   if (window.innerWidth <= 1024) {
     var lastW = window.innerWidth;
     var setH = function(){
-      document.documentElement.style.setProperty('--hero-h', window.innerHeight + 'px');
+      /* visualViewport.height is accurate even when innerHeight briefly
+         reports stale/rotated values during a landscape initial load. */
+      var vh = (window.visualViewport && window.visualViewport.height)
+        ? Math.round(window.visualViewport.height) : window.innerHeight;
+      document.documentElement.style.setProperty('--hero-h', vh + 'px');
     };
     setH();
     /* One-shot corrections shortly after load: some mobile browsers
