@@ -1873,7 +1873,13 @@ h3 + .svc-benefit-grid {
    never exceeds the visible viewport. svh/dvh are iOS 15.4+/16+ support.
    ──────────────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  /* Mobile: base rule already uses 100svh which is stable. No additional rules needed. */
+  /* Mobile: base rule already uses 100svh which is stable. */
+  /* Lift hero copy: balance whitespace (was heavier above the topline
+     than below the button because top padding includes nav height). */
+  .hero-content {
+    padding-top: calc(var(--nav-h) + 8px);
+    padding-bottom: 112px;
+  }
 }
 @media (max-width: 932px) and (orientation: landscape) and (max-height: 500px) {
   /* Mobile landscape: viewport is too short for full hero.
@@ -1883,8 +1889,12 @@ h3 + .svc-benefit-grid {
     height: 560px !important;
     min-height: 560px !important;
     max-height: 560px !important;
-    align-items: flex-end;
-    padding-bottom: 60px;
+    align-items: center;
+    padding-bottom: 0;
+  }
+  .hero-content {
+    padding-top: calc(var(--nav-h) + 4px);
+    padding-bottom: 28px;
   }
   .hero h1 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); margin-bottom: 8px; }
   .hero-tag { font-size: .68rem; letter-spacing: .14em; margin-bottom: 14px; }
