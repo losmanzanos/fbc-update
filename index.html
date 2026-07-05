@@ -30,7 +30,20 @@
      Listeners (resize, orientationchange, pageshow) intentionally omitted —
      any update would cause the visible "grow" effect. */
   if (window.innerWidth <= 1024) {
-    document.documentElement.style.setProperty('--hero-h', window.innerHeight + 'px');
+    var lastW = window.innerWidth;
+    var setH = function(){
+      document.documentElement.style.setProperty('--hero-h', window.innerHeight + 'px');
+    };
+    setH();
+    /* Update ONLY when width changes (rotation) — never on height-only
+       resizes (address-bar collapse), which caused the grow-on-scroll. */
+    window.addEventListener('resize', function(){
+      if (Math.abs(window.innerWidth - lastW) > 1) {
+        lastW = window.innerWidth;
+        setH();
+        setTimeout(setH, 250); /* iOS reports stale innerHeight mid-rotation */
+      }
+    });
   }
   /* On orientation change, reload page so hero re-locks to new dimensions. */
   window.addEventListener('orientationchange', function() {
