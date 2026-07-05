@@ -1880,25 +1880,33 @@ h3 + .svc-benefit-grid {
     padding-top: calc(var(--nav-h) + 8px);
     padding-bottom: 112px;
   }
+  /* Equal breathing room: topline→headline gap == tagline→button gap.
+     The topline's tall line-height (2.2) adds phantom space below it,
+     so its margin is smaller to compensate. */
+  .hero-tag { margin-bottom: 12px; }
+  .hero h1 { margin-bottom: 26px; }
 }
 @media (max-width: 932px) and (orientation: landscape) and (max-height: 500px) {
   /* Mobile landscape: viewport is too short for full hero.
      Give hero a fixed pixel height (taller than viewport so user can scroll)
      so content has room and there's no jump/grow. */
+  /* Landscape phones: hero must FIT the short viewport, not exceed it.
+     Hide the decorative topline; compact type so headline + tagline +
+     button are all visible and centered. */
   .hero {
-    height: 560px !important;
-    min-height: 560px !important;
-    max-height: 560px !important;
+    height: 100svh !important;
+    min-height: 100svh !important;
+    max-height: 100svh !important;
     align-items: center;
     padding-bottom: 0;
   }
   .hero-content {
-    padding-top: calc(var(--nav-h) + 4px);
-    padding-bottom: 28px;
+    padding: calc(var(--nav-h) - 8px) 24px 12px;
   }
-  .hero h1 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); margin-bottom: 8px; }
-  .hero-tag { font-size: .68rem; letter-spacing: .14em; margin-bottom: 14px; }
-  .hero .btn { padding: 10px 22px; font-size: .82rem; }
+  .hero-tag { display: none; }
+  .hero h1 { font-size: clamp(1.5rem, 4.5vh, 2rem); margin-bottom: 12px; }
+  .hero h1 span { margin-top: 10px !important; }
+  .hero .btn { padding: 9px 20px; font-size: .78rem; }
 }
 
 /* ── Custom checkbox — cross-browser visible checkmark ─────────────── */
