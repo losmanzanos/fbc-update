@@ -1003,12 +1003,25 @@ body.menu-open {
   z-index: 1;
   max-width: 860px;
   padding: calc(var(--nav-h) + 32px) 32px 64px;
+  opacity: 0;
+  /* CSS-only FAILSAFE reveal: if JS never adds .play (script fails/blocked, or
+     an odd iframe context), the hero is revealed anyway at 1.6s so the text can
+     NEVER stay invisible. When JS is healthy, .play is added on the first
+     painted frame and its animation (below) overrides this. */
+  animation: heroRevealFailsafe 0.01s linear 1.6s forwards;
+}
+/* Real entrance animation — added by JS (main.js) on the first painted frame.
+   Declaring the animation in static CSS makes it start at render-tree build,
+   BEFORE the first paint, so on a slow first (uncached) load it finishes during
+   the invisible pre-paint gap and looks instant. Gating it on .play anchors the
+   fade/slide to a frame the visitor can actually see. */
+.hero-content.play {
   animation: heroUp .9s ease both, heroFade .6s ease-out both;
-  /* Note: previously paused via animation-play-state and unpaused via JS once
-     fonts loaded — but document.fonts.ready was unreliable in iframe contexts,
-     leaving hero stuck invisible. Now plays on load; on first visit (uncached
-     fonts) you may briefly see fallback font during the 0.9s animation, which
-     is preferable to text never appearing. Cached visits are unaffected. */
+}
+@keyframes heroRevealFailsafe { to { opacity: 1; } }
+/* Respect reduced-motion: show the hero immediately, no slide/fade. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-content, .hero-content.play { opacity: 1; animation: none; }
 }
 
 @keyframes heroUp {

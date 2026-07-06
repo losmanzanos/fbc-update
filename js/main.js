@@ -377,19 +377,35 @@ setTimeout(function() {
   document.querySelectorAll('.fade-in:not(.visible)').forEach(function(el) { el.classList.add('visible'); });
 }, 1500);
 
-/* ── Replay hero animation after bfcache restore (back/forward navigation) ──
-   The hero's fade/slide is a pure-CSS animation that runs once on render.
-   When the browser restores a page from bfcache (clicking Back/Forward), it
-   comes back in its FINAL state and the animation never replays — the hero
-   looks like it "loaded finished," with no movement, until a manual refresh.
-   On a persisted pageshow we reset the animation so it plays again. Safe:
-   only fires on bfcache restore and only touches the hero, which stays visible
-   regardless. */
-window.addEventListener('pageshow', function(e) {
-  if (!e.persisted) return;
-  var hc = document.querySelector('.hero-content');
-  if (hc) { hc.style.animation = 'none'; void hc.offsetWidth; hc.style.animation = ''; }
-});
+/* ── Hero entrance: start the fade/slide on the FIRST PAINTED FRAME ──
+   Why this exists: if the entrance animation is declared in static CSS on
+   .hero-content, its clock starts at render-tree construction — before the
+   first paint. On a slow first (uncached) load, the browser spends time before
+   painting, so the animation runs during that invisible gap and is finished by
+   the time the page appears — it looks like the hero "just popped in." (On a
+   reload the paint is fast, so you see it play; that's the reported symptom.)
+   Fix: CSS keeps the hero hidden with a 1.6s failsafe reveal, and we add .play
+   inside requestAnimationFrame so the animation is anchored to a frame the
+   visitor actually sees. Double rAF guarantees a paint has happened first. */
+(function() {
+  function playHero() {
+    document.querySelectorAll('.hero-content').forEach(function(hc) { hc.classList.add('play'); });
+  }
+  function armHero() { requestAnimationFrame(function() { requestAnimationFrame(playHero); }); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', armHero);
+  } else {
+    armHero();
+  }
+  /* Replay on bfcache restore (Back/Forward): the page returns already-finished,
+     so reset and play again. */
+  window.addEventListener('pageshow', function(e) {
+    if (!e.persisted) return;
+    document.querySelectorAll('.hero-content').forEach(function(hc) {
+      hc.classList.remove('play'); void hc.offsetWidth; hc.classList.add('play');
+    });
+  });
+})();
 
 /* ── Mobile search modal ── */
 (function() {
