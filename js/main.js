@@ -377,6 +377,20 @@ setTimeout(function() {
   document.querySelectorAll('.fade-in:not(.visible)').forEach(function(el) { el.classList.add('visible'); });
 }, 1500);
 
+/* ── Replay hero animation after bfcache restore (back/forward navigation) ──
+   The hero's fade/slide is a pure-CSS animation that runs once on render.
+   When the browser restores a page from bfcache (clicking Back/Forward), it
+   comes back in its FINAL state and the animation never replays — the hero
+   looks like it "loaded finished," with no movement, until a manual refresh.
+   On a persisted pageshow we reset the animation so it plays again. Safe:
+   only fires on bfcache restore and only touches the hero, which stays visible
+   regardless. */
+window.addEventListener('pageshow', function(e) {
+  if (!e.persisted) return;
+  var hc = document.querySelector('.hero-content');
+  if (hc) { hc.style.animation = 'none'; void hc.offsetWidth; hc.style.animation = ''; }
+});
+
 /* ── Mobile search modal ── */
 (function() {
   var mSearchBtn = document.getElementById('mobile-search-btn');
