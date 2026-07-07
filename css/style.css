@@ -670,6 +670,9 @@ body.menu-open .nav-hamburger span {
   flex-direction: column;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  /* Contain the scroll so hitting the bottom (where search sits) doesn't
+     rubber-band/chain to the page behind, briefly revealing it on mobile. */
+  overscroll-behavior: contain;
   transform: translateX(100%);
   transition: transform .32s cubic-bezier(.4, 0, .2, 1);
   padding: 20px 0 0;
@@ -1369,7 +1372,10 @@ h3 + .svc-pullquote { margin-top: 32px; }
 
 .grid-2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 48px; }
 .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; }
-.grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 28px; }
+/* Team grid: flex + wrap + center so an incomplete final row (e.g. 7 cards =
+   4 + 3) is centered instead of left-aligned with a gap on the right. */
+.grid-4 { display: flex; flex-wrap: wrap; justify-content: center; gap: 28px; }
+.grid-4 > * { flex: 0 1 calc(25% - 21px); box-sizing: border-box; }
 
 /* ── Service page layout ─────────────────────────────────────────────── */
 .svc-layout {
@@ -1624,6 +1630,10 @@ h3 + .svc-pullquote { margin-top: 32px; }
 .search-overlay { display: none; position: fixed; inset: 0; background: rgba(28,20,12,.85); z-index: 10002; align-items: flex-start; justify-content: center; padding-top: 160px; backdrop-filter: blur(4px); }
 .search-overlay.open { display: flex; }
 .search-box { width: 100%; max-width: 680px; margin: 0 24px; }
+/* Let results scroll when they run past the viewport (keeps the input visible).
+   Stop short of the bottom edge and pad below the last card so the dark overlay
+   is always visible under the final result — making it clear you've hit the end. */
+#search-results { max-height: calc(100vh - 300px); overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding-right: 4px; padding-bottom: 20px; }
 .search-input-wrap { display: flex; background: var(--white); border-radius: 4px; overflow: hidden; box-shadow: var(--shadow-lg); }
 .search-input-wrap input { flex: 1; padding: 18px 24px; font-size: 1.1rem; border: none; outline: none; font-family: var(--font-sans); color: var(--text); }
 .search-input-wrap button { padding: 18px 24px; background: var(--petal); color: white; font-family: var(--font-sans); font-size: .8rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; border: none; cursor: pointer; }
@@ -1668,7 +1678,7 @@ h3 + .svc-pullquote { margin-top: 32px; }
   .post-layout { grid-template-columns: 1fr; }
   .post-sidebar { position: static; }
   .bio-layout { grid-template-columns: 240px 1fr; gap: 48px; }
-  .grid-4 { grid-template-columns: repeat(2,1fr); }
+  .grid-4 > * { flex-basis: calc(50% - 14px); }
 }
 
 @media(max-width:1024px) {
@@ -1691,7 +1701,7 @@ h3 + .svc-pullquote { margin-top: 32px; }
 @media(max-width:768px) {
   .grid-2 { grid-template-columns: 1fr; gap: 40px; }
   .grid-3 { grid-template-columns: 1fr !important; }
-  .grid-4 { grid-template-columns: 1fr; }
+  .grid-4 > * { flex-basis: 100%; }
   .footer-grid { grid-template-columns: 1fr; gap: 36px; }
   .footer-bottom { flex-direction: column; text-align: center; }
   .form-row { grid-template-columns: 1fr; }

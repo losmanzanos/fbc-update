@@ -139,22 +139,24 @@ if (searchOverlay) {
 var ROOT_PATH = (function() {
   var link = document.querySelector('link[href*="style.css"]');
   if (!link) return '/';
-  var href = link.getAttribute('href');
-  return href.replace('css/style.css', '');
+  /* Strip any query string (e.g. the ?v=7 cache-buster) BEFORE deriving the
+     path — otherwise "css/style.css?v=7" leaves a dangling "?v=7", which broke
+     every search result link (e.g. /?v=7/team/...). */
+  var href = link.getAttribute('href').split('?')[0];
+  return href.replace('css/style.css', '') || '/';
 })();
 
 var PAGES = [
   {url:'/',title:'Therapists in Denver & Online | Full Bloom Counseling',desc:'Compassionate therapy for anxiety, trauma, relationships, disordered eating. Free consultations.',cat:'Home'},
-  {url:'/therapists/',title:'Meet Our Denver Therapists',desc:'Eight licensed therapists. One practice built around depth, warmth, and evidence-based care. Find the right fit for you in Denver or online across Colorado.',cat:'About'},
-  {url:'/about/',title:'About Our Denver Therapists',desc:'Eight licensed therapists specializing in trauma, anxiety, Enneagram, couples therapy, and more.',cat:'About'},
+  {url:'/therapists/',title:'Meet Our Denver Therapists',desc:'Seven licensed therapists. One practice built around depth, warmth, and evidence-based care. Find the right fit for you in Denver or online across Colorado.',cat:'About'},
+  {url:'/about/',title:'About Our Denver Therapists',desc:'Seven licensed therapists specializing in trauma, anxiety, Enneagram, couples therapy, and more.',cat:'About'},
   {url:'/team/rebecca-moravec/',title:'Becca Moravec, LPC LMFT — Founder',desc:'Trauma-informed care, EMDR, IFS, Enneagram, couples therapy, Intuitive Eating, women\'s issues, people pleasers, millennial women.',cat:'Therapist',author:'Becca Moravec',tags:'emdr enneagram couples intuitive eating haes ifs internal family systems narrative therapy becca'},
   {url:'/team/natalie-siegel/',title:'Natalie Siegel, LPC — Therapist',desc:'Body image, disordered eating, Intuitive Eating, anxiety, self-esteem.',cat:'Therapist',author:'Natalie Siegel',tags:'haes anti-diet body image intuitive eating'},
   {url:'/team/mark-whitney/',title:'Mark Whitney, LPC ACS — Senior Clinician',desc:'Couples therapy, Enneagram, trauma, family systems, clinical supervision.',cat:'Therapist',author:'Mark Whitney',tags:'gottman couples enneagram family clinical supervision acs approved clinical supervisor emdr'},
   {url:'/team/jillian-corpora/',title:'Jillian Corpora, LPC — Therapist',desc:'Anxiety, depression, grief, life transitions, Intuitive Eating.',cat:'Therapist',author:'Jillian Corpora',tags:'grief anxiety depression intuitive eating'},
-  {url:'/team/kirsten-adorno/',title:'Kirsten Adorno, LPC MFTC — Therapist',desc:'Attachment-based therapy, couples counseling, emotional bonds.',cat:'Therapist',author:'Kirsten Adorno',tags:'gottman couples attachment'},
+  {url:'/team/kirsten-adorno/',title:'Kirsten Adorno, LPC, MFTC — Therapist',desc:'Depression, trauma, grief, culturally responsive care, identity, attachment-based therapy, couples counseling.',cat:'Therapist',author:'Kirsten Adorno',tags:'cultural culturally responsive multicultural identity belonging depression trauma grief gottman couples attachment'},
   {url:'/team/kelsey-bennett/',title:'Kelsey Bennett, LPC — Therapist',desc:'Young adults, couples, emotional regulation, EMDR, SSP, Gottman. Boulder and online.',cat:'Therapist',author:'Kelsey Bennett',tags:'emdr safe sound protocol ssp gottman boulder colorado young adults couples'},
   {url:'/team/kelli-ruhl/',title:'Kelli Ruhl, LPC — Therapist',desc:'Trauma therapy, addiction recovery, somatic interventions, Brainspotting.',cat:'Therapist',author:'Kelli Ruhl',tags:'brainspotting trauma somatic'},
-  {url:'/team/myldha-verdelus/',title:'Myldha Verdelus, LPCC — Therapist',desc:'Anxiety, depression, identity, couples, culturally responsive therapy, attachment.',cat:'Therapist',author:'Myldha Verdelus',tags:'cultural culturally responsive identity anxiety depression couples attachment'},
   {url:'/services/',title:'Therapy Services in Denver',desc:'Individual, couples, family, trauma, EMDR, Enneagram, Intuitive Eating, anxiety therapy.',cat:'Services'},
   {url:'/services/individual-therapy/',title:'Individual Therapy Denver',desc:'One-on-one therapy for anxiety, depression, trauma, relationships, life transitions. CBT, IFS, EMDR.',cat:'Service'},
   {url:'/services/couples-therapy/',title:'Couples Therapy Denver',desc:'Strengthen connection, communication, and navigate conflict. Gottman Method, EFT.',cat:'Service'},
@@ -183,6 +185,9 @@ var PAGES = [
   {url:'/services/depression-therapy-denver/',title:'Depression Therapy Denver',desc:'Evidence-based treatment for depression. CBT, EMDR, somatic therapy for real change, not just management.',cat:'Service'},
   {url:'/services/online-therapy-colorado/',title:'Online Therapy Colorado',desc:'All services available via secure telehealth statewide. Denver to Durango, Boulder to Colorado Springs.',cat:'Service'},
   // -- Blog posts --
+  {url:'/blog/therapy-cherry-creek-glendale-denver/',title:'Therapy in Cherry Creek & Glendale: A Local Guide',desc:'Looking for a therapist near Cherry Creek or Glendale? A local guide to starting therapy in your Denver neighborhood.',cat:'Blog',author:'Becca Moravec'},
+  {url:'/blog/how-much-does-therapy-cost-denver/',title:'How Much Does Therapy Cost in Denver? A Transparent Guide',desc:'Real numbers, no guesswork: what therapy costs in Denver, why rates vary, and how out-of-network benefits can bring the price down.',cat:'Blog',author:'Becca Moravec'},
+  {url:'/blog/does-insurance-cover-therapy-colorado/',title:'Does Insurance Cover Therapy in Colorado? Superbills, Explained',desc:'What out-of-network really means, how superbills work, and the exact questions to ask your insurer before your first session.',cat:'Blog',author:'Becca Moravec'},
     {url:'/blog/teen-therapy-denver/',title:'Teen Therapy in Denver: What Young People Actually Need',desc:'Teen therapy that meets young people where they are — not where adults wish they were. A Denver therapist on what actually helps adolescents.',cat:'Blog',author:'Jillian Corpora'},
   {url:'/blog/depression-therapy-denver/',title:'Depression Therapy in Denver: What It Actually Looks Like',desc:'Depression isn\'t just sadness. A Denver therapist on what depression really is, why it often goes unrecognized, and how therapy helps.',cat:'Blog',author:'Kirsten Adorno'},
   {url:'/blog/somatic-therapy-denver/',title:'Somatic Therapy in Denver: Why Healing Happens in the Body',desc:'Talk therapy doesn\'t work for everyone. A Denver somatic therapist on why body-based therapy reaches what words often can\'t.',cat:'Blog',author:'Natalie Siegel'},
@@ -196,7 +201,7 @@ var PAGES = [
   {url:'/blog/intuitive-eating-beginners-guide-denver/',title:'Intuitive Eating: A Beginner\'s Guide From a Denver Therapist',desc:'Intuitive Eating is not about eating whatever you want -- it\'s about rebuilding trust with your body.',cat:'Blog',author:'Natalie Siegel'},
   {url:'/blog/anti-diet-therapy-body-trust/',title:'How to Begin Anti-Diet Therapy: Building Body Trust',desc:'What does it look like to actually let go of the diet mentality? A Full Bloom therapist on how it begins.',cat:'Blog',author:'Natalie Siegel'},
   {url:'/blog/narrative-therapy-couples-families-denver/',title:'Narrative Therapy for Couples and Families',desc:'Every relationship has a story. Narrative therapy helps couples examine the dominant stories keeping them stuck.',cat:'Blog',author:'Mark Whitney'},
-  {url:'/blog/culturally-responsive-therapy-denver/',title:'Culturally Responsive Therapy: Why Your Culture Belongs in the Room',desc:'Therapy has a history of centering one kind of experience. A Denver therapist on why cultural context matters.',cat:'Blog',author:'Myldha Verdelus'},
+  {url:'/blog/culturally-responsive-therapy-denver/',title:'Culturally Responsive Therapy: Why Your Culture Belongs in the Room',desc:'Therapy has a history of centering one kind of experience. A Denver therapist on why cultural context matters.',cat:'Blog',author:'Kirsten Adorno'},
   {url:'/blog/safe-sound-protocol-denver/',title:'Feel Safer in Your Body with the Safe and Sound Protocol',desc:'For many people talk therapy isn\'t enough -- especially when anxiety and trauma live in the nervous system.',cat:'Blog',author:'Kelsey Bennett'},
   {url:'/blog/therapy-parents-young-adults-postpartum-colorado/',title:'The Hidden Weight of Parenting',desc:'Postpartum mental health gets attention. The years that follow -- navigating identity, young adults, and more.',cat:'Blog',author:'Jillian Corpora'},
   {url:'/blog/therapy-for-growth-denver/',title:'Therapy for Growth: Clarity, Connection, and Healing',desc:'Therapy isn\'t just for crisis. A Denver therapist on how counseling can help you grow and find direction.',cat:'Blog',author:'Becca Moravec'},

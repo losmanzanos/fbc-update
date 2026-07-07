@@ -110,3 +110,6 @@ https://www.fullbloomcounseling.com/* https://fullbloomcounseling.com/:splat 301
 # Old WordPress dated blog permalinks under /blog/ (the existing root-level
 # /:year/:month/:day/:slug/ rule does NOT catch these)
 /blog/:year/:month/:day/:slug/    /blog/:slug/                   301
+
+# Departed clinician — redirect old profile to the team page
+/team/myldha-verdelus/            /therapists/                   301
