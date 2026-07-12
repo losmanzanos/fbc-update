@@ -125,18 +125,30 @@
   "hasMap": "https://www.google.com/maps/place/1780+S+Bellaire+St+%23485,+Denver,+CO+80222",
   "areaServed": [
     {"@type":"City","name":"Denver","sameAs":"https://www.wikidata.org/wiki/Q16554"},
-    {"@type":"City","name":"Boulder"},
-    {"@type":"City","name":"Colorado Springs"},
-    {"@type":"City","name":"Fort Collins"},
+    {"@type":"City","name":"Boulder","sameAs":"https://www.wikidata.org/wiki/Q192517"},
+    {"@type":"City","name":"Colorado Springs","sameAs":"https://www.wikidata.org/wiki/Q49258"},
+    {"@type":"City","name":"Fort Collins","sameAs":"https://www.wikidata.org/wiki/Q490732"},
     {"@type":"State","name":"Colorado"}
   ],
-  "serviceType": [
-    "Individual Therapy", "Couples Therapy", "Family Therapy",
-    "EMDR Therapy", "Trauma Therapy", "Anxiety Therapy",
-    "Health at Every Size Therapy", "Intuitive Eating Counseling",
-    "Enneagram Therapy", "Clinical Supervision", "Pre-Marital Counseling",
-    "Safe and Sound Protocol", "Disordered Eating Therapy"
-  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Therapy Services",
+    "itemListElement": [
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Individual Therapy","serviceType":"Individual Therapy","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Couples Therapy","serviceType":"Couples Therapy","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Family Therapy","serviceType":"Family Therapy","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"EMDR Therapy","serviceType":"EMDR Therapy","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Trauma Therapy","serviceType":"Trauma Therapy","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Anxiety Therapy","serviceType":"Anxiety Therapy","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Health at Every Size Therapy","serviceType":"Health at Every Size Therapy","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Intuitive Eating Counseling","serviceType":"Intuitive Eating Counseling","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Enneagram Therapy","serviceType":"Enneagram Therapy","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Clinical Supervision","serviceType":"Clinical Supervision","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Pre-Marital Counseling","serviceType":"Pre-Marital Counseling","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Safe and Sound Protocol","serviceType":"Safe and Sound Protocol","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Disordered Eating Therapy","serviceType":"Disordered Eating Therapy","provider":{"@id":"https://fullbloomcounseling.com/#business"}}}
+    ]
+  },
   "sameAs": [
     "https://www.facebook.com/FullBloomDenver",
     "https://www.instagram.com/fullbloomcounseling",
@@ -147,17 +159,17 @@
   
   <link rel="dns-prefetch" href="https://formspree.io">
   <link rel="stylesheet" href="css/style.css?v=7">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["#main h2","#main .svc-lead","#main .hero-h1"]}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","speakable":{"@type":"SpeakableSpecification","cssSelector":["#main .hero-content h1","#main h2","#main #intro p"]}}</script>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "Service",
   "serviceType": "Mental Health Therapy",
   "provider": {"@id": "https://fullbloomcounseling.com/#business"},
   "areaServed": [
-    {"@type":"City","name":"Denver","addressRegion":"CO"},
-    {"@type":"City","name":"Boulder","addressRegion":"CO"},
-    {"@type":"City","name":"Colorado Springs","addressRegion":"CO"},
-    {"@type":"City","name":"Fort Collins","addressRegion":"CO"},
+    {"@type":"City","name":"Denver","sameAs":"https://www.wikidata.org/wiki/Q16554"},
+    {"@type":"City","name":"Boulder","sameAs":"https://www.wikidata.org/wiki/Q192517"},
+    {"@type":"City","name":"Colorado Springs","sameAs":"https://www.wikidata.org/wiki/Q49258"},
+    {"@type":"City","name":"Fort Collins","sameAs":"https://www.wikidata.org/wiki/Q490732"},
     {"@type":"State","name":"Colorado"}
   ],
   "availableChannel": [
