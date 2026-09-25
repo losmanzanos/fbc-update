@@ -95,7 +95,7 @@ https://www.fullbloomcounseling.com/* https://fullbloomcounseling.com/:splat 301
 /kirsten-adorno/      /team/kirsten-adorno/   301
 /kelsey-bennett/      /team/kelsey-bennett/   301
 /kelli-ruhl/          /team/kelli-ruhl/       301
-/myldha-verdelus/     /team/myldha-verdelus/  301
+/myldha-verdelus/     /therapists/            301
 
 # ── Catch-all for anything still not matched ─────────────────────────────────
 # (Netlify falls through to 404.html automatically if no rule matches)
@@ -113,3 +113,30 @@ https://www.fullbloomcounseling.com/* https://fullbloomcounseling.com/:splat 301
 
 # Departed clinician — redirect old profile to the team page
 /team/myldha-verdelus/            /therapists/                   301
+
+# ── ADDED 2026-09-24: legacy URLs Search Console still reports as 404 ──
+/natalie-siegel-lpc/                      /team/natalie-siegel/                301
+/kelli-ruhl-lpc-ncc/                      /team/kelli-ruhl/                    301
+/mark-whitney-lpc/                        /team/mark-whitney/                  301
+/kirsten-adorno-lpc-mftc/                 /team/kirsten-adorno/                301
+/jillian-corpora-lpc/                     /team/jillian-corpora/               301
+/denver-therapists/kelli-ruhl/            /team/kelli-ruhl/                    301
+/denver-therapists/jillian-corpora/       /team/jillian-corpora/               301
+/denver-therapists/kelsey-bennett/        /team/kelsey-bennett/                301
+/denver-therapists/*                      /therapists/                         301
+/denver-therapy-team/                     /therapists/                         301
+/enneagram-therapy-denver/                /services/enneagram-therapy/         301
+/emdr-therapy-denver/                     /services/emdr/                      301
+/trauma-therapy-denver/                   /services/trauma-therapy/            301
+/anxiety-therapy-denver/                  /services/anxiety-therapy/           301
+/health-at-every-size/                    /services/health-at-every-size/      301
+/clinical-supervision/                    /services/clinical-supervision/      301
+/counseling-services/individual-therapy/  /services/individual-therapy/        301
+/counseling-services/*                    /services/                           301
+/press-and-media/                         /press/                              301
+/therapy-contact/                         /contact/                            301
+/faq-full-bloom-counseling/               /faqs/                               301
+/haes-and-intuitive-eating-presentations/ /services/health-at-every-size/      301
+/our-denver-therapy-team/:name/           /team/:name/                         301
+/our-denver-therapy-team/                 /therapists/                         301
+/blog/:year/:month/                       /blog/                               301
