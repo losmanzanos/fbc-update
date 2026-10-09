@@ -1540,7 +1540,7 @@ h3 + .svc-pullquote { margin-top: 32px; }
 .post-body ul li, .post-body ol li { margin-bottom: 8px; font-size: .97rem; line-height: 1.77; }
 .post-body ol { padding-left: 24px; margin-bottom: 1.3rem; }
 .post-body blockquote { border-left: 3px solid var(--petal); padding: 18px 24px; margin: 36px 0; background: var(--cream); font-family: var(--font-serif); font-size: 1.25rem; font-style: italic; color: var(--bark); border-radius: 0 4px 4px 0; }
-.post-body a { color: var(--petal-dark); text-decoration: underline; text-decoration-color: rgba(168,114,78,.35); text-underline-offset: 3px; transition: color .2s, text-decoration-color .2s; }
+.post-body a { color: #8A5A3A; text-decoration: underline; text-decoration-color: rgba(168,114,78,.35); text-underline-offset: 3px; transition: color .2s, text-decoration-color .2s; }
 .post-body a:hover { color: var(--petal); text-decoration-color: var(--petal); }
 .post-sidebar { position: sticky; top: calc(var(--nav-h) + 32px); }
 

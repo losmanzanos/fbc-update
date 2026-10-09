@@ -512,7 +512,7 @@ setTimeout(function() {
     '<div class="konami-tv">' +
       '<div class="konami-screen-bezel">' +
         '<div class="konami-screen">' +
-          '<img src="/images/konami-contra.jpg" alt="Contra — Konami 1988" class="konami-img">' +
+          '<img src="/images/konami-contra.jpg" alt="Contra — Konami 1988" class="konami-img" loading="lazy" decoding="async">' +
           '<div class="konami-scanlines"></div>' +
         '</div>' +
       '</div>' +
