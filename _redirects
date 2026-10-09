@@ -4,7 +4,6 @@
 
 # ── www → non-www canonical redirect ────────────────────────────────────────
 https://www.fullbloomcounseling.com/* https://fullbloomcounseling.com/:splat 301!
-http://www.fullbloomcounseling.com/*  https://fullbloomcounseling.com/:splat 301!
 
 # ── WordPress admin/system URLs ──────────────────────────────────────────────
 /wp-admin/*          /          301
