@@ -2051,3 +2051,24 @@ h3 + .svc-benefit-grid {
 @media (max-width: 1100px) and (min-width: 481px) {
   .hero-tag-br { display: block; }
 }
+
+/* ── Oct 2026 polish ─────────────────────────────────────────────────────── */
+/* Hero lines break only between phrases (no orphaned "ARE!" or "COLORADO") */
+.hero-tag .nw, .hero-sub .nw { white-space: nowrap; }
+.hero-sub-br { display: none; }
+@media (max-width: 600px) {
+  .hero-sub-sep { display: none; }
+  .hero-sub-br { display: block; }
+}
+
+/* Footer F: sharper source, moved to the empty lower-right corner so it no longer sits behind the Our Team links */
+#footer::before { background-image: url('../images/fbc-logo-f-footer.png'); top: auto; bottom: 84px; right: 8px; width: 200px; height: 200px; opacity: .08; }
+
+/* Footer on phones: no faint watermark behind the text, a small crisp mark
+   beside the name instead, and two-column link lists so it isn't endless */
+@media (max-width: 768px) {
+  #footer::before { display: none; }
+  .footer-brand-mark::before { content: ''; flex: 0 0 auto; width: 40px; height: 40px; background: url('../images/fbc-logo-f-footer.png') center/contain no-repeat; filter: invert(1) sepia(.3) saturate(.4); opacity: .9; }
+  .footer-grid > .footer-col:nth-child(n+3) ul { columns: 2; column-gap: 24px; }
+  .footer-grid > .footer-col:nth-child(n+3) ul li { break-inside: avoid; }
+}
