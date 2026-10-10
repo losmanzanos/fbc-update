@@ -670,3 +670,20 @@ document.querySelectorAll('.svc-testimonials').forEach(function(wrap) {
   /* logo-scroll-top */
 })();
 
+
+/* Post share buttons: native share sheet on phones, copy-link everywhere */
+(function(){
+  document.querySelectorAll('.post-share').forEach(function(box){
+    var url = box.getAttribute('data-share-url'), title = box.getAttribute('data-share-title');
+    var nativeBtn = box.querySelector('.post-share-native'), copyBtn = box.querySelector('.post-share-copy');
+    if (navigator.share && nativeBtn) {
+      nativeBtn.hidden = false;
+      nativeBtn.addEventListener('click', function(){ navigator.share({title: title, url: url}).catch(function(){}); });
+    }
+    if (copyBtn) copyBtn.addEventListener('click', function(){
+      var done = function(){ copyBtn.textContent = 'Link copied'; setTimeout(function(){ copyBtn.textContent = 'Copy link'; }, 2000); };
+      if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, function(){});
+      else { var t = document.createElement('textarea'); t.value = url; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); done(); } catch(e){} document.body.removeChild(t); }
+    });
+  });
+})();

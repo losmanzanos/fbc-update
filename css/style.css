@@ -251,11 +251,14 @@ strong {
   background: var(--border);
 }
 
+/* Divider center: the practice's floral F instead of a stock ampersand */
 .rule-divider span {
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
-  color: var(--petal);
-  font-style: italic;
+  flex: 0 0 auto;
+  width: 34px;
+  height: 38px;
+  background: var(--petal);
+  -webkit-mask: url('../images/fbc-logo-f-footer.png') center/contain no-repeat;
+  mask: url('../images/fbc-logo-f-footer.png') center/contain no-repeat;
 }
 
 .btn {
@@ -2072,3 +2075,23 @@ h3 + .svc-benefit-grid {
   .footer-grid > .footer-col:nth-child(n+3) ul { columns: 2; column-gap: 24px; }
   .footer-grid > .footer-col:nth-child(n+3) ul li { break-inside: avoid; }
 }
+
+/* Post share row */
+.post-share { margin: 48px 0 8px; padding-top: 28px; border-top: 1px solid var(--border); }
+.post-share-label { display: block; font-size: .68rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--bark-mid); margin-bottom: 14px; }
+.post-share-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.post-share-btn { font: 500 .78rem/1 var(--font-sans); letter-spacing: .04em; color: var(--bark); background: transparent; border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 14px; text-decoration: none !important; cursor: pointer; transition: border-color var(--ease), color var(--ease); }
+.post-share-btn:hover { border-color: var(--petal); color: var(--petal-dark); }
+.post-share-native { background: var(--bark); color: var(--cream); border-color: var(--bark); }
+.post-share-native:hover { background: var(--petal-btn); border-color: var(--petal-btn); color: var(--white); }
+
+/* Therapist availability badges */
+.avail { display: inline-flex; align-items: center; gap: 7px; font: 600 .64rem/1 var(--font-sans); letter-spacing: .13em; text-transform: uppercase; margin: 10px 0 6px; }
+.avail::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.avail-open { color: #5F7F6E; }
+.avail-waitlist { color: var(--petal-dark); }
+.avail-full { color: var(--bark-mid); opacity: .75; }
+.page-hero .avail { margin-top: 14px; padding: 7px 12px; border-radius: 999px; background: rgba(248,244,238,.12); }
+.page-hero .avail-open { color: #B9D3C3; }
+.page-hero .avail-waitlist { color: var(--petal-lt); }
+.page-hero .avail-full { color: rgba(248,244,238,.7); opacity: 1; }

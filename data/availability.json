@@ -1,0 +1,10 @@
+{
+  "_help": "Change a therapist's status here and push. Every deploy updates their badge on the team pages, their profile, and the contact form. Status is one of: open, waitlist, full.",
+  "rebecca-moravec": {"status": "open", "pronoun": "she"},
+  "natalie-siegel":  {"status": "waitlist", "pronoun": "she"},
+  "mark-whitney":    {"status": "open", "pronoun": "he"},
+  "jillian-corpora": {"status": "open", "pronoun": "she"},
+  "kirsten-adorno":  {"status": "open", "pronoun": "she"},
+  "kelsey-bennett":  {"status": "open", "pronoun": "she"},
+  "kelli-ruhl":      {"status": "open", "pronoun": "she"}
+}

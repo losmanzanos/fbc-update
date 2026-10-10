@@ -10,10 +10,14 @@ script reads them and regenerates:
   - the blog entries in sitemap.xml
   - the Blog list in llms.txt
   - the blog entries in the site search index (js/main.js)
+  - share buttons on every post
+  - therapist availability (badges, profile wording, contact form) from
+    data/availability.json
 
 Scheduling: a post whose datePublished is later than today (Denver time) is
 left out of every list. During a Netlify build (NETLIFY=true) its folder is
-also removed from the deploy, so the URL does not exist until publish day.
+moved to /preview/<slug>/ with a noindex tag, so it can be proofread on the
+real site but is not at its public URL until publish day.
 
 Existing cards and search entries are kept exactly as written; only posts
 that are missing get a generated card or entry. Standard library only.
@@ -234,6 +238,124 @@ def build_search(live, future):
     return js
 
 
+# ── 7. Share buttons on every post ────────────────────────────────────────────
+SHARE_START, SHARE_END = "<!-- SHARE:START -->", "<!-- SHARE:END -->"
+
+
+def share_block(p):
+    from urllib.parse import quote
+    url = f"{SITE}/blog/{p['slug']}/"
+    title = plain(p["h1"])
+    img = f"{SITE}/images/{p['img']}.jpg" if p["img"] else ""
+    u, t = quote(url, safe=""), quote(title, safe="")
+    return f"""{SHARE_START}
+        <div class="post-share" data-share-url="{url}" data-share-title="{html.escape(title, quote=True)}">
+          <span class="post-share-label">Know someone who needs this?</span>
+          <div class="post-share-row">
+            <button type="button" class="post-share-btn post-share-native" hidden>Send to someone</button>
+            <button type="button" class="post-share-btn post-share-copy">Copy link</button>
+            <a class="post-share-btn" href="mailto:?subject={t}&amp;body={u}">Email</a>
+            <a class="post-share-btn" href="https://www.facebook.com/sharer/sharer.php?u={u}" target="_blank" rel="noopener">Facebook</a>
+            <a class="post-share-btn" href="https://pinterest.com/pin/create/button/?url={u}&amp;media={quote(img, safe='')}&amp;description={t}" target="_blank" rel="noopener">Pinterest</a>
+            <a class="post-share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url={u}" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+        {SHARE_END}"""
+
+
+def build_share(posts):
+    out = {}
+    for p in posts:
+        f = f"blog/{p['slug']}/index.html"
+        h = read(f)
+        block = share_block(p)
+        if SHARE_START in h:
+            new = re.sub(re.escape(SHARE_START) + r".*?" + re.escape(SHARE_END), lambda m: block, h, flags=re.S)
+        else:
+            new = re.sub(r'([ \t]*)<div class="author-box">', lambda m: m.group(1) + block + "\n" + m.group(0), h, count=1)
+        out[f] = new
+    return out
+
+
+# ── 8. Therapist availability ─────────────────────────────────────────────────
+AVAIL_RE = re.compile(r"<!--AVAIL:([a-z-]+):([a-z]+)-->(.*?)<!--/AVAIL-->", re.S)
+LABEL = {"open": "Accepting new clients", "waitlist": "Waitlist open", "full": "Full right now"}
+
+
+def avail_text(slug, kind, status, pron, old):
+    first = slug.split("-")[0].capitalize()
+    if slug == "rebecca-moravec":
+        first = "Becca"
+    P, Poss = {"he": ("He", "His"), "she": ("She", "Her"), "they": ("They", "Their")}[pron]
+    keeps = "keep" if pron == "they" else "keeps"
+    isnt = "aren&#8217;t" if pron == "they" else "isn&#8217;t"
+    if kind in ("badge", "herobadge"):
+        return f'<span class="avail avail-{status}">{LABEL[status]}</span>'
+    if kind == "sentence":
+        return {
+            "open": f"{P} {'are' if pron == 'they' else 'is'} currently accepting new clients.",
+            "waitlist": f"{Poss} caseload is full right now, but {pron} {keeps} a waitlist. <a href=\"/contact/\">Reach out</a> and we&#8217;ll add you to it.",
+            "full": f"{P} {isnt} taking new clients right now. <a href=\"/therapists/\">Meet the rest of the team</a>, or <a href=\"/contact/\">ask us</a> who&#8217;s a good fit.",
+        }[status]
+    if kind == "cta":
+        return {"open": "Request an Appointment", "waitlist": f"Join {first}&#8217;s Waitlist", "full": "Find Another Therapist"}[status]
+    if kind == "ctanote":
+        return {"open": "Free 15-minute consultation available",
+                "waitlist": "Caseload full right now. Free 15-minute consult when a spot opens.",
+                "full": "Not taking new clients right now."}[status]
+    if kind == "option":
+        name = re.sub(r"<[^>]+>|\s*\(.*?\)", "", old).strip()
+        return {"open": f"<option>{name}</option>", "waitlist": f"<option>{name} (waitlist)</option>",
+                "full": f"<option disabled>{name} (full right now)</option>"}[status]
+    return old
+
+
+def build_availability():
+    try:
+        data = json.loads(read("data/availability.json"))
+    except FileNotFoundError:
+        return {}
+    out = {}
+    for f in glob.glob(path("**", "*.html"), recursive=True):
+        rel = os.path.relpath(f, ROOT)
+        if rel.startswith(("blog/", "preview/")):
+            continue
+        h = open(f, encoding="utf-8").read()
+        if "<!--AVAIL:" not in h:
+            continue
+
+        def sub(m):
+            slug, kind, old = m.groups()
+            info = data.get(slug)
+            if not info:
+                return m.group(0)
+            status = info.get("status", "open")
+            if status not in LABEL:
+                sys.exit(f"Unknown status '{status}' for {slug} in data/availability.json")
+            new = avail_text(slug, kind, status, info.get("pronoun", "she"), old)
+            return f"<!--AVAIL:{slug}:{kind}-->{new}<!--/AVAIL-->"
+
+        out[rel] = AVAIL_RE.sub(sub, h)
+    return out
+
+
+def hold_back_for_preview(p):
+    """Netlify only: move a scheduled post to /preview/<slug>/, noindexed."""
+    src = path("blog", p["slug"], "index.html")
+    h = open(src, encoding="utf-8").read()
+    h = h.replace('<meta name="robots" content="index,follow">', '<meta name="robots" content="noindex,nofollow">')
+    h = re.sub(r'<meta name="googlebot"[^>]*>', '<meta name="googlebot" content="noindex,nofollow">', h)
+    banner = (f'<div style="position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#3A2E24;color:#F8F4EE;'
+              f'text-align:center;font:600 13px/1.4 system-ui,sans-serif;padding:10px">Preview only. '
+              f'Goes live {datetime.date.fromisoformat(p["date"]).strftime("%A, %B %-d")}.</div>')
+    h = h.replace("</body>", banner + "</body>")
+    dst = path("preview", p["slug"])
+    os.makedirs(dst, exist_ok=True)
+    with open(os.path.join(dst, "index.html"), "w", encoding="utf-8") as f:
+        f.write(h)
+    shutil.rmtree(path("blog", p["slug"]), ignore_errors=True)
+
+
 # ── main ──────────────────────────────────────────────────────────────────────
 def main():
     check = "--check" in sys.argv
@@ -249,6 +371,8 @@ def main():
         "llms.txt": build_llms(cards),
         "js/main.js": build_search(live, future),
     }
+    outputs.update(build_share(posts))
+    outputs.update(build_availability())
     changed = [k for k, v in outputs.items() if read(k) != v]
     print(f"{len(live)} live posts, {len(future)} scheduled"
           + (": " + ", ".join(f"{p['slug']} ({p['date']})" for p in future) if future else ""))
@@ -261,8 +385,8 @@ def main():
     print("updated:", ", ".join(changed) or "nothing")
     if os.environ.get("NETLIFY") == "true":
         for p in future:
-            shutil.rmtree(path("blog", p["slug"]), ignore_errors=True)
-            print(f"held back from deploy: blog/{p['slug']}/")
+            hold_back_for_preview(p)
+            print(f"scheduled, preview only: /preview/{p['slug']}/")
 
 
 if __name__ == "__main__":
