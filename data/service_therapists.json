@@ -1,7 +1,23 @@
 {
   "_help": "Which therapists to show in the 'Who to see for this' box on each service page. Keys are service folder names under /services/. Order is the order shown. Remove a service to remove its box.",
-  "adhd-neurodivergent-therapy-denver": ["kelsey-bennett"],
-  "postpartum-perinatal-therapy": ["rebecca-moravec", "kelsey-bennett", "kelli-ruhl", "natalie-siegel"],
-  "couples-therapy": ["rebecca-moravec", "mark-whitney", "kirsten-adorno", "kelsey-bennett"],
-  "trauma-therapy": ["kelli-ruhl", "kelsey-bennett"]
+  "adhd-neurodivergent-therapy-denver": [
+    "kelsey-bennett",
+    "jillian-corpora"
+  ],
+  "postpartum-perinatal-therapy": [
+    "rebecca-moravec",
+    "kelsey-bennett",
+    "kelli-ruhl",
+    "natalie-siegel"
+  ],
+  "couples-therapy": [
+    "rebecca-moravec",
+    "mark-whitney",
+    "kirsten-adorno",
+    "kelsey-bennett"
+  ],
+  "trauma-therapy": [
+    "kelli-ruhl",
+    "kelsey-bennett"
+  ]
 }
