@@ -687,3 +687,37 @@ document.querySelectorAll('.svc-testimonials').forEach(function(wrap) {
     });
   });
 })();
+
+/* ── Lead tracking (GA4) ───────────────────────────────────────────────────
+   Sends events so Analytics shows actual inquiries, not just visits:
+   generate_lead  contact form sent (fires when the success message appears)
+   phone_click    tap on the phone number
+   email_click    tap on the email address
+   consult_click  any button or link to the contact page
+   portal_click   existing clients opening the client portal            */
+(function(){
+  function send(name, params){
+    try { if (typeof gtag === 'function') gtag('event', name, params || {}); } catch(e){}
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    var where = { link_text: (a.textContent || '').trim().slice(0, 60), page_path: location.pathname };
+    if (href.indexOf('tel:') === 0) send('phone_click', where);
+    else if (href.indexOf('mailto:') === 0) { if (!a.closest('.post-share')) send('email_click', where); }
+    else if (/clientsecure\.me/.test(href)) send('portal_click', where);
+    else if (/(^|\/)contact\/?$/.test(href.replace(location.origin, '')) && location.pathname.indexOf('/contact') !== 0) send('consult_click', where);
+  }, true);
+  var suc = document.getElementById('form-success');
+  if (suc && 'MutationObserver' in window) {
+    var fired = false;
+    new MutationObserver(function(){
+      if (!fired && !suc.hidden) {
+        fired = true;
+        var svc = document.querySelector('#contact-form-ejs select, #contact-form select');
+        send('generate_lead', { form: 'contact', service: svc ? svc.value : '' });
+      }
+    }).observe(suc, { attributes: true, attributeFilter: ['hidden'] });
+  }
+})();
