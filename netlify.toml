@@ -3,6 +3,9 @@
 
 [build]
   publish = "."
+  # Rebuilds the blog page, homepage "From the Blog", RSS, sitemap, llms.txt and
+  # search index from the post pages, and holds back posts dated in the future.
+  command = "python3 scripts/build_blog.py"
 
 # ── Global security headers ──────────────────────────────────────────────────
 [[headers]]

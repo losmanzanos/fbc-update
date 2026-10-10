@@ -140,3 +140,6 @@ https://www.fullbloomcounseling.com/* https://fullbloomcounseling.com/:splat 301
 /our-denver-therapy-team/:name/           /team/:name/                         301
 /our-denver-therapy-team/                 /therapists/                         301
 /blog/:year/:month/                       /blog/                               301
+
+# Build tooling is not part of the site
+/scripts/*   /404.html   404
