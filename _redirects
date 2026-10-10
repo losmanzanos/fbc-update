@@ -142,4 +142,4 @@ https://www.fullbloomcounseling.com/* https://fullbloomcounseling.com/:splat 301
 /blog/:year/:month/                       /blog/                               301
 
 # Build tooling is not part of the site
-/scripts/*   /404.html   404
+/scripts/*   /404.html   404!
