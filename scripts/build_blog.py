@@ -13,6 +13,8 @@ script reads them and regenerates:
   - share buttons on every post
   - therapist availability (badges, profile wording, contact form) from
     data/availability.json
+  - "Who to see for this" boxes on service pages from
+    data/service_therapists.json
 
 Scheduling: a post whose datePublished is later than today (Denver time) is
 left out of every list. During a Netlify build (NETLIFY=true) its folder is
@@ -356,6 +358,67 @@ def hold_back_for_preview(p):
     shutil.rmtree(path("blog", p["slug"]), ignore_errors=True)
 
 
+# ── 9. "Who to see for this" boxes on service pages ──────────────────────────
+WHO_START, WHO_END = "<!-- WHO:START -->", "<!-- WHO:END -->"
+
+
+def therapist_info(slug):
+    h = read(f"team/{slug}/index.html")
+    name = re.search(r"<h1[^>]*>([^<]+)</h1>", h).group(1).strip()
+    creds = re.search(r'margin-bottom:36px;">([^<]*)</p>', h)
+    creds = creds.group(1).strip() if creds else ""
+    photo = slug.split("-")[0]
+    note = "Online only" if "online only" in h.lower() else ("Boulder &amp; Denver" if slug == "kelsey-bennett" else "Denver &amp; online")
+    return name, creds, photo, note
+
+
+def build_who():
+    try:
+        mapping = json.loads(read("data/service_therapists.json"))
+        avail = json.loads(read("data/availability.json"))
+    except FileNotFoundError:
+        return {}
+    out = {}
+    for f in glob.glob(path("services", "*", "index.html")):
+        svc = os.path.basename(os.path.dirname(f))
+        rel = os.path.relpath(f, ROOT)
+        h = open(f, encoding="utf-8").read()
+        slugs = mapping.get(svc)
+        block = ""
+        if slugs:
+            cards = ""
+            for s in slugs:
+                name, creds, photo, note = therapist_info(s)
+                st = avail.get(s, {}).get("status", "open")
+                first = name.split()[0]
+                cards += f"""      <a class="who-card" href="../../team/{s}/">
+        <picture><source srcset="../../images/team/{photo}-square.webp" type="image/webp"><img src="../../images/team/{photo}-square.jpg" alt="{name}, {creds}" width="72" height="72" loading="lazy" decoding="async"></picture>
+        <span class="who-text">
+          <span class="who-name">{name}</span>
+          <span class="who-creds">{creds} &middot; {note}</span>
+          <span class="avail avail-{st}">{LABEL[st]}</span>
+          <span class="who-link">Meet {first} &#8594;</span>
+        </span>
+      </a>
+"""
+            block = f"""{WHO_START}
+<section class="who-box" aria-labelledby="who-heading">
+  <h2 id="who-heading" class="who-heading">Who to See for This</h2>
+  <div class="who-grid">
+{cards}  </div>
+</section>
+{WHO_END}
+"""
+        if WHO_START in h:
+            new = re.sub(re.escape(WHO_START) + r".*?" + re.escape(WHO_END) + r"\n?", lambda m: block, h, flags=re.S)
+        elif block:
+            new = h.replace('<div class="svc-cta-final">', block + '<div class="svc-cta-final">', 1)
+        else:
+            new = h
+        out[rel] = new
+    return out
+
+
 # ── main ──────────────────────────────────────────────────────────────────────
 def main():
     check = "--check" in sys.argv
@@ -373,6 +436,7 @@ def main():
     }
     outputs.update(build_share(posts))
     outputs.update(build_availability())
+    outputs.update(build_who())
     changed = [k for k, v in outputs.items() if read(k) != v]
     print(f"{len(live)} live posts, {len(future)} scheduled"
           + (": " + ", ".join(f"{p['slug']} ({p['date']})" for p in future) if future else ""))

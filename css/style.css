@@ -2095,3 +2095,21 @@ h3 + .svc-benefit-grid {
 .page-hero .avail-open { color: #B9D3C3; }
 .page-hero .avail-waitlist { color: var(--petal-lt); }
 .page-hero .avail-full { color: rgba(248,244,238,.7); opacity: 1; }
+
+/* "Who to see for this" on service pages */
+.who-box { margin: 56px 0 8px; padding-top: 36px; border-top: 1px solid var(--border); }
+.who-heading { font-size: clamp(1.4rem, 2.6vw, 1.9rem); margin-bottom: 22px; }
+.who-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+.who-card { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 20px; border: 1px solid var(--border); border-radius: 4px; background: var(--white); text-decoration: none !important; color: var(--bark); transition: border-color var(--ease), box-shadow var(--ease); }
+.who-card:hover { border-color: var(--petal); box-shadow: var(--shadow-sm); }
+.who-card img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; margin-bottom: 8px; }
+.who-name { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 600; }
+.who-creds { font-size: .78rem; color: var(--bark-mid); }
+.who-card .avail { margin: 8px 0 2px; }
+.who-link { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--petal-dark); margin-top: 6px; }
+.who-text { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+@media (max-width: 600px) {
+  .who-card { flex-direction: row; align-items: center; gap: 16px; padding: 16px; }
+  .who-card img { width: 60px; height: 60px; margin: 0; flex: 0 0 60px; }
+  .who-card .avail { margin: 6px 0 0; }
+}
