@@ -171,6 +171,7 @@ var PAGES = [
   {url:'/services/pre-marital/',title:'Pre-Marital Counseling Denver',desc:'Build a strong foundation for marriage with evidence-based premarital therapy.',cat:'Service'},
   {url:'/services/clinical-supervision/',title:'Clinical Supervision Denver',desc:'AAMFT-approved supervision for LPC and LMFT associate therapists in Colorado. Provided by Mark Whitney, ACS.',cat:'Service',tags:'mark whitney clinical supervision acs supervisor lpc lmft associates'},
   {url:'/blog/',title:'Mental Health Blog | Full Bloom Counseling',desc:'Insights on anxiety, trauma, Enneagram therapy, disordered eating, and mental health.',cat:'Blog'},
+  {url:'/blog/people-pleasing-therapy-denver/',title:'You Said Yes Before You Even Decided: Notes for Recovering People Pleasers',desc:'The automatic yes, the guilt after a no, and the resentment in between. A Denver therapist on where people pleasing comes from and what actually helps.',cat:'Blog',author:'Becca Moravec'},
   {url:'/faqs/',title:'Therapy FAQs | Full Bloom Counseling Denver',desc:'Insurance, rates, sliding scale, first sessions, online therapy questions answered.',cat:'FAQ'},
   {url:'/contact/',title:'Contact Full Bloom Counseling Denver',desc:'Schedule a free 15-minute consultation. Call 720-767-9808 or email us.',cat:'Contact'},
   {url:'/press/',title:'Press & Media | Full Bloom Counseling',desc:'Becca Moravec featured in CNN, Bumble, Jewish Unpacked. Podcast: Two Therapists in Therapy.',cat:'Press'},
