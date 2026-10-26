@@ -48,7 +48,7 @@ https://www.fullbloomcounseling.com/* https://fullbloomcounseling.com/:splat 301
 /trauma-counseling/           /services/trauma-therapy/                    301
 /emdr/                        /services/emdr/                              301
 /emdr-therapy/                /services/emdr/                              301
-/brainspotting/               /services/brainspotting-therapy/             301
+/brainspotting/               /services/trauma-therapy/                    301
 /couples/                     /services/couples-therapy/                   301
 /couples-therapy/             /services/couples-therapy/                   301
 /couples-counseling/          /services/couples-therapy/                   301
@@ -143,3 +143,11 @@ https://www.fullbloomcounseling.com/* https://fullbloomcounseling.com/:splat 301
 
 # Build tooling is not part of the site
 /scripts/*   /404.html   404!
+
+# ── Brainspotting retired (October 2026, no clinician currently offers it) ───
+/services/brainspotting-therapy/              /services/trauma-therapy/        301
+/services/brainspotting-therapy               /services/trauma-therapy/        301
+/blog/brainspotting-therapy-denver/           /blog/somatic-therapy-denver/    301
+/blog/brainspotting-therapy-denver            /blog/somatic-therapy-denver/    301
+/blog/what-is-brainspotting-therapy-denver/   /blog/somatic-therapy-denver/    301
+/blog/what-is-brainspotting-therapy-denver    /blog/somatic-therapy-denver/    301

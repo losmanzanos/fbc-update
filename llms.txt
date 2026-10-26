@@ -6,7 +6,7 @@ Website: <https://fullbloomcounseling.com>. Last updated: June 2026.
 
 ## About
 
-Full Bloom Counseling is a group private practice of licensed clinicians offering compassionate, evidence-informed therapy for individuals, couples, and families. Approach: weight-inclusive, anti-diet, trauma-informed, LGBTQ+ affirming, and HAES-aligned. Modalities include EMDR, Brainspotting, the Safe and Sound Protocol (SSP), Narrative Therapy, the Gottman Method, ACT, CBT, and IFS. Insurance: out of network, with superbills provided and sliding scale available.
+Full Bloom Counseling is a group private practice of licensed clinicians offering compassionate, evidence-informed therapy for individuals, couples, and families. Approach: weight-inclusive, anti-diet, trauma-informed, LGBTQ+ affirming, and HAES-aligned. Modalities include EMDR, the Safe and Sound Protocol (SSP), Narrative Therapy, the Gottman Method, ACT, CBT, and IFS. Insurance: out of network, with superbills provided and sliding scale available.
 
 - [About Full Bloom](https://fullbloomcounseling.com/about/): practice story, philosophy, and team overview
 - [Meet Our Therapists](https://fullbloomcounseling.com/therapists/): full clinician roster and specialties
@@ -22,7 +22,6 @@ Full Bloom Counseling is a group private practice of licensed clinicians offerin
 - [Couples Therapy](https://fullbloomcounseling.com/services/couples-therapy/): Gottman Method and Emotionally Focused Therapy
 - [Family Therapy](https://fullbloomcounseling.com/services/family-therapy/): connection and conflict resolution for families
 - [EMDR Therapy](https://fullbloomcounseling.com/services/emdr/): Eye Movement Desensitization and Reprocessing for trauma
-- [Brainspotting Therapy](https://fullbloomcounseling.com/services/brainspotting-therapy/): brain-body trauma processing with a certified practitioner
 - [Safe and Sound Protocol (SSP)](https://fullbloomcounseling.com/services/safe-and-sound/): nervous system regulation through listening therapy
 - [Disordered Eating & Body Image](https://fullbloomcounseling.com/services/disordered-eating/): weight-inclusive support for disordered eating and body image
 - [Health at Every Size (HAES)](https://fullbloomcounseling.com/services/health-at-every-size/): intuitive eating and body liberation counseling
@@ -45,7 +44,7 @@ Full Bloom Counseling is a group private practice of licensed clinicians offerin
 - [Jillian Corpora, LPC](https://fullbloomcounseling.com/team/jillian-corpora/): anxiety, depression, grief, life transitions, young adults
 - [Kirsten Adorno, LPC, MFTC](https://fullbloomcounseling.com/team/kirsten-adorno/): trauma, grief, culturally responsive and attachment-based care
 - [Kelsey Bennett, LPC](https://fullbloomcounseling.com/team/kelsey-bennett/): EMDR, SSP, trauma, anxiety, young adults
-- [Kelli Ruhl, LPC, CBP](https://fullbloomcounseling.com/team/kelli-ruhl/): certified Brainspotting, trauma, addiction recovery, somatic work
+- [Kelli Ruhl, LPC, NCC, LAC](https://fullbloomcounseling.com/team/kelli-ruhl/): trauma, addiction recovery, somatic work
 
 ## Community Partnerships
 
@@ -73,7 +72,6 @@ Full Bloom partners with the Colorado Children's Chorale, a premier Denver-based
 - [The Enneagram in Therapy: How Knowing Your Type Can Change Everything](https://fullbloomcounseling.com/blog/enneagram-in-therapy-denver/)
 - [ADHD Therapy in Denver: When Executive Dysfunction Needs More Than a Planner](https://fullbloomcounseling.com/blog/adhd-therapy-denver/)
 - [Intuitive Eating in Therapy: What It Means and Why It Works](https://fullbloomcounseling.com/blog/intuitive-eating-therapy-denver/)
-- [What Is Brainspotting Therapy? A Denver Therapist Explains](https://fullbloomcounseling.com/blog/what-is-brainspotting-therapy-denver/)
 - [Teen Therapy in Denver: What Young People Actually Need From Therapy](https://fullbloomcounseling.com/blog/teen-therapy-denver/)
 - [Depression Therapy in Denver: What It Actually Looks Like (And Why It Works)](https://fullbloomcounseling.com/blog/depression-therapy-denver/)
 - [How to Know If You’re Ready for EMDR](https://fullbloomcounseling.com/blog/how-to-know-if-youre-ready-for-emdr/)
@@ -90,7 +88,6 @@ Full Bloom partners with the Colorado Children's Chorale, a premier Denver-based
 - [How the Enneagram Can Transform Your Relationships](https://fullbloomcounseling.com/blog/enneagram-relationships-communication-denver/)
 - [Life Transitions Therapy in Denver: When Change Feels Like Too Much](https://fullbloomcounseling.com/blog/life-transitions-therapy-denver/)
 - [What Is Complex PTSD? How It Differs From PTSD, and How Therapy Helps](https://fullbloomcounseling.com/blog/what-is-complex-ptsd-denver/)
-- [Brainspotting Therapy in Denver: What It Is and What to Expect](https://fullbloomcounseling.com/blog/brainspotting-therapy-denver/)
 - [Intuitive Eating: A Beginner's Guide From a Denver Therapist](https://fullbloomcounseling.com/blog/intuitive-eating-beginners-guide-denver/)
 - [How to Begin Anti-Diet Therapy: Building Body Trust, Not Rules](https://fullbloomcounseling.com/blog/anti-diet-therapy-body-trust/)
 - [Narrative Therapy for Couples and Families: Rewriting the Stories That Keep You Stuck](https://fullbloomcounseling.com/blog/narrative-therapy-couples-families-denver/)

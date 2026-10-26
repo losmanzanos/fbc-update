@@ -20,7 +20,7 @@ Our practice is built on the belief that therapy works best when it feels human 
 
 - Individual Therapy
 - Couples & Family Therapy
-- EMDR & Brainspotting
+- EMDR & Safe and Sound Protocol
 - Safe and Sound Protocol (SSP)
 - Anxiety, Trauma, and Grief Therapy
 - Body Image & Intuitive Eating
