@@ -5,8 +5,15 @@
     <link>https://fullbloomcounseling.com/blog/</link>
     <description>Practical insights, clinical wisdom, and honest reflections on mental health, relationships, and living well, from the therapists at Full Bloom Counseling in Denver, Colorado.</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 20 Oct 2026 09:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 27 Oct 2026 09:00:00 +0000</lastBuildDate>
     <atom:link href="https://fullbloomcounseling.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>300 Days of Sunshine and Still Sad in November</title>
+      <link>https://fullbloomcounseling.com/blog/seasonal-depression-colorado/</link>
+      <guid isPermaLink="true">https://fullbloomcounseling.com/blog/seasonal-depression-colorado/</guid>
+      <pubDate>Tue, 27 Oct 2026 09:00:00 +0000</pubDate>
+      <description>Colorado is sunny, and winter can still flatten you. A Denver therapist on seasonal depression, the 300-days myth, light boxes, and when to get help.</description>
+    </item>
     <item>
       <title>What Is Internal Family Systems (IFS)? Parts Work, Explained in Plain English</title>
       <link>https://fullbloomcounseling.com/blog/internal-family-systems-ifs-therapy-denver/</link>
@@ -104,13 +111,6 @@
       <guid isPermaLink="true">https://fullbloomcounseling.com/blog/therapy-for-men-why-its-different/</guid>
       <pubDate>Sun, 14 Jun 2026 09:00:00 +0000</pubDate>
       <description>Therapy built for men isn’t softer. It’s sharper. Mark Whitney on what makes men’s therapy work and what actually changes when it does.</description>
-    </item>
-    <item>
-      <title>The Enneagram in Therapy: How Knowing Your Type Can Change Everything</title>
-      <link>https://fullbloomcounseling.com/blog/enneagram-in-therapy-denver/</link>
-      <guid isPermaLink="true">https://fullbloomcounseling.com/blog/enneagram-in-therapy-denver/</guid>
-      <pubDate>Sat, 13 Jun 2026 09:00:00 +0000</pubDate>
-      <description>The Enneagram is more than a personality quiz. Becca Moravec on how it creates a language for self-understanding that changes the therapy conversation.</description>
     </item>
   </channel>
 </rss>
