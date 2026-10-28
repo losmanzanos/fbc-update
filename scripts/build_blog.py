@@ -312,7 +312,7 @@ def avail_text(slug, kind, status, pron, old):
     return old
 
 
-def build_availability():
+def build_availability(built):
     try:
         data = json.loads(read("data/availability.json"))
     except FileNotFoundError:
@@ -322,7 +322,7 @@ def build_availability():
         rel = os.path.relpath(f, ROOT)
         if rel.startswith(("blog/", "preview/")):
             continue
-        h = open(f, encoding="utf-8").read()
+        h = built.get(rel) or open(f, encoding="utf-8").read()
         if "<!--AVAIL:" not in h:
             continue
 
@@ -435,7 +435,7 @@ def main():
         "js/main.js": build_search(live, future),
     }
     outputs.update(build_share(posts))
-    outputs.update(build_availability())
+    outputs.update(build_availability(outputs))  # pages already built above (the homepage) must not be re-read from disk
     outputs.update(build_who())
     changed = [k for k, v in outputs.items() if read(k) != v]
     print(f"{len(live)} live posts, {len(future)} scheduled"
