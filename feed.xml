@@ -5,8 +5,15 @@
     <link>https://fullbloomcounseling.com/blog/</link>
     <description>Practical insights, clinical wisdom, and honest reflections on mental health, relationships, and living well, from the therapists at Full Bloom Counseling in Denver, Colorado.</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 27 Oct 2026 09:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 03 Nov 2026 09:00:00 +0000</lastBuildDate>
     <atom:link href="https://fullbloomcounseling.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Going Home for the Holidays When Everyone Still Treats You Like You’re 15</title>
+      <link>https://fullbloomcounseling.com/blog/going-home-for-the-holidays-adult-children/</link>
+      <guid isPermaLink="true">https://fullbloomcounseling.com/blog/going-home-for-the-holidays-adult-children/</guid>
+      <pubDate>Tue, 03 Nov 2026 09:00:00 +0000</pubDate>
+      <description>Forty minutes in your parents’ kitchen and you’re a teenager again. A family therapist on why it happens and how to stay yourself at the holidays.</description>
+    </item>
     <item>
       <title>300 Days of Sunshine and Still Sad in November</title>
       <link>https://fullbloomcounseling.com/blog/seasonal-depression-colorado/</link>
@@ -104,13 +111,6 @@
       <guid isPermaLink="true">https://fullbloomcounseling.com/blog/how-to-find-a-therapist-denver/</guid>
       <pubDate>Mon, 15 Jun 2026 09:00:00 +0000</pubDate>
       <description>Looking for a therapist in Denver but not sure where to start? A practical guide on finding the right fit, without the analysis paralysis.</description>
-    </item>
-    <item>
-      <title>Therapy for Men in Denver: Why It’s Different and Why It Works</title>
-      <link>https://fullbloomcounseling.com/blog/therapy-for-men-why-its-different/</link>
-      <guid isPermaLink="true">https://fullbloomcounseling.com/blog/therapy-for-men-why-its-different/</guid>
-      <pubDate>Sun, 14 Jun 2026 09:00:00 +0000</pubDate>
-      <description>Therapy built for men isn’t softer. It’s sharper. Mark Whitney on what makes men’s therapy work and what actually changes when it does.</description>
     </item>
   </channel>
 </rss>
