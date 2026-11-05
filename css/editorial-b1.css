@@ -160,3 +160,5 @@
 .ed-facts + .ed-cream { margin-top: 0; }
 .ed-section + .ed-facts { margin-top: var(--ed-gap); }
 @media (max-width: 900px) { .ed-split > div:last-child > .ed-numbered:first-child { margin-top: 0; } }
+@media (max-width: 900px) { .b1-path li:last-child { padding-bottom: 0; } .b1-path::before { bottom: 20px; } }
+@media (min-width: 901px) { .b1-path li:not(:last-child) { width: 150%; max-width: 300px; padding-right: 12px; } }
