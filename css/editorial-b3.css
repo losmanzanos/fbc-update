@@ -25,7 +25,7 @@
 .b3-talks > li { padding: 30px 26px 34px; border-bottom: 1px solid var(--border); border-left: 1px solid var(--border); }
 .b3-talks > li:nth-child(4n+1) { border-left: 0; padding-left: 0; }
 .b3-talks h3 { display: flex; align-items: center; gap: 14px; font-family: var(--font-serif); font-weight: 500; font-size: 1.45rem; line-height: 1.2; color: var(--bark); margin: 0 0 16px; }
-.b3-talks h3::before { content: ''; flex: 0 0 auto; width: 17px; height: 17px; border: 1.5px solid var(--petal-dark); border-radius: 3px; background: var(--white); }
+.b3-talks h3::before { content: ''; flex: 0 0 auto; width: 17px; height: 17px; border: 1.5px solid var(--petal-dark); border-radius: 0; background: var(--white); }
 .b3-talks ul { list-style: none; padding: 0; margin: 0; }
 .b3-talks ul li { font-size: .93rem; line-height: 1.6; color: var(--bark-mid); padding: 7px 0 7px 16px; position: relative; }
 .b3-talks ul li::before { content: ''; position: absolute; left: 0; top: 18px; width: 7px; height: 1px; background: var(--petal); }

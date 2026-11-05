@@ -27,7 +27,7 @@
 .ed-hero-actions .ed-textlink { font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--bark); text-decoration: none; border-bottom: 1px solid var(--petal); padding-bottom: 3px; }
 .ed-hero-photo { position: relative; align-self: stretch; min-height: 520px; }
 .ed-hero-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 220px 220px 0 0; }
-.ed-hero-photo.is-square img { border-radius: 6px 6px 0 0; }
+.ed-hero-photo.is-square img { border-radius: 0; }
 .ed-hero-photo figcaption { position: absolute; left: -28px; bottom: 40px; background: var(--white); padding: 14px 18px; font-family: var(--font-serif); font-style: italic; font-size: 1rem; color: var(--bark); box-shadow: var(--shadow); max-width: 240px; line-height: 1.4; }
 
 /* Practical facts strip */
@@ -269,7 +269,7 @@
 }
 
 /* Shape rule: arches are for people, scenes get a soft rectangle */
-.ed-hero-photo img, .ed-hero-photo.is-square img { border-radius: 6px 6px 0 0; }
+.ed-hero-photo img, .ed-hero-photo.is-square img { border-radius: 0; }
 @media (max-width: 900px) { .ed-hero-photo img, .ed-hero-photo.is-square img { border-radius: 0; } }
 
 /* Couples cycle: larger and easier to read */

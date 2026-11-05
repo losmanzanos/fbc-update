@@ -676,7 +676,7 @@ try {
     '%c Full Bloom Counseling %c\n\n' +
     '%cHi, I’m Chad. I designed and built this site.%c\n\n' +
     '%c THERAPISTWEB.DESIGN %c  Websites for therapists and group practices\n' +
-    '%c STUDIONULL.IO %c  My studio\n\n' +
+    '%c STUDIONULL.IO %c  A small Denver studio: brand, web design and development\n\n' +
     '%chello@therapistweb.design   ·   (720) 466-1013%c\n' +
     'https://therapistweb.design/   https://studionull.io/\n\n' +
     '%cPsst. There’s a secret garden on this site.  ↑ ↑ ↓ ↓ ← → ← → B A',
