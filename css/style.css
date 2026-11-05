@@ -2379,3 +2379,27 @@ body:has(.ed-close) #footer .ft-invite { display: none; }
 /* Skip link: hidden unless navigating with the keyboard */
 .skip-link:focus, .skip-link:focus-visible { top: -120px; }
 html.kb-nav .skip-link:focus-visible { top: 16px; }
+
+/* Mobile menu: fit the closed menu, CTA and search on one phone screen */
+.mobile-menu { padding-top: 12px; }
+.mobile-brand { padding: 4px 44px 14px; }
+.mobile-brand-icon { width: 30px; height: 30px; margin-bottom: 8px; }
+.mobile-brand-name { font-size: 1.3rem; margin-bottom: 4px; }
+.mobile-brand-tag { line-height: 1.5; }
+.mobile-nav { padding: 0; }
+.mobile-nav > .mobile-link,
+.mobile-nav > .mobile-toggle-sub { padding-top: 12px; padding-bottom: 12px; }
+.mobile-menu-cta { padding-top: 12px; }
+.mobile-menu-cta a { padding-top: 14px; padding-bottom: 14px; }
+.mobile-bottom { padding: 10px 28px 16px; }
+.mobile-socials a { width: 40px; height: 40px; }
+.mobile-search-wrap { height: 40px; }
+.mobile-search-input { font-size: 16px; padding: 0 11px; }
+.mobile-search-btn { padding: 0 12px; }
+.msm-input { font-size: 16px; }
+@media (max-height: 640px) {
+  .mobile-brand-tag { display: none; }
+  .mobile-brand { padding-bottom: 10px; }
+  .mobile-nav > .mobile-link,
+  .mobile-nav > .mobile-toggle-sub { padding-top: 10px; padding-bottom: 10px; }
+}

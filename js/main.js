@@ -122,6 +122,7 @@ document.querySelectorAll('.nav-search, .nav-search-mobile').forEach(function(el
 var searchBtn = document.getElementById('search-submit');
 if (searchBtn) searchBtn.addEventListener('click', doSearch);
 if (searchInput) {
+  searchInput.addEventListener('input', doSearch);
   searchInput.addEventListener('keydown', function(e) {
     if (e.key === 'Enter') doSearch();
     if (e.key === 'Escape') closeSearch();
@@ -149,7 +150,7 @@ var ROOT_PATH = (function() {
 
 var PAGES = [
   {url:'/',title:'Therapists in Denver & Online | Full Bloom Counseling',desc:'Compassionate therapy for anxiety, trauma, relationships, disordered eating. Free consultations.',cat:'Home'},
-  {url:'/therapists/',title:'Meet Our Denver Therapists',desc:'Seven licensed therapists. One practice built around depth, warmth, and evidence-based care. Find the right fit for you in Denver or online across Colorado.',cat:'About'},
+  {url:'/therapists/',title:'Meet Our Denver Therapists',desc:'Seven licensed therapists. One practice built around depth, warmth, and evidence-based care. Find the right fit for you in Denver or online across Colorado.',cat:'About',tags:'team therapists counselors staff'},
   {url:'/about/',title:'About Our Denver Therapists',desc:'Seven licensed therapists specializing in trauma, anxiety, Enneagram, couples therapy, and more.',cat:'About'},
   {url:'/team/rebecca-moravec/',title:'Becca Moravec, LPC LMFT, Founder',desc:'Trauma-informed care, EMDR, IFS, Enneagram, couples therapy, Intuitive Eating, women\'s issues, people pleasers, millennial women.',cat:'Therapist',author:'Becca Moravec',tags:'emdr enneagram couples intuitive eating haes ifs internal family systems narrative therapy becca'},
   {url:'/team/natalie-siegel/',title:'Natalie Siegel, LPC, Therapist',desc:'Body image, disordered eating, Intuitive Eating, anxiety, self-esteem.',cat:'Therapist',author:'Natalie Siegel',tags:'haes anti-diet body image intuitive eating disordered eating binge emotional eating self-esteem postpartum'},
@@ -158,24 +159,24 @@ var PAGES = [
   {url:'/team/kirsten-adorno/',title:'Kirsten Adorno, LPC, MFTC, Therapist',desc:'Depression, trauma, grief, culturally responsive care, identity, attachment-based therapy, couples counseling.',cat:'Therapist',author:'Kirsten Adorno',tags:'cultural culturally responsive multicultural identity belonging depression trauma grief gottman couples attachment'},
   {url:'/team/kelsey-bennett/',title:'Kelsey Bennett, LPC, Therapist',desc:'Young adults, couples, emotional regulation, EMDR, SSP, Gottman. Boulder and online.',cat:'Therapist',author:'Kelsey Bennett',tags:'emdr safe sound protocol ssp gottman boulder colorado young adults couples'},
   {url:'/team/kelli-ruhl/',title:'Kelli Ruhl, LPC, Therapist',desc:'Trauma therapy, addiction recovery, somatic interventions, parts work.',cat:'Therapist',author:'Kelli Ruhl',tags:'trauma somatic addiction recovery lac complex ptsd cptsd parts work dbt act cbt postpartum'},
-  {url:'/services/',title:'Therapy Services in Denver',desc:'Individual, couples, family, trauma, EMDR, Enneagram, Intuitive Eating, anxiety therapy.',cat:'Services'},
-  {url:'/services/individual-therapy/',title:'Individual Therapy Denver',desc:'One-on-one therapy for anxiety, depression, trauma, relationships, life transitions. CBT, IFS, EMDR.',cat:'Service'},
-  {url:'/services/couples-therapy/',title:'Couples Therapy Denver',desc:'Strengthen connection, communication, and navigate conflict. Gottman Method, EFT.',cat:'Service'},
-  {url:'/services/family-therapy/',title:'Family Therapy Denver',desc:'Resolve conflict, improve communication, and build stronger family bonds.',cat:'Service'},
-  {url:'/services/enneagram-therapy/',title:'Enneagram Therapy Denver',desc:'Use the Enneagram for deep self-discovery with certified practitioners.',cat:'Service'},
-  {url:'/services/health-at-every-size/',title:'Intuitive Eating & HAES Therapy Denver',desc:'Heal your relationship with food and body. Weight-neutral, affirming care.',cat:'Service'},
-  {url:'/services/trauma-therapy/',title:'Trauma Therapy Denver',desc:'EMDR, SSP, somatic therapy for PTSD, complex trauma, and attachment wounds.',cat:'Service'},
-  {url:'/services/anxiety-therapy/',title:'Anxiety Therapy Denver',desc:'CBT, ACT, and mindfulness-based treatment for anxiety, panic, and perfectionism.',cat:'Service'},
-  {url:'/services/emdr/',title:'EMDR Therapy Denver',desc:'Eye Movement Desensitization and Reprocessing for trauma and PTSD.',cat:'Service'},
-  {url:'/services/disordered-eating/',title:'Disordered Eating & Body Image Therapy',desc:'Compassionate, weight-neutral support with Certified Intuitive Eating Counselors.',cat:'Service'},
-  {url:'/services/safe-and-sound/',title:'Safe and Sound Protocol (SSP) Denver',desc:'Nervous system regulation for anxiety, trauma, and sensory processing.',cat:'Service'},
+  {url:'/services/',title:'Therapy Services in Denver',desc:'Individual, couples, family, trauma, EMDR, Enneagram, Intuitive Eating, anxiety therapy.',cat:'Services',tags:'services all services'},
+  {url:'/services/individual-therapy/',title:'Individual Therapy Denver',desc:'One-on-one therapy for anxiety, depression, trauma, relationships, life transitions. CBT, IFS, EMDR.',cat:'Service',tags:'one on one counseling talk therapy cbt'},
+  {url:'/services/couples-therapy/',title:'Couples Therapy Denver',desc:'Strengthen connection, communication, and navigate conflict. Gottman Method, EFT.',cat:'Service',tags:'marriage counseling relationship gottman eft partners'},
+  {url:'/services/family-therapy/',title:'Family Therapy Denver',desc:'Resolve conflict, improve communication, and build stronger family bonds.',cat:'Service',tags:'parents kids teens blended family adult children'},
+  {url:'/services/enneagram-therapy/',title:'Enneagram Therapy Denver',desc:'Use the Enneagram for deep self-discovery with certified practitioners.',cat:'Service',tags:'enneagram personality type'},
+  {url:'/services/health-at-every-size/',title:'Intuitive Eating & HAES Therapy Denver',desc:'Heal your relationship with food and body. Weight-neutral, affirming care.',cat:'Service',tags:'haes intuitive eating anti-diet weight neutral body image'},
+  {url:'/services/trauma-therapy/',title:'Trauma Therapy Denver',desc:'EMDR, SSP, somatic therapy for PTSD, complex trauma, and attachment wounds.',cat:'Service',tags:'ptsd complex trauma cptsd emdr ifs somatic ssp'},
+  {url:'/services/anxiety-therapy/',title:'Anxiety Therapy Denver',desc:'CBT, ACT, and mindfulness-based treatment for anxiety, panic, and perfectionism.',cat:'Service',tags:'panic worry perfectionism ocd stress'},
+  {url:'/services/emdr/',title:'EMDR Therapy Denver',desc:'Eye Movement Desensitization and Reprocessing for trauma and PTSD.',cat:'Service',tags:'emdr trauma ptsd eye movement'},
+  {url:'/services/disordered-eating/',title:'Disordered Eating & Body Image Therapy',desc:'Compassionate, weight-neutral support with Certified Intuitive Eating Counselors.',cat:'Service',tags:'eating disorder binge restriction body image haes'},
+  {url:'/services/safe-and-sound/',title:'Safe and Sound Protocol (SSP) Denver',desc:'Nervous system regulation for anxiety, trauma, and sensory processing.',cat:'Service',tags:'ssp safe sound protocol nervous system polyvagal listening'},
   {url:'/services/addiction-recovery-therapy-denver/',title:'Addiction Therapy Denver',desc:'Therapy for addiction and recovery in Denver and online across Colorado with a Licensed Addiction Counselor. Trauma-informed, nonjudgmental, every stage.',cat:'Service',tags:'addiction substance use alcohol drinking sobriety sober recovery relapse lac licensed addiction counselor kelli'},
-  {url:'/services/ifs-therapy-denver/',title:'IFS Therapy Denver',desc:'Internal Family Systems (IFS) therapy in Denver and online across Colorado. Parts work for anxiety, trauma, people pleasing and the inner critic.',cat:'Service',tags:'ifs internal family systems parts work inner critic protectors exiles self richard schwartz'},
-  {url:'/services/teen-therapy-denver/',title:'Teen Therapy Denver',desc:'Therapy for teens in Denver and online across Colorado: anxiety, depression, school stress, grief, ADHD and identity. A therapist your teen can talk to.',cat:'Service',tags:'teen teens teenager adolescent high school school anxiety parents kids youth'},
+  {url:'/services/ifs-therapy-denver/',title:'IFS Therapy Denver',desc:'Internal Family Systems (IFS) therapy in Denver and online across Colorado. Parts work for anxiety, trauma, people pleasing and the inner critic.',cat:'Service',tags:'ifs internal family systems parts work inner critic protectors exiles self richard schwartz people pleasing'},
+  {url:'/services/teen-therapy-denver/',title:'Teen Therapy Denver',desc:'Therapy for teens in Denver and online across Colorado: anxiety, depression, school stress, grief, ADHD and identity. A therapist your teen can talk to.',cat:'Service',tags:'teen teens teenager adolescent high school school anxiety parents kids youth middle'},
   {url:'/services/lgbtq-affirming-therapy-denver/',title:'LGBTQ+ Affirming Therapy Denver',desc:'LGBTQ+ affirming therapy in Denver and online across Colorado for individuals and couples. Identity, coming out, family, relationships and more.',cat:'Service',tags:'lgbtq lgbt gay lesbian bisexual queer trans transgender nonbinary coming out affirming pride'},
-  {url:'/services/emotionally-focused-couples-therapy-denver/',title:'Emotionally Focused Couples Therapy (EFT)',desc:'Emotionally Focused Therapy (EFT) for couples across Colorado. Break the pursue-withdraw cycle and rebuild emotional safety. Online sessions statewide.',cat:'Service',tags:'eft emotionally focused therapy couples sue johnson attachment hold me tight pursue withdraw'},
-  {url:'/services/pre-marital/',title:'Pre-Marital Counseling Denver',desc:'Build a strong foundation for marriage with evidence-based premarital therapy.',cat:'Service'},
-  {url:'/services/clinical-supervision/',title:'Clinical Supervision Denver',desc:'AAMFT-approved supervision for LPC and LMFT associate therapists in Colorado. Provided by Mark Whitney, ACS.',cat:'Service',tags:'mark whitney clinical supervision acs supervisor lpc lmft associates'},
+  {url:'/services/emotionally-focused-couples-therapy-denver/',title:'Emotionally Focused Couples Therapy (EFT)',desc:'Emotionally Focused Therapy (EFT) for couples across Colorado. Break the pursue-withdraw cycle and rebuild emotional safety. Online sessions statewide.',cat:'Service',tags:'eft emotionally focused therapy couples sue johnson attachment hold me tight pursue withdraw marriage'},
+  {url:'/services/pre-marital/',title:'Pre-Marital Counseling Denver',desc:'Build a strong foundation for marriage with evidence-based premarital therapy.',cat:'Service',tags:'premarital pre-marital engaged wedding prepare enrich marriage'},
+  {url:'/services/clinical-supervision/',title:'Clinical Supervision Denver',desc:'AAMFT-approved supervision for LPC and LMFT associate therapists in Colorado. Provided by Mark Whitney, ACS.',cat:'Service',tags:'mark whitney clinical supervision acs supervisor lpc lmft associates candidate associate'},
   {url:'/blog/',title:'Mental Health Blog | Full Bloom Counseling',desc:'Insights on anxiety, trauma, Enneagram therapy, disordered eating, and mental health.',cat:'Blog'},
   {url:'/blog/religious-trauma-faith-deconstruction-therapy-colorado/',title:'Leaving Your Faith, or Halfway Out: Religious Trauma and Faith Deconstruction',desc:'Questioning or leaving religion can bring grief, shame and fear that outlast belief. A Colorado therapist on religious trauma and what helps.',cat:'Blog',author:'Mark Whitney'},
   {url:'/blog/going-home-for-the-holidays-adult-children/',title:'Going Home for the Holidays When Everyone Still Treats You Like You’re 15',desc:'Forty minutes in your parents’ kitchen and you’re a teenager again. A family therapist on why it happens and how to stay yourself at the holidays.',cat:'Blog',author:'Becca Moravec'},
@@ -185,18 +186,20 @@ var PAGES = [
   {url:'/blog/school-anxiety-teens-denver/',title:'When Your Teen Dreads Going Back to School',desc:'Sunday night stomachaches, calls from the nurse, a kid who used to like school. A Denver family therapist on teen school anxiety and what actually helps.',cat:'Blog',author:'Becca Moravec'},
   {url:'/blog/internal-family-systems-ifs-therapy-denver/',title:'What Is Internal Family Systems (IFS)? Parts Work, Explained in Plain English',desc:'Managers, exiles, firefighters and Self. A Denver therapist who uses IFS daily explains how parts work, what a session looks like, and who it helps.',cat:'Blog',author:'Becca Moravec'},
   {url:'/blog/people-pleasing-therapy-denver/',title:'You Said Yes Before You Even Decided: Notes for Recovering People Pleasers',desc:'The automatic yes, the guilt after a no, and the resentment in between. A Denver therapist on where people pleasing comes from and what actually helps.',cat:'Blog',author:'Becca Moravec'},
-  {url:'/faqs/',title:'Therapy FAQs | Full Bloom Counseling Denver',desc:'Insurance, rates, sliding scale, first sessions, online therapy questions answered.',cat:'FAQ'},
-  {url:'/contact/',title:'Contact Full Bloom Counseling Denver',desc:'Schedule a free 15-minute consultation. Call 720-767-9808 or email us.',cat:'Contact'},
+  {url:'/faqs/',title:'Therapy FAQs | Full Bloom Counseling Denver',desc:'Insurance, rates, sliding scale, first sessions, online therapy questions answered.',cat:'FAQ',tags:'faq insurance cost price rates superbill sliding scale'},
+  {url:'/contact/',title:'Contact Full Bloom Counseling Denver',desc:'Schedule a free 15-minute consultation. Call 720-767-9808 or email us.',cat:'Contact',tags:'contact book appointment consultation schedule phone email'},
   {url:'/press/',title:'Press & Media | Full Bloom Counseling',desc:'Becca Moravec featured in CNN, Bumble, Jewish Unpacked. Podcast: Two Therapists in Therapy.',cat:'Press'},
+  {url:'/boulder/',title:'Boulder Therapy & Counseling',desc:'In-person and online therapy in Boulder for EMDR, trauma, anxiety and young adults with Kelsey Bennett, LPC. Free 15-minute consultation.',cat:'Location',tags:'boulder east boulder arapahoe office location kelsey'},
+  {url:'/partnerships/',title:'Community Partnerships',desc:'Full Bloom partners with the Colorado Children\'s Chorale, providing mental health support on every concert tour.',cat:'About',tags:'partnership colorado childrens chorale community'},
   // -- Missing service pages --
-  {url:'/services/therapy-for-men-denver/',title:'Therapy for Men in Denver',desc:'A space to work through it. Anxiety, relationships, identity, anger, and the things men rarely say out loud.',cat:'Service'},
-  {url:'/services/therapy-for-women-denver/',title:'Therapy for Women in Denver',desc:'Individual therapy for anxiety, burnout, body image, relationships, life transitions, and self-discovery.',cat:'Service'},
-  {url:'/services/therapy-young-adults-denver/',title:'Therapy for Young Adults Denver',desc:'Navigating your 20s and early 30s. Identity, relationships, anxiety, career uncertainty, and new independence.',cat:'Service'},
-  {url:'/services/grief-loss-therapy/',title:'Grief & Loss Therapy Denver',desc:'Compassionate support for loss, anticipatory grief, complicated grief, and major life transitions.',cat:'Service'},
-  {url:'/services/adhd-neurodivergent-therapy-denver/',title:'ADHD & Neurodivergent Therapy Denver',desc:'Therapy that works with how your brain actually works. ADHD, autism, sensory processing.',cat:'Service'},
-  {url:'/services/postpartum-perinatal-therapy/',title:'Postpartum & Perinatal Therapy Denver',desc:'Support for postpartum depression, anxiety, birth trauma, and the emotional complexity of new parenthood.',cat:'Service'},
-  {url:'/services/depression-therapy-denver/',title:'Depression Therapy Denver',desc:'Evidence-based treatment for depression. CBT, EMDR, somatic therapy for real change, not just management.',cat:'Service'},
-  {url:'/services/online-therapy-colorado/',title:'Online Therapy Colorado',desc:'All services available via secure telehealth statewide. Denver to Durango, Boulder to Colorado Springs.',cat:'Service'},
+  {url:'/services/therapy-for-men-denver/',title:'Therapy for Men in Denver',desc:'A space to work through it. Anxiety, relationships, identity, anger, and the things men rarely say out loud.',cat:'Service',tags:'men mens male anger'},
+  {url:'/services/therapy-for-women-denver/',title:'Therapy for Women in Denver',desc:'Individual therapy for anxiety, burnout, body image, relationships, life transitions, and self-discovery.',cat:'Service',tags:'women womens mental load people pleasing'},
+  {url:'/services/therapy-young-adults-denver/',title:'Therapy for Young Adults Denver',desc:'Navigating your 20s and early 30s. Identity, relationships, anxiety, career uncertainty, and new independence.',cat:'Service',tags:'young adults 20s 30s college quarter life'},
+  {url:'/services/grief-loss-therapy/',title:'Grief & Loss Therapy Denver',desc:'Compassionate support for loss, anticipatory grief, complicated grief, and major life transitions.',cat:'Service',tags:'grief loss bereavement death miscarriage divorce'},
+  {url:'/services/adhd-neurodivergent-therapy-denver/',title:'ADHD & Neurodivergent Therapy Denver',desc:'Therapy that works with how your brain actually works. ADHD, autism, sensory processing.',cat:'Service',tags:'adhd add autism neurodivergent executive function'},
+  {url:'/services/postpartum-perinatal-therapy/',title:'Postpartum & Perinatal Therapy Denver',desc:'Support for postpartum depression, anxiety, birth trauma, and the emotional complexity of new parenthood.',cat:'Service',tags:'postpartum perinatal pregnancy new mom birth trauma ppd miscarriage'},
+  {url:'/services/depression-therapy-denver/',title:'Depression Therapy Denver',desc:'Evidence-based treatment for depression. CBT, EMDR, somatic therapy for real change, not just management.',cat:'Service',tags:'depression sad low mood'},
+  {url:'/services/online-therapy-colorado/',title:'Online Therapy Colorado',desc:'All services available via secure telehealth statewide. Denver to Durango, Boulder to Colorado Springs.',cat:'Service',tags:'online telehealth virtual video remote'},
   // -- Blog posts --
   {url:'/blog/family-vacation-stress-family-therapy/',title:'Why Family Vacations Bring Out the Worst in Us (Even the Good Ones)',desc:'Months of planning, and the meltdown still hits by 2 p.m. A Denver family therapist, writing from Disneyland, on why trips get tense and what helps.',cat:'Blog',author:'Becca Moravec'},
   {url:'/blog/mental-load-women-therapy-denver/',title:'The Mental Load: Why You’re Exhausted When Nothing Is Technically Wrong',desc:'Tracking every appointment, birthday and permission slip is real work. A Denver therapist on the mental load, why rest doesn’t fix it, and what does.',cat:'Blog',author:'Becca Moravec'},
@@ -242,6 +245,48 @@ var PAGES = [
   {url:'/blog/how-to-know-if-youre-ready-for-emdr/',title:'How to Know If You\'re Ready for EMDR',desc:'Wondering if EMDR is right for you? Becca Moravec shares the signs you\'re prepared and what to expect from this powerful trauma treatment.',cat:'Blog',author:'Becca Moravec'},
 ];
 
+/* Search matcher shared by the desktop overlay and the mobile modal.
+   Every meaningful word must match somewhere; short words (EFT, IFS, SSP)
+   must match a whole word so "eft" doesn't hit "left". Title hits rank first. */
+var SEARCH_SOFT = ['therapy','therapist','therapists','counseling','counselor','counselors','denver','colorado','near','me','for','the','a','an','and','in','of','to','with','my','about'];
+function searchPages(raw) {
+  var q = raw.toLowerCase().replace(/[^a-z0-9+&' -]/g, ' ').trim();
+  if (!q) return [];
+  var words = q.split(/\s+/).filter(Boolean);
+  var hard = words.filter(function(w) { return SEARCH_SOFT.indexOf(w) === -1; });
+  if (!hard.length) {
+    hard = words.filter(function(w) { return /^(therap|counsel)/.test(w); }).slice(0, 1);
+    if (!hard.length) hard = words;
+  }
+  function has(text, w) {
+    if (!text) return false;
+    text = text.toLowerCase();
+    if (w.length <= 3) {
+      var esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      return new RegExp('(^|[^a-z0-9])' + esc + '([^a-z0-9]|$)').test(text);
+    }
+    return text.indexOf(w) !== -1;
+  }
+  var scored = [];
+  PAGES.forEach(function(p) {
+    var score = 0;
+    for (var i = 0; i < hard.length; i++) {
+      var w = hard[i], s = 0;
+      if (has(p.title, w)) s = 4;
+      else if (has(p.tags, w)) s = 3;
+      else if (has(p.author, w) || has(p.cat, w)) s = 2;
+      else if (has(p.desc, w) || has(p.url.replace(/[-/]/g, ' '), w)) s = 1;
+      if (!s) return;
+      score += s;
+    }
+    if (p.title.toLowerCase().indexOf(q) !== -1) score += 5;
+    if (p.cat === 'Service' || p.cat === 'Therapist') score += 1;
+    scored.push({ p: p, s: score });
+  });
+  scored.sort(function(a, b) { return b.s - a.s; });
+  return scored.map(function(x) { return x.p; });
+}
+
 function doSearch() {
   if (!searchInput) return;
   var q = searchInput.value.toLowerCase().trim();
@@ -249,14 +294,7 @@ function doSearch() {
   if (!results) return;
   if (!q) { results.innerHTML = ''; return; }
 
-  var hits = PAGES.filter(function(p) {
-    return p.title.toLowerCase().includes(q) ||
-           p.desc.toLowerCase().includes(q) ||
-           p.cat.toLowerCase().includes(q) ||
-           p.url.toLowerCase().includes(q) ||
-           (p.author && p.author.toLowerCase().includes(q)) ||
-           (p.tags && p.tags.toLowerCase().includes(q));
-  });
+  var hits = searchPages(q);
 
   if (hits.length === 0) {
     results.innerHTML = '<p class="search-no-results">No results found for \u201c' + q + '\u201d. Try a different search.</p>';
@@ -471,14 +509,7 @@ setTimeout(function() {
   function runMobileSearch() {
     var q = msmInput.value.toLowerCase().trim();
     if (!q) { msmResults.innerHTML = ''; return; }
-    var hits = PAGES.filter(function(p) {
-      return p.title.toLowerCase().includes(q) ||
-             p.desc.toLowerCase().includes(q) ||
-             p.cat.toLowerCase().includes(q) ||
-             p.url.toLowerCase().includes(q) ||
-             (p.author && p.author.toLowerCase().includes(q)) ||
-             (p.tags && p.tags.toLowerCase().includes(q));
-    });
+    var hits = searchPages(q);
     if (!hits.length) {
       msmResults.innerHTML = '<p class="msm-no-results">No results for \u201c' + q + '\u201d</p>';
       return;
@@ -501,6 +532,7 @@ setTimeout(function() {
   }
   document.getElementById('msm-close').addEventListener('click', closeMobileSearch);
   document.getElementById('msm-submit').addEventListener('click', runMobileSearch);
+  msmInput.addEventListener('input', runMobileSearch);
   msmInput.addEventListener('keydown', function(e) {
     if (e.key === 'Enter') runMobileSearch();
     if (e.key === 'Escape') closeMobileSearch();
