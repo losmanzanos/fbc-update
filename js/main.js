@@ -677,11 +677,15 @@ setTimeout(function() {
    Spring petals (Apr 1 to May 31), fall aspen leaves (Sep 20 to Nov 10),
    winter snow (Dec 15 to Jan 5). Nothing the rest of the year.
    Preview any season with ?season=spring|fall|winter.
+   SEASONAL_ON switches the automatic run on or off. While it is false,
+   visitors see nothing, but the ?season= preview still works.
    ══════════════════════════════════════════════ */
 (function() {
+  var SEASONAL_ON = false; // off until Becca signs off
   if (!/^\/(index\.html)?$/.test(location.pathname)) return;
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var forced = (location.search.match(/[?&]season=(spring|fall|winter)/) || [])[1];
+  if (!SEASONAL_ON && !forced) return;
   var d = new Date(), md = (d.getMonth() + 1) * 100 + d.getDate();
   var season = forced || (md >= 401 && md <= 531 ? 'spring' : md >= 920 && md <= 1110 ? 'fall' : (md >= 1215 || md <= 105) ? 'winter' : null);
   if (!season) return;
