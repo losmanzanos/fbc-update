@@ -411,7 +411,7 @@ def build_who():
 """
             block = f"""{WHO_START}
 <section class="who-box" aria-labelledby="who-heading">
-  <h2 id="who-heading" class="who-heading">Who to See for This</h2>
+  <h2 id="who-heading" class="who-heading">Who to see for this</h2>
   <div class="who-grid who-count-{len(slugs)}">
 {cards}  </div>
 </section>

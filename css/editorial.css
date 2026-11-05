@@ -21,7 +21,7 @@
 .ed-hero .breadcrumb { font-size: .72rem; letter-spacing: .08em; color: var(--bark-mid); margin: 0 0 36px; }
 .ed-hero .breadcrumb a { color: inherit; }
 .ed-hero h1 { font-family: var(--font-serif); font-weight: 500; font-size: clamp(2.8rem, 6vw, 4.8rem); line-height: 1.02; color: var(--bark); margin: 0 0 28px; letter-spacing: -.01em; }
-.ed-hero h1 em { font-style: italic; color: var(--petal-dark); }
+.ed-hero h1 em { font-style: inherit; color: inherit; } /* no single styled phrase in hero titles */
 .ed-hero-dek { font-size: 1.12rem; line-height: 1.75; color: var(--bark-mid); max-width: 46ch; margin: 0 0 36px; }
 .ed-hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
 .ed-hero-actions .ed-textlink { font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--bark); text-decoration: none; border-bottom: 1px solid var(--petal); padding-bottom: 3px; }
