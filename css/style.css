@@ -2257,3 +2257,28 @@ h3 + .svc-benefit-grid {
 /* Typography: no orphan words in headings, nicer paragraph rag */
 h1, h2, h3, h4, .ed-lede, .ft-invite-line { text-wrap: balance; }
 p, li { text-wrap: pretty; }
+
+/* Bio pages: light editorial header (no shared photo) */
+.page-hero.bio-hero { background: var(--cream); height: auto !important; min-height: 0 !important; max-height: none !important; }
+.bio-hero .page-hero-content { position: relative; padding: calc(var(--nav-h) + 56px) 0 56px; text-align: left; }
+.bio-hero .page-hero-content .container { max-width: 1240px; }
+.bio-hero .breadcrumb, .bio-hero .breadcrumb a { color: var(--bark-mid); text-shadow: none; font-size: .72rem; letter-spacing: .08em; }
+.bio-hero .eyebrow { color: var(--petal-dark); }
+.bio-hero h1 { color: var(--bark); font-family: var(--font-serif); font-weight: 500; font-size: clamp(3rem, 7vw, 5.6rem); line-height: 1; margin: 14px 0 14px; text-shadow: none; letter-spacing: -.01em; }
+.bio-hero p { color: var(--bark-mid) !important; text-shadow: none; }
+.bio-hero .hero-specialty { font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--petal-dark) !important; margin: 8px 0 18px; font-family: var(--font-sans); }
+.bio-hero .page-hero-content, .bio-hero .page-hero-content * { text-align: left !important; }
+.bio-hero .page-hero-content p { margin-left: 0; margin-right: 0; max-width: none; }
+.bio-hero .eyebrow { text-shadow: none; background: none; }
+.bio-hero .page-hero-content p.breadcrumb { margin: 0 0 28px; }
+.bio-hero .avail { background: rgba(95,127,110,.1); }
+.bio-hero .avail-open { color: #4F6F5E; }
+.bio-hero .avail-waitlist { color: var(--petal-dark); background: rgba(168,114,78,.1); }
+.bio-hero .avail-full { color: var(--bark-mid); background: rgba(58,46,36,.06); }
+@media (max-width: 1024px) { .bio-hero .page-hero-content p.hero-specialty { display: block; } }
+/* the name is now the page headline, so the body repeat goes */
+.bio-body > .eyebrow:first-child, .bio-body > .eyebrow:first-child + h2 { display: none; }
+.bio-photo-wrap { border-radius: 999px 999px 6px 6px; overflow: hidden; }
+.bio-photo-wrap img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 22%; border-radius: 0; display: block; }
+@media (max-width: 1024px) { #header .dropdown, #header .dropdown-sub { display: none !important; } }
+body:has(.ed-close) #footer .ft-invite { display: none; }
