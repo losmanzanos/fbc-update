@@ -24,7 +24,8 @@
     "mark-whitney",
     "jillian-corpora",
     "kelsey-bennett",
-    "natalie-siegel"
+    "natalie-siegel",
+    "kelli-ruhl"
   ],
   "depression-therapy-denver": [
     "jillian-corpora",
@@ -60,7 +61,12 @@
   ],
   "online-therapy-colorado": [
     "kirsten-adorno",
-    "mark-whitney"
+    "mark-whitney",
+    "rebecca-moravec",
+    "kelsey-bennett",
+    "jillian-corpora",
+    "kelli-ruhl",
+    "natalie-siegel"
   ],
   "pre-marital": [
     "rebecca-moravec",
@@ -92,5 +98,14 @@
   ],
   "emotionally-focused-couples-therapy-denver": [
     "kirsten-adorno"
+  ],
+  "lgbtq-affirming-therapy-denver": [
+    "rebecca-moravec",
+    "kelsey-bennett",
+    "jillian-corpora",
+    "kelli-ruhl",
+    "natalie-siegel",
+    "kirsten-adorno",
+    "mark-whitney"
   ]
 }

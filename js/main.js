@@ -177,6 +177,7 @@ var PAGES = [
   {url:'/services/pre-marital/',title:'Pre-Marital Counseling Denver',desc:'Build a strong foundation for marriage with evidence-based premarital therapy.',cat:'Service'},
   {url:'/services/clinical-supervision/',title:'Clinical Supervision Denver',desc:'AAMFT-approved supervision for LPC and LMFT associate therapists in Colorado. Provided by Mark Whitney, ACS.',cat:'Service',tags:'mark whitney clinical supervision acs supervisor lpc lmft associates'},
   {url:'/blog/',title:'Mental Health Blog | Full Bloom Counseling',desc:'Insights on anxiety, trauma, Enneagram therapy, disordered eating, and mental health.',cat:'Blog'},
+  {url:'/blog/religious-trauma-faith-deconstruction-therapy-colorado/',title:'Leaving Your Faith, or Halfway Out: Religious Trauma and Faith Deconstruction',desc:'Questioning or leaving religion can bring grief, shame and fear that outlast belief. A Colorado therapist on religious trauma and what helps.',cat:'Blog',author:'Mark Whitney'},
   {url:'/blog/going-home-for-the-holidays-adult-children/',title:'Going Home for the Holidays When Everyone Still Treats You Like You’re 15',desc:'Forty minutes in your parents’ kitchen and you’re a teenager again. A family therapist on why it happens and how to stay yourself at the holidays.',cat:'Blog',author:'Becca Moravec'},
   {url:'/blog/seasonal-depression-colorado/',title:'300 Days of Sunshine and Still Sad in November',desc:'Colorado is sunny, and winter can still flatten you. A Denver therapist on seasonal depression, the 300-days myth, light boxes, and when to get help.',cat:'Blog',author:'Becca Moravec'},
   {url:'/blog/miscarriage-grief-therapy-denver/',title:'Nobody Sends Flowers After a Miscarriage',desc:'Miscarriage ends 10 to 20 percent of known pregnancies, and most people grieve it quietly. A Denver perinatal therapist on that grief and when to get support.',cat:'Blog',author:'Becca Moravec'},
@@ -619,7 +620,16 @@ setTimeout(function() {
 
 /* Hello, fellow developer */
 try {
-  console.log('%cFull Bloom Counseling%c\nDesigned and built with care by therapistweb.design\nhttps://therapistweb.design/', 'font: italic 22px Georgia, serif; color: #A8724E;', 'font: 12px system-ui, sans-serif; color: #5C4A38; line-height: 1.6;');
+  console.log(
+    '%cFull Bloom Counseling%c\n\nHi, I\u2019m Chad. I designed and built this site.\nI make websites for therapists at %ctherapistweb.design%c, and I also built %crunstudionull.io%c.\n\nhttps://therapistweb.design/\nhttps://runstudionull.io/\n\n%cPsst. There\u2019s a secret on this site. \u2191 \u2191 \u2193 \u2193 \u2190 \u2192 \u2190 \u2192 B A',
+    'font: italic 24px Georgia, serif; color: #A8724E;',
+    'font: 13px system-ui, sans-serif; color: #8A7660; line-height: 1.7;',
+    'font: 600 13px system-ui, sans-serif; color: #A8724E;',
+    'font: 13px system-ui, sans-serif; color: #8A7660;',
+    'font: 600 13px system-ui, sans-serif; color: #A8724E;',
+    'font: 13px system-ui, sans-serif; color: #8A7660;',
+    'font: italic 12px system-ui, sans-serif; color: #A8724E;'
+  );
 } catch (e) {}
 
 })();
@@ -794,4 +804,68 @@ document.querySelectorAll('.svc-testimonials').forEach(function(wrap) {
       }
     }).observe(suc, { attributes: true, attributeFilter: ['hidden'] });
   }
+})();
+
+/* ── Blog index: topic filters + show more ──────────────────────────────
+   Every post stays in the HTML (good for search); visitors see 12 at a time. */
+(function() {
+  if (!/\/blog\/?(index\.html)?$/.test(location.pathname)) return;
+  var cards = Array.prototype.slice.call(document.querySelectorAll('main .blog-card'));
+  if (cards.length < 13) return;
+  var grid = cards[0].parentNode, PAGE = 12, shown = PAGE, active = 'all';
+  var TOPICS = [
+    ['all', 'All posts', /./],
+    ['relationships', 'Relationships', /COUPLE|FAMIL|RELATIONSHIP|MARRI|ATTACHMENT|PARENT/],
+    ['trauma', 'Trauma', /TRAUMA|PTSD|EMDR|SOMATIC|SAFE AND SOUND|SAFE & SOUND/],
+    ['anxiety', 'Anxiety & mood', /ANXIETY|DEPRESS|BURNOUT|PANIC|SAD IN|SELF-CARE|PEOPLE PLEAS/],
+    ['body', 'Food & body', /HEALTH AT EVERY|BODY|EATING|HAES|DIET/],
+    ['grief', 'Grief & loss', /GRIEF|LOSS|MISCARRIAGE/],
+    ['growth', 'Identity & growth', /GROWTH|DISCOVERY|WOMEN|\bMEN\b|ENNEAGRAM|POSTPARTUM|QUARTER|STUCK|TRANSITION|ADHD|TEEN|FAITH/],
+    ['start', 'Starting therapy', /THERAPY PROCESS|THERAPY APPROACH|FIRST|COST|INSURANCE|FIND A THERAPIST|HOW LONG|ONLINE THERAPY|STARTING|SUPERVISION/]
+  ];
+  cards.forEach(function(c) {
+    var cat = ((c.querySelector('.blog-card-cat') || {}).textContent || '') + ' ' + ((c.querySelector('.blog-card-title') || {}).textContent || '');
+    cat = cat.toUpperCase();
+    c.dataset.topics = TOPICS.filter(function(t) { return t[2].test(cat); }).map(function(t) { return t[0]; }).join(' ');
+  });
+  var bar = document.createElement('div');
+  bar.className = 'blog-filters';
+  bar.setAttribute('role', 'toolbar');
+  bar.setAttribute('aria-label', 'Filter posts by topic');
+  TOPICS.forEach(function(t) {
+    var n = cards.filter(function(c) { return c.dataset.topics.indexOf(t[0]) > -1; }).length;
+    if (!n) return;
+    var b = document.createElement('button');
+    b.type = 'button'; b.dataset.topic = t[0];
+    b.innerHTML = t[1] + ' <span>' + n + '</span>';
+    b.setAttribute('aria-pressed', t[0] === 'all' ? 'true' : 'false');
+    bar.appendChild(b);
+  });
+  grid.parentNode.insertBefore(bar, grid);
+  var more = document.createElement('div');
+  more.className = 'blog-more';
+  more.innerHTML = '<button type="button" class="btn btn-outline"></button><p aria-live="polite"></p>';
+  grid.parentNode.insertBefore(more, grid.nextSibling);
+  var moreBtn = more.querySelector('button'), status = more.querySelector('p');
+  function render() {
+    var match = cards.filter(function(c) { return c.dataset.topics.indexOf(active) > -1; });
+    cards.forEach(function(c) { c.hidden = true; });
+    match.forEach(function(c, i) { c.hidden = i >= shown; if (!c.hidden) c.classList.add('visible', 'in-view', 'is-visible'); });
+    var left = match.length - Math.min(shown, match.length);
+    moreBtn.hidden = left <= 0;
+    moreBtn.textContent = 'Show ' + Math.min(left, PAGE) + ' more';
+    status.textContent = 'Showing ' + Math.min(shown, match.length) + ' of ' + match.length + ' posts';
+  }
+  bar.addEventListener('click', function(e) {
+    var b = e.target.closest('button'); if (!b) return;
+    active = b.dataset.topic; shown = PAGE;
+    bar.querySelectorAll('button').forEach(function(x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+    render();
+  });
+  moreBtn.addEventListener('click', function() {
+    var firstNew = cards.filter(function(c) { return c.dataset.topics.indexOf(active) > -1; })[shown];
+    shown += PAGE; render();
+    if (firstNew) { var a = firstNew.querySelector('a'); if (a) a.focus({ preventScroll: true }); }
+  });
+  render();
 })();
