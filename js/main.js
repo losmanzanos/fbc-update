@@ -523,20 +523,14 @@ setTimeout(function() {
   overlay.setAttribute('aria-modal', 'true');
   overlay.setAttribute('aria-label', 'Bloom, a hidden game');
   overlay.innerHTML =
-    '<div class="konami-tv">' +
-      '<div class="konami-screen-bezel">' +
-        '<div class="konami-screen">' +
-          '<canvas class="konami-game" width="240" height="180" aria-label="Bloom game"></canvas>' +
-          '<div class="konami-scanlines"></div>' +
-        '</div>' +
-      '</div>' +
-      '<div class="konami-tv-bottom">' +
-        '<div class="konami-speaker"></div>' +
-        '<div class="konami-tv-knobs"><span></span><span></span><span></span></div>' +
-      '</div>' +
+    '<div class="kt">' +
+      '<div class="kt-screen"><canvas class="konami-game" width="240" height="190" aria-label="Bloom game"></canvas><div class="kt-glass"></div></div>' +
+      '<picture><source srcset="/images/tv-set-700.webp 700w, /images/tv-set.webp 994w" sizes="(max-width: 750px) 92vw, 720px" type="image/webp"><img class="kt-set" src="/images/tv-set.png" alt="" width="994" height="683"></picture>' +
+      '<span class="kt-lcd" aria-hidden="true">BLOOM</span>' +
+      '<button class="kt-knob" type="button" aria-label="New round"><picture><source srcset="/images/tv-knob.webp" type="image/webp"><img src="/images/tv-knob.png" alt="" width="74" height="74"></picture></button>' +
     '</div>' +
     '<button type="button" class="konami-close">Close &#10005;</button>' +
-    '<p class="konami-hint">You found the secret garden.</p>';
+    '<p class="konami-hint">You found the secret garden. Turn the dial for a new round.</p>';
   document.body.appendChild(overlay);
   var canvas = overlay.querySelector('canvas'), loaded = false;
 
@@ -546,7 +540,7 @@ setTimeout(function() {
     function go() { if (window.FBBloom) window.FBBloom.start(canvas); }
     if (loaded) return go();
     var sc = document.createElement('script');
-    sc.src = '/js/bloom.js?v=2'; sc.onload = function() { loaded = true; go(); };
+    sc.src = '/js/bloom.js?v=3'; sc.onload = function() { loaded = true; go(); };
     document.head.appendChild(sc);
   }
   function hideKonami() {
@@ -567,6 +561,16 @@ setTimeout(function() {
   });
 
   overlay.querySelector('.konami-close').addEventListener('click', hideKonami);
+  var knob = overlay.querySelector('.kt-knob'), lcd = overlay.querySelector('.kt-lcd'), turns = 0, lcdT = null;
+  knob.addEventListener('click', function() {
+    turns++; knob.style.setProperty('--rot', (20 + turns * 45) + 'deg');
+    if (window.FBBloom) window.FBBloom.restart();
+  });
+  setInterval(function() {
+    if (!overlay.classList.contains('active') || !window.FBBloom) return;
+    var g = window.FBBloom.score(); if (!g) return;
+    lcd.textContent = g.state === 'play' ? ('\u273F ' + String(g.s).padStart(2, '0')) : 'BLOOM';
+  }, 250);
   overlay.addEventListener('click', function(e) { if (e.target === overlay) hideKonami(); });
 
   // Same code on touch screens: swipe up, up, down, down, left, right, left, right, then tap twice

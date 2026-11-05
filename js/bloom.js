@@ -4,7 +4,7 @@
    Original pixel art, no outside assets. Loaded on demand by main.js. */
 (function () {
   'use strict';
-  var W = 240, H = 180, WORD = 'FULLBLOOM';
+  var W = 240, H = 190, WORD = 'FULLBLOOM';
   var C = { sky: '#1f2a1c', ground: '#2b3a25', grass: '#3b4f31', stem: '#6f9a55', bud: '#9fc27a',
             wilt: '#6b5a44', petal: ['#E8B898', '#F2C9B0', '#C8967A', '#F6E3C6'], core: '#E6B04B',
             bee: '#F2C14E', stripe: '#2A211A', wing: '#F8F4EE', text: '#F8F4EE', dim: '#A89A84', accent: '#E8B898' };
@@ -178,6 +178,8 @@
         raf = requestAnimationFrame(loop);
       })(last);
     },
-    stop: function () { cancelAnimationFrame(raf); if (current) current.unbind(); current = null; }
+    stop: function () { cancelAnimationFrame(raf); if (current) current.unbind(); current = null; },
+    restart: function () { if (current) current.start(); },
+    score: function () { return current ? { s: current.score, state: current.state } : null; }
   };
 })();
