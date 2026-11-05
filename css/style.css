@@ -2238,7 +2238,7 @@ h3 + .svc-benefit-grid {
 .service-card::after { display: none; } .service-card .link { border-bottom: 0; }
 
 /* Take a breath overlay */
-.breathe { position: fixed; inset: 0; z-index: 10000; background: radial-gradient(circle at 50% 45%, #4A3B2E 0%, #2A211A 70%); color: var(--cream); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity .6s ease, visibility .6s; padding: 24px; }
+.breathe { position: fixed; inset: 0; z-index: 10004; background: radial-gradient(circle at 50% 45%, #4A3B2E 0%, #2A211A 70%); color: var(--cream); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity .6s ease, visibility .6s; padding: 24px; }
 .breathe.active { opacity: 1; visibility: visible; }
 .breathe-close { position: absolute; top: 24px; right: 24px; background: none; border: 1px solid rgba(248,244,238,.3); color: var(--cream); font: 700 .68rem/1 var(--font-sans); letter-spacing: .18em; text-transform: uppercase; padding: 12px 16px; border-radius: 0; cursor: pointer; }
 .breathe-close:hover { border-color: var(--cream); }
