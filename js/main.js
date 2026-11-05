@@ -7,7 +7,8 @@ function updateNav() {
   if (!hdr) return;
   // Lower threshold on mobile so logo goes dark immediately after hero clears
   var threshold = window.innerWidth <= 768 ? 10 : 20;
-  if (window.scrollY > threshold) {
+  // Pages with a light hero (body.nav-solid) keep the dark nav from the start
+  if (window.scrollY > threshold || document.body.classList.contains('nav-solid')) {
     hdr.classList.add('scrolled');
     document.body.classList.add('header-scrolled');
   } else {
