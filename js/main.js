@@ -715,28 +715,58 @@ setTimeout(function() {
 /* Hello, fellow developer: a small business card in the console */
 try {
   (function() {
-    var serif = 'font-family: Georgia, "Cormorant Garamond", serif;', sans = 'font-family: system-ui, -apple-system, "Segoe UI", sans-serif;';
+    if (window.__fbcSig) return; window.__fbcSig = true;
+    /* Installed fonts only: the console can't use the site's web fonts, and the
+       canvas measurement below has to resolve the same face the console draws. */
+    var SANS = 'system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif', SERIF = 'Georgia, "Times New Roman", serif';
+    /* Console styles can't set width, so measure each line in the browser and pad
+       every row of the card to one shared width; the rules use the same width. */
+    var ctx = document.createElement('canvas').getContext('2d');
+    function w(text, font, track) {
+      ctx.font = font;
+      var supported = 'letterSpacing' in ctx;
+      if (supported) ctx.letterSpacing = (track || 0) + 'px';
+      var m = ctx.measureText(text).width;
+      if (!supported) m += (track || 0) * text.length;
+      return Math.ceil(m);
+    }
+    var mark = '✻', word = 'FULL BLOOM COUNSELING', hi = 'Hi, I’m Chad. I designed and built this site.';
+    var fWord = '600 13px ' + SANS, fHi = '400 15px ' + SERIF, fMark = '400 13px ' + SANS;
+    var PAD = 22, STRIPE = 6, GAP = 14;
+    var wMark = w(mark + ' ', fMark, 0), wWord = w(word, fWord, 4.5), wHi = w(hi, fHi, 0);
+    var inner = Math.max(wMark + GAP + wWord, wHi);
+    var W = STRIPE + PAD + inner + PAD;
     var parts = [], styles = [];
     function add(text, style) { parts.push('%c' + text); styles.push(style || ''); }
-    var tag = sans + 'font-size: 10px; font-weight: 700; letter-spacing: 2.5px; color: #F8F4EE; background: #A8724E; padding: 5px 10px;';
-    var desc = sans + 'font-size: 12px; color: #8A7660; line-height: 2;';
-    var rule = 'color: #DDD5C8; line-height: 2.4;';
-    var key = sans + 'font-size: 11px; font-weight: 700; color: #3A2E24; background: #F8F4EE; border: 1px solid #C8967A; border-bottom-width: 3px; padding: 2px 7px; margin-right: 4px; border-radius: 4px;';
-    add(' ✿  Full Bloom Counseling ', serif + 'font-size: 24px; font-style: italic; color: #F8F4EE; background: #3A2E24; padding: 14px 22px; line-height: 2.6;');
+    function block(bg) { return 'display: inline-block; background: ' + bg + '; vertical-align: top;'; }
+    var row = 'line-height: 1;';
+
+    /* Card: two bands sharing one width, a terracotta stripe down the left edge */
+    add(mark + ' ', block('#2E241C') + 'border-left: ' + STRIPE + 'px solid #A8724E; font: ' + fMark + '; color: #E8B898; padding: 16px ' + GAP + 'px 16px ' + PAD + 'px; ' + row);
+    add(word, block('#2E241C') + 'font: ' + fWord + '; letter-spacing: 4.5px; color: #F8F4EE; padding: 16px ' + (W - STRIPE - PAD - wMark - GAP - wWord) + 'px 16px 0; ' + row);
     add('\n');
-    add('Hi, I’m Chad. I designed and built this site.', serif + 'font-size: 16px; font-style: italic; color: #A8724E; line-height: 2.4;');
-    add('\n' + '—'.replace('—', '─').repeat(46) + '\n', rule);
-    add(' THERAPISTWEB.DESIGN ', tag); add('\n', '');
-    add('Websites for therapists and group practices\n', desc);
-    add('\n', 'line-height: .8;');
-    add(' STUDIONULL.IO ', tag); add('\n', '');
-    add('A small Denver studio: brand, web design and development\n', desc);
-    add('─'.repeat(46) + '\n', rule);
-    add('hello@therapistweb.design', sans + 'font-size: 13px; font-weight: 600; color: #C8967A; line-height: 2;');
-    add('    (720) 466-1013\n', sans + 'font-size: 13px; font-weight: 600; color: #C8967A; line-height: 2;');
-    add('https://therapistweb.design/    https://studionull.io/\n\n', sans + 'font-size: 12px; color: #8A7660;');
-    add('Psst. There’s a secret garden on this site:   ', sans + 'font-size: 12px; font-style: italic; color: #A8724E; line-height: 2.4;');
-    ['↑', '↑', '↓', '↓', '←', '→', '←', '→', 'B', 'A'].forEach(function(k) { add(k, key); add(' ', ''); });
+    add(hi, block('#3D3127') + 'border-left: ' + STRIPE + 'px solid #C8967A; font: ' + fHi + '; color: #EADBC8; padding: 12px ' + (W - STRIPE - PAD - wHi) + 'px 12px ' + PAD + 'px; ' + row);
+    add('\n');
+
+    var ruleStyle = 'display: inline-block; font-size: 0; line-height: 0; padding-left: ' + W + 'px; border-top: 1px solid #A8724E; margin: 14px 0 12px;';
+    function rule() { add(' ', ruleStyle); add('\n'); }
+    var tag = 'font: 700 10px ' + SANS + '; letter-spacing: 2.5px; color: #F8F4EE; background: #A8724E; padding: 5px 10px; line-height: 2.2;';
+    var desc = 'font: 400 12px ' + SANS + '; color: #9A8670; line-height: 2;';
+    var strong = 'font: 600 13px ' + SANS + '; color: #A8724E; line-height: 2;';
+
+    rule();
+    add('THERAPISTWEB.DESIGN', tag); add('\n');
+    add('Websites for therapists and group practices', desc); add('\n');
+    add(' ', 'font-size: 6px; line-height: 1;'); add('\n');
+    add('STUDIONULL.IO', tag); add('\n');
+    add('A small Denver studio: brand, web design and development', desc); add('\n');
+    rule();
+    add('hello@therapistweb.design', strong); add('    ', strong); add('(720) 466-1013', strong); add('\n');
+    add('https://therapistweb.design/    https://studionull.io/', 'font: 400 12px ' + SANS + '; color: #9A8670; line-height: 2;'); add('\n');
+    add(' ', 'font-size: 8px; line-height: 1;'); add('\n');
+    add('Psst. There’s a secret garden on this site:', 'font: 500 12px ' + SANS + '; color: #A8724E; line-height: 2;'); add('\n');
+    var key = 'display: inline-block; font: 700 11px ' + SANS + '; color: #2E241C; background: #F8F4EE; border: 1px solid #C8967A; border-bottom-width: 3px; border-radius: 2px; padding: 3px 7px; margin: 4px 5px 0 0; line-height: 1.2;';
+    ['↑', '↑', '↓', '↓', '←', '→', '←', '→', 'B', 'A'].forEach(function(k) { add(k, key); });
     console.log.apply(console, [parts.join('')].concat(styles));
   })();
 } catch (e) {}
