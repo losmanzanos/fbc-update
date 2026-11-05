@@ -2403,3 +2403,7 @@ html.kb-nav .skip-link:focus-visible { top: 16px; }
   .mobile-nav > .mobile-link,
   .mobile-nav > .mobile-toggle-sub { padding-top: 10px; padding-bottom: 10px; }
 }
+
+/* Signature service card (Enneagram) */
+.service-card.is-signature { border-top: 2px solid var(--petal-dark); }
+.service-card .svc-tag { position: absolute; top: 36px; left: 36px; font-family: var(--font-sans); font-size: .68rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--petal-dark); line-height: 1; }
