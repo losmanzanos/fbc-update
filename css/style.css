@@ -2303,3 +2303,35 @@ body:has(.ed-close) #footer .ft-invite { display: none; }
   .grid-3:has(> .blog-card) { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 36px 28px; }
   .grid-3:has(> .blog-card) > .blog-card { width: auto !important; max-width: none !important; }
 }
+
+/* BLOOM game in the Konami TV */
+#konami-overlay { cursor: default; }
+.konami-game { display: block; width: 100%; height: 100%; image-rendering: pixelated; image-rendering: crisp-edges; touch-action: none; background: #1f2a1c; }
+.konami-close { background: none; border: 1px solid rgba(255,255,255,.3); color: rgba(255,255,255,.8); font: 700 .68rem/1 var(--font-sans); letter-spacing: .18em; text-transform: uppercase; padding: 11px 16px; border-radius: 2px; cursor: pointer; }
+.konami-close:hover { border-color: #fff; color: #fff; }
+.konami-hint { animation: none; }
+
+/* Logo: the flower opens a little on hover */
+.nav-logo img, .nav-logo a::after { transition: transform .9s cubic-bezier(.2,.8,.2,1), filter .6s ease; transform-origin: 50% 70%; }
+.nav-logo a:hover img, .nav-logo a:focus-visible img { transform: scale(1.08) rotate(-5deg); }
+@media (prefers-reduced-motion: reduce) { .nav-logo a:hover img { transform: none; } }
+
+/* Seasonal drift (homepage only, a few times a year, once per visit) */
+.season-drift { position: fixed; inset: 0; pointer-events: none; z-index: 900; overflow: hidden; transition: opacity 1.5s ease; }
+.season-drift span { position: absolute; top: -40px; display: block; will-change: transform; animation: season-fall linear forwards; }
+.season-drift svg { display: block; width: 100%; height: 100%; animation: season-sway ease-in-out infinite alternate; }
+@keyframes season-fall { to { transform: translate3d(var(--dx), 112vh, 0) rotate(var(--rot)); } }
+@keyframes season-sway { from { transform: translateX(-10px) rotate(-12deg); } to { transform: translateX(10px) rotate(14deg); } }
+
+/* 404 */
+.nf { min-height: 78vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: calc(var(--nav-h) + 72px) 24px 96px; background: var(--cream); }
+.nf-inner { max-width: 620px; }
+.nf-num { font-family: var(--font-serif); font-style: italic; font-size: clamp(7rem, 20vw, 12rem); line-height: .9; color: var(--petal); opacity: .28; user-select: none; }
+.nf-kicker { display: block; font: 700 .66rem/1 var(--font-sans); letter-spacing: .22em; text-transform: uppercase; color: var(--petal-dark); margin: 8px 0 18px; }
+.nf h1 { font-family: var(--font-serif); font-weight: 500; font-size: clamp(2.4rem, 6vw, 3.8rem); line-height: 1.05; color: var(--bark); margin: 0 0 18px; }
+.nf p { font-size: 1.05rem; line-height: 1.75; color: var(--bark-mid); margin: 0 auto 32px; max-width: 42ch; }
+.nf-actions { display: flex; gap: 22px; justify-content: center; align-items: center; flex-wrap: wrap; margin-bottom: 44px; }
+.nf-breathe { font: 700 .72rem/1 var(--font-sans); letter-spacing: .14em; text-transform: uppercase; color: var(--bark); text-decoration: none; border-bottom: 1px solid var(--petal); padding-bottom: 4px; }
+.nf-links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; border-top: 1px solid var(--border); padding-top: 28px; }
+.nf-links a { font-size: .82rem; color: var(--bark-mid); text-decoration: none; padding: 9px 16px; border: 1px solid var(--border); border-radius: 999px; transition: all .25s ease; }
+.nf-links a:hover { border-color: var(--bark); color: var(--bark); }

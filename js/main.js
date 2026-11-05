@@ -516,14 +516,17 @@ setTimeout(function() {
   var CODE = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
   var pos = 0;
 
-  // Build the retro TV overlay
+  // Build the retro TV overlay; the screen runs BLOOM (js/bloom.js, loaded on demand)
   var overlay = document.createElement('div');
   overlay.id = 'konami-overlay';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-label', 'Bloom, a hidden game');
   overlay.innerHTML =
     '<div class="konami-tv">' +
       '<div class="konami-screen-bezel">' +
         '<div class="konami-screen">' +
-          '<img src="/images/konami-contra.jpg" alt="Contra, Konami 1988" class="konami-img" loading="lazy" decoding="async">' +
+          '<canvas class="konami-game" width="240" height="180" aria-label="Bloom game"></canvas>' +
           '<div class="konami-scanlines"></div>' +
         '</div>' +
       '</div>' +
@@ -532,22 +535,29 @@ setTimeout(function() {
         '<div class="konami-tv-knobs"><span></span><span></span><span></span></div>' +
       '</div>' +
     '</div>' +
-    
-    '<p class="konami-hint">Press any key to continue&hellip;</p>';
+    '<button type="button" class="konami-close">Close &#10005;</button>' +
+    '<p class="konami-hint">You found the secret garden.</p>';
   document.body.appendChild(overlay);
+  var canvas = overlay.querySelector('canvas'), loaded = false;
 
   function showKonami() {
     overlay.classList.add('active');
-    // Auto-dismiss after 8 seconds
-    setTimeout(hideKonami, 8000);
+    document.body.style.overflow = 'hidden';
+    function go() { if (window.FBBloom) window.FBBloom.start(canvas); }
+    if (loaded) return go();
+    var sc = document.createElement('script');
+    sc.src = '/js/bloom.js?v=2'; sc.onload = function() { loaded = true; go(); };
+    document.head.appendChild(sc);
   }
   function hideKonami() {
     overlay.classList.remove('active');
+    document.body.style.overflow = '';
+    if (window.FBBloom) window.FBBloom.stop();
     pos = 0;
   }
 
   document.addEventListener('keydown', function(e) {
-    if (overlay.classList.contains('active')) { hideKonami(); return; }
+    if (overlay.classList.contains('active')) { if (e.key === 'Escape') hideKonami(); return; }
     if (e.key === CODE[pos]) {
       pos++;
       if (pos === CODE.length) { showKonami(); pos = 0; }
@@ -556,12 +566,13 @@ setTimeout(function() {
     }
   });
 
-  overlay.addEventListener('click', hideKonami);
+  overlay.querySelector('.konami-close').addEventListener('click', hideKonami);
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) hideKonami(); });
 
   // Same code on touch screens: swipe up, up, down, down, left, right, left, right, then tap twice
   var tx = 0, ty = 0, tt = 0;
   function feed(key) {
-    if (overlay.classList.contains('active')) { hideKonami(); return; }
+    if (overlay.classList.contains('active')) return;
     if (key === CODE[pos]) { pos++; if (pos === CODE.length) { showKonami(); pos = 0; } }
     else { pos = (key === CODE[0]) ? 1 : 0; }
   }
@@ -618,17 +629,65 @@ setTimeout(function() {
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && ov.classList.contains('active')) close(); });
 })();
 
-/* Hello, fellow developer */
+/* ══════════════════════════════════════════════
+   SEASONAL DRIFT: homepage only, once per visit, a few pieces for ~10 seconds.
+   Spring petals (Apr 1 to May 31), fall aspen leaves (Sep 20 to Nov 10),
+   winter snow (Dec 15 to Jan 5). Nothing the rest of the year.
+   Preview any season with ?season=spring|fall|winter.
+   ══════════════════════════════════════════════ */
+(function() {
+  if (!/^\/(index\.html)?$/.test(location.pathname)) return;
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var forced = (location.search.match(/[?&]season=(spring|fall|winter)/) || [])[1];
+  var d = new Date(), md = (d.getMonth() + 1) * 100 + d.getDate();
+  var season = forced || (md >= 401 && md <= 531 ? 'spring' : md >= 920 && md <= 1110 ? 'fall' : (md >= 1215 || md <= 105) ? 'winter' : null);
+  if (!season) return;
+  try { if (!forced && sessionStorage.getItem('fbc-season')) return; sessionStorage.setItem('fbc-season', '1'); } catch (e) {}
+  var SHAPES = {
+    spring: ['<svg viewBox="0 0 20 20"><path d="M10 1C14 5 15 11 10 19 5 11 6 5 10 1z" fill="#F2C9B0"/><path d="M10 3v14" stroke="#E8B898" stroke-width=".8"/></svg>',
+             '<svg viewBox="0 0 20 20"><path d="M10 2C15 6 15 12 10 18 5 12 5 6 10 2z" fill="#F6E3C6"/></svg>'],
+    fall:   ['<svg viewBox="0 0 20 24"><path d="M10 1C16 4 18 11 10 19 2 11 4 4 10 1z" fill="#E6B04B"/><path d="M10 4v19" stroke="#A8724E" stroke-width="1"/></svg>',
+             '<svg viewBox="0 0 20 24"><path d="M10 1C16 4 18 11 10 19 2 11 4 4 10 1z" fill="#D9963A"/><path d="M10 4v19" stroke="#8B5E3A" stroke-width="1"/></svg>'],
+    winter: ['<svg viewBox="0 0 20 20"><g stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round"><path d="M10 2v16M3 6l14 8M17 6L3 14"/></g></svg>',
+             '<svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="4" fill="#FFFFFF"/></svg>']
+  };
+  setTimeout(function() {
+    var box = document.createElement('div');
+    box.className = 'season-drift'; box.setAttribute('aria-hidden', 'true');
+    var n = window.innerWidth < 700 ? 6 : 10, longest = 0;
+    for (var i = 0; i < n; i++) {
+      var el = document.createElement('span'), size = 12 + Math.random() * 10, dur = 7 + Math.random() * 5, delay = Math.random() * 3;
+      longest = Math.max(longest, dur + delay);
+      el.innerHTML = SHAPES[season][i % 2];
+      el.style.cssText = 'left:' + (Math.random() * 100) + 'vw;width:' + size + 'px;height:' + size + 'px;opacity:' + (season === 'winter' ? .75 : .6) +
+        ';animation-duration:' + dur + 's;animation-delay:' + delay + 's;--dx:' + ((Math.random() - .5) * 160) + 'px;--rot:' + ((Math.random() - .5) * 540) + 'deg';
+      el.firstChild.style.animationDuration = (1.6 + Math.random() * 1.6) + 's';
+      box.appendChild(el);
+    }
+    document.body.appendChild(box);
+    setTimeout(function() { box.style.opacity = '0'; setTimeout(function() { box.remove(); }, 1600); }, longest * 1000);
+  }, 1200);
+})();
+
+/* Hello, fellow developer: a small business card in the console */
 try {
+  var serif = 'font-family: Georgia, "Cormorant Garamond", serif;', sans = 'font-family: system-ui, -apple-system, sans-serif;';
   console.log(
-    '%cFull Bloom Counseling%c\n\nHi, I\u2019m Chad. I designed and built this site.\nI make websites for therapists at %ctherapistweb.design%c, and I also built %crunstudionull.io%c.\n\nhttps://therapistweb.design/\nhttps://runstudionull.io/\n\n%cPsst. There\u2019s a secret on this site. \u2191 \u2191 \u2193 \u2193 \u2190 \u2192 \u2190 \u2192 B A',
-    'font: italic 24px Georgia, serif; color: #A8724E;',
-    'font: 13px system-ui, sans-serif; color: #8A7660; line-height: 1.7;',
-    'font: 600 13px system-ui, sans-serif; color: #A8724E;',
-    'font: 13px system-ui, sans-serif; color: #8A7660;',
-    'font: 600 13px system-ui, sans-serif; color: #A8724E;',
-    'font: 13px system-ui, sans-serif; color: #8A7660;',
-    'font: italic 12px system-ui, sans-serif; color: #A8724E;'
+    '%c Full Bloom Counseling %c\n\n' +
+    '%cHi, I’m Chad. I designed and built this site.%c\n\n' +
+    '%c THERAPISTWEB.DESIGN %c  Websites for therapists and group practices\n' +
+    '%c STUDIONULL.IO %c  My studio\n\n' +
+    '%chello@therapistweb.design   ·   (720) 466-1013%c\n' +
+    'https://therapistweb.design/   https://studionull.io/\n\n' +
+    '%cPsst. There’s a secret garden on this site.  ↑ ↑ ↓ ↓ ← → ← → B A',
+    serif + 'font-size: 22px; font-style: italic; color: #F8F4EE; background: #3A2E24; padding: 10px 18px; border-radius: 3px;', '',
+    serif + 'font-size: 15px; font-style: italic; color: #A8724E;', '',
+    sans + 'font-size: 10px; font-weight: 700; letter-spacing: 2px; color: #3A2E24; background: #EFE9E0; padding: 4px 8px; border-radius: 2px;',
+    sans + 'font-size: 12px; color: #8A7660;',
+    sans + 'font-size: 10px; font-weight: 700; letter-spacing: 2px; color: #3A2E24; background: #EFE9E0; padding: 4px 8px; border-radius: 2px;',
+    sans + 'font-size: 12px; color: #8A7660;',
+    sans + 'font-size: 12px; font-weight: 600; color: #A8724E;', sans + 'font-size: 11px; color: #8A7660;',
+    sans + 'font-size: 11px; font-style: italic; color: #A8724E;'
   );
 } catch (e) {}
 
