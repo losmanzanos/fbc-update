@@ -2364,3 +2364,18 @@ body:has(.ed-close) #footer .ft-invite { display: none; }
 .skip-link { top: -120px; left: 16px; background: var(--cream); color: var(--bark); border: 1px solid var(--bark); padding: 12px 18px; font: 700 .7rem/1 var(--font-sans); letter-spacing: .16em; text-transform: uppercase; box-shadow: 0 10px 30px rgba(0,0,0,.15); transition: top .2s ease; }
 .skip-link:focus-visible { top: 16px; outline: none; }
 .skip-link:focus:not(:focus-visible) { top: -120px; }
+
+/* Logo bloom (replaces the tilt) */
+.nav-logo a:hover img, .nav-logo a:focus-visible img { transform: none; }
+.nl-wrap { position: relative; display: block; line-height: 0; }
+.nl-f { position: absolute; aspect-ratio: 1; background: center/contain no-repeat; opacity: 0; transform: scale(.35) rotate(-28deg); transition: opacity .45s ease, transform .9s cubic-bezier(.2,.9,.25,1.15); transition-delay: 0ms; pointer-events: none; will-change: transform, opacity; }
+@media (hover: hover) {
+  .nav-logo a:hover .nl-f, .nav-logo a:focus-visible .nl-f { opacity: 1; transform: none; transition-delay: var(--d); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nl-f { transform: none; transition: opacity .3s ease; }
+}
+
+/* Skip link: hidden unless navigating with the keyboard */
+.skip-link:focus, .skip-link:focus-visible { top: -120px; }
+html.kb-nav .skip-link:focus-visible { top: 16px; }

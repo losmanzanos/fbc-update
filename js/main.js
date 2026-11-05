@@ -939,3 +939,33 @@ document.querySelectorAll('.svc-testimonials').forEach(function(wrap) {
   });
   render();
 })();
+
+/* Logo bloom: a few flowers in the F open up in color on hover */
+(function () {
+  var links = document.querySelectorAll('.nav-logo a');
+  if (!links.length) return;
+  var base = (document.querySelector('.nav-logo img') || {}).getAttribute ? document.querySelector('.nav-logo img').getAttribute('src').replace(/fbc-logo-f-white\.png.*$/, '') : '';
+  var F = [['daisy', 44.34, 14.65, 22.27], ['roseR', 75.98, 25.20, 9.77], ['topR', 62.70, 16.99, 8.40], ['roseL', 28.71, 24.02, 9.77], ['mid', 36.91, 40.04, 12.11], ['roseLL', 25.39, 48.83, 9.38]];
+  links.forEach(function (a) {
+    var img = a.querySelector('img');
+    if (!img || a.querySelector('.nl-wrap')) return;
+    var wrap = document.createElement('span');
+    wrap.className = 'nl-wrap';
+    img.parentNode.insertBefore(wrap, img);
+    wrap.appendChild(img);
+    F.forEach(function (f, i) {
+      var s = document.createElement('span');
+      s.className = 'nl-f';
+      s.setAttribute('aria-hidden', 'true');
+      s.style.cssText = 'left:' + f[1] + '%;top:' + f[2] + '%;width:' + f[3] + '%;--d:' + (i * 70) + 'ms;background-image:url(' + base + 'logo-bloom-' + f[0] + '.png)';
+      wrap.appendChild(s);
+    });
+  });
+})();
+
+/* Skip link only for real keyboard users (not after DevTools or a click) */
+(function () {
+  var root = document.documentElement;
+  document.addEventListener('keydown', function (e) { if (e.key === 'Tab') root.classList.add('kb-nav'); });
+  document.addEventListener('pointerdown', function () { root.classList.remove('kb-nav'); });
+})();
