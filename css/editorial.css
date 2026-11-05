@@ -284,3 +284,7 @@
   .ed .who-grid:not(.who-count-1) .who-name { padding-top: 22px; }
   .ed .who-grid:not(.who-count-1) .who-link { justify-self: start; align-self: start; }
 }
+/* headshots: a touch larger */
+.ed-face { width: 104px; height: 104px; margin-bottom: 18px; }
+.b1-people .ed-face { width: 128px; height: 128px; margin-bottom: 22px; }
+@media (max-width: 760px) { .ed-face { width: 88px; height: 88px; } .b1-people .ed-face { width: 104px; height: 104px; } }

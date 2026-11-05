@@ -176,3 +176,16 @@
 .b1-traces .venn .venn-l { font-family: var(--font-serif); font-size: 27px; font-weight: 500; letter-spacing: .005em; }
 .b1-traces .venn .venn-s { font-family: var(--font-sans); font-size: 10.5px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; fill: var(--bark-mid); }
 .b1-traces .venn .venn-c { font-family: var(--font-serif); font-style: italic; font-size: 17px; }
+
+/* Grief lanes: set as a line of type instead of pills */
+.b1-lane ul { display: block; }
+.b1-lane li { display: inline; padding: 0; border: 0; border-radius: 0; background: none; font-family: var(--font-serif); font-size: 1.28rem; line-height: 1.6; color: var(--bark); }
+.b1-lane.is-life li { background: none; border: 0; color: var(--petal-dark); font-style: italic; }
+.b1-lane li:not(:last-child)::after { content: ''; display: inline-block; width: 4px; height: 4px; margin: 0 .7em; vertical-align: middle; transform: rotate(45deg); background: var(--petal); }
+.b1-lane-label { font-family: var(--font-sans); font-style: normal; font-size: .66rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--petal-dark); }
+@media (max-width: 760px) { .b1-lane li { font-size: 1.12rem; } }
+.b1-lane li { white-space: nowrap; }
+.b1-lane { grid-template-columns: 240px 1fr; }
+@media (max-width: 760px) { .b1-lane { grid-template-columns: 1fr; } .b1-lane li { white-space: normal; } }
+.b1-lane ul { min-width: 0; }
+.b1-lane li { display: inline-block; }
