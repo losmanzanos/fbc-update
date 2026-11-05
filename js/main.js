@@ -675,24 +675,31 @@ setTimeout(function() {
 
 /* Hello, fellow developer: a small business card in the console */
 try {
-  var serif = 'font-family: Georgia, "Cormorant Garamond", serif;', sans = 'font-family: system-ui, -apple-system, sans-serif;';
-  console.log(
-    '%c Full Bloom Counseling %c\n\n' +
-    '%cHi, I’m Chad. I designed and built this site.%c\n\n' +
-    '%c THERAPISTWEB.DESIGN %c  Websites for therapists and group practices\n' +
-    '%c STUDIONULL.IO %c  A small Denver studio: brand, web design and development\n\n' +
-    '%chello@therapistweb.design   ·   (720) 466-1013%c\n' +
-    'https://therapistweb.design/   https://studionull.io/\n\n' +
-    '%cPsst. There’s a secret garden on this site.  ↑ ↑ ↓ ↓ ← → ← → B A',
-    serif + 'font-size: 22px; font-style: italic; color: #F8F4EE; background: #3A2E24; padding: 10px 18px; border-radius: 3px;', '',
-    serif + 'font-size: 15px; font-style: italic; color: #A8724E;', '',
-    sans + 'font-size: 10px; font-weight: 700; letter-spacing: 2px; color: #3A2E24; background: #EFE9E0; padding: 4px 8px; border-radius: 2px;',
-    sans + 'font-size: 12px; color: #8A7660;',
-    sans + 'font-size: 10px; font-weight: 700; letter-spacing: 2px; color: #3A2E24; background: #EFE9E0; padding: 4px 8px; border-radius: 2px;',
-    sans + 'font-size: 12px; color: #8A7660;',
-    sans + 'font-size: 12px; font-weight: 600; color: #A8724E;', sans + 'font-size: 11px; color: #8A7660;',
-    sans + 'font-size: 11px; font-style: italic; color: #A8724E;'
-  );
+  (function() {
+    var serif = 'font-family: Georgia, "Cormorant Garamond", serif;', sans = 'font-family: system-ui, -apple-system, "Segoe UI", sans-serif;';
+    var parts = [], styles = [];
+    function add(text, style) { parts.push('%c' + text); styles.push(style || ''); }
+    var tag = sans + 'font-size: 10px; font-weight: 700; letter-spacing: 2.5px; color: #F8F4EE; background: #A8724E; padding: 5px 10px;';
+    var desc = sans + 'font-size: 12px; color: #8A7660; line-height: 2;';
+    var rule = 'color: #DDD5C8; line-height: 2.4;';
+    var key = sans + 'font-size: 11px; font-weight: 700; color: #3A2E24; background: #F8F4EE; border: 1px solid #C8967A; border-bottom-width: 3px; padding: 2px 7px; margin-right: 4px; border-radius: 4px;';
+    add(' ✿  Full Bloom Counseling ', serif + 'font-size: 24px; font-style: italic; color: #F8F4EE; background: #3A2E24; padding: 14px 22px; line-height: 2.6;');
+    add('\n');
+    add('Hi, I’m Chad. I designed and built this site.', serif + 'font-size: 16px; font-style: italic; color: #A8724E; line-height: 2.4;');
+    add('\n' + '—'.replace('—', '─').repeat(46) + '\n', rule);
+    add(' THERAPISTWEB.DESIGN ', tag); add('\n', '');
+    add('Websites for therapists and group practices\n', desc);
+    add('\n', 'line-height: .8;');
+    add(' STUDIONULL.IO ', tag); add('\n', '');
+    add('A small Denver studio: brand, web design and development\n', desc);
+    add('─'.repeat(46) + '\n', rule);
+    add('hello@therapistweb.design', sans + 'font-size: 13px; font-weight: 600; color: #C8967A; line-height: 2;');
+    add('    (720) 466-1013\n', sans + 'font-size: 13px; font-weight: 600; color: #C8967A; line-height: 2;');
+    add('https://therapistweb.design/    https://studionull.io/\n\n', sans + 'font-size: 12px; color: #8A7660;');
+    add('Psst. There’s a secret garden on this site:   ', sans + 'font-size: 12px; font-style: italic; color: #A8724E; line-height: 2.4;');
+    ['↑', '↑', '↓', '↓', '←', '→', '←', '→', 'B', 'A'].forEach(function(k) { add(k, key); add(' ', ''); });
+    console.log.apply(console, [parts.join('')].concat(styles));
+  })();
 } catch (e) {}
 
 })();

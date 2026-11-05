@@ -147,3 +147,35 @@
 .ed-facts + .ed-statement { margin-top: 0; }
 #supervisors { scroll-margin-top: calc(var(--nav-h) + 32px); }
 .ed-cream + .ed-statement { margin-top: 0; }
+
+/* Family: how stress travels, as a single line */
+.fl-line { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 0 28px; position: relative; }
+.fl-line::before { content: ''; position: absolute; left: 0; right: 0; top: 23px; height: 1px; background: linear-gradient(90deg, var(--petal-lt) 0%, var(--petal) 55%, var(--bark) 100%); }
+.fl-stop { position: relative; }
+.fl-dot { position: relative; z-index: 1; display: flex; width: 46px; height: 46px; border-radius: 50%; align-items: center; justify-content: center; background: var(--cream); border: 1px solid var(--petal); font-family: var(--font-serif); font-size: 1.25rem; color: var(--bark); margin-bottom: 26px; }
+.fl-stop.is-start .fl-dot { background: var(--petal-lt); border-color: var(--petal-lt); box-shadow: 0 0 0 8px rgba(232,184,152,.25); }
+.fl-stop.is-end .fl-dot { background: var(--bark); border-color: var(--bark); color: var(--cream); }
+.fl-who { display: block; font: 700 .64rem/1 var(--font-sans); letter-spacing: .2em; text-transform: uppercase; color: var(--petal-dark); margin-bottom: 10px; }
+.fl-stop h3 { font-family: var(--font-serif); font-weight: 500; font-size: 1.35rem; line-height: 1.2; color: var(--bark); margin: 0 0 10px; }
+.ed .fl-stop p { font-size: .93rem; line-height: 1.7; color: var(--bark-mid); margin: 0; }
+.fl-stop.is-end h3 { font-style: italic; }
+@media (max-width: 1024px) and (min-width: 761px) { .fl-line { grid-template-columns: repeat(5, 1fr); gap: 0 18px; } .fl-stop h3 { font-size: 1.15rem; } }
+@media (max-width: 760px) {
+  .fl-line { grid-template-columns: 1fr; gap: 0; }
+  .fl-line::before { left: 22px; right: auto; top: 0; bottom: 0; width: 1px; height: auto; background: linear-gradient(180deg, var(--petal-lt), var(--petal) 55%, var(--bark)); }
+  .fl-stop { display: grid; grid-template-columns: 46px 1fr; column-gap: 20px; padding-bottom: 30px; }
+  .fl-dot { grid-row: span 3; margin: 0; }
+  .fl-stop:last-child { padding-bottom: 0; }
+}
+/* line runs dot 1 to dot 5, not past it */
+.fl-line::before { left: 23px; right: calc((100% - 112px) / 5 - 23px); }
+@media (max-width: 1024px) and (min-width: 761px) { .fl-line::before { right: calc((100% - 72px) / 5 - 23px); } }
+@media (max-width: 760px) {
+  .fl-line::before { display: none; }
+  .fl-stop:not(:last-child)::after { content: ''; position: absolute; left: 22px; top: 23px; bottom: -23px; width: 1px; background: var(--petal); }
+  .fl-stop:nth-child(1)::after { background: linear-gradient(180deg, var(--petal-lt), var(--petal)); }
+  .fl-stop:nth-child(4)::after { background: linear-gradient(180deg, var(--petal), var(--bark)); }
+}
+/* Enneagram: engraved figure */
+.b3-nine-fig .enn .enn-n { font-family: var(--font-serif); font-style: italic; font-size: 22px; fill: var(--bark); }
+.b3-nine-fig svg.enn .enn-c text { font-family: var(--font-sans); font-size: 14px; font-weight: 700; letter-spacing: .32em; text-transform: uppercase; fill: var(--petal-dark); }

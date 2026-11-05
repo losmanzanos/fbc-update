@@ -157,3 +157,16 @@
   .b4-jump span { display: none; }
   .b4-jump a { font-size: .64rem; letter-spacing: .1em; padding: 8px 12px; }
 }
+
+/* Colorado: real shaded relief (USGS elevation), graticule at each degree, labels stay live text */
+.b4-co { background-image: none; border: 1px solid rgba(58,46,36,.55); box-shadow: 0 1px 0 rgba(58,46,36,.04), 0 24px 48px -28px rgba(58,46,36,.35); overflow: hidden; }
+.b4-co-relief, .b4-co-relief img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.b4-co-relief img { object-fit: cover; }
+.b4-co::after { content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(to right, rgba(58,46,36,.09) 1px, transparent 1px), linear-gradient(to bottom, rgba(58,46,36,.09) 1px, transparent 1px);
+  background-size: calc(100% / 7) calc(100% / 4); }
+.b4-co .pt, .b4-co-name { z-index: 1; }
+.b4-co .pt { box-shadow: 0 0 0 2px rgba(250,246,240,.85); }
+.b4-co .pt span { text-shadow: 0 0 2px #FAF6F0, 0 0 4px #FAF6F0, 0 0 8px rgba(250,246,240,.9); }
+.b4-co-name { text-shadow: 0 0 4px #FAF6F0; }
+.b4-co-relief img { opacity: .86; } .b4-co { background-color: #FAF6F0; }

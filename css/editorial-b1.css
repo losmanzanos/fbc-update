@@ -40,7 +40,6 @@
 /* Trauma: where it can show up */
 .b1-traces { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 6vw, 88px); align-items: center; margin-top: 48px; }
 .b1-traces svg { width: 100%; max-width: 460px; height: auto; display: block; margin: 0 auto; }
-.b1-traces svg circle { fill: var(--petal); fill-opacity: .1; stroke: var(--petal-dark); stroke-width: 1.2; }
 .b1-traces svg text { font-family: var(--font-serif); fill: var(--bark); }
 .b1-traces-list > div { display: grid; grid-template-columns: 150px 1fr; gap: 20px; padding: 22px 0; border-top: 1px solid var(--border); }
 .b1-traces-list > div:last-child { border-bottom: 1px solid var(--border); }
@@ -162,3 +161,18 @@
 @media (max-width: 900px) { .ed-split > div:last-child > .ed-numbered:first-child { margin-top: 0; } }
 @media (max-width: 900px) { .b1-path li:last-child { padding-bottom: 0; } .b1-path::before { bottom: 20px; } }
 @media (min-width: 901px) { .b1-path li:not(:last-child) { width: 150%; max-width: 300px; padding-right: 12px; } }
+/* IFS: protectors and exiles as nested arches, Self as a whole circle at the center */
+.b1-layer.is-outer, .b1-layer.is-mid { border-radius: 999px 999px 0 0; }
+.b1-layer.is-mid { padding-bottom: 32px; }
+.b1-layer.is-core { width: min(250px, 100%); aspect-ratio: 1; margin: 24px auto 0; padding: 30px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 0 0 10px rgba(232,184,152,.22), 0 0 0 22px rgba(232,184,152,.1); }
+.ed .b1-layer.is-core p { max-width: 18ch; }
+@media (max-width: 560px) {
+  .b1-layer.is-outer, .b1-layer.is-mid { border-radius: 999px 999px 0 0; }
+  .b1-layer.is-core { width: min(200px, 100%); padding: 22px; }
+}
+
+/* Trauma Venn: soft washes, serif labels set in each circle */
+.b1-traces .venn text { fill: var(--bark); }
+.b1-traces .venn .venn-l { font-family: var(--font-serif); font-size: 27px; font-weight: 500; letter-spacing: .005em; }
+.b1-traces .venn .venn-s { font-family: var(--font-sans); font-size: 10.5px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; fill: var(--bark-mid); }
+.b1-traces .venn .venn-c { font-family: var(--font-serif); font-style: italic; font-size: 17px; }
