@@ -38,6 +38,10 @@ https://www.fullbloomcounseling.com/* https://fullbloomcounseling.com/:splat 301
 /free-consultation/           /contact/           301
 /faq/                         /faqs/              301
 /frequently-asked-questions/  /faqs/              301
+/the-unspoken-truth-about-starting-therapy/   /blog/the-unspoken-truth-about-starting-therapy/   301
+/they-say-that-breaking-up-is-hard-to-do/     /blog/   301
+/holiday-stress/                               /blog/going-home-for-the-holidays-adult-children/   301
+/therapy/                                      /services/   301
 
 # ── Old service URLs ─────────────────────────────────────────────────────────
 /anxiety/                     /services/anxiety-therapy/                   301

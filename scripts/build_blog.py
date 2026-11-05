@@ -375,7 +375,7 @@ def therapist_info(slug):
     card = t[t.rfind('<div class="team-card', 0, focus.start()):focus.start()] if focus else ""
     focus = re.search(r"<p>(.*?)</p>", card, re.S)
     focus = focus.group(1).strip() if focus else ""
-    focus = re.sub(r"\s*(Online across Colorado|Boulder &amp; virtual)\.?$", "", focus).rstrip(" .") + "."
+    focus = re.sub(r"\s*(Online across Colorado|Boulder &amp; virtual|Boulder, Denver &amp; online)\.?$", "", focus).rstrip(" .") + "."
     return name, creds, photo, note, focus
 
 
