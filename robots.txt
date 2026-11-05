@@ -17,7 +17,7 @@ Allow: /
 User-agent: Teoma
 Allow: /
 
-# AI crawlers — all welcome
+# AI crawlers: all welcome
 User-agent: GPTBot
 Allow: /
 
@@ -51,7 +51,7 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
-# SEO scrapers — blocked
+# SEO scrapers: blocked
 User-agent: AhrefsBot
 Disallow: /
 

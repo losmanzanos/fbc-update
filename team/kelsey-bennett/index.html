@@ -73,7 +73,7 @@
 <meta content="https://fullbloomcounseling.com/images/team/kelsey-portrait.jpg" name="twitter:image"/>
 <meta content="US-CO" name="geo.region"/>
 <meta content="Denver,Colorado" name="geo.placename"/>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalBusiness","name":"Full Bloom Counseling Group","url":"https://fullbloomcounseling.com","telephone":"+1-720-767-9808","email":"info@fullbloomcounseling.com","address":{"@type":"PostalAddress","streetAddress":"1780 S Bellaire St #485","addressLocality":"Denver","addressRegion":"CO","postalCode":"80222","addressCountry":"US"},"openingHours":["Mo-Fr 08:00-20:00","Sa-Su 09:00-17:00"],"priceRange":"$$","sameAs":["https://www.facebook.com/FullBloomDenver","https://www.instagram.com/fullbloomcounseling"]}</script><link as="image" fetchpriority="high" href="../../images/team/kelsey-portrait.jpg" rel="preload" type="image/jpeg"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalBusiness","@id":"https://fullbloomcounseling.com/#business","name":"Full Bloom Counseling Group","url":"https://fullbloomcounseling.com","telephone":"+1-720-767-9808","email":"info@fullbloomcounseling.com","address":{"@type":"PostalAddress","streetAddress":"1780 S Bellaire St #485","addressLocality":"Denver","addressRegion":"CO","postalCode":"80222","addressCountry":"US"},"openingHours":["Mo-Fr 08:00-20:00","Sa-Su 09:00-17:00"],"priceRange":"$$","sameAs":["https://www.facebook.com/FullBloomDenver","https://www.instagram.com/fullbloomcounseling"]}</script><link as="image" fetchpriority="high" href="../../images/team/kelsey-portrait.jpg" rel="preload" type="image/jpeg"/>
 <link href="../../css/style.css?v=21" rel="stylesheet"/>
 <link href="../../css/mobile-service.css?v=7" rel="stylesheet"/>
 
@@ -86,6 +86,7 @@
 {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": "https://fullbloomcounseling.com/team/kelsey-bennett/#person",
   "name": "Kelsey Bennett",
   "jobTitle": "Licensed Professional Counselor",
   "description": "Kelsey Bennett is a therapist at Full Bloom Counseling in Boulder, CO specializing in therapy for young adults, couples, parents, and Safe and Sound Protocol (SSP).",
@@ -94,12 +95,47 @@
   "telephone": "+17207679808",
   "email": "info@fullbloomcounseling.com",
   "hasCredential": [
-    { "@type": "EducationalOccupationalCredential", "credentialCategory": "license", "name": "Licensed Professional Counselor", "recognizedBy": { "@type": "Organization", "name": "Colorado DORA" }, "identifier": "LPC.0022883" },
-    { "@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "Safe and Sound Protocol Certified" }
+    {
+      "@type": "EducationalOccupationalCredential",
+      "credentialCategory": "license",
+      "name": "Licensed Professional Counselor",
+      "recognizedBy": {
+        "@type": "Organization",
+        "name": "Colorado DORA"
+      },
+      "identifier": "LPC.0022883"
+    },
+    {
+      "@type": "EducationalOccupationalCredential",
+      "credentialCategory": "certification",
+      "name": "Safe and Sound Protocol Certified"
+    }
   ],
-  "knowsAbout": ["Therapy for Young Adults","Couples Therapy","Safe and Sound Protocol","Emotional Regulation","Anxiety Therapy","Parenting Support"],
-  "worksFor": { "@type": "MedicalBusiness", "name": "Full Bloom Counseling Group", "url": "https://fullbloomcounseling.com", "address": { "@type": "PostalAddress", "streetAddress": "5637 Arapahoe Ave", "addressLocality": "Boulder", "addressRegion": "CO", "postalCode": "80303", "addressCountry": "US" } },
-  "address": { "@type": "PostalAddress", "streetAddress": "5637 Arapahoe Ave", "addressLocality": "Boulder", "addressRegion": "CO", "postalCode": "80303", "addressCountry": "US" }
+  "knowsAbout": [
+    "Therapy for Young Adults",
+    "Couples Therapy",
+    "Safe and Sound Protocol",
+    "Emotional Regulation",
+    "Anxiety Therapy",
+    "Parenting Support"
+  ],
+  "worksFor": {
+    "@type": "MedicalBusiness",
+    "@id": "https://fullbloomcounseling.com/#business",
+    "name": "Full Bloom Counseling Group",
+    "url": "https://fullbloomcounseling.com"
+  },
+  "workLocation": {
+    "@id": "https://fullbloomcounseling.com/boulder/#business"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "5637 Arapahoe Ave",
+    "addressLocality": "Boulder",
+    "addressRegion": "CO",
+    "postalCode": "80303",
+    "addressCountry": "US"
+  }
 }
 </script>
 <!-- fbc-seo-patched -->

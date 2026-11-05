@@ -96,9 +96,9 @@
   "@type": "MedicalBusiness",
   "@id": "https://fullbloomcounseling.com/#business",
   "name": "Full Bloom Counseling Group",
-  "alternateName": "Full Bloom Counseling Group",
+  "alternateName": "Full Bloom Counseling",
   "url": "https://fullbloomcounseling.com",
-  "logo": "https://fullbloomcounseling.com/images/fbc-logo-f-white.png",
+  "logo": "https://fullbloomcounseling.com/images/fbc-logo-schema.png",
   "image": "https://fullbloomcounseling.com/images/fbc-photos/denver-therapists-team-full-bloom-counseling.jpg",
   "telephone": "+1-720-767-9808",
   "email": "info@fullbloomcounseling.com",
@@ -110,44 +110,374 @@
     "postalCode": "80222",
     "addressCountry": "US"
   },
-  "aggregateRating": {"@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "17", "bestRating": "5"},
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "17",
+    "bestRating": "5"
+  },
   "geo": {
     "@type": "GeoCoordinates",
     "latitude": "39.6846272",
     "longitude": "-104.937044"
   },
   "openingHoursSpecification": [
-    {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"20:00"},
-    {"@type":"OpeningHoursSpecification","dayOfWeek":["Saturday","Sunday"],"opens":"09:00","closes":"17:00"}
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "08:00",
+      "closes": "20:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "09:00",
+      "closes": "17:00"
+    }
   ],
   "priceRange": "$$",
   "description": "Full Bloom Counseling Group is a Denver group therapy practice offering trauma-informed, weight-inclusive, LGBTQ+ affirming care for individuals, couples, and families, in person in Denver and Boulder and online across Colorado.",
   "paymentAccepted": "Cash, Credit Card, Out-of-network insurance (superbills provided)",
   "hasMap": "https://maps.google.com/?cid=9888226903440426460",
   "areaServed": [
-    {"@type":"City","name":"Denver","sameAs":"https://www.wikidata.org/wiki/Q16554"},
-    {"@type":"City","name":"Boulder","sameAs":"https://www.wikidata.org/wiki/Q192517"},
-    {"@type":"City","name":"Colorado Springs","sameAs":"https://www.wikidata.org/wiki/Q49258"},
-    {"@type":"City","name":"Fort Collins","sameAs":"https://www.wikidata.org/wiki/Q490732"},
-    {"@type":"State","name":"Colorado"}
+    {
+      "@type": "City",
+      "name": "Denver",
+      "sameAs": "https://www.wikidata.org/wiki/Q16554"
+    },
+    {
+      "@type": "City",
+      "name": "Boulder",
+      "sameAs": "https://www.wikidata.org/wiki/Q192517"
+    },
+    {
+      "@type": "City",
+      "name": "Colorado Springs",
+      "sameAs": "https://www.wikidata.org/wiki/Q49258"
+    },
+    {
+      "@type": "City",
+      "name": "Fort Collins",
+      "sameAs": "https://www.wikidata.org/wiki/Q490732"
+    },
+    {
+      "@type": "State",
+      "name": "Colorado"
+    }
   ],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Therapy Services",
     "itemListElement": [
-      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Individual Therapy","serviceType":"Individual Therapy","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
-      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Couples Therapy","serviceType":"Couples Therapy","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
-      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Family Therapy","serviceType":"Family Therapy","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
-      {"@type":"Offer","itemOffered":{"@type":"Service","name":"EMDR Therapy","serviceType":"EMDR Therapy","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
-      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Trauma Therapy","serviceType":"Trauma Therapy","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
-      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Anxiety Therapy","serviceType":"Anxiety Therapy","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
-      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Health at Every Size Therapy","serviceType":"Health at Every Size Therapy","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
-      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Intuitive Eating Counseling","serviceType":"Intuitive Eating Counseling","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
-      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Enneagram Therapy","serviceType":"Enneagram Therapy","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
-      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Clinical Supervision","serviceType":"Clinical Supervision","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
-      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Pre-Marital Counseling","serviceType":"Pre-Marital Counseling","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
-      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Safe and Sound Protocol","serviceType":"Safe and Sound Protocol","provider":{"@id":"https://fullbloomcounseling.com/#business"}}},
-      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Disordered Eating Therapy","serviceType":"Disordered Eating Therapy","provider":{"@id":"https://fullbloomcounseling.com/#business"}}}
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Addiction and Recovery Therapy",
+          "serviceType": "Addiction and Recovery Therapy",
+          "url": "https://fullbloomcounseling.com/services/addiction-recovery-therapy-denver/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "ADHD and Neurodivergent Therapy",
+          "serviceType": "ADHD and Neurodivergent Therapy",
+          "url": "https://fullbloomcounseling.com/services/adhd-neurodivergent-therapy-denver/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Anxiety Therapy",
+          "serviceType": "Anxiety Therapy",
+          "url": "https://fullbloomcounseling.com/services/anxiety-therapy/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Clinical Supervision",
+          "serviceType": "Clinical Supervision",
+          "url": "https://fullbloomcounseling.com/services/clinical-supervision/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Couples Therapy",
+          "serviceType": "Couples Therapy",
+          "url": "https://fullbloomcounseling.com/services/couples-therapy/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Depression Therapy",
+          "serviceType": "Depression Therapy",
+          "url": "https://fullbloomcounseling.com/services/depression-therapy-denver/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Disordered Eating Therapy",
+          "serviceType": "Disordered Eating Therapy",
+          "url": "https://fullbloomcounseling.com/services/disordered-eating/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "EMDR Therapy",
+          "serviceType": "EMDR Therapy",
+          "url": "https://fullbloomcounseling.com/services/emdr/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Emotionally Focused Couples Therapy (EFT)",
+          "serviceType": "Emotionally Focused Couples Therapy (EFT)",
+          "url": "https://fullbloomcounseling.com/services/emotionally-focused-couples-therapy-denver/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Enneagram Therapy",
+          "serviceType": "Enneagram Therapy",
+          "url": "https://fullbloomcounseling.com/services/enneagram-therapy/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Family Therapy",
+          "serviceType": "Family Therapy",
+          "url": "https://fullbloomcounseling.com/services/family-therapy/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Grief and Loss Counseling",
+          "serviceType": "Grief and Loss Counseling",
+          "url": "https://fullbloomcounseling.com/services/grief-loss-therapy/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Health at Every Size and Intuitive Eating",
+          "serviceType": "Health at Every Size and Intuitive Eating",
+          "url": "https://fullbloomcounseling.com/services/health-at-every-size/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Internal Family Systems (IFS) Therapy",
+          "serviceType": "Internal Family Systems (IFS) Therapy",
+          "url": "https://fullbloomcounseling.com/services/ifs-therapy-denver/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Individual Therapy",
+          "serviceType": "Individual Therapy",
+          "url": "https://fullbloomcounseling.com/services/individual-therapy/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "LGBTQ+ Affirming Therapy",
+          "serviceType": "LGBTQ+ Affirming Therapy",
+          "url": "https://fullbloomcounseling.com/services/lgbtq-affirming-therapy-denver/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Online Therapy in Colorado",
+          "serviceType": "Online Therapy in Colorado",
+          "url": "https://fullbloomcounseling.com/services/online-therapy-colorado/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Postpartum and Perinatal Therapy",
+          "serviceType": "Postpartum and Perinatal Therapy",
+          "url": "https://fullbloomcounseling.com/services/postpartum-perinatal-therapy/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Pre-Marital Counseling",
+          "serviceType": "Pre-Marital Counseling",
+          "url": "https://fullbloomcounseling.com/services/pre-marital/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Safe and Sound Protocol (SSP)",
+          "serviceType": "Safe and Sound Protocol (SSP)",
+          "url": "https://fullbloomcounseling.com/services/safe-and-sound/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Teen Therapy",
+          "serviceType": "Teen Therapy",
+          "url": "https://fullbloomcounseling.com/services/teen-therapy-denver/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Therapy for Men",
+          "serviceType": "Therapy for Men",
+          "url": "https://fullbloomcounseling.com/services/therapy-for-men-denver/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Therapy for Women",
+          "serviceType": "Therapy for Women",
+          "url": "https://fullbloomcounseling.com/services/therapy-for-women-denver/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Therapy for Young Adults",
+          "serviceType": "Therapy for Young Adults",
+          "url": "https://fullbloomcounseling.com/services/therapy-young-adults-denver/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Trauma Therapy",
+          "serviceType": "Trauma Therapy",
+          "url": "https://fullbloomcounseling.com/services/trauma-therapy/",
+          "provider": {
+            "@id": "https://fullbloomcounseling.com/#business"
+          }
+        }
+      }
     ]
   },
   "sameAs": [
@@ -155,7 +485,25 @@
     "https://www.instagram.com/fullbloomcounseling",
     "https://www.linkedin.com/company/full-bloom-counseling-group",
     "https://maps.google.com/?cid=9888226903440426460"
-  ]
+  ],
+  "founder": {
+    "@type": "Person",
+    "@id": "https://fullbloomcounseling.com/team/rebecca-moravec/#person",
+    "name": "Rebecca Moravec",
+    "url": "https://fullbloomcounseling.com/team/rebecca-moravec/"
+  },
+  "department": [
+    {
+      "@type": "MedicalBusiness",
+      "@id": "https://fullbloomcounseling.com/boulder/#business",
+      "name": "Full Bloom Counseling, Boulder",
+      "url": "https://fullbloomcounseling.com/boulder/"
+    }
+  ],
+  "numberOfEmployees": {
+    "@type": "QuantitativeValue",
+    "value": 7
+  }
 }
 </script>
   
@@ -165,18 +513,74 @@
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "Service",
+  "name": "Therapy at Full Bloom Counseling",
   "serviceType": "Mental Health Therapy",
-  "provider": {"@id": "https://fullbloomcounseling.com/#business"},
+  "url": "https://fullbloomcounseling.com/",
+  "description": "Individual, couples, family and teen therapy in person in Denver and Boulder and online anywhere in Colorado.",
+  "provider": {
+    "@id": "https://fullbloomcounseling.com/#business"
+  },
   "areaServed": [
-    {"@type":"City","name":"Denver","sameAs":"https://www.wikidata.org/wiki/Q16554"},
-    {"@type":"City","name":"Boulder","sameAs":"https://www.wikidata.org/wiki/Q192517"},
-    {"@type":"City","name":"Colorado Springs","sameAs":"https://www.wikidata.org/wiki/Q49258"},
-    {"@type":"City","name":"Fort Collins","sameAs":"https://www.wikidata.org/wiki/Q490732"},
-    {"@type":"State","name":"Colorado"}
+    {
+      "@type": "City",
+      "name": "Denver",
+      "sameAs": "https://www.wikidata.org/wiki/Q16554"
+    },
+    {
+      "@type": "City",
+      "name": "Boulder",
+      "sameAs": "https://www.wikidata.org/wiki/Q192517"
+    },
+    {
+      "@type": "City",
+      "name": "Colorado Springs",
+      "sameAs": "https://www.wikidata.org/wiki/Q49258"
+    },
+    {
+      "@type": "City",
+      "name": "Fort Collins",
+      "sameAs": "https://www.wikidata.org/wiki/Q490732"
+    },
+    {
+      "@type": "State",
+      "name": "Colorado"
+    }
   ],
   "availableChannel": [
-    {"@type":"ServiceChannel","name":"In-Person","serviceLocation":{"@type":"Place","address":{"@type":"PostalAddress","streetAddress":"1780 S Bellaire St #485","addressLocality":"Denver","addressRegion":"CO","postalCode":"80222"}}},{"@type":"ServiceChannel","name":"In-Person Boulder","serviceLocation":{"@type":"Place","name":"5637 Arapahoe Ave (D&K Printing Building)","address":{"@type":"PostalAddress","streetAddress":"5637 Arapahoe Ave","addressLocality":"Boulder","addressRegion":"CO","postalCode":"80303"}}},
-    {"@type":"ServiceChannel","name":"Telehealth","serviceUrl":"https://fullbloomcounseling.com/contact/"}
+    {
+      "@type": "ServiceChannel",
+      "name": "In-Person",
+      "serviceLocation": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1780 S Bellaire St #485",
+          "addressLocality": "Denver",
+          "addressRegion": "CO",
+          "postalCode": "80222"
+        }
+      }
+    },
+    {
+      "@type": "ServiceChannel",
+      "name": "In-Person Boulder",
+      "serviceLocation": {
+        "@type": "Place",
+        "name": "5637 Arapahoe Ave (D&K Printing Building)",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "5637 Arapahoe Ave",
+          "addressLocality": "Boulder",
+          "addressRegion": "CO",
+          "postalCode": "80303"
+        }
+      }
+    },
+    {
+      "@type": "ServiceChannel",
+      "name": "Telehealth",
+      "serviceUrl": "https://fullbloomcounseling.com/contact/"
+    }
   ]
 }</script>
 <script type="application/ld+json">
