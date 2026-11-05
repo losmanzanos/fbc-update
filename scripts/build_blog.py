@@ -369,7 +369,14 @@ def therapist_info(slug):
     creds = creds.group(1).strip() if creds else ""
     photo = slug.split("-")[0]
     note = "Online only" if "online only" in h.lower() else ("Boulder &amp; Denver" if slug == "kelsey-bennett" else "Denver &amp; online")
-    return name, creds, photo, note
+    # one-line focus, kept in sync with the card on the therapists page
+    t = read("therapists/index.html")
+    focus = re.search(r'href="\.\./team/' + slug + r'/" class="btn', t)
+    card = t[t.rfind('<div class="team-card', 0, focus.start()):focus.start()] if focus else ""
+    focus = re.search(r"<p>(.*?)</p>", card, re.S)
+    focus = focus.group(1).strip() if focus else ""
+    focus = re.sub(r"\s*(Online across Colorado|Boulder &amp; virtual)\.?$", "", focus).rstrip(" .") + "."
+    return name, creds, photo, note, focus
 
 
 def build_who():
@@ -388,15 +395,16 @@ def build_who():
         if slugs:
             cards = ""
             for s in slugs:
-                name, creds, photo, note = therapist_info(s)
+                name, creds, photo, note, focus = therapist_info(s)
                 st = avail.get(s, {}).get("status", "open")
                 first = name.split()[0]
                 cards += f"""      <a class="who-card" href="../../team/{s}/">
-        <picture><source srcset="../../images/team/{photo}-square.webp" type="image/webp"><img src="../../images/team/{photo}-square.jpg" alt="{name}, {creds}" width="72" height="72" loading="lazy" decoding="async"></picture>
+        <span class="who-photo"><picture><source srcset="../../images/team/{photo}-portrait.webp" type="image/webp"><img src="../../images/team/{photo}-portrait.jpg" alt="{name}, {creds}" width="600" height="600" loading="lazy" decoding="async"></picture></span>
         <span class="who-text">
           <span class="who-name">{name}</span>
-          <span class="who-creds">{creds} &middot; {note}</span>
-          <span class="avail avail-{st}">{LABEL[st]}</span>
+          <span class="who-creds">{creds}</span>
+          <span class="who-focus">{focus}</span>
+          <span class="who-meta"><span class="who-where">{note}</span><span class="avail avail-{st}">{LABEL[st]}</span></span>
           <span class="who-link">Meet {first} &#8594;</span>
         </span>
       </a>
@@ -404,7 +412,7 @@ def build_who():
             block = f"""{WHO_START}
 <section class="who-box" aria-labelledby="who-heading">
   <h2 id="who-heading" class="who-heading">Who to See for This</h2>
-  <div class="who-grid">
+  <div class="who-grid who-count-{len(slugs)}">
 {cards}  </div>
 </section>
 {WHO_END}

@@ -119,9 +119,6 @@
 .ed-reading .ed-wrap { display: grid; grid-template-columns: 200px 1fr; gap: 32px; }
 .ed-reading a { display: block; font-family: var(--font-serif); font-size: 1.2rem; color: var(--bark); text-decoration: none; padding: 10px 0; border-bottom: 1px solid var(--border); }
 .ed-reading a:hover { color: var(--petal-dark); }
-.ed .who-box { max-width: var(--ed-w); margin: var(--ed-gap) auto 0; padding: 0 32px; border: 0; background: none; }
-.ed .who-box::before { content: 'Our therapists'; display: block; font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--petal-dark); margin-bottom: 18px; }
-.ed .who-heading { font-family: var(--font-serif); font-weight: 500; font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.12; color: var(--bark); margin: 0 0 32px; }
 
 @media (max-width: 900px) {
   .ed-wrap, .ed-facts ul, .ed .who-box { padding: 0 20px; }
@@ -168,4 +165,87 @@
 @media (max-height: 500px) and (orientation: landscape) {
   .ed-hero-photo { min-height: 300px; }
   .ed-hero h1 { font-size: clamp(2.2rem, 5vw, 3rem); }
+}
+
+/* Who to see: portrait cards */
+.ed .who-box { max-width: var(--ed-w); margin: var(--ed-gap) auto 0; padding: 0 32px; border: 0; background: none; }
+.ed .who-box::before { content: 'Our therapists'; display: block; font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--petal-dark); margin-bottom: 18px; }
+.ed .who-heading { font-family: var(--font-serif); font-weight: 500; font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.12; color: var(--bark); margin: 0 0 40px; }
+.ed .who-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px 28px; }
+.ed .who-grid.who-count-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ed .who-grid.who-count-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 760px; }
+.ed .who-card { display: flex; flex-direction: column; align-items: stretch; gap: 0; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; color: var(--bark); text-decoration: none !important; }
+.ed .who-card:hover { box-shadow: none; }
+.ed .who-photo { display: block; overflow: hidden; aspect-ratio: 4 / 5; border-radius: 999px 999px 6px 6px; background: var(--cream); }
+.ed .who-photo picture, .ed .who-photo img { display: block; width: 100%; height: 100%; }
+.ed .who-card img { width: 100%; height: 100%; border-radius: 0; margin: 0; object-fit: cover; object-position: center 22%; transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+.ed .who-card:hover img { transform: scale(1.045); }
+.ed .who-text { display: flex; flex-direction: column; align-items: flex-start; gap: 0; padding-top: 22px; }
+.ed .who-name { font-family: var(--font-serif); font-size: 1.55rem; font-weight: 500; line-height: 1.15; color: var(--bark); }
+.ed .who-creds { font-size: .66rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--petal-dark); margin-top: 8px; line-height: 1.6; }
+.ed .who-focus { font-size: .93rem; line-height: 1.6; color: var(--bark-mid); margin-top: 12px; }
+.ed .who-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); width: 100%; font-size: .78rem; color: var(--bark-mid); }
+.ed .who-card .avail { margin: 0; }
+.ed .who-link { margin-top: 18px; font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--bark); padding-bottom: 4px; background: linear-gradient(var(--petal), var(--petal)) left bottom / 28px 1px no-repeat; transition: background-size .4s ease; }
+.ed .who-card:hover .who-link { background-size: 100% 1px; }
+/* a single recommendation gets a feature layout */
+.ed .who-grid.who-count-1 { grid-template-columns: 1fr; max-width: 900px; }
+.ed .who-count-1 .who-card { display: grid; grid-template-columns: 300px 1fr; gap: 48px; align-items: center; }
+.ed .who-count-1 .who-text { padding-top: 0; }
+.ed .who-count-1 .who-name { font-size: 2.2rem; }
+.ed .who-count-1 .who-focus { font-size: 1.05rem; }
+@media (max-width: 1100px) { .ed .who-grid, .ed .who-grid.who-count-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 900px) { .ed .who-box { padding: 0 20px; } }
+@media (max-width: 560px) {
+  .ed .who-grid, .ed .who-grid.who-count-2, .ed .who-grid.who-count-3 { grid-template-columns: 1fr; gap: 40px; }
+  .ed .who-card, .ed .who-count-1 .who-card { display: grid; grid-template-columns: 120px 1fr; gap: 20px; align-items: start; }
+  .ed .who-photo { border-radius: 999px 999px 4px 4px; }
+  .ed .who-text, .ed .who-count-1 .who-text { padding-top: 4px; }
+  .ed .who-name, .ed .who-count-1 .who-name { font-size: 1.35rem; }
+  .ed .who-focus, .ed .who-count-1 .who-focus { font-size: .9rem; margin-top: 8px; }
+}
+
+/* EMDR: phases grouped into three stages */
+.ed-phase-groups { margin-top: 56px; border-top: 1px solid var(--bark); }
+.ed-pg { display: grid; grid-template-columns: 4fr 8fr; gap: clamp(24px, 5vw, 80px); padding: 44px 0; border-bottom: 1px solid var(--border); }
+.ed-pg-label span { display: block; font-size: .66rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--petal-dark); margin-bottom: 10px; }
+.ed-pg-label h3 { font-family: var(--font-serif); font-weight: 500; font-size: clamp(1.6rem, 2.4vw, 2.1rem); color: var(--bark); margin: 0 0 12px; }
+.ed .ed-pg-label p { font-size: .95rem; line-height: 1.7; color: var(--bark-mid); margin: 0; max-width: 34ch; }
+.ed-pg-steps { list-style: none; margin: 0; padding: 0; }
+.ed-pg-steps li { display: grid; grid-template-columns: 48px 1fr; gap: 20px; position: relative; padding-bottom: 28px; }
+.ed-pg-steps li:last-child { padding-bottom: 0; }
+.ed-pg-steps li::after { content: ''; position: absolute; left: 23px; top: 48px; bottom: 6px; width: 1px; background: var(--petal); opacity: .5; }
+.ed-pg-steps li:last-child::after { display: none; }
+.ed-pg-num { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--petal); background: var(--white); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 1.3rem; color: var(--bark); }
+.ed-pg.is-core .ed-pg-num { background: var(--bark); border-color: var(--bark); color: var(--cream); }
+.ed-pg-steps h4 { font-family: var(--font-serif); font-weight: 500; font-size: 1.4rem; color: var(--bark); margin: 8px 0 4px; }
+.ed .ed-pg-steps p { font-size: .98rem; line-height: 1.7; color: var(--bark-mid); margin: 0; }
+@media (max-width: 900px) {
+  .ed-pg { grid-template-columns: 1fr; gap: 24px; padding: 36px 0; }
+  .ed-pg-steps li { grid-template-columns: 40px 1fr; gap: 16px; }
+  .ed-pg-num { width: 40px; height: 40px; font-size: 1.1rem; }
+  .ed-pg-steps li::after { left: 19px; top: 40px; }
+  .ed-pg-steps h4 { margin-top: 4px; font-size: 1.25rem; }
+}
+
+/* Services hub: table of contents */
+.hub-group { display: grid; grid-template-columns: 4fr 8fr; gap: clamp(24px, 5vw, 80px); padding: 56px 0; border-top: 1px solid var(--border); }
+.hub-group:first-child { border-top: 1px solid var(--bark); }
+.hub-head { position: sticky; top: calc(var(--nav-h) + 32px); align-self: start; }
+.hub-head h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); margin-bottom: 12px; }
+.ed .hub-head p { font-size: .95rem; color: var(--bark-mid); max-width: 30ch; margin: 0; }
+.hub-list { list-style: none; margin: 0; padding: 0; }
+.hub-list li + li { border-top: 1px solid var(--border); }
+.hub-list a { display: grid; grid-template-columns: 1fr 1.3fr 28px; gap: 24px; align-items: baseline; padding: 22px 0; text-decoration: none; color: var(--bark); transition: padding .35s ease, color .35s ease; }
+.hub-t { font-family: var(--font-serif); font-size: 1.45rem; line-height: 1.2; }
+.hub-d { font-size: .92rem; line-height: 1.6; color: var(--bark-mid); }
+.hub-arrow { color: var(--petal); font-size: 1.1rem; transition: transform .35s ease; justify-self: end; }
+.hub-list a:hover { padding-left: 10px; color: var(--petal-dark); }
+.hub-list a:hover .hub-arrow { transform: translateX(4px); }
+@media (max-width: 900px) {
+  .hub-group { grid-template-columns: 1fr; gap: 16px; padding: 40px 0; }
+  .hub-head { position: static; }
+  .hub-list a { grid-template-columns: 1fr 24px; gap: 4px 16px; }
+  .hub-d { grid-column: 1; }
+  .hub-arrow { grid-row: 1 / span 2; grid-column: 2; align-self: center; }
 }

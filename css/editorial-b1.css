@@ -1,0 +1,158 @@
+/* Editorial service pages, batch 1: signature components for grief, depression,
+   trauma, SSP, IFS and addiction recovery. Builds on editorial.css. */
+
+.b1-intro { max-width: 62ch; }
+.ed .b1-note { font-size: .9rem; color: var(--bark-mid); margin-top: 28px; }
+.ed .b1-small { font-size: .95rem; color: var(--bark-mid); }
+.b1-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 48px; margin-top: 56px; border-top: 1px solid var(--bark); }
+.b1-cols > div { padding-top: 26px; }
+.b1-cols h3 { font-family: var(--font-serif); font-weight: 500; font-size: 1.4rem; color: var(--bark); margin: 0 0 10px; }
+.ed .b1-cols p { font-size: .96rem; line-height: 1.75; color: var(--bark-mid); margin: 0; }
+.b1-pull { font-family: var(--font-serif); font-style: italic; font-size: clamp(1.35rem, 2.2vw, 1.7rem); line-height: 1.4; color: var(--bark); border-left: 2px solid var(--petal); padding-left: 24px; margin: 40px 0 0; max-width: 34ch; }
+.b1-pull cite { display: block; font-family: var(--font-sans); font-style: normal; font-size: .7rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--bark-mid); margin-top: 14px; }
+.b1-pull cite a { color: var(--petal-dark); text-decoration: none; }
+
+/* Grief: back and forth between the loss and the rest of life */
+.b1-waves { margin-top: 56px; background: var(--white); border: 1px solid var(--border); padding: 40px 44px 36px; }
+.b1-lane { display: grid; grid-template-columns: 190px 1fr; gap: 24px; align-items: center; }
+.b1-lane-label { font-family: var(--font-serif); font-style: italic; font-size: 1.3rem; line-height: 1.25; color: var(--bark); }
+.b1-lane ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.b1-lane li { font-size: .86rem; line-height: 1.3; padding: 8px 14px; border-radius: 999px; background: var(--cream); color: var(--bark); }
+.b1-lane.is-life li { background: transparent; border: 1px solid var(--border); }
+.b1-wave { display: block; width: 100%; height: 120px; margin: 14px 0; }
+.b1-wave path { fill: none; stroke: var(--petal-dark); stroke-width: 1.6; vector-effect: non-scaling-stroke; }
+.b1-wave line { stroke: var(--border); stroke-width: 1; stroke-dasharray: 3 5; vector-effect: non-scaling-stroke; }
+.b1-wave-axis { display: flex; justify-content: space-between; font-size: .64rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--petal-dark); border-top: 1px solid var(--border); padding-top: 12px; margin-top: 18px; }
+
+/* Depression: two kinds, side by side */
+.b1-kinds { margin-top: 52px; }
+.b1-kinds-head, .b1-kinds-row { display: grid; grid-template-columns: 170px 1fr 1fr; gap: 0 44px; }
+.b1-kinds-head { padding-bottom: 18px; align-items: end; }
+.b1-kinds-head h3 { font-family: var(--font-serif); font-weight: 500; font-size: clamp(1.5rem, 2.4vw, 2rem); line-height: 1.15; color: var(--bark); margin: 0; }
+.b1-kinds-head h3 em { color: var(--petal-dark); }
+.b1-kinds-row { border-top: 1px solid var(--border); padding: 22px 0; }
+.b1-kinds-row:last-child { border-bottom: 1px solid var(--border); }
+.b1-kinds-row > span { font-size: .66rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--petal-dark); padding-top: 6px; }
+.ed .b1-kinds-row p { margin: 0; font-size: 1rem; line-height: 1.7; }
+.b1-kinds-row p b { display: none; }
+.b1-kinds-row p + p { color: var(--bark-mid); }
+
+/* Trauma: where it can show up */
+.b1-traces { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 6vw, 88px); align-items: center; margin-top: 48px; }
+.b1-traces svg { width: 100%; max-width: 460px; height: auto; display: block; margin: 0 auto; }
+.b1-traces svg circle { fill: var(--petal); fill-opacity: .1; stroke: var(--petal-dark); stroke-width: 1.2; }
+.b1-traces svg text { font-family: var(--font-serif); fill: var(--bark); }
+.b1-traces-list > div { display: grid; grid-template-columns: 150px 1fr; gap: 20px; padding: 22px 0; border-top: 1px solid var(--border); }
+.b1-traces-list > div:last-child { border-bottom: 1px solid var(--border); }
+.b1-traces-list h3 { font-family: var(--font-serif); font-weight: 500; font-size: 1.45rem; line-height: 1.2; color: var(--bark); margin: 0; }
+.ed .b1-traces-list p { margin: 0; font-size: .98rem; line-height: 1.75; color: var(--bark-mid); }
+
+/* SSP: the listening program laid out */
+.b1-track { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(10, 1fr); position: relative; }
+.b1-track::before { content: ''; position: absolute; left: 5%; right: 5%; top: 21px; height: 1px; background: var(--petal); }
+.b1-track li { position: relative; text-align: center; padding: 0 4px; }
+.b1-mark { height: 42px; display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 14px; }
+.b1-mark i { display: block; width: 10px; height: 10px; border-radius: 50%; background: var(--petal-dark); box-shadow: 0 0 0 4px var(--cream); }
+.b1-track .is-session .b1-mark i { width: 22px; height: 22px; background: var(--bark); }
+.b1-track .is-check .b1-mark i { width: 16px; height: 16px; background: var(--cream); border: 1.5px solid var(--bark); border-radius: 3px; transform: rotate(45deg); box-shadow: 0 0 0 5px var(--cream); }
+.b1-track b { display: block; font-family: var(--font-serif); font-weight: 500; font-size: 1.12rem; line-height: 1.2; color: var(--bark); }
+.b1-track span { display: block; font-size: .74rem; line-height: 1.4; color: var(--bark-mid); margin-top: 4px; }
+.b1-legend { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 36px; font-size: .84rem; color: var(--bark-mid); }
+.b1-legend span { display: inline-flex; align-items: center; gap: 10px; }
+.b1-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--petal-dark); }
+.b1-legend i.sq { width: 11px; height: 11px; border: 1.5px solid var(--bark); background: none; border-radius: 2px; transform: rotate(45deg); }
+.b1-legend i.lg { width: 16px; height: 16px; background: var(--bark); }
+
+.b1-included { display: grid; grid-template-columns: 4fr 8fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+.b1-price { font-family: var(--font-serif); font-size: clamp(3.6rem, 7vw, 5.6rem); line-height: 1; color: var(--bark); margin: 0 0 10px; }
+.b1-included ul { list-style: none; margin: 0; padding: 0; }
+.b1-included li { display: grid; grid-template-columns: 56px 1fr; gap: 20px; padding: 20px 0; border-top: 1px solid var(--border); font-size: 1rem; line-height: 1.6; color: var(--bark-mid); }
+.b1-included li:last-child { border-bottom: 1px solid var(--border); }
+.b1-included li strong { font-family: var(--font-serif); font-weight: 500; font-size: 1.9rem; line-height: 1; color: var(--petal-dark); }
+.b1-included li em { font-style: normal; color: var(--bark); font-weight: 600; }
+
+.b1-people { display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px; margin-top: 40px; }
+.b1-people > div { border-top: 1px solid var(--bark); padding-top: 24px; }
+.b1-people h3 { font-family: var(--font-serif); font-weight: 500; font-size: 1.6rem; color: var(--bark); margin: 0 0 4px; }
+.b1-people .b1-meta { display: block; font-size: .66rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--petal-dark); margin-bottom: 14px; line-height: 1.6; }
+.ed .b1-people p { font-size: .98rem; color: var(--bark-mid); }
+.b1-people a { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--petal-dark); text-decoration: none; }
+
+/* IFS: protectors around exiles around Self */
+.b1-parts { display: grid; grid-template-columns: 6fr 5fr; gap: clamp(32px, 6vw, 88px); align-items: center; margin-top: 48px; }
+.b1-layer { border: 1px solid var(--petal); border-radius: 260px 260px 12px 12px; text-align: center; }
+.b1-layer.is-outer { padding: 64px 30px 30px; background: var(--white); max-width: 520px; margin: 0 auto; }
+.b1-layer.is-mid { padding: 56px 26px 26px; background: var(--cream); margin-top: 22px; }
+.b1-layer.is-core { padding: 44px 20px 28px; background: var(--bark); border-color: var(--bark); margin-top: 20px; border-radius: 200px 200px 10px 10px; }
+.b1-layer h3 { font-family: var(--font-serif); font-weight: 500; font-size: 1.55rem; line-height: 1.1; color: var(--bark); margin: 0 0 6px; }
+.ed .b1-layer p { font-size: .84rem; line-height: 1.5; color: var(--bark-mid); margin: 0 auto; max-width: 30ch; }
+.b1-layer.is-core h3 { color: var(--white); font-style: italic; }
+.ed .b1-layer.is-core p { color: var(--petal-lt); }
+.b1-roles { display: flex; justify-content: center; gap: 8px; margin: 12px 0 0; flex-wrap: wrap; }
+.b1-roles span { font-size: .62rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--petal-dark); border: 1px solid var(--border); border-radius: 999px; padding: 5px 11px; }
+.b1-parts-key dl { margin: 0; }
+.b1-parts-key dt { font-family: var(--font-serif); font-size: 1.4rem; color: var(--bark); padding-top: 22px; border-top: 1px solid var(--border); }
+.b1-parts-key dt:first-child { border-top: 0; padding-top: 0; }
+.ed .b1-parts-key dd { margin: 6px 0 22px; font-size: .97rem; line-height: 1.75; color: var(--bark-mid); }
+
+/* Addiction: where people are when they come in */
+.b1-path { list-style: none; margin: 64px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: auto 56px auto; column-gap: 28px; position: relative; }
+.b1-path::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--petal); }
+.b1-path li { position: relative; }
+.b1-path li:nth-child(odd) { grid-row: 1; align-self: end; padding-bottom: 22px; }
+.b1-path li:nth-child(even) { grid-row: 3; padding-top: 22px; }
+.b1-path li:nth-child(1) { grid-column: 1; } .b1-path li:nth-child(2) { grid-column: 2; } .b1-path li:nth-child(3) { grid-column: 3; } .b1-path li:nth-child(4) { grid-column: 4; } .b1-path li:nth-child(5) { grid-column: 5; }
+.b1-path li::after { content: ''; position: absolute; left: 0; width: 15px; height: 15px; border-radius: 50%; background: var(--bark); box-shadow: 0 0 0 6px var(--cream); }
+.b1-path li:nth-child(odd)::after { bottom: -35px; }
+.b1-path li:nth-child(even)::after { top: -35px; }
+.b1-path li.is-slip::after { background: var(--cream); border: 1.5px dashed var(--bark); }
+.b1-path h3 { font-family: var(--font-serif); font-weight: 500; font-size: 1.4rem; line-height: 1.2; color: var(--bark); margin: 0 0 8px; }
+.ed .b1-path p { font-size: .92rem; line-height: 1.65; color: var(--bark-mid); margin: 0; }
+.ed .b1-path p.b1-work { margin-top: 10px; color: var(--bark); }
+.b1-path p.b1-work::before { content: 'In therapy '; font-size: .62rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--petal-dark); margin-right: 4px; }
+.b1-crisis { margin-top: 36px; padding: 22px 26px; border-left: 2px solid var(--petal-dark); background: var(--cream); }
+.ed .b1-crisis p { margin: 0; font-size: .95rem; }
+
+@media (max-width: 1100px) and (min-width: 901px) {
+  .b1-track b { font-size: 1rem; }
+  .b1-track span { font-size: .7rem; }
+  .b1-path { column-gap: 20px; }
+  .b1-path h3 { font-size: 1.25rem; }
+}
+
+@media (max-width: 900px) {
+  .b1-cols { grid-template-columns: 1fr; }
+  .b1-cols > div + div { border-top: 1px solid var(--border); margin-top: 26px; }
+  .b1-waves { padding: 28px 20px 24px; margin-left: -4px; margin-right: -4px; }
+  .b1-lane { grid-template-columns: 1fr; gap: 14px; }
+  .b1-wave { height: 90px; }
+  .b1-kinds-head { display: none; }
+  .b1-kinds-row { grid-template-columns: 1fr; gap: 12px; }
+  .b1-kinds-row p b { display: block; font-family: var(--font-serif); font-weight: 500; font-style: italic; font-size: 1.05rem; color: var(--petal-dark); margin-bottom: 2px; }
+  .b1-traces, .b1-parts, .b1-included { grid-template-columns: 1fr; }
+  .b1-traces svg { max-width: 380px; }
+  .b1-traces-list > div { grid-template-columns: 1fr; gap: 6px; }
+  .b1-track { grid-template-columns: 1fr; margin-top: 40px; }
+  .b1-track::before { left: 21px; right: auto; top: 10px; bottom: 10px; width: 1px; height: auto; }
+  .b1-track li { display: grid; grid-template-columns: 42px 1fr; column-gap: 18px; text-align: left; padding: 0 0 14px; align-items: center; }
+  .b1-mark { grid-row: span 2; margin: 0; width: 42px; height: 30px; gap: 3px; }
+  .b1-mark i { width: 7px; height: 7px; box-shadow: 0 0 0 3px var(--cream); }
+  .b1-track span { margin-top: 0; }
+  .b1-people { grid-template-columns: 1fr; gap: 40px; }
+  .b1-path { grid-template-columns: 1fr; grid-template-rows: none; margin-top: 40px; }
+  .b1-path::before { left: 7px; right: auto; top: 8px; bottom: 8px; width: 1px; height: auto; }
+  .b1-path li:nth-child(n) { grid-row: auto; grid-column: 1; padding: 0 0 30px 40px; align-self: start; }
+  .b1-path li:nth-child(n)::after { top: 4px; bottom: auto; }
+}
+@media (max-width: 420px) {
+  .b1-layer.is-outer { padding: 52px 16px 16px; border-radius: 180px 180px 10px 10px; }
+  .b1-layer.is-mid { padding: 46px 14px 16px; border-radius: 150px 150px 10px 10px; }
+  .b1-layer.is-core { padding: 38px 14px 22px; }
+  .b1-layer h3 { font-size: 1.35rem; }
+  .b1-pull { padding-left: 18px; }
+}
+.ed p:not(.breadcrumb) > a:not(.btn) { color: var(--petal-dark); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.ed p:not(.breadcrumb) > a:not(.btn):hover { color: var(--bark); }
+.ed-split .ed-numbered.is-2col { column-gap: 40px; }
+.ed-split .ed-numbered.is-2col li { grid-template-columns: 44px 1fr; gap: 8px 14px; }
+.ed-split .ed-numbered.is-2col li::before { font-size: 1.6rem; }

@@ -556,7 +556,71 @@ setTimeout(function() {
   });
 
   overlay.addEventListener('click', hideKonami);
+
+  // Same code on touch screens: swipe up, up, down, down, left, right, left, right, then tap twice
+  var tx = 0, ty = 0, tt = 0;
+  function feed(key) {
+    if (overlay.classList.contains('active')) { hideKonami(); return; }
+    if (key === CODE[pos]) { pos++; if (pos === CODE.length) { showKonami(); pos = 0; } }
+    else { pos = (key === CODE[0]) ? 1 : 0; }
+  }
+  document.addEventListener('touchstart', function(e) { var t = e.changedTouches[0]; tx = t.clientX; ty = t.clientY; tt = Date.now(); }, { passive: true });
+  document.addEventListener('touchend', function(e) {
+    var t = e.changedTouches[0], dx = t.clientX - tx, dy = t.clientY - ty;
+    if (Date.now() - tt > 600) return;
+    if (Math.max(Math.abs(dx), Math.abs(dy)) < 30) {
+      // taps only count once the eight swipes are in
+      if (pos >= 8) feed(pos === 8 ? 'b' : 'a');
+      return;
+    }
+    feed(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'ArrowRight' : 'ArrowLeft') : (dy > 0 ? 'ArrowDown' : 'ArrowUp'));
+  }, { passive: true });
 })();
+
+/* ══════════════════════════════════════════════
+   TAKE A BREATH: box breathing, 4 in, 4 hold, 4 out, 4 hold
+   Opened by any [data-breathe] link
+   ══════════════════════════════════════════════ */
+(function() {
+  var triggers = document.querySelectorAll('[data-breathe]');
+  if (!triggers.length) return;
+  var ov = document.createElement('div');
+  ov.className = 'breathe';
+  ov.setAttribute('role', 'dialog');
+  ov.setAttribute('aria-modal', 'true');
+  ov.setAttribute('aria-label', 'A one-minute breathing exercise');
+  ov.innerHTML =
+    '<button class="breathe-close" type="button" aria-label="Close">Close &#10005;</button>' +
+    '<div class="breathe-stage"><div class="breathe-ring"></div><div class="breathe-dot"></div>' +
+    '<p class="breathe-cue" aria-live="polite">Get comfortable</p><p class="breathe-count"></p></div>' +
+    '<p class="breathe-foot">Box breathing: in for four, hold for four, out for four, hold for four.<br>Stay as long as you like.</p>';
+  document.body.appendChild(ov);
+  var cue = ov.querySelector('.breathe-cue'), count = ov.querySelector('.breathe-count');
+  var steps = [['Breathe in', 'in'], ['Hold', 'hold-in'], ['Breathe out', 'out'], ['Hold', 'hold-out']];
+  var timer = null, last = null;
+  function run() {
+    var i = 0, n = 4;
+    function tick() {
+      if (n === 4) { cue.textContent = steps[i][0]; ov.setAttribute('data-phase', steps[i][1]); }
+      count.textContent = n;
+      n--;
+      if (n === 0) { n = 4; i = (i + 1) % 4; }
+    }
+    cue.textContent = 'Get comfortable'; count.textContent = '';
+    ov.setAttribute('data-phase', 'rest');
+    timer = setTimeout(function() { tick(); timer = setInterval(tick, 1000); }, 1500);
+  }
+  function open(e) { if (e) e.preventDefault(); last = document.activeElement; ov.classList.add('active'); document.body.style.overflow = 'hidden'; ov.querySelector('.breathe-close').focus(); run(); }
+  function close() { ov.classList.remove('active'); document.body.style.overflow = ''; clearTimeout(timer); clearInterval(timer); if (last) last.focus(); }
+  triggers.forEach(function(t) { t.addEventListener('click', open); });
+  ov.querySelector('.breathe-close').addEventListener('click', close);
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && ov.classList.contains('active')) close(); });
+})();
+
+/* Hello, fellow developer */
+try {
+  console.log('%cFull Bloom Counseling%c\nDesigned and built with care by therapistweb.design\nhttps://therapistweb.design/', 'font: italic 22px Georgia, serif; color: #A8724E;', 'font: 12px system-ui, sans-serif; color: #5C4A38; line-height: 1.6;');
+} catch (e) {}
 
 })();
 
