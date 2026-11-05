@@ -2,7 +2,8 @@
    individual-therapy (b2-guide), therapy-for-women-denver (b2-roles), therapy-for-men-denver (b2-spec),
    therapy-young-adults-denver (b2-decade), teen-therapy-denver (b2-sides), lgbtq-affirming-therapy-denver (b2-contrast) */
 
-.ed h1, .ed h2, .ed h3 { text-wrap: balance; }
+.ed h2, .ed h3 { text-wrap: balance; }
+.ed h1 { text-wrap: pretty; }
 .ed p, .ed li { text-wrap: pretty; }
 
 /* A facts strip placed mid-page needs its own breathing room */
@@ -43,7 +44,7 @@
 .b2-spec-row { counter-increment: spec; display: grid; grid-template-columns: 240px 1fr; gap: 6px 48px; padding: 24px 32px; border-top: 1px solid var(--border); }
 .b2-spec-row:first-child { border-top: 0; }
 .b2-spec dt { font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--bark); padding-top: 5px; line-height: 1.6; }
-.b2-spec dt::before { content: counter(spec, decimal-leading-zero); display: inline-block; width: 36px; font-family: var(--font-serif); font-size: 1rem; font-weight: 500; letter-spacing: 0; color: var(--petal); }
+.b2-spec dt::before { content: counter(spec, decimal-leading-zero); display: inline-block; width: 36px; font-family: var(--font-serif); font-size: 1rem; font-weight: 500; letter-spacing: 0; color: var(--petal-dark); }
 .b2-spec dd { margin: 0; font-size: 1.02rem; line-height: 1.78; color: var(--text); max-width: 64ch; }
 .b2-spec dd a { color: var(--petal-dark); }
 
@@ -61,13 +62,12 @@
 .b2-decade-note { margin-top: 40px; font-size: .9rem; color: var(--bark-mid); }
 
 /* Teens: one column for parents, one for teens */
+.ed .b2-ticks-1 { columns: 1; margin-top: 28px; }
 .b2-sides { display: grid; grid-template-columns: 1fr 1fr; margin-top: var(--ed-gap); }
 .b2-side { padding: clamp(64px, 8vw, 112px) 32px; }
-.b2-side > div { max-width: calc(var(--ed-w) / 2 - 80px); }
-.b2-side.is-parent { background: var(--cream); }
-.b2-side.is-parent > div { margin-left: auto; margin-right: 48px; }
-.b2-side.is-teen { background: var(--bark); color: var(--white); }
-.b2-side.is-teen > div { margin-right: auto; margin-left: 48px; }
+.b2-side > div { max-width: 560px; }
+.b2-side.is-parent { background: var(--cream); padding-left: max(32px, calc(100% - var(--ed-w) / 2 + 32px)); padding-right: clamp(32px, 5vw, 72px); }
+.b2-side.is-teen { background: var(--bark); color: var(--white); padding-right: max(32px, calc(100% - var(--ed-w) / 2 + 32px)); padding-left: clamp(32px, 5vw, 72px); }
 .b2-side.is-teen h2, .b2-side.is-teen h3 { color: var(--white); }
 .b2-side.is-teen .ed-kicker { color: var(--petal-lt); }
 .ed .b2-side.is-teen p { color: rgba(255, 255, 255, .86); }
@@ -106,8 +106,6 @@
   .b2-decade-end { display: none; }
   .b2-age { grid-row: span 2; font-size: 2.3rem; margin: -6px 0 0; }
   .b2-age small { display: block; margin: 8px 0 0; }
-  .b2-side.is-parent > div { margin-right: 16px; }
-  .b2-side.is-teen > div { margin-left: 16px; }
 }
 @media (max-width: 900px) {
   .b2-guide-intro, .b2-roles-head { grid-template-columns: 1fr; gap: 20px; }
@@ -121,8 +119,8 @@
   .b2-spec-row { grid-template-columns: 1fr; padding: 20px; }
   .b2-spec dt { padding-top: 0; }
   .b2-sides { grid-template-columns: 1fr; }
-  .b2-side { padding: 64px 20px; }
-  .b2-side > div, .b2-side.is-parent > div, .b2-side.is-teen > div { max-width: 640px; margin: 0; }
+  .b2-side, .b2-side.is-parent, .b2-side.is-teen { padding: 64px 20px; }
+  .b2-side > div { max-width: 640px; }
   .b2-contrast-head { display: none; }
   .b2-contrast-row { grid-template-columns: 1fr; gap: 18px; padding: 28px 0; }
   .b2-contrast { border-top: 1px solid var(--bark); margin-top: 36px; }

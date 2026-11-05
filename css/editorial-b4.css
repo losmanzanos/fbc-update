@@ -97,6 +97,7 @@
 
 /* ---------- Online: Colorado map + setup checklist ---------- */
 .b4-map-band { background: var(--cream-alt); padding: var(--ed-gap) 0; margin-top: var(--ed-gap); }
+.ed-facts + .b4-map-band { margin-top: 0; }
 .b4-map-band + .ed-section { padding-top: var(--ed-gap); }
 .b4-map-grid { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(36px, 6vw, 88px); align-items: center; }
 .b4-co { position: relative; aspect-ratio: 1.36 / 1; border: 1.5px solid var(--bark); background-color: var(--cream);
@@ -107,9 +108,9 @@
 .b4-co .pt span { position: absolute; top: 50%; transform: translateY(-50%); left: 14px; white-space: nowrap; font-family: var(--font-serif); font-size: 1rem; line-height: 1; color: var(--bark); }
 .b4-co .pt.is-office span { left: 20px; font-weight: 600; }
 .b4-co .pt.l span { left: auto; right: 14px; }
-.b4-co .pt.is-office.l span { right: 20px; }
+.b4-co .pt.is-office.l span { left: auto; right: 20px; }
 .b4-co .pt.b span { top: 14px; left: 50%; transform: translateX(-50%); }
-.b4-co-name { position: absolute; left: 16px; bottom: 12px; font-size: .62rem; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: var(--petal-dark); }
+.b4-co-name { position: absolute; left: 16px; top: 12px; font-size: .62rem; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: var(--petal-dark); }
 .b4-legend { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: .8rem; color: var(--bark-mid); margin: 0; padding: 0; list-style: none; }
 .b4-legend li { display: flex; align-items: center; gap: 8px; }
 .b4-legend i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--petal-dark); }
@@ -121,14 +122,14 @@
 }
 @media (max-width: 560px) {
   .b4-co .pt span { font-size: .82rem; left: 10px; }
-  .b4-co .pt.l span { right: 10px; }
+  .b4-co .pt.l span { left: auto; right: 10px; }
   .b4-co .pt.is-office span { left: 15px; }
-  .b4-co .pt.is-office.l span { right: 15px; }
+  .b4-co .pt.is-office.l span { left: auto; right: 15px; }
   .b4-co .pt.b span { top: 10px; }
   .b4-co .pt.m-hide span { display: none; }
   .b4-co .pt { width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; }
   .b4-co .pt.is-office { width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; box-shadow: 0 0 0 3px var(--cream), 0 0 0 4px var(--bark); }
-  .b4-co-name { left: 10px; bottom: 8px; font-size: .54rem; }
+  .b4-co-name { left: 10px; top: 8px; font-size: .54rem; }
 }
 
 .b4-setup { list-style: none; padding: 0; margin: 48px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px; counter-reset: b4s; }
@@ -141,4 +142,18 @@
 @media (max-width: 900px) {
   .b4-setup { grid-template-columns: 1fr; }
   .b4-setup li:nth-last-child(2) { border-bottom: 0; }
+}
+
+/* Balanced headings on these pages, so no single-word last lines */
+.ed h1, .ed h2, .ed h3, .b4-wall li, .ed .ed-lede { text-wrap: balance; }
+@media (max-width: 600px) {
+  .b4-wall { gap: 12px 20px; margin-top: 40px; }
+  .b4-wall li.lg { font-size: 1.55rem; }
+}
+.b4-tldr-label strong { text-wrap: balance; }
+.ed .ed-ticks a, .ed .b4-care a, .ed .faq-answer a { color: var(--petal-dark); text-decoration: underline; text-decoration-color: var(--petal); text-underline-offset: 3px; }
+@media (max-width: 600px) {
+  .b4-jump { gap: 8px; }
+  .b4-jump span { display: none; }
+  .b4-jump a { font-size: .64rem; letter-spacing: .1em; padding: 8px 12px; }
 }

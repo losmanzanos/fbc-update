@@ -64,7 +64,7 @@
 .b1-legend i.lg { width: 16px; height: 16px; background: var(--bark); }
 
 .b1-included { display: grid; grid-template-columns: 4fr 8fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
-.b1-price { font-family: var(--font-serif); font-size: clamp(3.6rem, 7vw, 5.6rem); line-height: 1; color: var(--bark); margin: 0 0 10px; }
+.ed .b1-price { font-family: var(--font-serif); font-size: clamp(3.6rem, 7vw, 5.6rem); line-height: 1; color: var(--bark); margin: 0 0 10px; }
 .b1-included ul { list-style: none; margin: 0; padding: 0; }
 .b1-included li { display: grid; grid-template-columns: 56px 1fr; gap: 20px; padding: 20px 0; border-top: 1px solid var(--border); font-size: 1rem; line-height: 1.6; color: var(--bark-mid); }
 .b1-included li:last-child { border-bottom: 1px solid var(--border); }
@@ -97,7 +97,7 @@
 
 /* Addiction: where people are when they come in */
 .b1-path { list-style: none; margin: 64px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: auto 56px auto; column-gap: 28px; position: relative; }
-.b1-path::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--petal); }
+.b1-path::before { content: ''; grid-row: 2; grid-column: 1 / -1; align-self: center; height: 1px; background: var(--petal); }
 .b1-path li { position: relative; }
 .b1-path li:nth-child(odd) { grid-row: 1; align-self: end; padding-bottom: 22px; }
 .b1-path li:nth-child(even) { grid-row: 3; padding-top: 22px; }
@@ -140,7 +140,7 @@
   .b1-track span { margin-top: 0; }
   .b1-people { grid-template-columns: 1fr; gap: 40px; }
   .b1-path { grid-template-columns: 1fr; grid-template-rows: none; margin-top: 40px; }
-  .b1-path::before { left: 7px; right: auto; top: 8px; bottom: 8px; width: 1px; height: auto; }
+  .b1-path::before { position: absolute; grid-row: auto; align-self: stretch; left: 7px; right: auto; top: 8px; bottom: 8px; width: 1px; height: auto; }
   .b1-path li:nth-child(n) { grid-row: auto; grid-column: 1; padding: 0 0 30px 40px; align-self: start; }
   .b1-path li:nth-child(n)::after { top: 4px; bottom: auto; }
 }
@@ -156,3 +156,7 @@
 .ed-split .ed-numbered.is-2col { column-gap: 40px; }
 .ed-split .ed-numbered.is-2col li { grid-template-columns: 44px 1fr; gap: 8px 14px; }
 .ed-split .ed-numbered.is-2col li::before { font-size: 1.6rem; }
+.b1-pull cite a, .ed-voice cite a { white-space: nowrap; }
+.ed-facts + .ed-cream { margin-top: 0; }
+.ed-section + .ed-facts { margin-top: var(--ed-gap); }
+@media (max-width: 900px) { .ed-split > div:last-child > .ed-numbered:first-child { margin-top: 0; } }
