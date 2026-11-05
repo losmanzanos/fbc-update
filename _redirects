@@ -143,6 +143,9 @@ https://www.fullbloomcounseling.com/* https://fullbloomcounseling.com/:splat 301
 
 # Build tooling is not part of the site
 /scripts/*   /404.html   404!
+/data/*      /404.html   404!
+/README.md   /404.html   404!
+/NEXT-DEPLOY-NOTES.md   /404.html   404!
 
 # ── Brainspotting retired (October 2026, no clinician currently offers it) ───
 /services/brainspotting-therapy/              /services/trauma-therapy/        301

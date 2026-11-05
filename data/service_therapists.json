@@ -19,5 +19,63 @@
   "trauma-therapy": [
     "kelli-ruhl",
     "kelsey-bennett"
+  ],
+  "anxiety-therapy": [
+    "mark-whitney",
+    "jillian-corpora",
+    "kelsey-bennett",
+    "natalie-siegel"
+  ],
+  "depression-therapy-denver": [
+    "jillian-corpora",
+    "kirsten-adorno",
+    "kelli-ruhl"
+  ],
+  "disordered-eating": [
+    "natalie-siegel",
+    "jillian-corpora",
+    "rebecca-moravec"
+  ],
+  "health-at-every-size": [
+    "natalie-siegel",
+    "rebecca-moravec",
+    "jillian-corpora"
+  ],
+  "emdr": [
+    "rebecca-moravec",
+    "mark-whitney",
+    "kelsey-bennett"
+  ],
+  "enneagram-therapy": [
+    "rebecca-moravec",
+    "mark-whitney"
+  ],
+  "family-therapy": [
+    "kirsten-adorno",
+    "rebecca-moravec"
+  ],
+  "grief-loss-therapy": [
+    "jillian-corpora",
+    "kirsten-adorno"
+  ],
+  "online-therapy-colorado": [
+    "kirsten-adorno",
+    "mark-whitney"
+  ],
+  "pre-marital": [
+    "rebecca-moravec",
+    "kirsten-adorno"
+  ],
+  "therapy-for-men-denver": [
+    "mark-whitney"
+  ],
+  "therapy-for-women-denver": [
+    "rebecca-moravec",
+    "kelsey-bennett",
+    "natalie-siegel"
+  ],
+  "therapy-young-adults-denver": [
+    "kelsey-bennett",
+    "jillian-corpora"
   ]
 }

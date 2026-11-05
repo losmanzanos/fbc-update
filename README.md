@@ -31,7 +31,7 @@ Our practice is built on the belief that therapy works best when it feels human 
 ## Get In Touch
 
 📧 [info@fullbloomcounseling.com](mailto:info@fullbloomcounseling.com)
-📞 (303) 246-4923
+📞 (720) 767-9808
 🌐 [Schedule a free 15-minute consultation](https://fullbloomcounseling.com/contact/)
 
 ---
