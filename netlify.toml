@@ -70,3 +70,10 @@
   for = "/preview/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
+
+# Google Business Profile post graphics: readable by the GBP post editor, kept out of image search
+[[headers]]
+  for = "/images/gbp/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "https://business.google.com"
+    X-Robots-Tag = "noindex"
