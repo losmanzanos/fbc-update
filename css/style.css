@@ -2407,3 +2407,99 @@ html.kb-nav .skip-link:focus-visible { top: 16px; }
 /* Signature service card (Enneagram) */
 .service-card.is-signature { border-top: 2px solid var(--petal-dark); }
 .service-card .svc-tag { position: absolute; top: 36px; left: 36px; font-family: var(--font-sans); font-size: .68rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--petal-dark); line-height: 1; }
+
+/* ── Mobile menu: exactly one screen on every phone ──
+   Sized to the visible viewport (dvh), so Safari's toolbars don't push the
+   bottom off screen. Item spacing scales with screen height so the closed
+   menu always fits; it only scrolls once a submenu is open, and the
+   scrollbar stays hidden either way. */
+.mobile-menu {
+  height: 100vh;
+  height: 100dvh;
+  padding: max(12px, env(safe-area-inset-top)) env(safe-area-inset-right) 0 env(safe-area-inset-left);
+  scrollbar-width: none;
+}
+.mobile-menu::-webkit-scrollbar { display: none; }
+.mobile-close { top: max(16px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right)); }
+.mobile-brand { padding-bottom: clamp(8px, 1.8dvh, 16px); }
+.mobile-nav > .mobile-link,
+.mobile-nav > .mobile-toggle-sub { padding-top: clamp(8px, 1.6dvh, 15px); padding-bottom: clamp(8px, 1.6dvh, 15px); }
+.mobile-menu-cta { padding-top: clamp(10px, 2dvh, 20px); }
+.mobile-bottom { padding-bottom: max(14px, env(safe-area-inset-bottom)); }
+/* On phones, pin the button and search to the bottom edge */
+@media (max-height: 900px) {
+  .mobile-menu-cta { margin-top: auto; }
+}
+
+/* Phone landscape: two columns, links on the right */
+@media (orientation: landscape) and (max-height: 540px) {
+  .mobile-menu.open {
+    display: grid !important;
+    grid-template-columns: minmax(300px, 42%) 1fr;
+    grid-template-rows: auto 1fr auto;
+    overflow: hidden;
+  }
+  .mobile-brand { grid-column: 1; grid-row: 1; padding: 4px 20px 10px; border-bottom: 0; }
+  .mobile-brand-name { font-size: 1.12rem; white-space: nowrap; }
+  .mobile-menu-cta, .mobile-bottom { padding-left: 20px; padding-right: 20px; }
+  .mobile-menu-cta a { font-size: .66rem; letter-spacing: .1em; padding-left: 10px; padding-right: 10px; white-space: nowrap; }
+  .mobile-bottom { gap: 6px; }
+  .mobile-socials { gap: 6px; }
+  .mobile-socials a { width: 36px; height: 36px; }
+  .mobile-search-wrap { height: 36px; }
+  .mobile-search-btn { padding: 0 10px; font-size: .62rem; }
+  .mobile-menu-cta { grid-column: 1; grid-row: 2; align-self: end; margin-top: 0; padding-top: 0; }
+  .mobile-bottom { grid-column: 1; grid-row: 3; }
+  .mobile-nav {
+    grid-column: 2; grid-row: 1 / 4;
+    display: flex; flex-direction: column; justify-content: safe center;
+    overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none;
+    border-left: 1px solid rgba(170, 148, 128, .25);
+    padding: 44px 0 max(8px, env(safe-area-inset-bottom));
+  }
+  .mobile-nav::-webkit-scrollbar { display: none; }
+  .mobile-nav > .mobile-link,
+  .mobile-nav > .mobile-toggle-sub { padding-top: 9px; padding-bottom: 9px; }
+}
+
+/* Leaving from the menu: hold the menu until the next page is ready,
+   then crossfade (browsers without view transitions simply swap). */
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .22s; }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}
+.mobile-menu a.is-going { color: var(--petal-dark); }
+
+/* Cards: plain wrapping so every title and excerpt fills its card's width.
+   (Balanced wrapping shortened some lines and made cards look misaligned.) */
+[class*="card"] h2, [class*="card"] h3, [class*="card"] h4,
+[class*="card"] p, [class*="card"] li { text-wrap: wrap; }
+
+/* Narrowest phones (320 to 360 wide): keep the name, button and search on one line each */
+@media (max-width: 360px) {
+  .mobile-brand { padding-left: 20px; padding-right: 20px; }
+  .mobile-brand-name { font-size: 1.12rem; white-space: nowrap; }
+  .mobile-menu-cta { padding-left: 20px; padding-right: 20px; }
+  .mobile-menu-cta a { font-size: .66rem; letter-spacing: .1em; padding-left: 10px; padding-right: 10px; white-space: nowrap; }
+  .mobile-bottom { padding-left: 20px; padding-right: 20px; gap: 6px; }
+  .mobile-socials { gap: 6px; }
+  .mobile-socials a { width: 36px; height: 36px; }
+  .mobile-search-btn { padding: 0 10px; font-size: .62rem; }
+}
+
+@media (orientation: landscape) and (max-height: 340px) {
+  .mobile-nav > .mobile-link,
+  .mobile-nav > .mobile-toggle-sub { padding-top: 6px; padding-bottom: 6px; }
+}
+
+/* Tablets: center the menu instead of leaving the lower half empty */
+@media (min-width: 600px) and (min-height: 700px) {
+  .mobile-menu.open { justify-content: safe center; }
+  .mobile-menu-cta { margin-top: 0; }
+  .mobile-menu > * { width: 100%; max-width: 560px; margin-left: auto; margin-right: auto; }
+  .mobile-menu > .mobile-close { width: 32px; margin: 0; }
+  .mobile-brand { border-bottom: 0; }
+  .mobile-nav > .mobile-link,
+  .mobile-nav > .mobile-toggle-sub { font-size: 1.3rem; padding-top: 16px; padding-bottom: 16px; }
+}

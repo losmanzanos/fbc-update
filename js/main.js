@@ -80,12 +80,35 @@ var closeBtn = document.getElementById('mobile-close');
 if (closeBtn) { closeBtn.addEventListener('click', closeMenu); }
 document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { closeMenu(); closeSearch(); } });
 if (menu) {
-  menu.querySelectorAll('a[href]').forEach(function(a) { 
-    a.addEventListener('click', function() {
-      setTimeout(closeMenu, 50);
+  menu.querySelectorAll('a[href]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || a.target === '_blank') return;
+      var url;
+      try { url = new URL(a.href, location.href); } catch (err) { setTimeout(closeMenu, 50); return; }
+      var samePage = url.origin === location.origin && url.pathname === location.pathname;
+      if (url.origin !== location.origin || samePage) { setTimeout(closeMenu, 50); return; }
+      // Going to another page: leave the menu up so the old page never shows
+      // through. The next page replaces it once it is ready to paint.
+      leavingFromMenu = true;
+      a.classList.add('is-going');
     });
   });
 }
+
+/* Coming back with the Back button restores this page from cache with the
+   menu still open, so close it instantly. Only crossfade for menu exits. */
+var leavingFromMenu = false;
+function closeMenuNow() {
+  if (!menu || !menu.classList.contains('open')) return;
+  menu.style.transition = 'none';
+  closeMenu();
+  menu.querySelectorAll('.is-going').forEach(function(a) { a.classList.remove('is-going'); });
+  requestAnimationFrame(function() { menu.style.transition = ''; });
+}
+window.addEventListener('pageshow', function(e) { if (e.persisted) { leavingFromMenu = false; closeMenuNow(); } });
+window.addEventListener('pageswap', function(e) {
+  if (e.viewTransition && !leavingFromMenu) e.viewTransition.skipTransition();
+});
 
 /* Mobile submenus */
 document.querySelectorAll('.mobile-toggle-sub').forEach(function(t) {
