@@ -53,6 +53,40 @@ function lockMenuHeight() {
   menu.classList.toggle('is-tall', h > 900);
 }
 
+/* Freeze the page behind the open menu. overflow:hidden alone doesn't stop
+   iOS from scrolling (and bouncing) the page underneath, which shows a page
+   scrollbar, collapses the toolbars and flashes the copy behind. */
+var lockedY = 0, pageLocked = false;
+function lockPage() {
+  if (pageLocked) return;
+  pageLocked = true;
+  lockedY = window.pageYOffset || document.documentElement.scrollTop || 0;
+  var b = document.body.style;
+  b.position = 'fixed'; b.top = (-lockedY) + 'px'; b.left = '0'; b.right = '0'; b.width = '100%';
+  document.documentElement.classList.add('menu-lock');
+}
+function unlockPage() {
+  if (!pageLocked) return;
+  pageLocked = false;
+  var b = document.body.style;
+  b.position = ''; b.top = ''; b.left = ''; b.right = ''; b.width = '';
+  document.documentElement.classList.remove('menu-lock');
+  var html = document.documentElement, sb = html.style.scrollBehavior;
+  html.style.scrollBehavior = 'auto';
+  window.scrollTo(0, lockedY);
+  html.style.scrollBehavior = sb;
+}
+/* The menu only scrolls when an open submenu makes it taller than the screen. */
+function updateMenuScroll() {
+  if (!menu) return;
+  menu.classList.toggle('can-scroll', menu.scrollHeight > menu.clientHeight + 1);
+}
+if (menu && window.ResizeObserver) {
+  var ro = new ResizeObserver(updateMenuScroll);
+  Array.prototype.forEach.call(menu.children, function(c) { ro.observe(c); });
+  ro.observe(menu);
+}
+
 function openMenu() {
   if (!menu) return;
   lockMenuHeight();
@@ -70,8 +104,9 @@ function openMenu() {
       }
     });
   });
-  document.body.style.overflow = 'hidden';
+  lockPage();
   document.body.classList.add('menu-open');
+  requestAnimationFrame(updateMenuScroll);
   if (btn) { btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
   menu.setAttribute('aria-hidden','false');
 }
@@ -87,7 +122,7 @@ function closeMenu() {
     spans[2].style.transform = '';
   }
   document.body.classList.remove('menu-open');
-  document.body.style.overflow = '';
+  unlockPage();
   if (btn) { btn.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
   menu.setAttribute('aria-hidden','true');
   // Hide after transition completes
@@ -148,6 +183,7 @@ document.querySelectorAll('.mobile-toggle-sub').forEach(function(t) {
     var o = s.classList.contains('open');
     s.classList.toggle('open', !o);
     t.setAttribute('aria-expanded', o ? 'false' : 'true');
+    updateMenuScroll(); setTimeout(updateMenuScroll, 350);
   });
 });
 

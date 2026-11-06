@@ -2558,3 +2558,12 @@ html { scroll-padding-top: calc(var(--nav-h, 80px) + 56px); }
   .author-box .author-info > p { grid-column: 1 / -1; margin: 18px 0 10px !important; font-size: .92rem !important; line-height: 1.6 !important; }
   .author-box .author-info > a { grid-column: 1 / -1; justify-self: start; }
 }
+
+/* Open menu: the page behind is frozen (see lockPage in main.js), nothing
+   bounces, and the menu itself only scrolls once a submenu needs the room. */
+html.menu-lock, html.menu-lock body { overscroll-behavior: none; }
+.mobile-menu { overflow-y: hidden; }
+.mobile-menu.can-scroll { overflow-y: auto; }
+@media (orientation: portrait) {
+  .mobile-menu.open:not(.can-scroll) { touch-action: none; }
+}
