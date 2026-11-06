@@ -25,12 +25,42 @@ if (hdr) {
 var btn = document.getElementById('hamburger');
 var menu = document.getElementById('mobile-menu');
 
+/* Lock the open menu to the smallest viewport height seen at this width.
+   Some phone browsers resize the page when their toolbars hide on scroll;
+   a fixed pixel height means nothing in the menu moves when that happens. */
+var menuMinH = window.innerHeight, menuW = window.innerWidth;
+function smallViewportPx() {
+  var p = document.createElement('div');
+  p.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:100svh;visibility:hidden;pointer-events:none';
+  document.body.appendChild(p);
+  var h = p.getBoundingClientRect().height; p.remove();
+  return h || window.innerHeight;
+}
+window.addEventListener('resize', function() {
+  if (window.innerWidth !== menuW) {           /* rotation: start over */
+    menuW = window.innerWidth; menuMinH = window.innerHeight;
+    if (menu && menu.classList.contains('open')) lockMenuHeight();
+  } else if (window.innerHeight < menuMinH) {  /* toolbars came back: shrink only */
+    menuMinH = window.innerHeight;
+    if (menu && menu.classList.contains('open')) lockMenuHeight();
+  }
+}, {passive: true});
+function lockMenuHeight() {
+  if (!menu) return;
+  var h = Math.round(Math.min(menuMinH, smallViewportPx(), window.innerHeight));
+  menuMinH = Math.min(menuMinH, h);
+  menu.style.setProperty('--menu-h', h + 'px');
+  menu.classList.toggle('is-tall', h > 900);
+}
+
 function openMenu() {
   if (!menu) return;
-  menu.style.cssText = 'display:flex!important;transform:translateX(100%)';
+  lockMenuHeight();
+  var mh = menu.style.getPropertyValue('--menu-h');
+  menu.style.cssText = 'display:flex!important;transform:translateX(100%);--menu-h:' + mh;
   requestAnimationFrame(function() {
     requestAnimationFrame(function() {
-      menu.style.cssText = '';
+      menu.style.cssText = '--menu-h:' + mh;
       menu.classList.add('open');
       var spans = document.querySelectorAll('#hamburger span');
       if (spans.length === 3) {

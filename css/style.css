@@ -2421,22 +2421,22 @@ html.kb-nav .skip-link:focus-visible { top: 16px; }
      so nothing in the menu moves. The cream shadow fills the strip below
      when the toolbar collapses. */
   height: 100vh;
-  height: 100svh;
+  height: var(--menu-h, 100svh);
   box-shadow: 0 50vh 0 0 var(--cream);
   padding: max(12px, env(safe-area-inset-top)) env(safe-area-inset-right) 0 env(safe-area-inset-left);
   scrollbar-width: none;
 }
 .mobile-menu::-webkit-scrollbar { display: none; }
 .mobile-close { top: max(16px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right)); }
-.mobile-brand { padding-bottom: clamp(8px, 1.8svh, 16px); }
+.mobile-brand { padding-bottom: clamp(8px, calc(var(--menu-h, 100svh) * .018), 16px); }
 .mobile-nav > .mobile-link,
-.mobile-nav > .mobile-toggle-sub { padding-top: clamp(8px, 1.6svh, 15px); padding-bottom: clamp(8px, 1.6svh, 15px); }
-.mobile-menu-cta { padding-top: clamp(10px, 2svh, 20px); }
+.mobile-nav > .mobile-toggle-sub { padding-top: clamp(8px, calc(var(--menu-h, 100svh) * .016), 15px); padding-bottom: clamp(8px, calc(var(--menu-h, 100svh) * .016), 15px); }
+.mobile-menu-cta { padding-top: clamp(10px, calc(var(--menu-h, 100svh) * .02), 20px); }
 .mobile-bottom { padding-bottom: max(14px, env(safe-area-inset-bottom)); }
 /* On phones, pin the button and search to the bottom edge */
-@media (max-height: 900px) {
-  .mobile-menu-cta { margin-top: auto; }
-}
+/* Keyed to the locked menu height, not a media query, so a toolbar
+   collapsing past 900px can't flip it mid-view. */
+:where(.mobile-menu:not(.is-tall)) .mobile-menu-cta { margin-top: auto; }
 
 /* Phone landscape: two columns, links on the right */
 @media (orientation: landscape) and (max-height: 540px) {
