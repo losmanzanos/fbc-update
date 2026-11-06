@@ -2547,3 +2547,14 @@ html { scroll-padding-top: calc(var(--nav-h, 80px) + 56px); }
 .post-body .post-rs .post-rs-small { font-size: .85rem; margin: 0; color: rgba(242,236,225,.65); }
 .ed-close .ed-close-note { margin: 28px auto 0; max-width: 52ch; font-size: .92rem; line-height: 1.7; }
 .ed-close .ed-close-note a { color: #8A5A3A; text-decoration: underline; text-decoration-color: rgba(168,114,78,.35); text-underline-offset: 3px; }
+
+/* Author box on phones: photo beside name + credentials, bio full width below */
+@media (max-width: 640px) {
+  .author-box { display: grid; grid-template-columns: 68px 1fr; column-gap: 18px; row-gap: 0; align-items: center; padding: 24px 22px; }
+  .author-box .author-photo, .author-box .author-placeholder { width: 68px; height: 68px; grid-column: 1; grid-row: 1 / span 3; align-self: center; }
+  .author-box .author-info { display: contents; }
+  .author-box .author-info > span, .author-box .author-info > strong { grid-column: 2; }
+  .author-box .author-info > span + strong + span { text-transform: none; letter-spacing: .01em; font-weight: 500; font-size: .8rem !important; line-height: 1.4; }
+  .author-box .author-info > p { grid-column: 1 / -1; margin: 18px 0 10px !important; font-size: .92rem !important; line-height: 1.6 !important; }
+  .author-box .author-info > a { grid-column: 1 / -1; justify-self: start; }
+}
