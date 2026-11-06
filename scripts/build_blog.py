@@ -104,7 +104,8 @@ def load_posts():
 
 
 # ── 2. Blog index cards ───────────────────────────────────────────────────────
-CARD_RE = re.compile(r'      <div class="blog-card fade-in" data-date="[^"]*">\n.*?\n      </div>\n', re.S)
+# Extra classes after "fade-in" (e.g. "is-feature") are allowed and kept, since existing cards are never rewritten.
+CARD_RE = re.compile(r'      <div class="blog-card fade-in(?: [^"]*)?" data-date="[^"]*">\n.*?\n      </div>\n', re.S)
 
 
 def card_slug(card):

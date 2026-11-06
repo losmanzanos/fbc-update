@@ -4,12 +4,18 @@
   <meta content="Full Bloom Counseling Group" property="og:site_name"/>
 <!-- Google Analytics 4 -->
 <link rel="preconnect" href="https://www.googletagmanager.com">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3C97K0XW7Z"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-3C97K0XW7Z');
+  /* Skip analytics for automated browsers (headless crawlers, test runs) so they stay out of GA4 */
+  if (!navigator.webdriver) {
+    var ga = document.createElement('script');
+    ga.async = true;
+    ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-3C97K0XW7Z';
+    document.head.appendChild(ga);
+    gtag('js', new Date());
+    gtag('config', 'G-3C97K0XW7Z');
+  }
 </script>
   <meta charset="UTF-8">
 <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicons/favicon-32x32.png?v=4">
@@ -84,7 +90,7 @@
   <link rel="dns-prefetch" href="https://formspree.io">
   <link rel="preload" as="image" href="../../images/hero-almost-booking-therapy.webp" type="image/webp" fetchpriority="high">
   <link rel="preload" href="../../images/hero-almost-booking-therapy.avif" as="image" type="image/avif" fetchpriority="high">
-<link rel="stylesheet" href="../../css/style.css?v=26">
+<link rel="stylesheet" href="../../css/style.css?v=27">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -455,6 +461,7 @@
             <li><a href="/services/lgbtq-affirming-therapy-denver/">LGBTQ+ Affirming</a></li>
             <li><a href="/services/postpartum-perinatal-therapy/">Postpartum &amp; Perinatal</a></li>
             <li><a href="/services/clinical-supervision/">Clinical Supervision</a></li>
+            <li><a href="https://therootandstem.com/" target="_blank" rel="noopener">The Root &amp; Stem &#8599;</a></li>
           </ul>
         </div>
         <div>

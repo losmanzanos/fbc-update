@@ -4,12 +4,18 @@
   <meta content="Full Bloom Counseling Group" property="og:site_name"/>
 <!-- Google Analytics 4 -->
 <link rel="preconnect" href="https://www.googletagmanager.com">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3C97K0XW7Z"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-3C97K0XW7Z');
+  /* Skip analytics for automated browsers (headless crawlers, test runs) so they stay out of GA4 */
+  if (!navigator.webdriver) {
+    var ga = document.createElement('script');
+    ga.async = true;
+    ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-3C97K0XW7Z';
+    document.head.appendChild(ga);
+    gtag('js', new Date());
+    gtag('config', 'G-3C97K0XW7Z');
+  }
 </script>
   <meta charset="UTF-8">
 <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicons/favicon-32x32.png?v=4">
@@ -74,7 +80,7 @@
   <meta name="twitter:image" content="https://fullbloomcounseling.com/images/blog-culturally-responsive.jpg">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Culturally Responsive Therapy: Why Your Culture Belongs in the Room","datePublished":"2025-07-21","dateModified":"2026-08-01","image":"https://fullbloomcounseling.com/images/blog-culturally-responsive.jpg","author":{"@type":"Person","@id":"https://fullbloomcounseling.com/team/kirsten-adorno/#person","name":"Kirsten Adorno","honorificSuffix":"LPC, MFTC","url":"https://fullbloomcounseling.com/team/kirsten-adorno/","worksFor":{"@type":"Organization","name":"Full Bloom Counseling Group","url":"https://fullbloomcounseling.com"}},"publisher":{"@type":"Organization","@id":"https://fullbloomcounseling.com/#business","name":"Full Bloom Counseling Group","url":"https://fullbloomcounseling.com","logo":{"@type":"ImageObject","url":"https://fullbloomcounseling.com/images/fbc-logo-schema.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://fullbloomcounseling.com/blog/culturally-responsive-therapy-denver/"},"description":"Therapy has a history of centering one kind of experience. A Denver therapist on why your cultural context isn't separate from your mental health."}</script>  <link rel="preload" as="image" href="../../images/blog-culturally-responsive.webp" type="image/webp" fetchpriority="high">
   <link rel="preload" href="../../images/blog-culturally-responsive.avif" as="image" type="image/avif" fetchpriority="high">
-<link rel="stylesheet" href="../../css/style.css?v=26">
+<link rel="stylesheet" href="../../css/style.css?v=27">
   <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","@id":"https://fullbloomcounseling.com/#website","url":"https://fullbloomcounseling.com","name":"Full Bloom Counseling Group","alternateName":"Full Bloom Counseling"}
 </script>
@@ -459,6 +465,7 @@
             <li><a href="/services/lgbtq-affirming-therapy-denver/">LGBTQ+ Affirming</a></li>
             <li><a href="/services/postpartum-perinatal-therapy/">Postpartum &amp; Perinatal</a></li>
             <li><a href="/services/clinical-supervision/">Clinical Supervision</a></li>
+            <li><a href="https://therootandstem.com/" target="_blank" rel="noopener">The Root &amp; Stem &#8599;</a></li>
           </ul>
         </div>
         <div>

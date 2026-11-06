@@ -5,12 +5,18 @@
   <meta content="Full Bloom Counseling Group" property="og:site_name"/>
 <!-- Google Analytics 4 -->
 <link rel="preconnect" href="https://www.googletagmanager.com">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3C97K0XW7Z"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-3C97K0XW7Z');
+  /* Skip analytics for automated browsers (headless crawlers, test runs) so they stay out of GA4 */
+  if (!navigator.webdriver) {
+    var ga = document.createElement('script');
+    ga.async = true;
+    ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-3C97K0XW7Z';
+    document.head.appendChild(ga);
+    gtag('js', new Date());
+    gtag('config', 'G-3C97K0XW7Z');
+  }
 </script>
 <meta charset="utf-8"/>
 <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicons/favicon-32x32.png?v=4">
@@ -82,7 +88,7 @@
 <meta content="Denver,Colorado" name="geo.placename"/>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalBusiness","@id":"https://fullbloomcounseling.com/#business","name":"Full Bloom Counseling Group","url":"https://fullbloomcounseling.com","telephone":"+1-720-767-9808","email":"info@fullbloomcounseling.com","address":{"@type":"PostalAddress","streetAddress":"1780 S Bellaire St #485","addressLocality":"Denver","addressRegion":"CO","postalCode":"80222","addressCountry":"US"},"openingHours":["Mo-Fr 08:00-20:00","Sa-Su 09:00-17:00"],"priceRange":"$$","sameAs":["https://www.facebook.com/FullBloomDenver","https://www.instagram.com/fullbloomcounseling"]}</script><link as="image" fetchpriority="high" href="../../images/hero-lgbtq-affirming-therapy-denver.jpg" rel="preload" type="image/jpeg"/>
 <link rel="preload" href="../../images/hero-lgbtq-affirming-therapy-denver.avif" as="image" type="image/avif" fetchpriority="high">
-<link href="../../css/style.css?v=26" rel="stylesheet"/>
+<link href="../../css/style.css?v=27" rel="stylesheet"/>
 <link href="../../css/mobile-service.css?v=7" rel="stylesheet"/>
 <link href="../../css/editorial.css?v=10" rel="stylesheet"/>
 <link href="../../css/editorial-b2.css?v=6" rel="stylesheet"/>
@@ -515,6 +521,7 @@
             <li><a href="/services/lgbtq-affirming-therapy-denver/">LGBTQ+ Affirming</a></li>
             <li><a href="/services/postpartum-perinatal-therapy/">Postpartum &amp; Perinatal</a></li>
             <li><a href="/services/clinical-supervision/">Clinical Supervision</a></li>
+            <li><a href="https://therootandstem.com/" target="_blank" rel="noopener">The Root &amp; Stem &#8599;</a></li>
           </ul>
         </div>
         <div>
