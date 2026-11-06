@@ -2409,22 +2409,26 @@ html.kb-nav .skip-link:focus-visible { top: 16px; }
 .service-card .svc-tag { position: absolute; top: 36px; left: 36px; font-family: var(--font-sans); font-size: .68rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--petal-dark); line-height: 1; }
 
 /* ── Mobile menu: exactly one screen on every phone ──
-   Sized to the visible viewport (dvh), so Safari's toolbars don't push the
+   Sized to the small viewport (svh), so Safari's toolbars don't push the
    bottom off screen. Item spacing scales with screen height so the closed
    menu always fits; it only scrolls once a submenu is open, and the
    scrollbar stays hidden either way. */
 .mobile-menu {
+  /* Small-viewport height never changes as Safari's toolbar shows or hides,
+     so nothing in the menu moves. The cream shadow fills the strip below
+     when the toolbar collapses. */
   height: 100vh;
-  height: 100dvh;
+  height: 100svh;
+  box-shadow: 0 50vh 0 0 var(--cream);
   padding: max(12px, env(safe-area-inset-top)) env(safe-area-inset-right) 0 env(safe-area-inset-left);
   scrollbar-width: none;
 }
 .mobile-menu::-webkit-scrollbar { display: none; }
 .mobile-close { top: max(16px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right)); }
-.mobile-brand { padding-bottom: clamp(8px, 1.8dvh, 16px); }
+.mobile-brand { padding-bottom: clamp(8px, 1.8svh, 16px); }
 .mobile-nav > .mobile-link,
-.mobile-nav > .mobile-toggle-sub { padding-top: clamp(8px, 1.6dvh, 15px); padding-bottom: clamp(8px, 1.6dvh, 15px); }
-.mobile-menu-cta { padding-top: clamp(10px, 2dvh, 20px); }
+.mobile-nav > .mobile-toggle-sub { padding-top: clamp(8px, 1.6svh, 15px); padding-bottom: clamp(8px, 1.6svh, 15px); }
+.mobile-menu-cta { padding-top: clamp(10px, 2svh, 20px); }
 .mobile-bottom { padding-bottom: max(14px, env(safe-area-inset-bottom)); }
 /* On phones, pin the button and search to the bottom edge */
 @media (max-height: 900px) {
@@ -2503,3 +2507,7 @@ html.kb-nav .skip-link:focus-visible { top: 16px; }
   .mobile-nav > .mobile-link,
   .mobile-nav > .mobile-toggle-sub { font-size: 1.3rem; padding-top: 16px; padding-bottom: 16px; }
 }
+
+/* Breadcrumb shadow only where it sits on a photo; on light headers it blurred the text */
+.breadcrumb { text-shadow: none; }
+.page-hero .breadcrumb, .hero .breadcrumb { text-shadow: 0 1px 3px rgba(0,0,0,.4); }

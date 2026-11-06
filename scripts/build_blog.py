@@ -117,7 +117,9 @@ def make_card(p):
     cat = p["cat"].upper().replace("&AMP;", "&amp;")
     pic = ""
     if p["img"]:
-        pic = (f'<picture><source srcset="../images/{p["img"]}.webp" type="image/webp">'
+        avif = (f'<source srcset="../images/{p["img"]}.avif" type="image/avif">'
+                if os.path.exists(path("images", p["img"] + ".avif")) else "")
+        pic = (f'<picture>{avif}<source srcset="../images/{p["img"]}.webp" type="image/webp">'
                f'<img src="../images/{p["img"]}.jpg" alt="{p["alt"]}" loading="lazy" decoding="async" '
                f'width="1920" height="1080"></picture>')
     return f'''      <div class="blog-card fade-in" data-date="{p["date"]}">
@@ -396,10 +398,12 @@ def build_who():
             cards = ""
             for s in slugs:
                 name, creds, photo, note, focus = therapist_info(s)
+                who_avif = (f'<source srcset="../../images/team/{photo}-portrait.avif" type="image/avif">'
+                            if os.path.exists(path("images", "team", f"{photo}-portrait.avif")) else "")
                 st = avail.get(s, {}).get("status", "open")
                 first = name.split()[0]
                 cards += f"""      <a class="who-card" href="../../team/{s}/">
-        <span class="who-photo"><picture><source srcset="../../images/team/{photo}-portrait.webp" type="image/webp"><img src="../../images/team/{photo}-portrait.jpg" alt="{name}, {creds}" width="600" height="600" loading="lazy" decoding="async"></picture></span>
+        <span class="who-photo"><picture>{who_avif}<source srcset="../../images/team/{photo}-portrait.webp" type="image/webp"><img src="../../images/team/{photo}-portrait.jpg" alt="{name}, {creds}" width="600" height="600" loading="lazy" decoding="async"></picture></span>
         <span class="who-text">
           <span class="who-name">{name}</span>
           <span class="who-creds">{creds}</span>
