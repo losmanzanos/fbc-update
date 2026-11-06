@@ -1,4 +1,7 @@
 /* ── Self-hosted fonts (no Google Fonts request, zero render-blocking) ─── */
+/* Fallbacks tuned to the web fonts' size and spacing, so a late font swaps in without moving text */
+@font-face { font-family: 'Cormorant Fallback'; src: local('Times New Roman'), local('Times'), local('Liberation Serif'); size-adjust: 97.21%; ascent-override: 95.05%; descent-override: 29.52%; line-gap-override: 0.00%; }
+@font-face { font-family: 'DM Sans Fallback'; src: local('Arial'), local('Helvetica'), local('Liberation Sans'); size-adjust: 104.82%; ascent-override: 94.64%; descent-override: 29.57%; line-gap-override: 0.00%; }
 @font-face { font-family:'Cormorant Garamond'; font-style:normal; font-weight:300; font-display:swap; src:url('../fonts/cormorant-garamond-300-normal.woff2') format('woff2'); unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
 @font-face { font-family:'Cormorant Garamond'; font-style:italic; font-weight:300; font-display:swap; src:url('../fonts/cormorant-garamond-300-italic.woff2') format('woff2'); unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
 @font-face { font-family:'Cormorant Garamond'; font-style:normal; font-weight:400; font-display:swap; src:url('../fonts/cormorant-garamond-400-normal.woff2') format('woff2'); unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
@@ -35,8 +38,8 @@
   --shadow-lg: 0 12px 52px rgba(42, 31, 22, .16);
   --radius: 0;
   --nav-h: 88px;
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-serif: 'Cormorant Garamond', 'Cormorant Fallback', Georgia, serif;
+  --font-sans: 'DM Sans', 'DM Sans Fallback', system-ui, sans-serif;
   --max-w: 1280px;
   --ease: 0.22s ease;
   --sage: #7A9B8A;
@@ -2511,3 +2514,6 @@ html.kb-nav .skip-link:focus-visible { top: 16px; }
 /* Breadcrumb shadow only where it sits on a photo; on light headers it blurred the text */
 .breadcrumb { text-shadow: none; }
 .page-hero .breadcrumb, .hero .breadcrumb { text-shadow: 0 1px 3px rgba(0,0,0,.4); }
+
+/* In-page jumps (Who to see, etc.) land with the section title clear of the fixed header */
+html { scroll-padding-top: calc(var(--nav-h, 80px) + 56px); }
