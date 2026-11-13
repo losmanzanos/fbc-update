@@ -158,3 +158,8 @@ https://www.fullbloomcounseling.com/* https://fullbloomcounseling.com/:splat 301
 /blog/brainspotting-therapy-denver            /blog/somatic-therapy-denver/    301
 /blog/what-is-brainspotting-therapy-denver/   /blog/somatic-therapy-denver/    301
 /blog/what-is-brainspotting-therapy-denver    /blog/somatic-therapy-denver/    301
+
+# ── ADDED 2026-11-13: practice sees adults 18+ only, teen pages retired ──
+/services/teen-therapy-denver/            /services/therapy-young-adults-denver/   301
+/blog/teen-therapy-denver/                /services/therapy-young-adults-denver/   301
+/blog/school-anxiety-teens-denver/        /services/anxiety-therapy/               301
