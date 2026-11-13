@@ -1036,7 +1036,7 @@ document.querySelectorAll('.svc-testimonials').forEach(function(wrap) {
     ['anxiety', 'Anxiety & mood', /ANXIETY|DEPRESS|BURNOUT|PANIC|SAD IN|SELF-CARE|PEOPLE PLEAS/],
     ['body', 'Food & body', /HEALTH AT EVERY|BODY|EATING|HAES|DIET/],
     ['grief', 'Grief & loss', /GRIEF|LOSS|MISCARRIAGE/],
-    ['growth', 'Identity & growth', /GROWTH|DISCOVERY|WOMEN|\bMEN\b|ENNEAGRAM|POSTPARTUM|QUARTER|STUCK|TRANSITION|ADHD|TEEN|FAITH/],
+    ['growth', 'Identity & growth', /GROWTH|DISCOVERY|WOMEN|\bMEN\b|ENNEAGRAM|POSTPARTUM|QUARTER|STUCK|TRANSITION|ADHD|FAITH/],
     ['start', 'Starting therapy', /THERAPY PROCESS|THERAPY APPROACH|FIRST|COST|INSURANCE|FIND A THERAPIST|HOW LONG|ONLINE THERAPY|STARTING|SUPERVISION/]
   ];
   cards.forEach(function(c) {
