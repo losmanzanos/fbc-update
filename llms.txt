@@ -1,6 +1,6 @@
 # Full Bloom Counseling
 
-> Full Bloom Counseling Group is a group therapy practice of seven licensed therapists in Denver, Colorado, with a second office in Boulder, founded by Rebecca Moravec, LPC, LMFT, AAMFT Approved Supervisor and Certified Narrative Enneagram Practitioner & Teacher. The practice sees clients in person in Denver and Boulder and online anywhere in Colorado, offering trauma-informed, weight-inclusive, LGBTQ+ affirming care.
+> Full Bloom Counseling Group is a group therapy practice of seven licensed therapists in Denver, Colorado, with a second office in Boulder, founded by Rebecca Moravec, LPC, LMFT, AAMFT Approved Supervisor and Certified Narrative Enneagram Practitioner & Teacher. The practice sees adults 18 and older (no children or teens) in person in Denver and Boulder and online anywhere in Colorado, offering trauma-informed, weight-inclusive, LGBTQ+ affirming care.
 
 Website: <https://fullbloomcounseling.com>. Last updated: November 2026.
 
@@ -29,7 +29,6 @@ Full Bloom Counseling is a group private practice of licensed clinicians offerin
 - [Grief & Loss Therapy](https://fullbloomcounseling.com/services/grief-loss-therapy/): support for grief that needs more than time
 - [Addiction & Recovery Therapy](https://fullbloomcounseling.com/services/addiction-recovery-therapy-denver/): Substance use and recovery, at any stage, with a Licensed Addiction Counselor
 - [Internal Family Systems (IFS) Therapy](https://fullbloomcounseling.com/services/ifs-therapy-denver/): Internal Family Systems and parts work for the inner critic, anxiety and trauma
-- [Therapy for Teens](https://fullbloomcounseling.com/services/teen-therapy-denver/): Anxiety, school stress, mood, grief and identity, with a therapist teens can actually talk to
 - [LGBTQ+ Affirming Therapy](https://fullbloomcounseling.com/services/lgbtq-affirming-therapy-denver/): Affirming care for LGBTQ+ individuals and couples: identity, family, relationships and more
 - [Emotionally Focused Couples Therapy (EFT)](https://fullbloomcounseling.com/services/emotionally-focused-couples-therapy-denver/): Emotionally Focused Therapy for the pursue-withdraw cycle and emotional distance
 - [Pre-Marital Counseling](https://fullbloomcounseling.com/services/pre-marital/): Gottman-informed preparation for couples
@@ -46,7 +45,7 @@ Full Bloom Counseling is a group private practice of licensed clinicians offerin
 - [Rebecca Moravec, LPC, LMFT](https://fullbloomcounseling.com/team/rebecca-moravec/): Founder, AAMFT Approved Supervisor, Certified Narrative Enneagram Practitioner; trauma, couples, Enneagram, Intuitive Eating
 - [Natalie Siegel, LPC](https://fullbloomcounseling.com/team/natalie-siegel/): Intuitive Eating, body image, anxiety, self-esteem
 - [Mark Whitney, LPC, ACS](https://fullbloomcounseling.com/team/mark-whitney/): individuals and couples online across Colorado; anxiety, people pleasing, couples conflict, faith deconstruction and religious trauma, Enneagram, EMDR, SSP, clinical supervision
-- [Jillian Corpora, LPC](https://fullbloomcounseling.com/team/jillian-corpora/): anxiety, depression, grief, life transitions, teens and young adults, ADHD, Intuitive Eating
+- [Jillian Corpora, LPC](https://fullbloomcounseling.com/team/jillian-corpora/): anxiety, depression, grief, life transitions, young adults, ADHD, Intuitive Eating
 - [Kirsten Adorno, LPC, MFTC](https://fullbloomcounseling.com/team/kirsten-adorno/): trauma, grief, culturally responsive and attachment-based care
 - [Kelsey Bennett, LPC](https://fullbloomcounseling.com/team/kelsey-bennett/): EMDR, SSP, trauma, anxiety, young adults
 - [Kelli Ruhl, LPC, NCC, LAC](https://fullbloomcounseling.com/team/kelli-ruhl/): trauma, addiction recovery, somatic work
@@ -71,7 +70,6 @@ Full Bloom partners with the Colorado Children's Chorale, a premier Denver-based
 - [The Mental Load: Why You’re Exhausted When Nothing Is Technically Wrong](https://fullbloomcounseling.com/blog/mental-load-women-therapy-denver/)
 - [Nobody Sends Flowers After a Miscarriage](https://fullbloomcounseling.com/blog/miscarriage-grief-therapy-denver/)
 - [Finally Diagnosed With ADHD as an Adult. Now What?](https://fullbloomcounseling.com/blog/adult-adhd-diagnosis-denver/)
-- [When Your Teen Dreads Going Back to School](https://fullbloomcounseling.com/blog/school-anxiety-teens-denver/)
 - [How Long Does Therapy Take? A Denver Therapist’s Honest Answer](https://fullbloomcounseling.com/blog/how-long-does-therapy-take/)
 - [Online Therapy in Colorado: Does Virtual Therapy Actually Work?](https://fullbloomcounseling.com/blog/online-therapy-colorado-does-it-work/)
 - [Therapy in Cherry Creek & Glendale: A Local Guide](https://fullbloomcounseling.com/blog/therapy-cherry-creek-glendale-denver/)
@@ -82,7 +80,6 @@ Full Bloom partners with the Colorado Children's Chorale, a premier Denver-based
 - [The Enneagram in Therapy: How Knowing Your Type Can Change Everything](https://fullbloomcounseling.com/blog/enneagram-in-therapy-denver/)
 - [ADHD Therapy in Denver: When Executive Dysfunction Needs More Than a Planner](https://fullbloomcounseling.com/blog/adhd-therapy-denver/)
 - [Intuitive Eating in Therapy: What It Means and Why It Works](https://fullbloomcounseling.com/blog/intuitive-eating-therapy-denver/)
-- [Teen Therapy in Denver: What Young People Actually Need From Therapy](https://fullbloomcounseling.com/blog/teen-therapy-denver/)
 - [Depression Therapy in Denver: What It Actually Looks Like (And Why It Works)](https://fullbloomcounseling.com/blog/depression-therapy-denver/)
 - [How to Know If You’re Ready for EMDR](https://fullbloomcounseling.com/blog/how-to-know-if-youre-ready-for-emdr/)
 - [Clinical Supervision in Denver: What to Look for as a New Therapist](https://fullbloomcounseling.com/blog/clinical-supervision-denver/)
