@@ -254,6 +254,7 @@ var PAGES = [
   {url:'/services/family-therapy/',title:'Family Therapy Denver',desc:'Resolve conflict, improve communication, and build stronger family bonds.',cat:'Service',tags:'parents adult children siblings blended family'},
   {url:'/services/enneagram-therapy/',title:'Enneagram Therapy Denver',desc:'Use the Enneagram for deep self-discovery with certified practitioners.',cat:'Service',tags:'enneagram personality type'},
   {url:'/services/health-at-every-size/',title:'Intuitive Eating & HAES Therapy Denver',desc:'Heal your relationship with food and body. Weight-neutral, affirming care.',cat:'Service',tags:'haes intuitive eating anti-diet weight neutral body image'},
+  {url:'/services/sexual-assault-therapy-denver/',title:'Sexual Assault Therapy Denver',desc:'Therapy for adult survivors of sexual assault, recent or years ago. Go at your own pace.',cat:'Service',tags:'sexual assault rape sexual trauma survivor abuse consent date rape ptsd'},
   {url:'/services/trauma-therapy/',title:'Trauma Therapy Denver',desc:'EMDR, SSP, somatic therapy for PTSD, complex trauma, and attachment wounds.',cat:'Service',tags:'ptsd complex trauma cptsd emdr ifs somatic ssp'},
   {url:'/services/anxiety-therapy/',title:'Anxiety Therapy Denver',desc:'CBT, ACT, and mindfulness-based treatment for anxiety, panic, and perfectionism.',cat:'Service',tags:'panic worry perfectionism ocd stress'},
   {url:'/services/emdr/',title:'EMDR Therapy Denver',desc:'Eye Movement Desensitization and Reprocessing for trauma and PTSD.',cat:'Service',tags:'emdr trauma ptsd eye movement'},
