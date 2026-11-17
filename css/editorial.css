@@ -119,6 +119,7 @@
 .ed-reading .ed-wrap { display: grid; grid-template-columns: 200px 1fr; gap: 32px; }
 .ed-reading a { display: block; font-family: var(--font-serif); font-size: 1.2rem; color: var(--bark); text-decoration: none; padding: 10px 0; border-bottom: 1px solid var(--border); }
 .ed-reading a:hover { color: var(--petal-dark); }
+.ed-reading a[hidden] { display: none; }
 
 @media (max-width: 900px) {
   .ed-wrap, .ed-facts ul, .ed .who-box { padding: 0 20px; }
@@ -236,11 +237,13 @@
 .ed .hub-head p { font-size: .95rem; color: var(--bark-mid); max-width: 30ch; margin: 0; }
 .hub-list { list-style: none; margin: 0; padding: 0; }
 .hub-list li + li { border-top: 1px solid var(--border); }
-.hub-list a { display: grid; grid-template-columns: 1fr 1.3fr 28px; gap: 24px; align-items: baseline; padding: 22px 0; text-decoration: none; color: var(--bark); transition: padding .35s ease, color .35s ease; }
+.hub-list a { display: grid; grid-template-columns: 1fr 1.3fr 28px; gap: 24px; align-items: baseline; padding: 22px 0; text-decoration: none; color: var(--bark); transition: color .35s ease; }
+.hub-t, .hub-d { transition: transform .35s ease; }
 .hub-t { font-family: var(--font-serif); font-size: 1.45rem; line-height: 1.2; }
 .hub-d { font-size: .92rem; line-height: 1.6; color: var(--bark-mid); }
 .hub-arrow { color: var(--petal); font-size: 1.1rem; transition: transform .35s ease; justify-self: end; }
-.hub-list a:hover { padding-left: 10px; color: var(--petal-dark); }
+.hub-list a:hover { color: var(--petal-dark); }
+.hub-list a:hover .hub-t, .hub-list a:hover .hub-d { transform: translateX(10px); }
 .hub-list a:hover .hub-arrow { transform: translateX(4px); }
 @media (max-width: 900px) {
   .hub-group { grid-template-columns: 1fr; gap: 16px; padding: 40px 0; }

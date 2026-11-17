@@ -432,6 +432,40 @@ def build_who():
     return out
 
 
+def build_reading_links(posts, outputs):
+    """Hide "Further reading" links to scheduled posts until they publish.
+
+    A link to a post that isn't live yet would 404 (the post sits in /preview/
+    on Netlify). The link stays in the HTML with a `hidden` attribute and is
+    shown again automatically on the day the post goes live.
+    """
+    status = {p["slug"]: p["date"] > TODAY for p in posts}
+    out = {}
+    for f in glob.glob(path("**", "*.html"), recursive=True):
+        rel = os.path.relpath(f, ROOT)
+        if rel.startswith("preview/"):
+            continue
+        h = outputs.get(rel)
+        if h is None:
+            h = open(f, encoding="utf-8").read()
+        if 'class="ed-reading"' not in h:
+            continue
+
+        def link(m):
+            slug = re.search(r"blog/([^/\"]+)/$", m.group(1))
+            if not slug or slug.group(1) not in status:
+                return m.group(0)
+            return f'<a href="{m.group(1)}"{" hidden" if status[slug.group(1)] else ""}>'
+
+        def section(m):
+            return re.sub(r'<a href="([^"]+)"(?: hidden)?>', link, m.group(0))
+
+        new = re.sub(r'<section class="ed-reading">.*?</section>', section, h, flags=re.S)
+        if new != h:
+            out[rel] = new
+    return out
+
+
 # ── main ──────────────────────────────────────────────────────────────────────
 def main():
     check = "--check" in sys.argv
@@ -450,6 +484,7 @@ def main():
     outputs.update(build_share(posts))
     outputs.update(build_availability(outputs))  # pages already built above (the homepage) must not be re-read from disk
     outputs.update(build_who())
+    outputs.update(build_reading_links(posts, outputs))
     changed = [k for k, v in outputs.items() if read(k) != v]
     print(f"{len(live)} live posts, {len(future)} scheduled"
           + (": " + ", ".join(f"{p['slug']} ({p['date']})" for p in future) if future else ""))
