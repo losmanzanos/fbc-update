@@ -2567,3 +2567,16 @@ html.menu-lock, html.menu-lock body { overscroll-behavior: none; }
 @media (orientation: portrait) {
   .mobile-menu.open:not(.can-scroll) { touch-action: none; }
 }
+
+/* Mobile Services menu: group labels so the list scans in sections */
+.mobile-submenu .mobile-group-label {
+  display: block;
+  padding: 18px 28px 6px 44px;
+  font-family: var(--font-sans, inherit);
+  font-size: .64rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--petal-dark);
+  border-bottom: 1px solid rgba(170, 148, 128, .12);
+}
